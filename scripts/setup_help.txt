@@ -1,0 +1,34 @@
+
+# CREATE a virtual environment using Python 3.11 (newest supported by pytorch)
+conda create --name RelevanceEnv python=3.11
+conda activate RelevanceEnv
+conda install pip
+pip install -r requirements.txt
+python -m spacy download en_core_web_sm
+
+# Download an LLM from GPT4ALL into the model folder
+https://gpt4all.io/index.html in "Model Explorer" section.
+
+# Start Neo4j server. You can build and run this with Docker Compose:
+cd ./Neo4j
+docker compose up
+
+# View the Neo4j web-page to verify and visualize the KG
+http://localhost:7474/browser/
+
+# You can drag and drop the .grass file on the Neo4j to import it and configure your color 
+# and labeling schemes to match those in our screenshots. 
+
+# Copy the dotenv file to .env (and edit that to your configuration if not using above)
+cp dotenv .env
+
+# Run the Notebooks in the main directory, they are intended to be run in Step # order, but
+# once run, most can be re-run without issues. If you wish run them all in order from start to
+# finish, the best way to do this is by running the "Workflow.ipynb" notebook - which will kick
+# off each of the steps in order - just be careful not to edit the "READONLY_OUTPUT" notebooks
+# as they are generated during this process and intended for debugging headless runs.
+
+# IF you change the dependencies you can update the requirements.txt file using this command:
+pip list --format=freeze > requirements.txt
+
+# Be sure that the kernal being used is the "RelevanceEnv" enviroment you just created in your Notebooks.

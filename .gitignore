@@ -1,0 +1,6 @@
+/models/*.gguf
+/.env
+/READ_ONLY_OUTPUT/
+/scripts/Neo4j/.neo4j_log
+/log-*.txt
+/_gsdata_/

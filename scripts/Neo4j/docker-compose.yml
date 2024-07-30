@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+
+  neo4j:
+    image: neo4j
+    container_name: KnowledgeGraph
+    restart: on-failure:3
+    environment:
+      - NEO4J_AUTH=none
+    networks:
+      - dev
+    ports:
+      - target: 7474
+        host_ip: 127.0.0.1
+        published: 7474
+        protocol: tcp
+        mode: host
+      - target: 7687
+        host_ip: 127.0.0.1
+        published: 7687
+        protocol: tcp
+        mode: host
+    volumes:
+      - neo4jdb:/neo4jdata
+
+volumes:
+  neo4jdb:
+
+networks:
+    dev:

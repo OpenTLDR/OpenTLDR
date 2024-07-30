@@ -1,0 +1,9 @@
+# title: Story Two
+# date: 01/02/2000
+# type: news
+# class: Content
+# author: Hapster N. Wheel
+# source: New News Today Daily
+# url: https://www.rockfishresearch.com/opentldr/sample_data/news2.html
+
+Just in - we have a report this morning that Alice was seen heading towards 1st Avenue at 8:00AM carrying a brown bag that is presumed to contain the lunch of interest. At this time we are unable to identify the potential sandwich-related content of the bag. Alice has an established history of eating peanut butter and jelly sandwiches during her lunch, but it remains uncertain if she currently possesses the required ingredient of white bread that will be needed to complete this specific meal.

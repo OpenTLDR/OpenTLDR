@@ -1,0 +1,8 @@
+# request: Around the 1st Bank
+# content: Story One
+# score: 1.0
+ 
+This morning Alice Allsorts went to the store and purchased peanut butter and jelly.
+Alice Allsorts works at the First Bank on 1st Avenue.
+Bob Bobbert, a local with inside knowledge about Alice Allsort's purchasing habits, said "Alice Allsorts often eats PB&J sandwiches for lunch. Bob Bobbert will walk by her office on 1st Avenue around lunch time and often see her sitting there at her desk munching away."
+A news reporters will be staking out First Bank on 1st Avenue later this week and will report back on if we see Alice Allsorts eating lunch at her desk and, if so, what she eats.

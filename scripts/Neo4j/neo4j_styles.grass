@@ -1,0 +1,118 @@
+node {
+  diameter: 50px;
+  color: #A5ABB6;
+  border-color: #9AA1AC;
+  border-width: 2px;
+  text-color-internal: #FFFFFF;
+  font-size: 10px;
+}
+relationship {
+  color: #A5ABB6;
+  shaft-width: 1px;
+  font-size: 8px;
+  padding: 3px;
+  text-color-external: #000000;
+  text-color-internal: #FFFFFF;
+  caption: "<type>";
+}
+node.Source {
+  diameter: 30px;
+  color: #92D050;
+  border-color: #92D050;
+  text-color-internal: #FFFFFF;
+  defaultCaption: "<uid>";
+  caption: "{name}";
+}
+node.Entity {
+  color: #AFABAB;
+  border-color: #AFABAB;
+  text-color-internal: #FFFFFF;
+  defaultCaption: "<uid>";
+  caption: "{text}";
+  diameter: 30px;
+}
+node.OpenTldrNode {
+  color: #DA7194;
+  border-color: #cc3c6c;
+  text-color-internal: #FFFFFF;
+  defaultCaption: "<uid>";
+  caption: "{text}";
+}
+node.ReferenceNode {
+  defaultCaption: "<uid>";
+  caption: "{text}";
+  color: #FF7034;
+  border-color: #FF7034;
+  text-color-internal: #FFFFFF;
+  diameter: 50px;
+}
+node.CitableNode {
+  defaultCaption: "<uid>";
+  caption: "{title}";
+}
+node.User {
+  diameter: 30px;
+  defaultCaption: "<uid>";
+  caption: "{name}";
+  color: #0070C0;
+  border-color: #0070C0;
+  text-color-internal: #FFFFFF;
+}
+node.Request {
+  defaultCaption: "<uid>";
+  caption: "{text}";
+  color: #0070C0;
+  border-color: #0070C0;
+  text-color-internal: #FFFFFF;
+}
+relationship.ReferenceEdge {
+  caption: "{type}";
+}
+node.Recommendation {
+  defaultCaption: "<uid>";
+  caption: "{score}";
+  color: #C00000;
+  border-color: #C00000;
+  text-color-internal: #FFFFFF;
+}
+node.Summary {
+  defaultCaption: "<uid>";
+  caption: "{text}";
+  color: #7030A0;
+  border-color: #7030A0;
+  text-color-internal: #FFFFFF;
+}
+node.Content {
+  defaultCaption: "<uid>";
+  color: #92D050;
+  border-color: #92D050;
+  text-color-internal: #FFFFFF;
+  caption: "{title}";
+}
+node.Tldr {
+  defaultCaption: "<uid>";
+  caption: "{date}";
+  color: #000000;
+  text-color-internal: #FFFFFF;
+}
+node.TldrEntry {
+  defaultCaption: "<uid>";
+  color: #000000;
+  text-color-internal: #FFFFFF;
+  caption: "{uid}";
+  diameter: 30px;
+}
+node.Feedback {
+  defaultCaption: "<uid>";
+  caption: "{score}";
+  color: #FFC000;
+  border-color: #FFC000;
+  text-color-internal: #000000;
+}
+node.EvalKey {
+  defaultCaption: "<id>";
+  color: #FFFFFF;
+  border-color: #000000;
+  text-color-internal: #000000;
+  caption: "{uid}";
+}

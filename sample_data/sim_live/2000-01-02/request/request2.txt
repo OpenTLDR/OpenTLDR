@@ -1,0 +1,7 @@
+# class: Request
+# user: cfargent@ncsu.edu
+# email: cfargent@ncsu.edu
+# date: 05/22/2024
+# title: Keep up with my friends
+
+I would like to be keep informed about any social news involving my close friends Bob Bobbert or Charlie Chuckles.
