@@ -58,23 +58,23 @@ This notebook clears the contents of the knowledge graph and loads any reference
 ![step0](resources/After_Step0_Initialize.png)
 
 ### Step_1_Ingest
-This notebooks reads in Content - a set of news-like articles (defaults to those in the "sample_data" folder but can be retargetted). In the next release this will also provide for S3 bucket data sources. The Relevance version uses Spacy to perform Named Entity Recognition (NER) on the Content and populates the knowledge graph with the sources, articles, and recognized entities. This is refered to as Active Data because it changes continuously.
+This notebook reads in Content - a set of news-like articles (defaults to those in the "sample_data" folder but can be retargetted). In the next release this will also provide for S3 bucket data sources. The Relevance version uses Spacy to perform Named Entity Recognition (NER) on the Content and populates the knowledge graph with the sources, articles, and recognized entities. This is refered to as Active Data because it changes continuously.
 
 ![step1](resources/After_Step1_Ingest.png)
 
 ### Step_1a_MockUI
-This notbook simulates users requesting a TLDR based on their interests, in a production system this would be implemented with the User Interface. Like the Ingest step, this also uses NER on the text of the Request and build a similar structure as the Active Data but for the Information.
+This notebook simulates users requesting a TLDR based on their interests, in a production system this would be implemented with the User Interface. Like the Ingest step, this also uses NER on the text of the Request and build a similar structure as the Active Data but for the Information.
 > **Reproducability Note:** In a live TLDR system, real user interactions through the User Interface would be used instead of a step like this. However, for prototypes this helps keeps the process consistent and automated. It is also a good example of how the workflow is automated for evaluation purposes where consistently and automation are essential for reproducable results.
 
 ![step1a](resources/After_Step1a_MockUI.png)
 
 ### Step_2_Connect
-This notbook scans the recognized entities from both the Active and Information Request Data, and the nodes from Reference Data. It uses a language embedding model to pair-wise compare each of the entities pulled from the text to each of the nodes of the same type in the Refernce Data. The most semantically similar entities are linked (with a confidence value) to the Reference nodes that they appear to "refer to". Any remaining entities are then compared to each other to determine if a "hypothesized" reference node should be created to link them together.
+This notebook scans the recognized entities from both the Active and Information Request Data, and the nodes from Reference Data. It uses a language embedding model to pair-wise compare each of the entities pulled from the text to each of the nodes of the same type in the Reference Data. The most semantically similar entities are linked (with a confidence value) to the Reference nodes that they appear to "refer to". Any remaining entities are then compared to each other to determine if a "hypothesized" reference node should be created to link them together.
 
 ![step2](resources/After_Step2_Connect.png)
 
 ### Step_3_Recommend
-by assessing the ontological distances (# of edges with confidence) between Content and Request (and scores on near neighbors) to score the "relevance" of each Content node to each Request node. Higher scoring relationships are used to create Recommendation nodes in the knowledge graph.
+This notebook recommends by assessing the ontological distances (# of edges with confidence) between Content and Request (and scores on near neighbors) to score the "relevance" of each Content node to each Request node. Higher scoring relationships are used to create Recommendation nodes in the knowledge graph.
 
 ![step3](resources/After_Step3_Recommend.png)
 
