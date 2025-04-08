@@ -1,0 +1,9 @@
+# title: Story Eight
+# date: 01/08/2000
+# type: news
+# class: Content
+# author: Hampster N. Wheel
+# source: New News Today Daily
+# url: https://www.rockfishresearch.com/opentldr/sample_data/news8.html
+
+Former news reporter Charles Chuckles is scheduled to wed Alice Allsorts in the park on 1st Avenue. Alice is the manager at First Bank and relates "Charlie and I first met right here outside the bank about two years ago. But we didn't start dating until about a year later when he came by the office and invited me to a picnic for lunch." Apparently, Charles is quite the lunch chef and Alice has never eaten at her desk since.

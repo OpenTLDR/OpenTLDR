@@ -1,0 +1,214 @@
+h1 {
+    font-family: Arial, sans-serif;
+    font-size: medium;
+    color: gold;
+}
+body {
+    font-family: Arial, sans-serif;
+    font-size: small;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 5px 20px;
+    background-color: rgb(20, 20, 72);
+    color: gold;
+}
+.logo {
+    height: 40px;
+    color: gold;
+}
+.container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    width: 100vw;
+}
+.column {
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    width: 33%;
+}
+.column:first-child {
+}
+.column:last-child {
+}
+.component {
+    margin-bottom: 20px;
+}
+.list {
+    width: 100%;
+    border-collapse: collapse;
+}
+.list th, .list td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+.list th {
+    cursor: pointer;
+    background-color: #f4f4f4;
+}
+.list tr:hover {
+    background-color: #f9f9f9;
+}
+.list tr.selected {
+    background-color: lightblue;
+}
+.buttons {
+    display: block;
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    align-content: center;
+    border: 1px solid black;
+    font-weight: bold;
+}
+.green {
+    background-color: lightgreen;
+}
+.red {
+    background-color: lightcoral;
+}
+.yellow {
+    background-color: lightgoldenrodyellow;
+}
+.blue {
+    background-color: lightblue;
+}
+.textentry {
+    width: 97%;
+    padding: 10px 10px 10px 10px;
+    justify-content: left;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+    font-size: small;
+    color: blue;
+    border: 1px solid black;
+}
+.textreadonly {
+    width: 97%;
+    padding: 10px 10px 10px 10px;
+    justify-content: left;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+    font-size: small;
+    color: black;
+    border: 1px solid grey;
+}
+.selected {
+    stroke: black;
+    fill: limegreen;
+    stroke-width: 1px;
+    fill-opacity: 0.75;
+}
+.unselected {
+    stroke: black;
+    fill: lightgray;
+    stroke-width: 1px;
+    fill-opacity: 0.75;
+}
+.selection-box {
+    fill: none;
+    stroke: blue;
+    stroke-width: 1px;
+    stroke-dasharray: 2px;
+}
+.axis path,
+.axis line {
+    fill: none;
+    shape-rendering: crispEdges;
+}
+.axis-label {
+    font-size: 12px;
+    font-weight: bold;
+}
+.nodeText {
+    font-family: Arial, sans-serif;
+    font-size: smaller;
+    color:black;
+}
+.node {
+    fill: lightgrey;
+    stroke: black;
+    stroke-width: 1px;
+}
+.Entity {
+    fill: lightgrey;
+    stroke: black;
+    stroke-width: 1px;
+}
+.Content {
+    fill: limegreen;
+    stroke: black;
+    stroke-width: 1px;
+}
+.Request {
+    fill: blue;
+    stroke: black;
+    stroke-width: 1px;
+}
+.ReferenceNode {
+    fill: orange;
+    stroke: black;
+    stroke-width: 1px;
+}
+.link {
+    stroke: black;
+    stroke-width: 2px;
+}
+.label {
+    color:black;
+}
+.blurb{
+    margin: 5px 5px 5px 5px;
+    color:blue;
+    text-align: center;
+}
+.slidecontainer {
+    width: 100%;
+  }
+  
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: blue;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: blue;
+    cursor: pointer;
+}

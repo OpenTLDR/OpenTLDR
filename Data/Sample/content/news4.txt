@@ -1,0 +1,10 @@
+# title: Story Four
+# date: 01/04/2000
+# type: news
+# class: Content
+# author: Hampster N. Wheel
+# source: New News Today Daily
+# url: https://www.rockfishresearch.com/opentldr/sample_data/news4.html
+
+This morning our reporter Charlie Chuckles intercepted Alice on 1st Avenue minutes before entering the First Bank where she works. She was carrying a brown paper bag believed to contain a PB&J sandwich. However, inside the bag we discovered a left over Caesar Salad and Fig Newton brand snack bar. Alice was released and continued to First Bank somewhat annoyed.
+"We had it on good authority that Alice was potentially bringing PB&J sandwiches for lunch. Based on this information, we performed an intervention. Unfortunately, no PB&J was discovered and we left with a bit of egg on our faces." reports Charlie. A check with the Human Resources Department at this news station uncovered a pattern of Mr. Chuckles acting too quickly. This recent incident will certainly be brought up by his manager during his next performance evaluation. We will continue to monitor his employment situation and report back.

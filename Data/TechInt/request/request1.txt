@@ -1,0 +1,7 @@
+# class: Request
+# user: public
+# email: public@ncsulas.org
+# title: LLMs used for hacking
+# date: 11/20/2024
+
+What research is might enables LLM agents to perform Cybersecurity hacking?

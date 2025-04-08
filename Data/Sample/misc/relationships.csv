@@ -1,0 +1,5 @@
+"Entity From","Entity To","Relationship Type","Relationship Text"
+"Alice Allsorts","First Bank", EMPLOYED_BY,"Alice works for First Bank."
+"Bob Bobbert","Local Newspaper", EMPLOYED_BY,"Bob works for Local Newspaper."
+"First Bank", "First Ave", LOCATED_AT,"The First Bank is on First Ave."
+"Groceries and Stuff", "Second Street", LOCATED_AT,"The Groceries and Stuff is on Second Street."

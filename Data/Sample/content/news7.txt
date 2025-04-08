@@ -1,0 +1,9 @@
+# title: Story Seven
+# date: 01/07/2000
+# type: news
+# class: Content
+# author: Hampster N. Wheel
+# source: New News Today Daily
+# url: https://www.rockfishresearch.com/opentldr/sample_data/news7.html
+
+In dramatic news today, a local man affiliated with a Pro-CARB organization was charged with the unlawful production and distribution of PB&J sandwiches. The sandwiches have long been banned by local establishments due to a combination of peanut allergies and carbohydrate concerns. In recent days, an obsession with PB&J sandwiches has been blamed for multiple incidences in our community, including the arrest of our own Mr. Charles Chuckles.

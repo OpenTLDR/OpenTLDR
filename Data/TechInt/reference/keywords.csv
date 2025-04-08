@@ -1,0 +1,70 @@
+large language model, language models, LLMs are a type of language model.
+LLM, language models, LLMs are a type of language model.
+token, language models, Tokens are a unit of text for a language model.
+multi-agent, AI, Mult-agent systems are a form of distributed AI.
+human-machine interaction, HMI, human machine 
+decision-making, pychology, decision-making is a substudy of pychology.
+algorithm, computer science, an algorithm is the way a computer solves a problem.
+Mean Squared Error, metrics, MSE is a metric about average error.
+MSE, metrics, MSE is a metric about average error.
+signal-to-noise ratio, metrics, SNR is a measure of signal to noise in data.
+SNR, metrics, SNR is a measure of signal to noise in data.
+image segmentation, computer vision, automatically identifies a meaning for pixels in an image.
+embeddings, machine learning, how semantics of text are captured and compared to each other.
+bias, human sciences, how reasoning can go wrong.
+Markov Decision Processes, probabilistic AI, a MDP is a technique for probablistic reasoning.
+artificial intelligence, AI, AI stands for Artificial Intelligence.
+transformer,language models, transformers are popular way to model languages in AI.
+Multilayer Perceptron, neural networking, an MLP is a type of ANN.
+neural network, neural networking, ANN stands for artificial neural network.
+ChatGPT, language models, ChatGPT is a specific language model.
+Llamma, language models, ChatGPT is a specific language model.
+Mistral, language models, Mistral is a specific language model.
+Knowledge Graph, AI, a KG is a representation of knowledge.
+NLP,AI,Natural Language Processing (NLP) is used by AI/ML to process free language text.
+LLM agents,AI,LLM agents are systems used within AI/ML to perform language-based tasks.
+Autonomous hacking,Cybersecurity,Autonomous hacking involves the use of AI/ML in the context of cybersecurity to carry out automated attacks.
+GPT-4 agent,AI,GPT-4 agent is a model based on AI/ML for advanced language processing.
+Cybersecurity,Cybersecurity,Cybersecurity focuses on protecting systems and data from threats in the digital space.
+Remote code execution (RCE),Exploitation,Remote code execution (RCE) is a form of exploitation where attackers execute malicious code remotely.
+SQL injection,Exploitation,SQL injection is an exploitation technique where malicious SQL queries manipulate databases.
+Cross-site scripting (XSS),Exploitation,Cross-site scripting (XSS) is a vulnerability exploited by attackers to inject scripts into web applications.
+Privilege escalation,Exploitation,Privilege escalation is an exploitation method where attackers gain higher-level permissions in a system.
+Web Vulnerability,Vulnerabilities,Web vulnerabilities are weaknesses in web applications that can be exploited by attackers.
+Cyber attacks,Cybersecurity,Cyber attacks are malicious actions aimed at compromising cybersecurity measures.
+Penetration testing,Penetration Testing,Penetration testing is a process that involves simulating attacks to test security defenses.
+Ethical hacking,Penetration Testing,Ethical hacking is a form of penetration testing where hackers attempt to find and fix vulnerabilities.
+Vulnerability detection,Detection,Vulnerability detection refers to identifying weak points in systems that could be exploited.
+Exploit framework,Exploitation,Exploit frameworks are tools used for exploiting identified vulnerabilities in systems.
+Vulnerability scanners,Penetration Testing,Vulnerability scanners are tools used in penetration testing to detect security flaws.
+Container vulnerabilities,Vulnerabilities,Container vulnerabilities are weaknesses in containerized applications that can be exploited.
+Data exfiltration,Cybersecurity,"Data exfiltration refers to the unauthorized transfer of data, compromising cybersecurity."
+Security patches,Detection,Security patches are updates used to fix detected vulnerabilities in software.
+Zero-day vulnerabilities,Vulnerabilities,Zero-day vulnerabilities are previously unknown weaknesses that can be exploited before a fix is available.
+One-day vulnerabilities,Vulnerabilities,One-day vulnerabilities are flaws known for a short time but still pose a risk.
+Agent planning,AI,Agent planning refers to AI/ML systems planning actions based on data and objectives.
+ReAct framework,AI,ReAct framework is a method used in AI/ML to model agent decision-making.
+Open-source vulnerabilities/software,Vulnerabilities,Open-source vulnerabilities/software refers to flaws in publicly available software that can be exploited.
+Metasploit,Penetration Testing,Metasploit is a popular penetration testing tool for exploiting vulnerabilities.
+Capture-the-flag exercises,Penetration Testing,Capture-the-flag exercises are hands-on penetration testing competitions used to practice finding and exploiting vulnerabilities.
+Exploit detection,Detection,Exploit detection is the process of identifying attempts to exploit vulnerabilities.
+Online security,Cybersecurity,Online security is the broad practice of ensuring cybersecurity in digital environments.
+Cyber defense,Cybersecurity,Cyber defense involves protecting systems against active cyber attacks.
+Vulnerability exploitation,Exploitation,Vulnerability exploitation refers to taking advantage of known vulnerabilities to compromise systems.
+Website hacking,Vulnerabilities,Website hacking refers to exploiting vulnerabilities in websites to gain unauthorized access.
+Scripted vulnerabilities,Vulnerabilities,Scripted vulnerabilities are security flaws that can be exploited using automated scripts.
+Prompt injection,Vulnerabilities,Prompt injection is an attack targeting vulnerabilities in language models by manipulating their input.
+Memory protections,AI,Memory protections in AI/ML ensure that agents don't exceed their memory limits or expose sensitive data.
+Language model limitations,AI,Language model limitations in AI/ML define the constraints within which models like GPT-4 operate.
+GPT-4 performance,AI,GPT-4 performance refers to the efficiency and accuracy of GPT-4 in AI/ML tasks.
+CVE database,Vulnerabilities,CVE database is a repository of known vulnerabilities (CVEs) that can be exploited.
+Autonomous agents,AI,Autonomous agents are AI/ML systems that perform tasks independently based on learned behaviors.
+OWASP ZAP,Exploitation,OWASP ZAP is a tool used in exploitation to find vulnerabilities in web applications.
+Exploit development,Exploitation,Exploit development refers to the creation of methods or code to exploit vulnerabilities.
+Planning modules,AI,Planning modules in AI/ML guide autonomous agents in decision-making and task execution.
+Subagent capabilities,AI,Subagent capabilities refer to specialized tasks that subcomponents of larger AI/ML systems can perform.
+LLM-based agents,AI,LLM-based agents are AI/ML agents that rely on large language models for decision-making and interaction.
+Tool-assisted LLM agents,AI,Tool-assisted LLM agents use tools in conjunction with large language models to perform more advanced tasks.
+AI agents,AI,AI agents are general agents within AI/ML designed to act intelligently in specific environments.
+Security of AI agents,Cybersecurity,Security of AI agents ensures that AI systems are protected from cybersecurity threats.
+AI safety,Cybersecurity,AI safety focuses on making sure AI systems operate safely without causing unintended harm.

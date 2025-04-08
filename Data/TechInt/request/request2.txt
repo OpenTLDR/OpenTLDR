@@ -1,0 +1,7 @@
+# class: Request
+# user: public
+# email: public@ncsulas.org
+# title: discovering zero or one day vulnerabilities
+# date: 11/20/2024
+
+What cybersecurity research exists to autonomously exploiting zero-day vulnerabilities or one-day vulnerabilities?

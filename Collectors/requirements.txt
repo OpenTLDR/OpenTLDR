@@ -1,0 +1,10 @@
+opentldr
+ipykernel
+ipywidgets
+python-dotenv
+feedparser
+beautifulsoup4
+pymupdf
+langchain-text-splitters
+langchain
+langchain_community

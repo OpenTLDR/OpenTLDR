@@ -1,0 +1,113 @@
+
+body{
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1{
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+h2{
+    margin-bottom: 6px;
+    text-align: left;
+}
+
+p{
+    margin-top: 0px;
+    margin-bottom: 10px;
+    margin-right: 10%;
+}
+
+a{
+    color:blue;
+    cursor: pointer;
+}
+
+#request_list {
+    width: 70%;
+    border-collapse: collapse;
+    border: 1px solid black;
+    text-align: center;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding: 8px;
+}
+
+#request_list th {
+    text-align: center;
+    border: 1px solid black;
+    padding: 8px;
+    background-color: black;
+    color: white;
+}
+
+#request_list tr {
+    text-align: left;
+    border: 1px solid black;
+    padding: 8px;
+}
+
+#request_list tr:hover {background-color: #ddd;}
+
+#request_list td {
+    text-align: left;
+    border: 1px, solid, black;
+    padding: 8px;
+}
+
+#add_request_form {
+    border-collapse: collapse;
+    border: 1px solid black;
+    text-align: center;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding: 8px;
+    align-items: top;
+}
+
+#add_request_form input{
+    width: 400px;
+    padding: 8px;
+    margin: 8px 8px;
+    border: 1px solid black;
+}
+
+#add_request_form textarea{
+    width: 400px;
+    padding: 8px;
+    margin: 8px 8px;
+    border: 1px solid black;
+    resize: none;
+}
+
+#add_request_form label{
+    display: flex;
+    vertical-align:top;
+    align-items: center;
+}
+
+.formfield {
+    display: inline-block;
+    vertical-align:text-top;
+}
+
+.blurb{
+    color:blue;
+    text-align: center;
+}
+
+.checked {
+    color: orange;
+    cursor: pointer;
+  }
+
+.unchecked {
+    color: gray;
+    cursor: pointer;
+  }
+
+.selected {
+    color: blue;
+  }

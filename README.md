@@ -3,7 +3,7 @@
 This repository contains examples of OpenTDLR workflows and modules built with Python and in Jupyter Notebooks.
 The intent is for you to clone this repository using the "Template" button in GitHub, so that you can work on your own edits to the Playground directly.
 
-![overview image](resources/opentldr.png)
+![overview image](https://opentldr.org/wp-content/uploads/2024/07/opentldr_large-1024x512.png)
 
 ## Installation and Setup
 
@@ -48,47 +48,34 @@ During development of new components, running the notebooks manually (and someti
 
 > **Competition**: OpenTLDR runs a friendly competition to compare implementations to each other using a collection of hidden datasets. Participation is optional and requires you to submit your codebase, which will be executed in isolation using a headless execution of the Workflow notebooks as its starting place. The intent is to encourage incremental improvement in the end-to-end report quality while cultivating a set of components that can easily work together.
 
-## Overview of Example (baseline) Workflow Steps
+## Overview of Example (baseline) Workflow
 
 The Relevance(2023) baseline focuses on using a Knowledge Graph to inform how content (articles and requests) is tailored into a report. This includes how mentioned entities are interpreted, how articles are recommended to users, and how those articles are summerized. We understand that this implementation is NOT the only way to do any of these steps. It may not even be the best way - so you are encouraged researchers to replace these modules in the workflow and evaluate their results in comparison to this baseline and other implementations.
 
-### Step_0_Initialize
-This notebook clears the contents of the knowledge graph and loads any reference data. Reference Data can be imported as a Cypher file or two CSV files (one for nodes and one for edges).
+### Stage_1_Initialize/Clear_All
+This notebook clears the contents of the knowledge graph.
 
-![step0](resources/After_Step0_Initialize.png)
+### Stage_1_Initialize/Load_Reference_Data
+Loads any reference data. Reference Data can be imported as a Cypher file. There is also a notebook in this folder for creating Keyword/Concept ontologies in Reference Data.
 
-### Step_1_Ingest
-This notebook reads in Content - a set of news-like articles (defaults to those in the "sample_data" folder but can be retargetted). In the next release this will also provide for S3 bucket data sources. The Relevance version uses Spacy to perform Named Entity Recognition (NER) on the Content and populates the knowledge graph with the sources, articles, and recognized entities. This is refered to as Active Data because it changes continuously.
+### Stage_2_Ingest/Load_Content
+This notebooks reads in Content - a set of news-like articles (defaults to those in the "sample_data" folder but can be retargetted). In the next release this will also provide for S3 bucket data sources. The Relevance version uses Spacy to perform Named Entity Recognition (NER) on the Content and populates the knowledge graph with the sources, articles, and recognized entities. This is refered to as Active Data because it changes continuously.
 
-![step1](resources/After_Step1_Ingest.png)
-
-### Step_1a_MockUI
-This notebook simulates users requesting a TLDR based on their interests, in a production system this would be implemented with the User Interface. Like the Ingest step, this also uses NER on the text of the Request and build a similar structure as the Active Data but for the Information.
+### Stage_2_Ingest/Load_Requests
+This notbook simulates users requesting a TLDR based on their interests, in a production system this would be implemented with the User Interface. Like the Ingest step, this also uses NER on the text of the Request and build a similar structure as the Active Data but for the Information.
 > **Reproducability Note:** In a live TLDR system, real user interactions through the User Interface would be used instead of a step like this. However, for prototypes this helps keeps the process consistent and automated. It is also a good example of how the workflow is automated for evaluation purposes where consistently and automation are essential for reproducable results.
 
-![step1a](resources/After_Step1a_MockUI.png)
+### Stage_3_Connect/Entity_Cosin_Similarity
+This notbook scans the recognized entities from both the Active and Information Request Data, and the nodes from Reference Data. It uses a language embedding model to pair-wise compare each of the entities pulled from the text to each of the nodes of the same type in the Refernce Data. The most semantically similar entities are linked (with a confidence value) to the Reference nodes that they appear to "refer to". Any remaining entities are then compared to each other to determine if a "hypothesized" reference node should be created to link them together.
 
-### Step_2_Connect
-This notebook scans the recognized entities from both the Active and Information Request Data, and the nodes from Reference Data. It uses a language embedding model to pair-wise compare each of the entities pulled from the text to each of the nodes of the same type in the Reference Data. The most semantically similar entities are linked (with a confidence value) to the Reference nodes that they appear to "refer to". Any remaining entities are then compared to each other to determine if a "hypothesized" reference node should be created to link them together.
+### Stage_4_Recommend/Flood_Scoring
+by assessing the ontological distances (# of edges with confidence) between Content and Request (and scores on near neighbors) to score the "relevance" of each Content node to each Request node. Higher scoring relationships are used to create Recommendation nodes in the knowledge graph.
 
-![step2](resources/After_Step2_Connect.png)
-
-### Step_3_Recommend
-This notebook recommends by assessing the ontological distances (# of edges with confidence) between Content and Request (and scores on near neighbors) to score the "relevance" of each Content node to each Request node. Higher scoring relationships are used to create Recommendation nodes in the knowledge graph.
-
-![step3](resources/After_Step3_Recommend.png)
-
-### Step_4_Summarize
+### Stage_5_Summarize/Tailored_Abstractive_Summary
 This notebook uses an LLM (based on Gpt4all and langchain) to summarize the Content with a prompt that attempts to focus the summary on the most concepts of the Content that are most "relevant" to the Request and the Entities/Reference Data on the shortest path between the Content and the Request, the Summary is then integrated into the knowledge graph.
 
-![step4](resources/After_Step4_Summarize.png)
-
-### Step_5_Produce
+### Stage_6_Produce/Build_TLDR
 For each Request and each day, find the Recommendations and Summaries that need to get assembled into a TDRL structure (which is implemented as a TDLR node connected to TLDR Entries that identify the Recommendation and Summary to include).
 
-![step5](resources/After_Step5_Produce.png)
-
-### Step_6_Evaluate
+### tage_7_Evaluate/Evaluate
 This step loads the Evaluation Keys for the dataset and runs a set of evaluation metrics on the TLDRs that are produced by the workflow. This is intended to allow you to assess if your changes have helped or hurt the performance of the end-to-end process.
-
-![step6](resources/After_Step6_Evaluate.png)

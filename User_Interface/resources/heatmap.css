@@ -1,0 +1,17 @@
+.heatmap {
+    display: inline-block;
+    margin: 20px;
+}
+.cell {
+    stroke: #ffffff;
+    stroke-width: 1px;
+}
+.tooltip {
+    position: absolute;
+    pointer-events: none;
+    display: none;
+}
+.tooltip img {
+    width: 150px;
+    height: 150px;
+}

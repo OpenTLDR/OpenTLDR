@@ -1,0 +1,9 @@
+# title: Story Six
+# date: 01/06/2000
+# type: news
+# class: Content
+# author: Hampster N. Wheel
+# source: New News Today Daily
+# url: https://www.rockfishresearch.com/opentldr/sample_data/news6.html
+
+Local man was discovered to be hoarding a large quantity of sliced white bread. Mr. Bob Bobbert was discovered with the loaves of bread stored in multiple places in his apartment on 2nd Street. He has apparently been buying all of the white bread from the local Groceries and Stuff market daily for the last week. The manager of G&S reported Bob's unusual behavior after other customers complained about the inventory of white bread at his establishment. It remains unclear what Bob intended to do with the stores of bread.

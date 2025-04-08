@@ -1,0 +1,7 @@
+# class: Request
+# user: public
+# email: public@ncsulas.org
+# title: Teams of cyber agents
+# date: 11/20/2024
+
+Is there research on multi-agent or teams of agents using LLMs in the cybersecurity domain?

@@ -1,0 +1,7 @@
+NEO4J_CONNECTION='neo4j://localhost:7687'
+NEO4J_USERNAME=neo4j
+NEO4J_PASSWORD=neo4jPassword
+NEO4J_DATABASE=neo4j
+LLM_MODEL='../LLM_Models/mistral-7b-openorca.gguf2.Q4_0.gguf'
+LLM_DEVICE='cpu'
+SPACY_MODEL="en_core_web_lg"

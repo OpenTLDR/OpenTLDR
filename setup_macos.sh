@@ -1,14 +1,24 @@
 #!/bin/bash
 
-echo "Setting up Python environment"
+echo "Setting up Python environment (MacOS Only)"
 VENVNAME="opentldr-env"
 
-commandOutput=$(python3 -m venv ~/.virtualenvs/$VENVNAME)
+
+commandOutput=$(brew --version)
 if [[ $? -ne 0 ]]; then
     echo ""
-    echo "Installing python-venv, you will be prompted for sudo password:"
-    sudo apt install -y python3.12-venv
-fi 
+    echo "Installing HomeBrew"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    brew update
+    brew upgrade
+fi
+
+commandOutput=$(python3.12 --version)
+if [[ $? -ne 0 ]]; then
+    echo ""
+    echo "Installing Python3.12"
+    brew install python@3.12
+fi
 
 echo ""
 echo "Createing a virtual environment:"
@@ -36,7 +46,11 @@ cp ./DefaultDotEnv ./.env
 cp ./User_Interface/DefaultDotEnv ./User_Interface/.env
 cp ./Collectors/DefaultDotEnv ./Collectors/.env
 
-if [ ! -f ./LLM_Models/mistral-7b-openorca.gguf2.Q4_0.gguf ]; then
+echo ""
+echo "Creating .env file using default settings... *** You should edit these if needed"
+cp ./DefaultDotEnv ./.env
+
+if [! -f ./LLM_Models/mistral-7b-openorca.gguf2.Q4_0.gguf ]; then
     echo ""
     echo "Adding default ./LLM_Models for LLM... "
     mkdir ./LLM_Models

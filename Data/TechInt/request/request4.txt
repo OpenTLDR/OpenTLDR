@@ -1,0 +1,7 @@
+# class: Request
+# user: public
+# email: public@ncsulas.org
+# title: LLM based Cyber Agents
+# date: 11/20/2024
+
+How does an LLM enable autonomous agents to perform vulnerability exploitation?

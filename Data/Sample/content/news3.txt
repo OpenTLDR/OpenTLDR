@@ -1,0 +1,9 @@
+# title: Story Three
+# date: 01/03/2000
+# type: news
+# class: Content
+# author: Hampster N. Wheel
+# source: New News Today Daily
+# url: https://www.rockfishresearch.com/opentldr/sample_data/news3.html
+
+We have unconfirmed reports that Alice did eat a PB&J sandwich today for lunch. These reports were conveyed to our reporter by Bob, an expert in the field of Alice's lunch habits. Bob states  "I walked by her work, as I often do, around 12:00PM today. I watched as she opened a brown paper bag at her desk and removed what appeared to be a white bread sandwich in a clear plastic bag. I'm pretty sure that it was PB&J, isn't it always?"  This news appears to confirm our suspicion and settle the questions surrounding this mystery.

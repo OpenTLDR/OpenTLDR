@@ -1,0 +1,9 @@
+# title: Story Five
+# date: 01/05/2000
+# type: news
+# class: Content
+# author: Hampster N. Wheel
+# source: New News Today Daily
+# url: https://www.rockfishresearch.com/opentldr/sample_data/news5.html
+
+In an apparent effort to clear his name, Charles Chuckles, now former reported for this news outlet has been arrested for assaulting an innocent pedestrian on 1st Avenue. The victim Alice Allsorts works at the First Bank and reports that this was the second time Mr. Chukles has approached her. In the previous incident Charles "wrestled away her lunch, tore open the bag, and seemed to be searching for something." suggested Alice. Alice reported this incidence to the local authorities when she arrived at work and an undercover officer was assigned for the next day. It is unclear what charges Mr. Chuckles will face.

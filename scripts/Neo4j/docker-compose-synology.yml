@@ -20,7 +20,7 @@ services:
         protocol: tcp
         mode: host
     volumes:
-      - neo4jdb:/neo4jdata
+      - /volume1/docker/neo4j/data:/neo4jdata
 
 volumes:
   neo4jdb:

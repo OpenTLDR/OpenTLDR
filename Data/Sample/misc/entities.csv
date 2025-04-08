@@ -1,0 +1,10 @@
+Type,Text,Meta
+PERSON,"Alice Allsorts",{}
+PERSON,"Bob Bobbert",{}
+PERSON,"Charlie Chuckles",{}
+ORG,"First Bank",{}
+ORG,"Groceries and Stuff",{}
+ORG,"Local Newspaper",{}
+LOC,"First Ave",{}
+LOC,"Second Street",{}
+LOC,"Third Blvd",{}
