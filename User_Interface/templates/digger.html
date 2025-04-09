@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>digger</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="{{ url_for('resources', path='/digger.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{{ url_for('resources', path='/scatterplot.js') }}""></script>
+    <script src="{{ url_for('resources', path='/networkplot.js') }}" ></script>
+
+</head>
+
+<body width="100%" height="100%">
+    <div class="header">
+        <img src="{{ url_for('resources', path='/logo.png') }}"  alt="logo" class="logo">
+        <h1>digger</h1>
+    </div>
+    <div class="container" width="100%" id="digger_pane">
+        <div class="column" width="33%">
+            <div class="component" width="100%" id="analytic_request">
+                <h2>Analytic Request for Information</h2>
+                <input class="textentry" type="text" id="request_title" placeholder="Title of Request">
+                <textarea class="textentry" rows="7" id="request_text" placeholder="Analytic Request Text"></textarea>
+                <button class="buttons blue" id="dig_request" onclick="update_request()"><span class="fa fa-search"></span>&nbsp;Dig</button>
+            </div>
+
+            <script>
+                const request_title_field = document.querySelector('#request_title')
+                const request_text_field = document.querySelector('#request_text')
+                const dig_request_button = document.querySelector('#dig_request')
+                
+                // default
+                dig_request_button.disabled = true
+                // check
+                function check_dig_button(event) {
+                    dig_request_button.disabled = (request_title_field.value.trim().length === 0) || (request_text_field.value.trim().length === 0)
+                }
+        
+                // listen for events
+                document.querySelector('#analytic_request').addEventListener('mouseout', check_dig_button, false)
+                document.querySelector('#analytic_request').addEventListener('change', check_dig_button, false)
+            </script>
+
+            <div class="component" width="100%">
+                <h2>Select Content by Relevance and Age</h2>
+                <div id="scatterplot" style="width:560px; height:500px; justify-content: center;"></div>
+            </div>
+        </div>
+        
+        <div class="column" width="33%">
+            <div class="component" width="100%">
+                <h2>Tailored Summary of Selected Group</h2>
+                <textarea readonly class="textreadonly" id="multidocsummary" rows="15" placeholder="Select a group of Content above to jointly summarize."></textarea>
+            </div>
+            <h2>Content in Selected Group (Sortable)</h2>
+            <div id="selected_table" style="width: 100%; "></div>
+        </div>
+        <div class="column" width="33%">
+            <div class="component">
+                <h2>Relevant Knowlege Sub-Graph</h2>
+                <div id="networkplot" style="width:100%; height:300px; justify-content: center;"></div>
+            </div>
+            <div class="component">
+                <h2>Tailored Summary</h2>
+                <textarea readonly class="textreadonly" id="summary" rows="10" placeholder="Select Content from Group to Start Tailoring."></textarea>
+            </div>
+            <div class="component">
+                <h2>Actions on this Document</h2>
+                <button id="remove_action" onclick="remove_this()" class="buttons red"><span class="fa fa-minus-circle"></span>&nbsp;Remove from Selected Group</button>
+                <button id="view_action" onclick="view_this()" class="buttons yellow"><span class="fa fa-external-link"></span>&nbsp;View Content at Source</button>
+                <button id="cite_action" onclick="cite_this()" class="buttons green"><span class="fa fa-check-square"></span>&nbsp;Cite this Content in TLDR</button> 
+            </div>
+
+            <script>
+                const remove_action_button = document.querySelector('#remove_action')
+                const view_action_button = document.querySelector('#view_action')
+                const cite_action_button = document.querySelector('#cite_action')
+                
+                // default
+                remove_action_button.disabled = true
+                view_action_button.disabled = true
+                cite_action_button.disabled = true
+
+                // check
+                function update_action_buttons_event(event){
+                    update_action_buttons();
+                }
+                
+                function update_action_buttons(){
+                    if (selected_content!="") {
+                        console.log("activate buttons! "+selected_content);
+                        remove_action_button.disabled = false
+                        view_action_button.disabled = false
+                        cite_action_button.disabled = false
+                    } else {
+                        console.log("deactivate buttons! "+selected_content);
+                        remove_action_button.disabled = true
+                        view_action_button.disabled = true
+                        cite_action_button.disabled = true
+                    }
+                }
+        
+                // listen for events
+                document.querySelector('#digger_pane').addEventListener('click', update_action_buttons_event, false)
+            </script>
+
+        </div>
+    </div>
+    <div class="blurb">Powered by <a href="http://opentldr.org">OpenTLDR</a>.</div>
+    <script>
+
+        function sortTable(columnIndex) {
+            const table = document.getElementById("selected_content");
+            const rows = Array.from(table.rows).slice(1);
+            const sortedRows = rows.sort((a, b) => {
+                const cellA = a.cells[columnIndex].innerText;
+                const cellB = b.cells[columnIndex].innerText;
+                if (columnIndex < 2){ // cols 0 and 1 sort normally
+                    return cellA.localeCompare(cellB);
+                } else { // reverse sort cols 2 and 3
+                    return cellB.localeCompare(cellA);
+                }
+            });
+            sortedRows.forEach(row => table.tBodies[0].appendChild(row));
+        }
+
+        function selectRow(row) {
+            const rows = document.querySelectorAll("#selected_content tbody tr");
+            rows.forEach(r => r.classList.remove("selected"));
+            row.classList.add("selected");
+            const selectedText="Tailoring a Summary of "+row.cells[0].innerText+"... (please wait)";
+            document.getElementById("summary").value = selectedText;
+            selected_content=row.cells[4].innerText;
+            selected_content_score=row.cells[3].innerText;
+            update_subgraph();
+            update_tailored_summary();
+            update_action_buttons();
+        }
+    
+        function remove_this(){
+            selected_content_nodes[selected_content]=false;
+            selected_content="";
+            selected_content_score=0;
+            update_selected_table();
+            update_subgraph();
+            update_tailored_summary();
+            update_action_buttons();
+        }
+
+        function view_this(){
+            if (selected_content!="") {
+                url="{{ url_for('digger_forward_to_content_link', content_uid='CONTENTUID') }}".replace("CONTENTUID",selected_content);
+                window.open(url, '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
+            }
+        }
+
+        function cite_this(){
+            if (selected_content!="") {
+                cite_entry(request_data.uid,selected_content);
+            }
+        }
+
+        // Analytic Request for Information
+
+        // Init
+        var request_data = JSON.parse({{request_json|tojson}}) ;
+        $('#request_title').val(request_data.title)
+        $('#request_text').val(request_data.text)       
+        console.log("Init Request Node: "+JSON.stringify(request_data));
+
+        // On Submit (dig button)
+        async function update_request() {
+
+            // update values from form fields
+            request_data.title=$('#request_title').val();
+            request_data.text=$('#request_text').val();
+            console.log("Submitting Request Node: "+JSON.stringify(request_data));
+
+            // TODO: verify request
+            // TODO: busy mask - Dig button, Title and Text boxes
+
+            var successFunction = function(data) {
+                request_data = data ;
+                $('#request_title').val(request_data.title)
+                $('#request_text').val(request_data.text)       
+                console.log("Successful Update of Request Node: "+JSON.stringify(data));
+                // TODO: Unbusy Requests
+                all_content_nodes = getAllContentNodes(request_data.uid);
+
+            }
+
+            var failFunction = function(error) {
+                console.log("Failed Update of Request Node: "+error);
+                $('#request_title').val("ERROR")
+                $('#request_text').val("ERROR: "+error+"\nSUBMITTED:\n"+JSON.stringify(request_data))   
+            };
+
+            // Call to OpenTLDR
+            try {
+                var data = await $.ajax({
+                    method : 'POST',
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json"
+                        },
+                    url: "{{ url_for('digger_update_request')}}",
+                    data : JSON.stringify(request_data),
+                    dataType : 'json',
+                    contentType : 'application/json',
+                    cache : false,
+                    async : true,
+                });
+                successFunction(data);
+            return true;
+            } catch (err) { 
+                console.log(err);
+                failFunction(err);
+            }
+            return false;
+        }
+
+        // ALL RANKED CONTENT NODES
+        // This is a list of all the content nodes in the system and includes a relevance score
+        // based on request. These are used to make the scatterplot and to extract the content
+        // details for the selected group list.
+
+        var scatterplot=new Scatterplot("#scatterplot");
+
+        var all_content_nodes = getAllContentNodes(request_data.uid);
+        var selected_content_nodes = {};
+        var cited_content_nodes={};
+
+        function update_scatterplot(){
+            console.log("In Update Scatterplot");
+            scatterplot.loadData(all_content_nodes);
+            scatterplot.draw();
+        }
+
+        async function getAllContentNodes(request_uid) {
+            if (request_uid ==""){
+                request_uid="NEW";
+            }
+            var successFunction = function(data) {
+                all_content_nodes = data;
+                console.log("Successful Got All Content: "+data.length+" Content nodes "); //+JSON.stringify(data));
+                selected_content_nodes={};
+                cited_content_nodes={};
+                for (const node of data){
+                    selected_content_nodes[node.content_uid]=false;
+                    cited_content_nodes[node.content_uid]=node.cited;
+                }
+                update_scatterplot();
+                update_groupsummary();
+                update_selected_table();
+            }
+
+            var failFunction = function(error) {
+                console.log("Failed Get All Content: "+JSON.stringify(error));
+                all_content_nodes = [];
+                selected_content_nodes={};
+                cited_content_nodes={}
+                update_scatterplot();
+                update_groupsummary();
+                update_selected_table();
+            };
+
+            //call to API function
+            try {
+                var data = await $.ajax({
+                    method : 'GET',
+                    url: "/digger/get_ranked_content/"+request_uid,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    cache: false,
+                    async: true,
+                });
+            successFunction(data);
+            return true;
+            } catch (err) { 
+                console.log(err);
+                failFunction(err);
+            }
+            return false;
+        }
+
+        // GROUP SUMMARY
+
+        function update_groupsummary(){
+            var uid_list=[ ]
+            for (var current in selected_content_nodes) {
+                if (selected_content_nodes[current]){
+                    uid_list.push(current);
+                    console.log("grouping: "+current); 
+                }
+            }
+            console.log("selected: "+uid_list.length+"/"+all_content_nodes.length);
+
+            if (uid_list.length == 0){
+                $('#multidocsummary').val("No content Selected.");
+                return;          
+            } else if (uid_list.length > 10){
+                $('#multidocsummary').val("More than 10 selected, summarizing first 10... (please wait)"); 
+                uid_list=uid_list.slice(0,10);
+            } else {
+                $('#multidocsummary').val("Summarizing selected nodes... (please wait)"); 
+            }
+            return getGroupSummary(uid_list)
+         }
+
+        async function getGroupSummary(uid_list) {
+
+            json_uid_list=[]
+            for (var current of uid_list){
+                json_uid_list.push({"uid":current, "request_uid":request_data.uid });
+            }
+            console.log("sending: "+JSON.stringify(json_uid_list));
+
+
+            var successFunction = function(data) {
+                console.log("Successful Got All Content: "+JSON.stringify(data));
+                $('#multidocsummary').val(data)               
+            }
+
+            var failFunction = function(error) {
+                console.log("Failed Get All Content: "+error);
+                $('#multidocsummary').val("ERROR: "+error)               
+            };
+
+            //call to API function
+            try {
+                var data = await $.ajax({
+                    method : 'POST',
+                    url: "{{ url_for('digger_get_group_summary')}}",
+                    data : JSON.stringify(json_uid_list),
+                    dataType : 'json',
+                    contentType : 'application/json',
+                    cache : false,
+                    async : true,
+                });
+            successFunction(data);
+            return true;
+            } catch (err) { 
+                console.log(err);
+                failFunction(err);
+            }
+            return false;
+        }
+
+        function update_selected_table(){
+            // clear the items on the right side
+            networkplot.clear();    // network
+            $('#summary').val("");  // tailored summary
+
+            var container = $('#selected_table');
+            container.empty(".list");
+            var table = $('<table class="list" id="selected_content">');
+            var header = $('<thead>');
+            var headrow = $('<tr>');
+            headrow.append('<th onclick="sortTable(0)">Title</th>');
+            headrow.append('<th onclick="sortTable(1)">Source</th>');
+            headrow.append('<th onclick="sortTable(2) min-width:40px">Date</th>');
+            headrow.append('<th onclick="sortTable(3)">Relevance</th>');
+            headrow.append('<th style="display:none;">uid</th>');
+            header.append(headrow); 
+            table.append(header);
+            
+            var body=$('<tbody>');
+            for (var current of all_content_nodes) {
+                console.log("tabling: "+JSON.stringify(current));
+                if (selected_content_nodes[current.content_uid]){
+                    var tr=$('<tr onclick="selectRow(this)">');
+                    tr.append('<td>'+current.title+'</td>');
+                    tr.append('<td>'+current.source+'</td>');
+                    tr.append('<td min-width:40px>'+current.date+'</td>');
+                    tr.append('<td>'+current.relevance+'</td>');
+                    tr.append('<td style="display:none;">'+current.content_uid+'</td>');
+                    body.append(tr);
+                }
+            }
+            table.append(body);
+            container.append(table);
+            selected_content=""
+            $('#summary').val("Pick a row from the Content in Selected Group table to begin tailoring a summary.");               
+        }
+        
+// TAILORED Summary
+
+        var selected_content="";
+        var selected_content_score=0.0;
+        
+        function update_tailored_summary(){
+            if (selected_content!="") {
+                console.log("tailored summary content selected: "+selected_content);
+                return get_tailored_summary(request_data.uid,selected_content);
+            } else {
+                $('#summary').val("Pick a row from the Content in Selected Group table to begin tailoring a summary.");               
+            }
+         }
+
+        async function get_tailored_summary(request_uid,content_uid) {
+   
+            t={
+                "request_uid": request_uid,
+                "content_uid": content_uid
+            }
+            console.log("sending: "+JSON.stringify(t));
+
+            var successFunction = function(data) {
+                console.log("Successful Got Tailored Content: "+JSON.stringify(data));
+                $('#summary').val(data)               
+            }
+
+            var failFunction = function(error) {
+                console.log("Failed Get All Content: "+error);
+                $('#summary').val("ERROR: "+error)               
+            };
+
+            //call to API function
+            try {
+                var data = await $.ajax({
+                    method : 'POST',
+                    url: "{{ url_for('digger_get_tailored_summary')}}",
+                    data : JSON.stringify(t),
+                    dataType : 'json',
+                    contentType : 'application/json',
+                    cache : false,
+                    async : true,
+                });
+            successFunction(data);
+            return true;
+            } catch (err) { 
+                console.log(err);
+                failFunction(err);
+            }
+            return false;
+        }
+
+        async function cite_entry(request_uid,content_uid) {
+
+            var sum=  $('#summary').val();
+
+            c={
+                "request_uid": request_uid,
+                "content_uid": content_uid,
+                "score": selected_content_score,
+                "summary":sum
+            };
+
+            console.log("sending: "+JSON.stringify(t));
+
+            var successFunction = function(data) {
+                console.log("Successful Cited: "+JSON.stringify(data));           
+            }
+
+            var failFunction = function(error) {
+                console.log("Failed to Cite Content: "+error);
+                $('#summary').val("ERROR: "+error)               
+            };
+
+            //call to API function
+            try {
+                var data = await $.ajax({
+                    method : 'POST',
+                    url: "{{ url_for('digger_cite')}}",
+                    data : JSON.stringify(c),
+                    dataType : 'json',
+                    contentType : 'application/json',
+                    cache : false,
+                    async : true,
+                });
+            successFunction(data);
+            return true;
+            } catch (err) { 
+                console.log(err);
+                failFunction(err);
+            }
+            return false;
+            }
+
+
+        var networkplot=new Networkplot("#networkplot"); 
+        var netdata={}
+
+        function update_subgraph(){
+            get_subgraph(request_data.uid,selected_content);
+        }
+
+        async function get_subgraph(request_uid,content_uid) {
+   
+            t={
+                "request_uid": request_uid,
+                "content_uid": content_uid
+            }
+            console.log("subgraph sending: "+JSON.stringify(t));
+
+            var successFunction = function(data) {
+                console.log("Successful Got Subgraph Content: "+JSON.stringify(data));
+                networkplot.loadData(data);
+                networkplot.draw();            
+            }
+
+            var failFunction = function(error) {
+                console.log("Failed Get Subgraph Content: "+error);
+                // TODO: clear subgraph
+                //$('#summary').val("ERROR: "+error)               
+            };
+
+            //call to API function
+            try {
+                var data = await $.ajax({
+                    method : 'POST',
+                    url: "{{ url_for('digger_get_subgraph')}}",
+                    data : JSON.stringify(t),
+                    dataType : 'json',
+                    contentType : 'application/json',
+                    cache : false,
+                    async : true,
+                });
+            successFunction(data);
+            return true;
+            } catch (err) { 
+                console.log(err);
+                failFunction(err);
+            }
+            return false;
+        }        
+    </script>
+</body>
+</html>

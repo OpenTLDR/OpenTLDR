@@ -1,0 +1,163 @@
+<html>
+<head>
+    <title>OpenTLDR Home</title>
+    <link href="{{ url_for('resources', path='/styles.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<script>
+    
+    // This JavaScript fuction makes a REST call to OpenTLDR API to record a Request in KG
+
+    function add_request (){
+        var formData = {
+            user_name : $('#user_name').val(),
+            user_email : $('#user_email').val(),    
+            request_title : $('#request_title').val(),    
+            request_text : $('#request_text').val()
+        }
+        $.ajax({
+            url: "{{ url_for('add_request')}}",
+            async: true,
+            type: 'POST',
+            headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+            },
+            data: JSON.stringify(formData),
+            encode: true,
+            success: function(data){
+                console.log("Success: " + JSON.stringify(data));
+            },
+            error: function(data){
+                alert("ERROR: " + JSON.stringify(data));
+            }
+        });
+        location.reload()
+    }
+
+    function delete_request(uid){
+        var url = "{{ url_for('delete_request_by_uid', uid='####') }}";
+        let text = "Permently delete request?";
+        if (confirm(text) != true) {
+            return
+        }
+        $.ajax({
+            url: url.replace("####",uid),
+            async: true,
+            type: 'DELETE',
+            headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+            },
+            encode: true,
+            success: function(data){
+                console.log("Success: " + JSON.stringify(data));
+            },
+            error: function(data){
+                console.log("ERROR: " + JSON.stringify(data));
+            }
+        });
+        location.reload()
+    }
+ </script>
+
+<body>
+    <h1>OpenTLDR Dashboard</h1>
+
+    {% if auth == None %}
+    <p>No Authentication - use with caution!</p>
+    {% else %}
+    <p>Welcome {{auth}}</p>
+    {% endif %}
+
+    <h2>Active Requests and Existing TLDRs</h2>
+    <table id="request_list">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Request</th>
+                <th width="40%">Request Text</th>
+                <th>TLDRs</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for line in data %}
+            <tr>
+                <td style="min-width:100px">{{line.user}}{% if line.user != line.email %} ({{line.email}}){% endif %}</td>
+                <td style="min-width:100px">{{line.title}}</td>
+                <td style="min-width:200px">{{line.text}}</td>
+                <td style="min-width:100px">
+                    {% for tldr in line.tldrs %}
+                        <a href="{{ url_for('tldr_report', uid=tldr.uid) }}"><span class="fa fa-external-link">&nbsp;{{tldr.date}}</span></a><br>
+                    {% endfor %}
+                </td>
+                <td style="min-width:100px">
+                    <a class="action" href="{{ url_for('digger_existing', uid=line.uid) }}"><span class="fa fa-search"></span>&nbsp;Digger</a><br>
+                    <a class="action" href="{{ url_for('timeline', uid=line.uid) }}"><span class="fa fa-external-link"></span>&nbsp;Timeline</a><br>
+                    <a class="action" onclick='delete_request("{{line.uid}}");'><span class="fa fa-trash"></span>&nbsp;Delete</a><br>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Create a New Request</h2>
+
+    <a class="action" href="{{ url_for('digger_new') }}"><span class="fa fa-search"></span>&nbsp;Create with Digger</a><br>
+
+    <form id="add_request_form">
+        {% if auth == None %}
+        <div class="formfield">
+            <label for="user_name">User Name:</label>
+            <input name="user_name" id="user_name" value="" />
+        </div>
+        <div class="formfield">
+            <label for="user_email">User Email:</label>
+            <input name="user_email" id="user_email" value="" />
+        </div>
+        {% else %}
+            <input type="hidden" name="user_name" id="user_name" value="{{auth}}" />
+            <input type="hidden" name="user_email" id="user_email" value="{{auth}}" />  
+        {% endif %}
+
+        <div class="formfield">
+            <label for="request_title">Request Title:</label>
+            <input name="request_title" id="request_title" value="" />
+        </div>
+        <div class="formfield">
+            <label for="request_text">Request Text:</label>
+            <textarea rows="4" name="request_text" id="request_text" autocomplete="on" autocorrect="on" spellcheck="true"></textarea>
+        </div>
+        <div>
+          <button id="add_request" onclick="add_request();">Add New Request</button>
+          
+        </div>
+    </form>
+    <script>
+        const user_name_field = document.querySelector('#user_name')
+        const user_email_field = document.querySelector('#user_email')
+        const request_title_field = document.querySelector('#request_title')
+        const request_text_field = document.querySelector('#request_text')
+        const add_request_button = document.querySelector('#add_request')
+        
+        // default
+        add_request_button.disabled = true
+        // check
+        function check_request_button(event) {
+            add_request_button.disabled = (user_name_field.value.trim().length === 0) || (user_email_field.value.trim().length === 0) || (request_title_field.value.trim().length === 0) || (request_text_field.value.trim().length === 0)
+        }
+
+        // listen for events
+        document.querySelector('#add_request_form').addEventListener('mouseout', check_request_button, false)
+        document.querySelector('#add_request_form').addEventListener('change', check_request_button, false)
+
+    </script>
+    
+
+    <div class="blurb">Generated by <a href="http://opentldr.org">OpenTLDR</a>.</div>
+
+</body>
+</html>
