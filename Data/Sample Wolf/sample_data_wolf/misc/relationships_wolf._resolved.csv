@@ -1,0 +1,10 @@
+Entity From,Entity To,Relationship Type,Relationship Text
+Mr Wuf,Granny,FRIEND_OF,Mr Wuf is a friend of Granny
+Granny,Hillsborough Street,LOCATED_AT,Granny lives at Jordan Hall on Hillsborough Street
+Jordan Hall,NC State Campus,LOCATED_AT,Jordan Hall is on NC State Campus
+NC State Campus,Raleigh,LOCATED_AT,"NC State Campus is in Raleigh, NC."
+Ms Wuf,Mr Wuf,FAMILY_OF,Ms Wuf and Mr Wuf are married
+Little Red Riding Hood,Granny,FAMILY_OF,Little Red Riding Hood is the granddaughter of Granny
+wolf,Mr Wuf,FAMILY_OF,Mr Wuf is a wolf
+Hunt Library,Hillsborough Street,LOCATED_AT,Hunt Library is on Hillsborough street
+Hillsborough Street,Raleigh,LOCATED_AT,Hillsborough Street is located in Raleigh

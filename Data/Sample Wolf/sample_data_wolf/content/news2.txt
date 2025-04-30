@@ -1,0 +1,11 @@
+# title: Campus Police Investigate Suspicious Activity Near Hunt Library
+# date: 01/02/2000
+# type: news
+# class: Content
+# author: Hapster N. Wheel
+# source: New News Today Daily
+# url: https://www.rockfishresearch.com/opentldr/sample_data/news2.html
+
+A suspicious character was spotted lurking around the perimeter of the Hunt Library building earlier today, according to campus police.
+
+"We take all threats seriously," said Captain James Parker of NC State University Police in an interview with this reporter. "We are investigating the incident and will provide updates as more information becomes available."

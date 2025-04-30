@@ -1,0 +1,6 @@
+# class: Request
+# user: AbigailB
+# email: abrowning@rockfishresearch.com
+# title: Mr Wuf's whereabouts
+
+I am an FBI agent and I'm tracking Mr Wuf and his family for suspicious activity

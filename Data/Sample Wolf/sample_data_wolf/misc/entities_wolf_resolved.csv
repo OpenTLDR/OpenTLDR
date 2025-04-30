@@ -1,0 +1,16 @@
+Type,Text,Meta
+PERSON,Granny,{}
+PERSON,wolf,{}
+PERSON,Little Red Riding Hood,{}
+PERSON,Hapster N. Wheel,{}
+PERSON,Mr Wufie Wuf,"{ ""FullName"":""Mr Wufie Wuf Wolf""  }"
+PERSON,Ms Wuf,{}
+ORG,NC State University Police,{}
+ORG,New News,{}
+ORG,Laboratory of Analytic Sciences,{}
+LOC,Hillsborough Street,{}
+LOC,NC State Campus,{}
+GPE,Raleigh,{}
+GPE,NC ,{}
+FAC,Jordan Hall,{}
+FAC,Hunt Library,{}
