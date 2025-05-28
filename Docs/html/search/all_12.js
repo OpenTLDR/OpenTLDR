@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['s3datarepo_0',['S3DataRepo',['../classopentldr_1_1_s3_data_repo_1_1_s3_data_repo.html',1,'opentldr::S3DataRepo']]],
+  ['s3datarepo_2epy_1',['S3DataRepo.py',['../_s3_data_repo_8py.html',1,'']]],
+  ['scene_2',['Scene',['../classopentldr_1_1_content_enrichment_1_1_scene.html',1,'opentldr::ContentEnrichment']]],
+  ['score_3',['score',['../classopentldr_1_1_domain_1_1_scored.html#ab2fd1f45213ddb72c96c19f77c6ddf77',1,'opentldr::Domain::Scored']]],
+  ['score_5fto_5ftext_4',['score_to_text',['../classopentldr_1_1_domain_1_1_scored.html#af1eecb0e7a0e24f34a64166700a382e5',1,'opentldr::Domain::Scored']]],
+  ['scored_5',['Scored',['../classopentldr_1_1_domain_1_1_scored.html',1,'opentldr::Domain']]],
+  ['section_6',['Section',['../classopentldr_1_1_content_enrichment_1_1_section.html',1,'opentldr::ContentEnrichment']]],
+  ['set_5fhypothesized_7',['set_hypothesized',['../classopentldr_1_1_domain_1_1_reference_edge.html#ad0f2acf0e116321b1f16b28dc3fc041a',1,'opentldr.Domain.ReferenceEdge.set_hypothesized()'],['../classopentldr_1_1_domain_1_1_reference_node.html#a051b2634fa1b63d885b176c9431c72c2',1,'opentldr.Domain.ReferenceNode.set_hypothesized()']]],
+  ['shortest_5fpath_8',['shortest_path',['../classopentldr_1_1_knowledge_graph_1_1_knowledge_graph.html#ac60641ad7f42d22ea3892abc86914447',1,'opentldr::KnowledgeGraph::KnowledgeGraph']]],
+  ['similar_5fto_9',['similar_to',['../classopentldr_1_1_content_enrichment_1_1_similarity.html#a3cd7133bed5a85bbea64d1c090c0ffda',1,'opentldr::ContentEnrichment::Similarity']]],
+  ['similarity_10',['Similarity',['../classopentldr_1_1_content_enrichment_1_1_similarity.html',1,'opentldr::ContentEnrichment']]],
+  ['similarto_11',['SimilarTo',['../classopentldr_1_1_content_enrichment_1_1_similar_to.html',1,'opentldr::ContentEnrichment']]],
+  ['source_12',['Source',['../classopentldr_1_1_domain_1_1_source.html',1,'opentldr::Domain']]],
+  ['subsectionof_13',['SubsectionOf',['../classopentldr_1_1_content_enrichment_1_1_subsection_of.html',1,'opentldr::ContentEnrichment']]],
+  ['summarizes_14',['Summarizes',['../classopentldr_1_1_domain_1_1_summarizes.html',1,'opentldr::Domain']]],
+  ['summarizes_15',['summarizes',['../classopentldr_1_1_domain_1_1_summary.html#a5672355dc84f04d11a754bdfd6ff21c5',1,'opentldr::Domain::Summary']]],
+  ['summary_16',['Summary',['../classopentldr_1_1_domain_1_1_summary.html',1,'opentldr::Domain']]],
+  ['summary_17',['summary',['../classopentldr_1_1_domain_1_1_tldr_entry.html#a3aa4675c5917a9d8eafb611a939ac07c',1,'opentldr::Domain::TldrEntry']]]
+];

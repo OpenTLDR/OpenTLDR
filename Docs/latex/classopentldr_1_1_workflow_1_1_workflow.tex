@@ -1,0 +1,110 @@
+\doxysection{opentldr.\+Workflow.\+Workflow Class Reference}
+\hypertarget{classopentldr_1_1_workflow_1_1_workflow}{}\label{classopentldr_1_1_workflow_1_1_workflow}\index{opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a065593c50d0b5f830a0235f9562e0b46}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, dict \mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad881bd3b131b1ac6c66b088fe6660f1a}{workflow}})
+\item 
+\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a4f90e300befa3cd9c1a466f4968e451c}{from\+\_\+json}} (cls, str j)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_af0f7bdd2538d41105df26902295ce34c}{from\+\_\+file}} (cls, str filepath)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a6ee040f835b88f15345ee00c0a1c2c2e}{from\+\_\+vars}} (cls, str output\+\_\+folder, list\mbox{[}str\mbox{]} notebook\+\_\+order, dict variables)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ac8e6335ff5c37d13bed5c1871265d0c4}{verify}} (self)
+\item 
+json \mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a1af2a7757daee5f190a988f806d15b5f}{export\+\_\+workflow}} (self, str filepath)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a26d1807f210272a2cc3e2d5b3e15c4d2}{ensure\+\_\+path}} (self, path)
+\item 
+float \mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad1f2b102c2b687ebff381cd650be04df}{execute\+\_\+notebook}} (self, str notebook, dict variables, str output\+\_\+path)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a6c86183378937e71d6825e5bbcee3787}{run}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad881bd3b131b1ac6c66b088fe6660f1a}{workflow}} = workflow
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classopentldr_1_1_workflow_1_1_workflow_a065593c50d0b5f830a0235f9562e0b46}\index{opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_workflow_1_1_workflow_a065593c50d0b5f830a0235f9562e0b46} 
+opentldr.\+Workflow.\+Workflow.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{dict}]{workflow}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classopentldr_1_1_workflow_1_1_workflow_a26d1807f210272a2cc3e2d5b3e15c4d2}\index{opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}!ensure\_path@{ensure\_path}}
+\index{ensure\_path@{ensure\_path}!opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}}
+\doxysubsubsection{\texorpdfstring{ensure\_path()}{ensure\_path()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_workflow_1_1_workflow_a26d1807f210272a2cc3e2d5b3e15c4d2} 
+opentldr.\+Workflow.\+Workflow.\+ensure\+\_\+path (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Ensure_path(path) simply creates a directory if it is not there already.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_workflow_1_1_workflow_ad1f2b102c2b687ebff381cd650be04df}\index{opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}!execute\_notebook@{execute\_notebook}}
+\index{execute\_notebook@{execute\_notebook}!opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}}
+\doxysubsubsection{\texorpdfstring{execute\_notebook()}{execute\_notebook()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_workflow_1_1_workflow_ad1f2b102c2b687ebff381cd650be04df} 
+ float opentldr.\+Workflow.\+Workflow.\+execute\+\_\+notebook (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{notebook}{, }\item[{dict}]{variables}{, }\item[{str}]{output\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Execute_notebook runs a single notebook file in PaperMill returns the run time in seconds
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_workflow_1_1_workflow_a1af2a7757daee5f190a988f806d15b5f}\index{opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}!export\_workflow@{export\_workflow}}
+\index{export\_workflow@{export\_workflow}!opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}}
+\doxysubsubsection{\texorpdfstring{export\_workflow()}{export\_workflow()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_workflow_1_1_workflow_a1af2a7757daee5f190a988f806d15b5f} 
+json opentldr.\+Workflow.\+Workflow.\+export\+\_\+workflow (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{filepath}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_workflow_1_1_workflow_af0f7bdd2538d41105df26902295ce34c}\index{opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}!from\_file@{from\_file}}
+\index{from\_file@{from\_file}!opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}}
+\doxysubsubsection{\texorpdfstring{from\_file()}{from\_file()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_workflow_1_1_workflow_af0f7bdd2538d41105df26902295ce34c} 
+opentldr.\+Workflow.\+Workflow.\+from\+\_\+file (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{str}]{filepath}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_workflow_1_1_workflow_a4f90e300befa3cd9c1a466f4968e451c}\index{opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}!from\_json@{from\_json}}
+\index{from\_json@{from\_json}!opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}}
+\doxysubsubsection{\texorpdfstring{from\_json()}{from\_json()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_workflow_1_1_workflow_a4f90e300befa3cd9c1a466f4968e451c} 
+opentldr.\+Workflow.\+Workflow.\+from\+\_\+json (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{str}]{j}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_workflow_1_1_workflow_a6ee040f835b88f15345ee00c0a1c2c2e}\index{opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}!from\_vars@{from\_vars}}
+\index{from\_vars@{from\_vars}!opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}}
+\doxysubsubsection{\texorpdfstring{from\_vars()}{from\_vars()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_workflow_1_1_workflow_a6ee040f835b88f15345ee00c0a1c2c2e} 
+opentldr.\+Workflow.\+Workflow.\+from\+\_\+vars (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{str}]{output\+\_\+folder}{, }\item[{list\mbox{[}str\mbox{]}}]{notebook\+\_\+order}{, }\item[{dict}]{variables}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_workflow_1_1_workflow_a6c86183378937e71d6825e5bbcee3787}\index{opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}!run@{run}}
+\index{run@{run}!opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_workflow_1_1_workflow_a6c86183378937e71d6825e5bbcee3787} 
+opentldr.\+Workflow.\+Workflow.\+run (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run the defined workflow files in order in PaperMill
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_workflow_1_1_workflow_ac8e6335ff5c37d13bed5c1871265d0c4}\index{opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}!verify@{verify}}
+\index{verify@{verify}!opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}}
+\doxysubsubsection{\texorpdfstring{verify()}{verify()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_workflow_1_1_workflow_ac8e6335ff5c37d13bed5c1871265d0c4} 
+opentldr.\+Workflow.\+Workflow.\+verify (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Walk thru the structure of the workflow and ensure it is setup correctly.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classopentldr_1_1_workflow_1_1_workflow_ad881bd3b131b1ac6c66b088fe6660f1a}\index{opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}!workflow@{workflow}}
+\index{workflow@{workflow}!opentldr.Workflow.Workflow@{opentldr.Workflow.Workflow}}
+\doxysubsubsection{\texorpdfstring{workflow}{workflow}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_workflow_1_1_workflow_ad881bd3b131b1ac6c66b088fe6660f1a} 
+opentldr.\+Workflow.\+Workflow.\+workflow = workflow}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/chrisargenta/dev/opentldr/\+Open\+TLDR-\/\+Core/src/opentldr/\mbox{\hyperlink{_workflow_8py}{Workflow.\+py}}\end{DoxyCompactItemize}

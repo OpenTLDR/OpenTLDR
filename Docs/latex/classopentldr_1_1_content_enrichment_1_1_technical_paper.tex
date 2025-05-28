@@ -1,0 +1,88 @@
+\doxysection{opentldr.\+Content\+Enrichment.\+Technical\+Paper Class Reference}
+\hypertarget{classopentldr_1_1_content_enrichment_1_1_technical_paper}{}\label{classopentldr_1_1_content_enrichment_1_1_technical_paper}\index{opentldr.ContentEnrichment.TechnicalPaper@{opentldr.ContentEnrichment.TechnicalPaper}}
+Inheritance diagram for opentldr.\+Content\+Enrichment.\+Technical\+Paper\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.081784cm]{classopentldr_1_1_content_enrichment_1_1_technical_paper}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_technical_paper_a4fb9fbb50ebd8615360670703f0c4de6}{title}} = nm.\+String\+Property(required=False)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_technical_paper_a10247656fd4e52a62cf2aa12d83eb6de}{link}} = nm.\+String\+Property(required=False)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_technical_paper_a7283db9aff0dd0aea60974ffcc4da892}{publish\+\_\+date}} = nm.\+Date\+Property(required=False)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_technical_paper_a8ea1ff2e4a70fc648d476bb07946db35}{author}} = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}}, \textquotesingle{}AUTHORED\+\_\+\+BY\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_authored_by}{Authored\+By}}, cardinality=Zero\+Or\+More)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_technical_paper_a6b2a6b86c93d44af911579df9173ffc7}{enriches}} = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}, \textquotesingle{}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enriches}{Enriches}}\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enriches}{Enriches}}, cardinality=Zero\+Or\+One)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enrichment}{opentldr.\+Content\+Enrichment.\+Enrichment}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enrichment_afdc0579aa490ccae37f66d427eadfd23}{contains}} = nm.\+Relationship\+To(\textquotesingle{}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enrichment}{Enrichment}}\textquotesingle{},\textquotesingle{}CONTAINS\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_subsection_of}{Subsection\+Of}}, cardinality=Zero\+Or\+More)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a614bf6f289697675be10cfa8cdd0fb4e}{uid}} = nm.\+Unique\+Id\+Property()
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_afdffc0ebdaf1f8f87441d3db2d793d02}{metadata}} = nm.\+JSONProperty()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a82fb039f0c98cff4893a796e230572b5}{to\+\_\+text}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{opentldr.\+Domain.\+Open\+Tldr\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a9cf13c000011b62caba715caab59f46b}{from\+\_\+json}} (cls, kg, json\+\_\+string)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3beee20100161b1a421cefb6cb531df2}{to\+\_\+json}} (self, kg)
+\item 
+dict \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3ffd43dde7e5d2f3d736c7141109b855}{to\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a188adbb74405c1735fd06be87f58463c}{from\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classopentldr_1_1_content_enrichment_1_1_technical_paper_a8ea1ff2e4a70fc648d476bb07946db35}\index{opentldr.ContentEnrichment.TechnicalPaper@{opentldr.ContentEnrichment.TechnicalPaper}!author@{author}}
+\index{author@{author}!opentldr.ContentEnrichment.TechnicalPaper@{opentldr.ContentEnrichment.TechnicalPaper}}
+\doxysubsubsection{\texorpdfstring{author}{author}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_content_enrichment_1_1_technical_paper_a8ea1ff2e4a70fc648d476bb07946db35} 
+opentldr.\+Content\+Enrichment.\+Technical\+Paper.\+author = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}}, \textquotesingle{}AUTHORED\+\_\+\+BY\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_authored_by}{Authored\+By}}, cardinality=Zero\+Or\+More)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_content_enrichment_1_1_technical_paper_a6b2a6b86c93d44af911579df9173ffc7}\index{opentldr.ContentEnrichment.TechnicalPaper@{opentldr.ContentEnrichment.TechnicalPaper}!enriches@{enriches}}
+\index{enriches@{enriches}!opentldr.ContentEnrichment.TechnicalPaper@{opentldr.ContentEnrichment.TechnicalPaper}}
+\doxysubsubsection{\texorpdfstring{enriches}{enriches}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_content_enrichment_1_1_technical_paper_a6b2a6b86c93d44af911579df9173ffc7} 
+opentldr.\+Content\+Enrichment.\+Technical\+Paper.\+enriches = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}, \textquotesingle{}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enriches}{Enriches}}\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enriches}{Enriches}}, cardinality=Zero\+Or\+One)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_content_enrichment_1_1_technical_paper_a10247656fd4e52a62cf2aa12d83eb6de}\index{opentldr.ContentEnrichment.TechnicalPaper@{opentldr.ContentEnrichment.TechnicalPaper}!link@{link}}
+\index{link@{link}!opentldr.ContentEnrichment.TechnicalPaper@{opentldr.ContentEnrichment.TechnicalPaper}}
+\doxysubsubsection{\texorpdfstring{link}{link}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_content_enrichment_1_1_technical_paper_a10247656fd4e52a62cf2aa12d83eb6de} 
+opentldr.\+Content\+Enrichment.\+Technical\+Paper.\+link = nm.\+String\+Property(required=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_content_enrichment_1_1_technical_paper_a7283db9aff0dd0aea60974ffcc4da892}\index{opentldr.ContentEnrichment.TechnicalPaper@{opentldr.ContentEnrichment.TechnicalPaper}!publish\_date@{publish\_date}}
+\index{publish\_date@{publish\_date}!opentldr.ContentEnrichment.TechnicalPaper@{opentldr.ContentEnrichment.TechnicalPaper}}
+\doxysubsubsection{\texorpdfstring{publish\_date}{publish\_date}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_content_enrichment_1_1_technical_paper_a7283db9aff0dd0aea60974ffcc4da892} 
+opentldr.\+Content\+Enrichment.\+Technical\+Paper.\+publish\+\_\+date = nm.\+Date\+Property(required=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_content_enrichment_1_1_technical_paper_a4fb9fbb50ebd8615360670703f0c4de6}\index{opentldr.ContentEnrichment.TechnicalPaper@{opentldr.ContentEnrichment.TechnicalPaper}!title@{title}}
+\index{title@{title}!opentldr.ContentEnrichment.TechnicalPaper@{opentldr.ContentEnrichment.TechnicalPaper}}
+\doxysubsubsection{\texorpdfstring{title}{title}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_content_enrichment_1_1_technical_paper_a4fb9fbb50ebd8615360670703f0c4de6} 
+opentldr.\+Content\+Enrichment.\+Technical\+Paper.\+title = nm.\+String\+Property(required=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/chrisargenta/dev/opentldr/\+Open\+TLDR-\/\+Core/src/opentldr/\mbox{\hyperlink{_content_enrichment_8py}{Content\+Enrichment.\+py}}\end{DoxyCompactItemize}

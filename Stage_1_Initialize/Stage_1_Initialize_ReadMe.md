@@ -22,7 +22,7 @@ Variables that a Workflow can override in the notebooks.
 | Variable | Description |
 | ------ | ----------- |
 | message | In *Clear_All* this is a test message that is simply printed by the notebook. The intend here is to demonstrate parameter passing as a learning example. |
-| keyword_to_concept_csv_file concept_to_concept_csv_file | In *Load_CSV_Reference_Data*, these are the paths (relative to notebook itself) where the csv files to read in are located. |
+| keyword_to_concept_csv_file concept_to_concept_csv_file | In *Load_Reference_Data_From_CSV*, these are the paths (relative to notebook itself) where the csv files to read in are located. |
 | data_repo_config | In *Load_Reference_Data*, this is the specification for an OpenTLDR Data_Repo from which to ingest Reference Data. |
 | logging_level | This can be used to control the amount of logging data that is outputted by OpenTLDR when running this notebook. The options (from least to most verbose) are ERROR, WARN, INFO, DEBUG. Note, these are enumerations and will show up as numbers in the parameter-injection cell. |
 | verbose | A boolean value to indicate if the notebooks should print out more of the processing steps it is doing, by default these are set to True. |

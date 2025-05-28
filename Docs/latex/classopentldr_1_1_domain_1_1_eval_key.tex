@@ -1,0 +1,122 @@
+\doxysection{opentldr.\+Domain.\+Eval\+Key Class Reference}
+\hypertarget{classopentldr_1_1_domain_1_1_eval_key}{}\label{classopentldr_1_1_domain_1_1_eval_key}\index{opentldr.Domain.EvalKey@{opentldr.Domain.EvalKey}}
+Inheritance diagram for opentldr.\+Domain.\+Eval\+Key\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.407035cm]{classopentldr_1_1_domain_1_1_eval_key}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+dict \mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_af744cd9e6a3213bac4a03720b42c4027}{to\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_a4e2bd88a9e0500721e3636c7593277de}{from\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_aca1767ad060b5cf841e9a8770e9d6773}{to\+\_\+text}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{opentldr.\+Domain.\+Open\+Tldr\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a9cf13c000011b62caba715caab59f46b}{from\+\_\+json}} (cls, kg, json\+\_\+string)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3beee20100161b1a421cefb6cb531df2}{to\+\_\+json}} (self, kg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored}{opentldr.\+Domain.\+Scored}}}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_af1eecb0e7a0e24f34a64166700a382e5}{score\+\_\+to\+\_\+text}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_ae654810a408bea5f2f26a92aadcb5e45}{text}} = nm.\+String\+Property(required=True)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_ac8df8c1a48390b7896d8762d3a7a2429}{key\+\_\+for\+\_\+content}} = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}, \textquotesingle{}KEY\+\_\+\+FOR\+\_\+\+CONTENT\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_key_for_content}{Key\+For\+Content}}, cardinality=One)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_abddfd1e17b0a297f0b816a251622d334}{key\+\_\+for\+\_\+request}} = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}, \textquotesingle{}KEY\+\_\+\+FOR\+\_\+\+REQUEST\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_key_for_request}{Key\+For\+Request}}, cardinality=One)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a614bf6f289697675be10cfa8cdd0fb4e}{uid}} = nm.\+Unique\+Id\+Property()
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_afdffc0ebdaf1f8f87441d3db2d793d02}{metadata}} = nm.\+JSONProperty()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored}{opentldr.\+Domain.\+Scored}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_ab2fd1f45213ddb72c96c19f77c6ddf77}{score}} = nm.\+Float\+Property(default=-\/1.\+0)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}EvalKey is an indication of the relationship between a Content (e.g., a news article) and a
+Request (i.e., what the user is interested in). This represents a "correct" tailoring pair.
+This also includes a score and text to help identify what was most relevant in the pair.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_eval_key_a4e2bd88a9e0500721e3636c7593277de}\index{opentldr.Domain.EvalKey@{opentldr.Domain.EvalKey}!from\_json\_connect@{from\_json\_connect}}
+\index{from\_json\_connect@{from\_json\_connect}!opentldr.Domain.EvalKey@{opentldr.Domain.EvalKey}}
+\doxysubsubsection{\texorpdfstring{from\_json\_connect()}{from\_json\_connect()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_eval_key_a4e2bd88a9e0500721e3636c7593277de} 
+opentldr.\+Domain.\+Eval\+Key.\+from\+\_\+json\+\_\+connect (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{kg}{, }\item[{}]{json\+\_\+dict}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Override from_json_connect to rebuild edge data from serialized node.
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a188adbb74405c1735fd06be87f58463c}{opentldr.\+Domain.\+Open\+Tldr\+Node}}.
+
+\Hypertarget{classopentldr_1_1_domain_1_1_eval_key_af744cd9e6a3213bac4a03720b42c4027}\index{opentldr.Domain.EvalKey@{opentldr.Domain.EvalKey}!to\_json\_connect@{to\_json\_connect}}
+\index{to\_json\_connect@{to\_json\_connect}!opentldr.Domain.EvalKey@{opentldr.Domain.EvalKey}}
+\doxysubsubsection{\texorpdfstring{to\_json\_connect()}{to\_json\_connect()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_eval_key_af744cd9e6a3213bac4a03720b42c4027} 
+ dict opentldr.\+Domain.\+Eval\+Key.\+to\+\_\+json\+\_\+connect (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{kg}{, }\item[{}]{json\+\_\+dict}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Override to_json_connect to insert edge data into the node.
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3ffd43dde7e5d2f3d736c7141109b855}{opentldr.\+Domain.\+Open\+Tldr\+Node}}.
+
+\Hypertarget{classopentldr_1_1_domain_1_1_eval_key_aca1767ad060b5cf841e9a8770e9d6773}\index{opentldr.Domain.EvalKey@{opentldr.Domain.EvalKey}!to\_text@{to\_text}}
+\index{to\_text@{to\_text}!opentldr.Domain.EvalKey@{opentldr.Domain.EvalKey}}
+\doxysubsubsection{\texorpdfstring{to\_text()}{to\_text()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_eval_key_aca1767ad060b5cf841e9a8770e9d6773} 
+ str opentldr.\+Domain.\+Eval\+Key.\+to\+\_\+text (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}to_text() returns a unique, user readable string representing the object.
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a82fb039f0c98cff4893a796e230572b5}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_eval_key_ac8df8c1a48390b7896d8762d3a7a2429}\index{opentldr.Domain.EvalKey@{opentldr.Domain.EvalKey}!key\_for\_content@{key\_for\_content}}
+\index{key\_for\_content@{key\_for\_content}!opentldr.Domain.EvalKey@{opentldr.Domain.EvalKey}}
+\doxysubsubsection{\texorpdfstring{key\_for\_content}{key\_for\_content}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_eval_key_ac8df8c1a48390b7896d8762d3a7a2429} 
+opentldr.\+Domain.\+Eval\+Key.\+key\+\_\+for\+\_\+content = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}, \textquotesingle{}KEY\+\_\+\+FOR\+\_\+\+CONTENT\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_key_for_content}{Key\+For\+Content}}, cardinality=One)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_eval_key_abddfd1e17b0a297f0b816a251622d334}\index{opentldr.Domain.EvalKey@{opentldr.Domain.EvalKey}!key\_for\_request@{key\_for\_request}}
+\index{key\_for\_request@{key\_for\_request}!opentldr.Domain.EvalKey@{opentldr.Domain.EvalKey}}
+\doxysubsubsection{\texorpdfstring{key\_for\_request}{key\_for\_request}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_eval_key_abddfd1e17b0a297f0b816a251622d334} 
+opentldr.\+Domain.\+Eval\+Key.\+key\+\_\+for\+\_\+request = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}, \textquotesingle{}KEY\+\_\+\+FOR\+\_\+\+REQUEST\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_key_for_request}{Key\+For\+Request}}, cardinality=One)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_eval_key_ae654810a408bea5f2f26a92aadcb5e45}\index{opentldr.Domain.EvalKey@{opentldr.Domain.EvalKey}!text@{text}}
+\index{text@{text}!opentldr.Domain.EvalKey@{opentldr.Domain.EvalKey}}
+\doxysubsubsection{\texorpdfstring{text}{text}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_eval_key_ae654810a408bea5f2f26a92aadcb5e45} 
+opentldr.\+Domain.\+Eval\+Key.\+text = nm.\+String\+Property(required=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/chrisargenta/dev/opentldr/\+Open\+TLDR-\/\+Core/src/opentldr/\mbox{\hyperlink{_domain_8py}{Domain.\+py}}\end{DoxyCompactItemize}

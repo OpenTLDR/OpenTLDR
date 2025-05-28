@@ -1,0 +1,100 @@
+\doxysection{opentldr.\+Domain.\+Entity Class Reference}
+\hypertarget{classopentldr_1_1_domain_1_1_entity}{}\label{classopentldr_1_1_domain_1_1_entity}\index{opentldr.Domain.Entity@{opentldr.Domain.Entity}}
+Inheritance diagram for opentldr.\+Domain.\+Entity\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.757322cm]{classopentldr_1_1_domain_1_1_entity}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity_a1dfd2d8bdefa563a65d70978228d72c0}{get\+\_\+refers\+\_\+to}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}} \mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity_a7d8c58cddbc79ce697e1e477142cc31f}{get\+\_\+mentioned\+\_\+in}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text}{opentldr.\+Domain.\+Open\+Tldr\+Text}}}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text_a1a862c1ef704321dcebb82a8cdfa7842}{to\+\_\+text}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a82fb039f0c98cff4893a796e230572b5}{to\+\_\+text}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{opentldr.\+Domain.\+Open\+Tldr\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a9cf13c000011b62caba715caab59f46b}{from\+\_\+json}} (cls, kg, json\+\_\+string)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3beee20100161b1a421cefb6cb531df2}{to\+\_\+json}} (self, kg)
+\item 
+dict \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3ffd43dde7e5d2f3d736c7141109b855}{to\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a188adbb74405c1735fd06be87f58463c}{from\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity_a8a8baab5f480b8071676aa99e1c38a46}{refers\+\_\+to}} = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}},\textquotesingle{}REFERS\+\_\+\+TO\textquotesingle{}, model = \mbox{\hyperlink{classopentldr_1_1_domain_1_1_refers_to}{Refers\+To}}, cardinality=Zero\+Or\+More)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity_a8f81a00a1a9d02e26bf6f54f69f82fbd}{mentioned\+\_\+in}} = nm.\+Relationship\+To("{}Citable\+Node"{}, \textquotesingle{}MENTIONED\+\_\+\+IN\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_mentioned_in}{Mentioned\+In}}, cardinality=One\+Or\+More)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text}{opentldr.\+Domain.\+Open\+Tldr\+Text}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text_a7d1c303e41d0ca88b67a61609306e8e6}{text}} = nm.\+String\+Property(required=True)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text_a0e1285b9de9d44ceac3f79976d722e7e}{type}} = nm.\+String\+Property(required=True)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a614bf6f289697675be10cfa8cdd0fb4e}{uid}} = nm.\+Unique\+Id\+Property()
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_afdffc0ebdaf1f8f87441d3db2d793d02}{metadata}} = nm.\+JSONProperty()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Entity nodes represent specific things that are "mentioned_in" in Citable nodes 
+(e.g., Content or Requests) that "refers_to" some ReferenceNode information. The text property
+contains the text for the entity identified and the type property expresses what it is.
+The "refers_to" edge can be uncertain (e.g., sematic similarity of text and type consistency). 
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_entity_a7d8c58cddbc79ce697e1e477142cc31f}\index{opentldr.Domain.Entity@{opentldr.Domain.Entity}!get\_mentioned\_in@{get\_mentioned\_in}}
+\index{get\_mentioned\_in@{get\_mentioned\_in}!opentldr.Domain.Entity@{opentldr.Domain.Entity}}
+\doxysubsubsection{\texorpdfstring{get\_mentioned\_in()}{get\_mentioned\_in()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_entity_a7d8c58cddbc79ce697e1e477142cc31f} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}} opentldr.\+Domain.\+Entity.\+get\+\_\+mentioned\+\_\+in (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_entity_a1dfd2d8bdefa563a65d70978228d72c0}\index{opentldr.Domain.Entity@{opentldr.Domain.Entity}!get\_refers\_to@{get\_refers\_to}}
+\index{get\_refers\_to@{get\_refers\_to}!opentldr.Domain.Entity@{opentldr.Domain.Entity}}
+\doxysubsubsection{\texorpdfstring{get\_refers\_to()}{get\_refers\_to()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_entity_a1dfd2d8bdefa563a65d70978228d72c0} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}}\mbox{]} opentldr.\+Domain.\+Entity.\+get\+\_\+refers\+\_\+to (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_entity_a8f81a00a1a9d02e26bf6f54f69f82fbd}\index{opentldr.Domain.Entity@{opentldr.Domain.Entity}!mentioned\_in@{mentioned\_in}}
+\index{mentioned\_in@{mentioned\_in}!opentldr.Domain.Entity@{opentldr.Domain.Entity}}
+\doxysubsubsection{\texorpdfstring{mentioned\_in}{mentioned\_in}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_entity_a8f81a00a1a9d02e26bf6f54f69f82fbd} 
+opentldr.\+Domain.\+Entity.\+mentioned\+\_\+in = nm.\+Relationship\+To("{}Citable\+Node"{}, \textquotesingle{}MENTIONED\+\_\+\+IN\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_mentioned_in}{Mentioned\+In}}, cardinality=One\+Or\+More)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_entity_a8a8baab5f480b8071676aa99e1c38a46}\index{opentldr.Domain.Entity@{opentldr.Domain.Entity}!refers\_to@{refers\_to}}
+\index{refers\_to@{refers\_to}!opentldr.Domain.Entity@{opentldr.Domain.Entity}}
+\doxysubsubsection{\texorpdfstring{refers\_to}{refers\_to}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_entity_a8a8baab5f480b8071676aa99e1c38a46} 
+opentldr.\+Domain.\+Entity.\+refers\+\_\+to = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}},\textquotesingle{}REFERS\+\_\+\+TO\textquotesingle{}, model = \mbox{\hyperlink{classopentldr_1_1_domain_1_1_refers_to}{Refers\+To}}, cardinality=Zero\+Or\+More)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/chrisargenta/dev/opentldr/\+Open\+TLDR-\/\+Core/src/opentldr/\mbox{\hyperlink{_domain_8py}{Domain.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,105 @@
+\doxysection{Content\+Enrichment.\+py}
+\hypertarget{_content_enrichment_8py_source}{}\label{_content_enrichment_8py_source}\index{/Users/chrisargenta/dev/opentldr/OpenTLDR-\/Core/src/opentldr/ContentEnrichment.py@{/Users/chrisargenta/dev/opentldr/OpenTLDR-\/Core/src/opentldr/ContentEnrichment.py}}
+\mbox{\hyperlink{_content_enrichment_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00001}\mbox{\hyperlink{namespaceopentldr_1_1_content_enrichment}{00001}}\ \textcolor{keyword}{from}\ .Domain\ \textcolor{keyword}{import}\ *}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00002}00002\ \textcolor{comment}{\#from\ .KnowledgeGraph\ import\ KnowledgeGraph}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00004}00004\ \textcolor{keyword}{import}\ neomodel\ \textcolor{keyword}{as}\ nm}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00006}00006\ \textcolor{comment}{\#\ Document\ Content}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00008}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_ordered_edges}{00008}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_ordered_edges}{OrderedEdges}}(nm.StructuredRel):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00009}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_ordered_edges_a996b3f08c59058675cf23e4b9a3f621f}{00009}}\ \ \ \ \ order\ =\ nm.IntegerProperty(required=\textcolor{keyword}{False},\ default=0)}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00011}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_subsection_of}{00011}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_subsection_of}{SubsectionOf}}(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{OpenTldrEdge}},\ \mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_ordered_edges}{OrderedEdges}}):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00012}00012\ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00014}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_authored_by}{00014}}\ \textcolor{keyword}{class\ }AuthoredBy(nm.StructuredRel,\ OpenTldrMeta,\ OpenTldrEdge,\ Uncertain):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00015}00015\ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00017}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enriches}{00017}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enriches}{Enriches}}(nm.StructuredRel,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{OpenTldrEdge}}):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00018}00018\ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00019}00019\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00020}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enrichment}{00020}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enrichment}{Enrichment}}(nm.StructuredNode,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{OpenTldrNode}}):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00021}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enrichment_afdc0579aa490ccae37f66d427eadfd23}{00021}}\ \ \ \ \ contains\ =\ nm.RelationshipTo(\textcolor{stringliteral}{'Enrichment'},\textcolor{stringliteral}{'CONTAINS'},\ model=SubsectionOf,\ cardinality=ZeroOrMore)}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00023}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_technical_paper}{00023}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_technical_paper}{TechnicalPaper}}(\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enrichment}{Enrichment}}):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00024}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_technical_paper_a4fb9fbb50ebd8615360670703f0c4de6}{00024}}\ \ \ \ \ title\ =\ nm.StringProperty(required=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00025}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_technical_paper_a10247656fd4e52a62cf2aa12d83eb6de}{00025}}\ \ \ \ \ link\ =\ nm.StringProperty(required=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00026}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_technical_paper_a7283db9aff0dd0aea60974ffcc4da892}{00026}}\ \ \ \ \ publish\_date\ =\ nm.DateProperty(required=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00027}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_technical_paper_a8ea1ff2e4a70fc648d476bb07946db35}{00027}}\ \ \ \ \ author\ =\ nm.RelationshipTo(ReferenceNode,\ \textcolor{stringliteral}{'AUTHORED\_BY'},\ model=AuthoredBy,\ cardinality=ZeroOrMore)}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00028}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_technical_paper_a6b2a6b86c93d44af911579df9173ffc7}{00028}}\ \ \ \ \ enriches\ =\ nm.RelationshipTo(Content,\ \textcolor{stringliteral}{'Enriches'},\ model=Enriches,\ cardinality=ZeroOrOne)}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00030}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_section}{00030}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_section}{Section}}(\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enrichment}{Enrichment}}):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00031}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_section_a30938663362dd029daf1591891877350}{00031}}\ \ \ \ \ title\ =\ nm.StringProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00032}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_section_ad19f46811fc4541740485b88a03a7c70}{00032}}\ \ \ \ \ url\ =\ nm.StringProperty(required=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00034}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_text_chunk}{00034}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_text_chunk}{TextChunk}}(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}},\ \mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enrichment}{Enrichment}}):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00035}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_text_chunk_af5de86524c4f6a60a35f89f06e183d6f}{00035}}\ \ \ \ \ index\ =\ nm.IntegerProperty(required=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00037}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_table}{00037}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_table}{Table}}(\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enrichment}{Enrichment}}):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00038}00038\ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00041}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_formula}{00041}}\ \textcolor{keyword}{class\ }Formula(Enrichment):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00042}00042\ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00045}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_figure}{00045}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_figure}{Figure}}(\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enrichment}{Enrichment}}):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00046}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_figure_a713603ae233897a88c836a9ab64649ac}{00046}}\ \ \ \ \ caption\ =\ nm.StringProperty(required=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00047}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_figure_adb9f4649a4a84502e4167a4e908f0a31}{00047}}\ \ \ \ \ title\ =\ nm.StringProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00048}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_figure_a367e6a4c3eae55dfa9a3a87658ee87de}{00048}}\ \ \ \ \ description\ =\ nm.StringProperty(required=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00049}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_figure_a68ff278b37bdb32d45cb935d3f22eac3}{00049}}\ \ \ \ \ url\ =\ nm.StringProperty(required=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00051}00051\ \textcolor{comment}{\#\ Image\ Content}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00053}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_image}{00053}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_image}{Image}}(\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enrichment}{Enrichment}}):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00054}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_image_a988d7e02aebd05cec5d42c2867c55645}{00054}}\ \ \ \ \ title\ =\ nm.StringProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00055}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_image_a5abce11eff7b0c1d5da4be220b15da63}{00055}}\ \ \ \ \ description\ =\ nm.StringProperty(required=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00056}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_image_aa54ad3fcacbfce17c93b1b7c05cebc4f}{00056}}\ \ \ \ \ url\ =\ nm.StringProperty(required=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00058}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_image_sequence}{00058}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_image_sequence}{ImageSequence}}(\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enrichment}{Enrichment}}):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00062}00062\ \textcolor{comment}{\#\ Audio\ Content}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00064}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_audio_chunk}{00064}}\ \textcolor{keyword}{class\ }AudioChunk(Enrichment):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00065}00065\ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00068}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_audio_sequence}{00068}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_audio_sequence}{AudioSequence}}(\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_enrichment}{Enrichment}}):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00072}00072\ \textcolor{comment}{\#\ Video\ Content}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00074}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_scene}{00074}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_scene}{Scene}}():}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00075}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_scene_a43a7b39e4a9646cb749ff18a1ce01199}{00075}}\ \ \ \ \ time:int\ =\ 0}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00076}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_scene_a7935a21a6ba4d3d57e1f1fb67fe28679}{00076}}\ \ \ \ \ frame:Image\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00077}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_scene_a53f10c36eba03a4696b074b221302b88}{00077}}\ \ \ \ \ audio:AudioChunk\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00080}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_video}{00080}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_video}{Video}}(\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_image_sequence}{ImageSequence}},\ \mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_audio_sequence}{AudioSequence}}):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00081}00081\ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00084}00084\ \textcolor{comment}{\#\ Similarity\ Matrix}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00086}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_similar_to}{00086}}\ \textcolor{keyword}{class\ }SimilarTo\ (nm.StructuredRel,\ OpenTldrMeta,\ OpenTldrEdge):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00087}00087\ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00089}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_similarity}{00089}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_similarity}{Similarity}}\ (nm.StructuredNode,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{OpenTldrNode}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored}{Scored}}):}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00090}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_similarity_a3cd7133bed5a85bbea64d1c090c0ffda}{00090}}\ \ \ \ \ similar\_to\ =\ nm.Relationship(Content,\textcolor{stringliteral}{'SIMILAR\_TO'},\ model=SimilarTo,\ cardinality=ZeroOrMore)}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00091}00091\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00092}\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_similarity_aa7368248adeb3f9876eeef91463323a8}{00092}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_similarity_aa7368248adeb3f9876eeef91463323a8}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00093}00093\ \ \ \ \ \ \ \ \ nodes=\textcolor{stringliteral}{"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ node\ \textcolor{keywordflow}{in}\ self.\mbox{\hyperlink{classopentldr_1_1_content_enrichment_1_1_similarity_a3cd7133bed5a85bbea64d1c090c0ffda}{similar\_to}}:}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(nodes)!=0:}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nodes=nodes+\textcolor{stringliteral}{"{}\ AND\ "{}}}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ nodes=\ nodes\ +\ node.title.replace(\textcolor{stringliteral}{"{}\(\backslash\)n"{}},\textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}There\ is\ a\ \{score\}\ similarity\ between:\ \{nodes\}"{}}.format(score=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_af1eecb0e7a0e24f34a64166700a382e5}{score\_to\_text}}(),nodes=nodes)}
+\DoxyCodeLine{\Hypertarget{_content_enrichment_8py_source_l00099}00099\ \ \ \ \ }
+
+\end{DoxyCode}

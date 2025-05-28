@@ -1,0 +1,68 @@
+\doxysection{opentldr.\+Domain.\+Open\+Tldr\+Node Class Reference}
+\hypertarget{classopentldr_1_1_domain_1_1_open_tldr_node}{}\label{classopentldr_1_1_domain_1_1_open_tldr_node}\index{opentldr.Domain.OpenTldrNode@{opentldr.Domain.OpenTldrNode}}
+Inheritance diagram for opentldr.\+Domain.\+Open\+Tldr\+Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{classopentldr_1_1_domain_1_1_open_tldr_node}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a9cf13c000011b62caba715caab59f46b}{from\+\_\+json}} (cls, kg, json\+\_\+string)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3beee20100161b1a421cefb6cb531df2}{to\+\_\+json}} (self, kg)
+\item 
+dict \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3ffd43dde7e5d2f3d736c7141109b855}{to\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a188adbb74405c1735fd06be87f58463c}{from\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}OpenTldrNode is mixed in to each node class to support json import/export.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_open_tldr_node_a9cf13c000011b62caba715caab59f46b}\index{opentldr.Domain.OpenTldrNode@{opentldr.Domain.OpenTldrNode}!from\_json@{from\_json}}
+\index{from\_json@{from\_json}!opentldr.Domain.OpenTldrNode@{opentldr.Domain.OpenTldrNode}}
+\doxysubsubsection{\texorpdfstring{from\_json()}{from\_json()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_open_tldr_node_a9cf13c000011b62caba715caab59f46b} 
+opentldr.\+Domain.\+Open\+Tldr\+Node.\+from\+\_\+json (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{}]{kg}{, }\item[{}]{json\+\_\+string}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_open_tldr_node_a188adbb74405c1735fd06be87f58463c}\index{opentldr.Domain.OpenTldrNode@{opentldr.Domain.OpenTldrNode}!from\_json\_connect@{from\_json\_connect}}
+\index{from\_json\_connect@{from\_json\_connect}!opentldr.Domain.OpenTldrNode@{opentldr.Domain.OpenTldrNode}}
+\doxysubsubsection{\texorpdfstring{from\_json\_connect()}{from\_json\_connect()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_open_tldr_node_a188adbb74405c1735fd06be87f58463c} 
+opentldr.\+Domain.\+Open\+Tldr\+Node.\+from\+\_\+json\+\_\+connect (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{kg}{, }\item[{}]{json\+\_\+dict}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Override from_json_connect to rebuild edge data from serialized node.
+\end{DoxyVerb}
+ 
+
+Reimplemented in \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_a99c627fb47e210f334fdd90731d5b622}{opentldr.\+Domain.\+Content}}, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_a4e2bd88a9e0500721e3636c7593277de}{opentldr.\+Domain.\+Eval\+Key}}, and \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_a00ddd7e9016961973597513fc0287876}{opentldr.\+Domain.\+Request}}.
+
+\Hypertarget{classopentldr_1_1_domain_1_1_open_tldr_node_a3beee20100161b1a421cefb6cb531df2}\index{opentldr.Domain.OpenTldrNode@{opentldr.Domain.OpenTldrNode}!to\_json@{to\_json}}
+\index{to\_json@{to\_json}!opentldr.Domain.OpenTldrNode@{opentldr.Domain.OpenTldrNode}}
+\doxysubsubsection{\texorpdfstring{to\_json()}{to\_json()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_open_tldr_node_a3beee20100161b1a421cefb6cb531df2} 
+ str opentldr.\+Domain.\+Open\+Tldr\+Node.\+to\+\_\+json (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{kg}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_open_tldr_node_a3ffd43dde7e5d2f3d736c7141109b855}\index{opentldr.Domain.OpenTldrNode@{opentldr.Domain.OpenTldrNode}!to\_json\_connect@{to\_json\_connect}}
+\index{to\_json\_connect@{to\_json\_connect}!opentldr.Domain.OpenTldrNode@{opentldr.Domain.OpenTldrNode}}
+\doxysubsubsection{\texorpdfstring{to\_json\_connect()}{to\_json\_connect()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_open_tldr_node_a3ffd43dde7e5d2f3d736c7141109b855} 
+ dict opentldr.\+Domain.\+Open\+Tldr\+Node.\+to\+\_\+json\+\_\+connect (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{kg}{, }\item[{}]{json\+\_\+dict}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Override to_json_connect to insert edge data into the node.
+\end{DoxyVerb}
+ 
+
+Reimplemented in \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_ad6d4cb4c822ff926e777909667ab688c}{opentldr.\+Domain.\+Content}}, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_af744cd9e6a3213bac4a03720b42c4027}{opentldr.\+Domain.\+Eval\+Key}}, and \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_a47099c46bbf68e58ff5e831f435cc38f}{opentldr.\+Domain.\+Request}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/chrisargenta/dev/opentldr/\+Open\+TLDR-\/\+Core/src/opentldr/\mbox{\hyperlink{_domain_8py}{Domain.\+py}}\end{DoxyCompactItemize}

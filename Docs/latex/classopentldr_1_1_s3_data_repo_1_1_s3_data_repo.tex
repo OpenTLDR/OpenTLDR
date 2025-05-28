@@ -1,0 +1,126 @@
+\doxysection{opentldr.\+S3\+Data\+Repo.\+S3\+Data\+Repo Class Reference}
+\hypertarget{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo}{}\label{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo}\index{opentldr.S3DataRepo.S3DataRepo@{opentldr.S3DataRepo.S3DataRepo}}
+Inheritance diagram for opentldr.\+S3\+Data\+Repo.\+S3\+Data\+Repo\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a8b327f520c4610dd2fdb20c952da0e81}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph}{Knowledge\+Graph}} \mbox{\hyperlink{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo}{kg}}, str \mbox{\hyperlink{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a8801847000edbfbadf54b013c317472e}{bucket\+\_\+name}}, str aws\+\_\+access\+\_\+key\+\_\+id, str aws\+\_\+secret\+\_\+access\+\_\+key, str \mbox{\hyperlink{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_ab501a50866be53feefcc0d7a93594cb8}{prefix}}=None)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_aa056dc525b05c89709bf40bcfaf0d6a3}{describe}} (self)
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a772fdd20fcd777803799310d9cc723cd}{import\+Data}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo}{opentldr.\+Abstract\+Data\+Repo.\+Abstract\+Data\+Repo}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a58575267f66a2a6df63d80b6e6f4af77}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph}{Knowledge\+Graph}} \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a09c4007af00cc06ec68ef288d7b87057}{kg}})
+\item 
+tuple\mbox{[}dict, str\mbox{]} \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a6c9e83c5886bf8d307a29ca90d98f381}{parse\+Annotated\+Text}} (cls, str text)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a31c8c8f102bc162cc834da77432acdca}{infer\+Domain\+Class}} (cls, str full\+\_\+path, dict annotations)
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a95df8e37ec34655b559b171fcb0b9de5}{clean\+\_\+up\+\_\+nodes}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a27cac12d765b07de2a9cd08764fb972e}{export\+Data}} (self, str path)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a8801847000edbfbadf54b013c317472e}{bucket\+\_\+name}} = bucket\+\_\+name
+\item 
+\mbox{\hyperlink{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a63fe4780649a1d87c2413300d48f687f}{bucket}} = s3.\+Bucket(\mbox{\hyperlink{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a8801847000edbfbadf54b013c317472e}{bucket\+\_\+name}})
+\item 
+\mbox{\hyperlink{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_ab501a50866be53feefcc0d7a93594cb8}{prefix}} = prefix
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+list \mbox{\hyperlink{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a2a47ca20ce08962c5e8e1cb358d42f7f}{files}} = \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo}{opentldr.\+Abstract\+Data\+Repo.\+Abstract\+Data\+Repo}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph}{Knowledge\+Graph}} \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a09c4007af00cc06ec68ef288d7b87057}{kg}} = None
+\item 
+list \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a12774abeff90ed7f5ea66d0e18d9fb57}{import\+\_\+order}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a0b59d75f6acf6ae78ea88cc71cfbb1f8}{\+\_\+import\+By\+Class}} (self, dict raw, str clazz)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a8b327f520c4610dd2fdb20c952da0e81}\index{opentldr.S3DataRepo.S3DataRepo@{opentldr.S3DataRepo.S3DataRepo}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!opentldr.S3DataRepo.S3DataRepo@{opentldr.S3DataRepo.S3DataRepo}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a8b327f520c4610dd2fdb20c952da0e81} 
+opentldr.\+S3\+Data\+Repo.\+S3\+Data\+Repo.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph}{Knowledge\+Graph}}}]{kg}{, }\item[{str}]{bucket\+\_\+name}{, }\item[{str}]{aws\+\_\+access\+\_\+key\+\_\+id}{, }\item[{str}]{aws\+\_\+secret\+\_\+access\+\_\+key}{, }\item[{str}]{prefix}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a0b59d75f6acf6ae78ea88cc71cfbb1f8}\index{opentldr.S3DataRepo.S3DataRepo@{opentldr.S3DataRepo.S3DataRepo}!\_importByClass@{\_importByClass}}
+\index{\_importByClass@{\_importByClass}!opentldr.S3DataRepo.S3DataRepo@{opentldr.S3DataRepo.S3DataRepo}}
+\doxysubsubsection{\texorpdfstring{\_importByClass()}{\_importByClass()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a0b59d75f6acf6ae78ea88cc71cfbb1f8} 
+ list\mbox{[}str\mbox{]} opentldr.\+S3\+Data\+Repo.\+S3\+Data\+Repo.\+\_\+import\+By\+Class (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{dict}]{raw}{, }\item[{str}]{clazz}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_aa056dc525b05c89709bf40bcfaf0d6a3}\index{opentldr.S3DataRepo.S3DataRepo@{opentldr.S3DataRepo.S3DataRepo}!describe@{describe}}
+\index{describe@{describe}!opentldr.S3DataRepo.S3DataRepo@{opentldr.S3DataRepo.S3DataRepo}}
+\doxysubsubsection{\texorpdfstring{describe()}{describe()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_aa056dc525b05c89709bf40bcfaf0d6a3} 
+ str opentldr.\+S3\+Data\+Repo.\+S3\+Data\+Repo.\+describe (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_adb84f6e0d4b532656f84bb63c3771d2f}{opentldr.\+Abstract\+Data\+Repo.\+Abstract\+Data\+Repo}}.
+
+\Hypertarget{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a772fdd20fcd777803799310d9cc723cd}\index{opentldr.S3DataRepo.S3DataRepo@{opentldr.S3DataRepo.S3DataRepo}!importData@{importData}}
+\index{importData@{importData}!opentldr.S3DataRepo.S3DataRepo@{opentldr.S3DataRepo.S3DataRepo}}
+\doxysubsubsection{\texorpdfstring{importData()}{importData()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a772fdd20fcd777803799310d9cc723cd} 
+ list\mbox{[}str\mbox{]} opentldr.\+S3\+Data\+Repo.\+S3\+Data\+Repo.\+import\+Data (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_ae5dacc8cba09f1c297a8b5525e1c78ac}{opentldr.\+Abstract\+Data\+Repo.\+Abstract\+Data\+Repo}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a63fe4780649a1d87c2413300d48f687f}\index{opentldr.S3DataRepo.S3DataRepo@{opentldr.S3DataRepo.S3DataRepo}!bucket@{bucket}}
+\index{bucket@{bucket}!opentldr.S3DataRepo.S3DataRepo@{opentldr.S3DataRepo.S3DataRepo}}
+\doxysubsubsection{\texorpdfstring{bucket}{bucket}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a63fe4780649a1d87c2413300d48f687f} 
+opentldr.\+S3\+Data\+Repo.\+S3\+Data\+Repo.\+bucket = s3.\+Bucket(\mbox{\hyperlink{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a8801847000edbfbadf54b013c317472e}{bucket\+\_\+name}})}
+
+\Hypertarget{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a8801847000edbfbadf54b013c317472e}\index{opentldr.S3DataRepo.S3DataRepo@{opentldr.S3DataRepo.S3DataRepo}!bucket\_name@{bucket\_name}}
+\index{bucket\_name@{bucket\_name}!opentldr.S3DataRepo.S3DataRepo@{opentldr.S3DataRepo.S3DataRepo}}
+\doxysubsubsection{\texorpdfstring{bucket\_name}{bucket\_name}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a8801847000edbfbadf54b013c317472e} 
+opentldr.\+S3\+Data\+Repo.\+S3\+Data\+Repo.\+bucket\+\_\+name = bucket\+\_\+name}
+
+\Hypertarget{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a2a47ca20ce08962c5e8e1cb358d42f7f}\index{opentldr.S3DataRepo.S3DataRepo@{opentldr.S3DataRepo.S3DataRepo}!files@{files}}
+\index{files@{files}!opentldr.S3DataRepo.S3DataRepo@{opentldr.S3DataRepo.S3DataRepo}}
+\doxysubsubsection{\texorpdfstring{files}{files}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_a2a47ca20ce08962c5e8e1cb358d42f7f} 
+list opentldr.\+S3\+Data\+Repo.\+S3\+Data\+Repo.\+files = \mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_ab501a50866be53feefcc0d7a93594cb8}\index{opentldr.S3DataRepo.S3DataRepo@{opentldr.S3DataRepo.S3DataRepo}!prefix@{prefix}}
+\index{prefix@{prefix}!opentldr.S3DataRepo.S3DataRepo@{opentldr.S3DataRepo.S3DataRepo}}
+\doxysubsubsection{\texorpdfstring{prefix}{prefix}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_s3_data_repo_1_1_s3_data_repo_ab501a50866be53feefcc0d7a93594cb8} 
+opentldr.\+S3\+Data\+Repo.\+S3\+Data\+Repo.\+prefix = prefix}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/chrisargenta/dev/opentldr/\+Open\+TLDR-\/\+Core/src/opentldr/\mbox{\hyperlink{_s3_data_repo_8py}{S3\+Data\+Repo.\+py}}\end{DoxyCompactItemize}

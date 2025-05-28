@@ -1,0 +1,119 @@
+\doxysection{opentldr.\+Domain.\+Reference\+Node Class Reference}
+\hypertarget{classopentldr_1_1_domain_1_1_reference_node}{}\label{classopentldr_1_1_domain_1_1_reference_node}\index{opentldr.Domain.ReferenceNode@{opentldr.Domain.ReferenceNode}}
+Inheritance diagram for opentldr.\+Domain.\+Reference\+Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.365854cm]{classopentldr_1_1_domain_1_1_reference_node}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_ada60ef40d76a63cee02f75c096d09365}{is\+\_\+hypothesized}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_a051b2634fa1b63d885b176c9431c72c2}{set\+\_\+hypothesized}} (self, bool \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_ada60ef40d76a63cee02f75c096d09365}{is\+\_\+hypothesized}})
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}} \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_a3bfd35a4bda3f537073b42f669ab0397}{connect\+\_\+to}} (self, \textquotesingle{}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}}\textquotesingle{} to\+\_\+node)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_ab6731ddb65182d3a4d7c55cc2e8810ae}{connect}} (self, \textquotesingle{}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}}\textquotesingle{} to\+\_\+node, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}} edge)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_a766c7e0fafd2f399de6e543f6763685d}{to\+\_\+text}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{opentldr.\+Domain.\+Open\+Tldr\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a9cf13c000011b62caba715caab59f46b}{from\+\_\+json}} (cls, kg, json\+\_\+string)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3beee20100161b1a421cefb6cb531df2}{to\+\_\+json}} (self, kg)
+\item 
+dict \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3ffd43dde7e5d2f3d736c7141109b855}{to\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a188adbb74405c1735fd06be87f58463c}{from\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_ad9ff21d4b1b660328d7f2a32f7b1cc8e}{hypothesized}} = nm.\+Boolean\+Property(default=False)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_ade9242f6d116565c21161cfaf94b5668}{edges}} = nm.\+Relationship\+To(\textquotesingle{}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}}\textquotesingle{},\textquotesingle{}REFERENCE\+\_\+\+EDGE\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}}, cardinality=Zero\+Or\+More)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text}{opentldr.\+Domain.\+Open\+Tldr\+Text}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text_a7d1c303e41d0ca88b67a61609306e8e6}{text}} = nm.\+String\+Property(required=True)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text_a0e1285b9de9d44ceac3f79976d722e7e}{type}} = nm.\+String\+Property(required=True)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a614bf6f289697675be10cfa8cdd0fb4e}{uid}} = nm.\+Unique\+Id\+Property()
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_afdffc0ebdaf1f8f87441d3db2d793d02}{metadata}} = nm.\+JSONProperty()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}ReferenceNode allows for general reference data nodes to be introduced into the
+knowledge graph and used abstractly (e.g., to relate extracted entities to known things).
+This uses the OpenTldrText mixin to implement text and type properties.
+The hypothesized property is a boolean that indicates if this was inferred (e.g., discovered)
+or provided as fact via external reference data (e.g., imported). 
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_reference_node_ab6731ddb65182d3a4d7c55cc2e8810ae}\index{opentldr.Domain.ReferenceNode@{opentldr.Domain.ReferenceNode}!connect@{connect}}
+\index{connect@{connect}!opentldr.Domain.ReferenceNode@{opentldr.Domain.ReferenceNode}}
+\doxysubsubsection{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_reference_node_ab6731ddb65182d3a4d7c55cc2e8810ae} 
+opentldr.\+Domain.\+Reference\+Node.\+connect (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\textquotesingle{}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}}\textquotesingle{}}]{to\+\_\+node}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}}}]{edge}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_reference_node_a3bfd35a4bda3f537073b42f669ab0397}\index{opentldr.Domain.ReferenceNode@{opentldr.Domain.ReferenceNode}!connect\_to@{connect\_to}}
+\index{connect\_to@{connect\_to}!opentldr.Domain.ReferenceNode@{opentldr.Domain.ReferenceNode}}
+\doxysubsubsection{\texorpdfstring{connect\_to()}{connect\_to()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_reference_node_a3bfd35a4bda3f537073b42f669ab0397} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}} opentldr.\+Domain.\+Reference\+Node.\+connect\+\_\+to (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\textquotesingle{}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}}\textquotesingle{}}]{to\+\_\+node}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_reference_node_ada60ef40d76a63cee02f75c096d09365}\index{opentldr.Domain.ReferenceNode@{opentldr.Domain.ReferenceNode}!is\_hypothesized@{is\_hypothesized}}
+\index{is\_hypothesized@{is\_hypothesized}!opentldr.Domain.ReferenceNode@{opentldr.Domain.ReferenceNode}}
+\doxysubsubsection{\texorpdfstring{is\_hypothesized()}{is\_hypothesized()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_reference_node_ada60ef40d76a63cee02f75c096d09365} 
+ bool opentldr.\+Domain.\+Reference\+Node.\+is\+\_\+hypothesized (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_reference_node_a051b2634fa1b63d885b176c9431c72c2}\index{opentldr.Domain.ReferenceNode@{opentldr.Domain.ReferenceNode}!set\_hypothesized@{set\_hypothesized}}
+\index{set\_hypothesized@{set\_hypothesized}!opentldr.Domain.ReferenceNode@{opentldr.Domain.ReferenceNode}}
+\doxysubsubsection{\texorpdfstring{set\_hypothesized()}{set\_hypothesized()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_reference_node_a051b2634fa1b63d885b176c9431c72c2} 
+opentldr.\+Domain.\+Reference\+Node.\+set\+\_\+hypothesized (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{bool}]{is\+\_\+hypothesized}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_reference_node_a766c7e0fafd2f399de6e543f6763685d}\index{opentldr.Domain.ReferenceNode@{opentldr.Domain.ReferenceNode}!to\_text@{to\_text}}
+\index{to\_text@{to\_text}!opentldr.Domain.ReferenceNode@{opentldr.Domain.ReferenceNode}}
+\doxysubsubsection{\texorpdfstring{to\_text()}{to\_text()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_reference_node_a766c7e0fafd2f399de6e543f6763685d} 
+ str opentldr.\+Domain.\+Reference\+Node.\+to\+\_\+text (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text_a1a862c1ef704321dcebb82a8cdfa7842}{opentldr.\+Domain.\+Open\+Tldr\+Text}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_reference_node_ade9242f6d116565c21161cfaf94b5668}\index{opentldr.Domain.ReferenceNode@{opentldr.Domain.ReferenceNode}!edges@{edges}}
+\index{edges@{edges}!opentldr.Domain.ReferenceNode@{opentldr.Domain.ReferenceNode}}
+\doxysubsubsection{\texorpdfstring{edges}{edges}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_reference_node_ade9242f6d116565c21161cfaf94b5668} 
+opentldr.\+Domain.\+Reference\+Node.\+edges = nm.\+Relationship\+To(\textquotesingle{}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}}\textquotesingle{},\textquotesingle{}REFERENCE\+\_\+\+EDGE\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}}, cardinality=Zero\+Or\+More)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_reference_node_ad9ff21d4b1b660328d7f2a32f7b1cc8e}\index{opentldr.Domain.ReferenceNode@{opentldr.Domain.ReferenceNode}!hypothesized@{hypothesized}}
+\index{hypothesized@{hypothesized}!opentldr.Domain.ReferenceNode@{opentldr.Domain.ReferenceNode}}
+\doxysubsubsection{\texorpdfstring{hypothesized}{hypothesized}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_reference_node_ad9ff21d4b1b660328d7f2a32f7b1cc8e} 
+bool opentldr.\+Domain.\+Reference\+Node.\+hypothesized = nm.\+Boolean\+Property(default=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/chrisargenta/dev/opentldr/\+Open\+TLDR-\/\+Core/src/opentldr/\mbox{\hyperlink{_domain_8py}{Domain.\+py}}\end{DoxyCompactItemize}

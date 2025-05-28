@@ -1,0 +1,1223 @@
+\doxysection{Knowledge\+Graph.\+py}
+\hypertarget{_knowledge_graph_8py_source}{}\label{_knowledge_graph_8py_source}\index{/Users/chrisargenta/dev/opentldr/OpenTLDR-\/Core/src/opentldr/KnowledgeGraph.py@{/Users/chrisargenta/dev/opentldr/OpenTLDR-\/Core/src/opentldr/KnowledgeGraph.py}}
+\mbox{\hyperlink{_knowledge_graph_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00001}\mbox{\hyperlink{namespaceopentldr_1_1_knowledge_graph}{00001}}\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00002}00002\ \textcolor{keyword}{from}\ dotenv\ \textcolor{keyword}{import}\ load\_dotenv}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00004}00004\ \textcolor{keyword}{import}\ datetime}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00006}00006\ \textcolor{keyword}{from}\ neo4j\ \textcolor{keyword}{import}\ GraphDatabase}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00007}00007\ \textcolor{keyword}{import}\ neomodel\ \textcolor{keyword}{as}\ nm}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00009}00009\ \textcolor{keyword}{from}\ \mbox{\hyperlink{namespaceopentldr_1_1_domain}{opentldr.Domain}}\ \textcolor{keyword}{import}\ *}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00010}00010\ \textcolor{keyword}{from}\ \mbox{\hyperlink{namespaceopentldr_1_1_content_enrichment}{opentldr.ContentEnrichment}}\ \textcolor{keyword}{import}\ *}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00011}00011\ \textcolor{keyword}{from}\ .log\ \textcolor{keyword}{import}\ log}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00013}00013\ load\_dotenv()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00014}00014\ load\_dotenv(\textcolor{stringliteral}{"{}\{d\}/.env"{}}.format(d=os.getcwd()))}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00015}00015\ load\_dotenv(\textcolor{stringliteral}{"{}\{d\}/../.env"{}}.format(d=os.getcwd()))}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00018}\mbox{\hyperlink{namespaceopentldr_1_1_knowledge_graph_ae716c7469fbad08b82aa463a9b8e8a21}{00018}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespaceopentldr_1_1_knowledge_graph_ae716c7469fbad08b82aa463a9b8e8a21}{\_getenv}}(variable:\ str,\ default:\ str):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00019}00019\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00020}00020\ \textcolor{stringliteral}{\ \ \ \ \_getenv(variable,\ default)\ attempts\ to\ resolve\ the\ value\ of\ the\ environment\ variable\ specified.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00021}00021\ \textcolor{stringliteral}{\ \ \ \ If\ it\ cannot\ find\ the\ variable\ in\ the\ OS\ or\ .env\ (from\ dotenv\ package)\ it\ will\ fail\ over\ to\ the}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00022}00022\ \textcolor{stringliteral}{\ \ \ \ provided\ default\ value\ while\ giving\ a\ warning\ to\ the\ logging\ system.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00023}00023\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00024}00024\ \ \ \ \ value:\ str\ =\ os.getenv(variable)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00025}00025\ \ \ \ \ \textcolor{keywordflow}{if}\ value\ ==\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00026}00026\ \ \ \ \ \ \ \ \ log.warning(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}No\ environment\ variable\ '"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ +\ variable}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ +\ \textcolor{stringliteral}{"{}'\ so\ defaulting\ to\ '"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ +\ default}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ +\ \textcolor{stringliteral}{"{}'."{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ default}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{return}\ value}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00037}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph}{00037}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph}{KnowledgeGraph}}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00038}00038\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00039}00039\ \textcolor{stringliteral}{\ \ \ \ KnowledgeGraph\ is\ the\ API\ for\ OpenTLDR's\ interface\ to\ Neo4j\ graph\ database.\ It\ attempts\ to\ make\ the}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00040}00040\ \textcolor{stringliteral}{\ \ \ \ driver\ connection\ using\ OS,\ .env,\ and\ then\ default\ values\ for\ connections.\ This\ API\ maps\ neo4j}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00041}00041\ \textcolor{stringliteral}{\ \ \ \ nodes/edges\ to\ types\ specified\ in\ the\ Domain\ module\ (using\ Neomodel\ OGM\ and\ some\ custom\ cypher).}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00042}00042\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00043}00043\ \textcolor{stringliteral}{\ \ \ \ In\ order\ to\ be\ successful,\ you\ will\ need\ to\ have\ a\ neo4j\ server\ running,\ reachable\ on\ the\ network,}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00044}00044\ \textcolor{stringliteral}{\ \ \ \ and\ with\ environment\ variables\ (either\ in\ OS\ or\ .env\ files)\ similar\ to\ these:}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00045}00045\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00046}00046\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ NEO4J\_CONNECTION='neo4j://localhost:7687'}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00047}00047\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ NEO4J\_USERNAME=neo4jUser}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00048}00048\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ NEO4J\_PASSWORD=neo4jPassword}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00049}00049\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ NEO4J\_DATABASE=neo4j}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00050}00050\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00051}00051\ \textcolor{stringliteral}{\ \ \ \ This\ class\ can\ be\ used\ in\ several\ different\ ways,\ including:}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00052}00052\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ (1)\ import\ opentldr.KnowledgeGraph\ ...\ kg=KnowledgeGraph()\ ...\ (use\ kg\ here)\ ...\ kg.close()}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00053}00053\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ (2)\ with\ opentldr.KnowledgeGraph\ as\ kg:\ ...\ (use\ kg\ here,\ and\ then\ it\ will\ autoclose)}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00054}00054\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00055}00055\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00057}00057\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00058}00058\ \ \ \ \ \textcolor{comment}{\#\ Setup\ Methods}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00059}00059\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00061}00061\ \ \ \ \ \textcolor{comment}{\#\ Default\ values\ come\ from\ first\ of:\ (1)\ .env\ file,\ (2)\ os\ environment,\ or\ (3)\ these\ hardcoded\ values}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00062}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2c3bf7492bb2167ab425f6d2877eab0b}{00062}}\ \ \ \ \ connection\ =\ \mbox{\hyperlink{namespaceopentldr_1_1_knowledge_graph_ae716c7469fbad08b82aa463a9b8e8a21}{\_getenv}}(\textcolor{stringliteral}{"{}NEO4J\_CONNECTION"{}},\ \textcolor{stringliteral}{"{}neo4j://localhost:7687"{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00063}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a87d184700dde3455ca73770c98bf545f}{00063}}\ \ \ \ \ user\ =\ \mbox{\hyperlink{namespaceopentldr_1_1_knowledge_graph_ae716c7469fbad08b82aa463a9b8e8a21}{\_getenv}}(\textcolor{stringliteral}{"{}NEO4J\_USERNAME"{}},\ \textcolor{stringliteral}{"{}neo4j"{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00064}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab5d9784d801fda4dc621d387f1f3a11d}{00064}}\ \ \ \ \ password\ =\ \mbox{\hyperlink{namespaceopentldr_1_1_knowledge_graph_ae716c7469fbad08b82aa463a9b8e8a21}{\_getenv}}(\textcolor{stringliteral}{"{}NEO4J\_PASSWORD"{}},\ \textcolor{stringliteral}{"{}neo4j"{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00065}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aeaeceb9420e4d37d479d259c83fe49ba}{00065}}\ \ \ \ \ database\ =\ \mbox{\hyperlink{namespaceopentldr_1_1_knowledge_graph_ae716c7469fbad08b82aa463a9b8e8a21}{\_getenv}}(\textcolor{stringliteral}{"{}NEO4J\_DATABASE"{}},\ \textcolor{stringliteral}{"{}neo4j"{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00066}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{00066}}\ \ \ \ \ driver\ =\ GraphDatabase.driver(connection,\ auth=(user,\ password))}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00067}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab1a575940d30d1b9341084f22477d129}{00067}}\ \ \ \ \ nm.config.DRIVER\ =\ driver}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00069}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2c531a38e1418624185e37b410062bea}{00069}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2c531a38e1418624185e37b410062bea}{\_\_init\_\_}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ self,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00071}00071\ \ \ \ \ \ \ \ \ neo4j\_driver=None,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ connection=None,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ user=None,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ password=None,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ database=None,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00076}00076\ \ \ \ \ ):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ connection\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2c3bf7492bb2167ab425f6d2877eab0b}{connection}}\ =\ connection}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ user\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a87d184700dde3455ca73770c98bf545f}{user}}\ =\ user}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ password\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab5d9784d801fda4dc621d387f1f3a11d}{password}}\ =\ password}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00083}00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ database\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aeaeceb9420e4d37d479d259c83fe49ba}{database}}\ =\ database}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ neo4j\_driver\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Connecting\ to\ Neo4J\ using\ environment\ specification."{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}\(\backslash\)tconnection:\(\backslash\)t\{v\}"{}}.format(v=self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2c3bf7492bb2167ab425f6d2877eab0b}{connection}}))}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}\(\backslash\)tuser:\(\backslash\)t\(\backslash\)t\{v\}"{}}.format(v=self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a87d184700dde3455ca73770c98bf545f}{user}}))}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ log.info("{}\(\backslash\)tpassword:\(\backslash\)t\{v\}"{}.format(v=self.password))\ \ \ \ \ \ \ \ \ \ \ \#\ don't\ display\ sensitive\ information}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}\(\backslash\)tdatabase:\(\backslash\)t\{v\}"{}}.format(v=self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aeaeceb9420e4d37d479d259c83fe49ba}{database}}))}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a90f76a2524973d4c91a0a137ead2bab0}{connect}}()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Using\ Neo4j\ driver\ passed\ into\ initialization."{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a90f76a2524973d4c91a0a137ead2bab0}{connect}}(neo4j\_driver)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00097}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a03e6143a869eb4331b1cf0d258859fe1}{00097}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a03e6143a869eb4331b1cf0d258859fe1}{\_\_del\_\_}}(self):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aa4dcbea4838a04e1c86b0aaf2ab4f03e}{close}}()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00101}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a9b5e3bb2b5550ed8cad3231849aa8efa}{00101}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a9b5e3bb2b5550ed8cad3231849aa8efa}{\_\_enter\_\_}}(self):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00104}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab2020a03aa26f03e0ad16b635fc88ac2}{00104}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab2020a03aa26f03e0ad16b635fc88ac2}{\_\_exit\_\_}}(self,\ ctx\_type,\ ctx\_value,\ ctx\_traceback):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aa4dcbea4838a04e1c86b0aaf2ab4f03e}{close}}()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00108}00108\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00109}00109\ \ \ \ \ \textcolor{comment}{\#\ General\ Utility\ Methods}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00110}00110\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00112}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a020cdd76b7d4d347d05f304c6b0b29f7}{00112}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a020cdd76b7d4d347d05f304c6b0b29f7}{neo4j\_query}}(self,\ cql):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00114}00114\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Performs\ a\ cypher\ call\ to\ the\ knowledge\ base\ and\ returns\ results\ in\ the\ standard\ neo4j\ driver\ format.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00115}00115\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Use\ this\ if\ you\ are\ following\ neo4j\ documentation,\ otherwise\ use\ cypher\_query().}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00116}00116\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00117}00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}\ ==\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a90f76a2524973d4c91a0a137ead2bab0}{connect}}()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00120}00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ records,\ summary,\ keys\ =\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}.execute\_query(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cql,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ database\_=self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aeaeceb9420e4d37d479d259c83fe49ba}{database}},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ log.debug(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}The\ query\ \`{}\{query\}`\ returned\ \{records\_count\}\ records\ in\ \{time\}\ ms."{}}.format(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ query=summary.query,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ records\_count=len(records),}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ time=summary.result\_available\_after,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ records,\ summary}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(e)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00136}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ae053d69a83992c8c62441514ad82617a}{00136}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ae053d69a83992c8c62441514ad82617a}{neomodel\_query}}(self,\ cypher\_query,\ params:\ dict\ =\ \{\}):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00138}00138\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Performs\ a\ cypher\ query\ in\ the\ standard\ neomodel\ method,\ which\ will\ return\ a\ list\ of\ lists\ of\ neomodel.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00139}00139\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Use\ this\ if\ you\ are\ following\ Neomodel\ documentation,\ otherwise\ use\ cypher\_query().}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00140}00140\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00141}00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}\ ==\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a90f76a2524973d4c91a0a137ead2bab0}{connect}}()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00144}00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ nm.db.cypher\_query(cypher\_query,\ resolve\_objects=\textcolor{keyword}{True},\ params=params)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00146}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a90f76a2524973d4c91a0a137ead2bab0}{00146}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a90f76a2524973d4c91a0a137ead2bab0}{connect}}(self,\ driver=None):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00147}00147\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00148}00148\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Ensures\ that\ a\ connection\ to\ Neo4j\ has\ been\ established\ and\ is\ functioning.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00149}00149\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00150}00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ driver\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ driver\ =\ GraphDatabase.driver(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2c3bf7492bb2167ab425f6d2877eab0b}{connection}},\ auth=(self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a87d184700dde3455ca73770c98bf545f}{user}},\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab5d9784d801fda4dc621d387f1f3a11d}{password}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ driver\ =\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Testing\ Neo4j\ Connectivity..."{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ driver.verify\_connectivity()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ driver.verify\_connectivity:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Successfully\ connected\ to\ Neo4J\ server\ for\ KnowledgeGraph."{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ log.error(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Unable\ to\ connect\ to\ Neo4J\ for\ KnowledgeGraph.\ Check\ that\ Neo4j\ server\ is\ running."{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Testing\ Neo4j\ Authentication..."{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ driver.verify\_authentication()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ driver.verify\_authentication:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Successfully\ logged\ into\ Neo4J\ server\ for\ KnowledgeGraph."{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ log.error(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Unable\ to\ log\ in\ to\ Neo4J\ for\ KnowledgeGraph.\ Check\ that\ your\ user\ and\ password\ are\ correct."{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}\ =\ driver}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ nm.config.DRIVER\ =\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ nm.db.set\_connection(driver=self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00187}00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(e)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}There\ was\ an\ issue\ connecting\ to\ Neo4J\ server,\ please\ verify\ that\ it\ is\ running\ and\ configured\ correctly."{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ e}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00194}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a609dbb2ca39dd2ebea591a93a65ddc7d}{00194}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a609dbb2ca39dd2ebea591a93a65ddc7d}{getNeo4jDriver}}(self):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00195}00195\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00196}00196\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Returns\ the\ Neo4j\ driver\ class\ being\ used\ (usually\ neo4j.GraphDatabase.driver)\ so\ that\ direct\ neo4j\ calls\ can\ be}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00197}00197\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ made\ or\ it\ can\ be\ passed\ into\ other\ libraries.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00198}00198\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00199}00199\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a90f76a2524973d4c91a0a137ead2bab0}{connect}}()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00201}00201\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00203}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aa4dcbea4838a04e1c86b0aaf2ab4f03e}{00203}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aa4dcbea4838a04e1c86b0aaf2ab4f03e}{close}}(self):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00204}00204\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00205}00205\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Shuts\ down\ the\ current\ connection\ to\ neo4j.\ This\ should\ be\ done\ at\ the\ end\ of\ each\ program\ /\ notebook.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00206}00206\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ If\ you\ use\ the\ "{}with\ statement"{}\ context\ control,\ this\ will\ be\ called\ automatically\ when\ the\ code\ block\ ends.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00207}00207\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00208}00208\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aa4dcbea4838a04e1c86b0aaf2ab4f03e}{close}}()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00210}00210\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00212}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a42d3f9d6010f6377950b9c3eec7e40ef}{00212}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a42d3f9d6010f6377950b9c3eec7e40ef}{\_ensure\_saved}}(self,\ node:\ OpenTldrMeta):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00213}00213\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00214}00214\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ OpenTLDR\ objects\ all\ inherit\ from\ the\ OpenTldrMeta\ mixin\ class.\ They\ will\ be\ assigned\ a\ "{}uid"{}\ when\ they\ are\ saved.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00215}00215\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ So,\ we\ can\ use\ this\ to\ determine\ if\ an\ object\ has\ been\ saved\ or\ not\ and\ respond\ appropriately.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00216}00216\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00217}00217\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ node.uid\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ log.warning(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Nodes\ must\ be\ persisted\ with\ node.save()\ before\ being\ connected.\ Forcing\ this\ now."{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ node.save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00222}00222\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ node}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00223}00223\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00224}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aac10fc455d8264ac64567ec471b350ab}{00224}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aac10fc455d8264ac64567ec471b350ab}{get\_all\_node\_uids\_by\_tag}}(self,\ tag:\ str)\ -\/>\ list[str]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00225}00225\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00226}00226\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Returns\ the\ list\ of\ uids\ for\ the\ tag\ specified\ as\ a\ string.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00227}00227\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00228}00228\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(\textcolor{stringliteral}{"{}MATCH\ (n:\{tag\})\ RETURN\ n.uid"{}}.format(tag=tag))}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00230}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_afbf8196b86e556998a935f8ebaed3409}{00230}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_afbf8196b86e556998a935f8ebaed3409}{get\_all\_nodes\_by\_tag}}(self,\ tag:\ str):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00231}00231\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00232}00232\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Returns\ the\ list\ of\ uids\ for\ the\ tag\ specified\ as\ a\ string.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00233}00233\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00234}00234\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(\textcolor{stringliteral}{"{}MATCH\ (n:\{tag\})\ RETURN\ n"{}}.format(tag=tag),\ \textcolor{stringliteral}{"{}n"{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00236}00236\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00237}00237\ \ \ \ \ \textcolor{comment}{\#\ KnowedgeGraph\ API}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00238}00238\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00240}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{00240}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00241}00241\ \ \ \ \ \ \ \ \ self,\ cypher\_query,\ extract\_variable=None,\ params:\ dict\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00242}00242\ \ \ \ \ )\ -\/>\ list:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00243}00243\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00244}00244\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Performs\ a\ cypher\ query\ and\ returns\ a\ single\ simple\ list\ of\ Neomodel\ objects\ based\ on\ the\ variable\ indicated\ (or\ first).}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00245}00245\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Use\ this\ for\ most\ OpenTLDR\ queries\ because\ it\ is\ much\ simpler\ to\ process\ for\ iterating\ on\ the\ results.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00246}00246\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ For\ example:\ cypher\_query("{}MATCH\ (a)-\/[b]-\/>(c)\ RETURN\ a,b,c"{},"{}a"{})\ only\ returns\ a\ list\ of\ only\ the\ "{}a"{}\ results.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00247}00247\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ So,\ cypher\_query("{}MATCH\ (a)-\/[b]-\/>(c)\ RETURN\ a"{},"{}a"{})\ would\ give\ the\ same\ result\ list\ by\ dropping\ the\ "{}b"{}\ and\ "{}c"{}\ results.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00248}00248\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Reduce\ the\ risk\ of\ Cypher\ injection\ attacks\ by\ passing\ Cypher\ parameters\ in\ params.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00249}00249\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00250}00250\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ log.debug(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Cypher\ Query\ made\ before\ driver\ created,\ creating\ connection\ driver."{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a90f76a2524973d4c91a0a137ead2bab0}{connect}}()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00255}00255\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00256}00256\ \ \ \ \ \ \ \ \ results,\ meta\ =\ nm.db.cypher\_query(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ cypher\_query,\ resolve\_objects=\textcolor{keyword}{True},\ params=params}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00258}00258\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00259}00259\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00260}00260\ \ \ \ \ \ \ \ \ index\ =\ 0}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00261}00261\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ extract\_variable\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ index\ =\ meta.index(extract\_variable)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00263}00263\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(meta)\ >\ 1:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ log.warning(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}cypher\_query\ is\ defaulting\ to\ return\ the\ first\ element\ of\ multiple\ return\ values\ in\ results."{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00269}00269\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ [item[index]\ \textcolor{keywordflow}{for}\ item\ \textcolor{keywordflow}{in}\ results]}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00271}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac38bc2dcd436b2725a38514ca45c5c0e}{00271}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac38bc2dcd436b2725a38514ca45c5c0e}{cypher\_query\_one}}(self,\ cypher\_query,\ extract\_variable=None,\ params:\ dict\ =\ \{\}):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00272}00272\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00273}00273\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Performs\ a\ query\ that\ is\ intended\ to\ LIMIT\ the\ return\ values\ to\ one\ single\ Neomodel\ object.\ This\ simplifies\ the\ processing}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00274}00274\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ of\ the\ query\ results\ to\ consistently\ only\ get\ a\ single\ object\ for\ the\ extract\_variable,\ it\ is\ undefined\ which\ unless\ you\ sort\ them.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00275}00275\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ For\ example:\ cypher\_query\_one("{}MATCH\ (a)-\/[b]-\/>(c)\ RETURN\ a,b,c"{},"{}a"{})\ returns\ the\ FIRST\ object\ of\ result\ "{}a"{}.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00276}00276\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ So,\ cypher\_query\_one("{}MATCH\ (a)-\/[b]-\/>(c)\ RETURN\ a\ LIMIT\ 1"{},"{}a"{})\ gives\ the\ same\ result\ (faster).}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00277}00277\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Reduce\ the\ risk\ of\ Cypher\ injection\ attacks\ by\ passing\ Cypher\ parameters\ in\ params.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00278}00278\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00279}00279\ \ \ \ \ \ \ \ \ results\ =\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(cypher\_query,\ extract\_variable,\ params=params)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00281}00281\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Limits\ the\ output\ to\ the\ first\ actual\ object\ (i.e.,\ not\ a\ list)}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00282}00282\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ results\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}\ \textcolor{keywordflow}{and}\ len(results)\ >\ 0:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ results[0]}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00284}00284\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00287}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a556dfdcd967cbfcdf3bd066f7004c7dd}{00287}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a556dfdcd967cbfcdf3bd066f7004c7dd}{cypher\_import}}(self,\ filename):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00288}00288\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00289}00289\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Processes\ a\ text\ file\ containing\ cypher\ commands\ and\ executes\ them\ on\ the\ KnowledgeGraph.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00290}00290\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00291}00291\ \ \ \ \ \ \ \ \ count\ =\ 0}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00292}00292\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ open(filename)\ \textcolor{keyword}{as}\ fp:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ lines\ =\ fp.readlines()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ line\ \textcolor{keywordflow}{in}\ lines:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(line.strip())\ ==\ 0:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}.session()\ \textcolor{keyword}{as}\ session:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ session.run(line)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ count\ =\ count\ +\ 1}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00300}00300\ \ \ \ \ \ \ \ \ log.info(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Imported\ \{count\}\ lines\ of\ Cypher\ from\ \{filename\}"{}}.format(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ count=count,\ filename=filename}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00304}00304\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00305}00305\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00306}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a716046d64e384491a127f2fdfe80c996}{00306}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a716046d64e384491a127f2fdfe80c996}{delete\_all}}(self):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00307}00307\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00308}00308\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Clears\ the\ neo4j\ graph\ database.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00309}00309\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00310}00310\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(\textcolor{stringliteral}{"{}MATCH(x)\ DETACH\ DELETE\ x"{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00312}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac60641ad7f42d22ea3892abc86914447}{00312}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac60641ad7f42d22ea3892abc86914447}{shortest\_path}}(self,\ start:\ OpenTldrMeta,\ end:\ OpenTldrMeta):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00313}00313\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00314}00314\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ This\ is\ a\ special\ cypher\ command\ to\ run\ neo4j's\ shortest\ path\ algorithm\ and\ return\ the\ path\ (list\ of\ edges)\ found.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00315}00315\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ We\ remove\ EvalKey,\ Recommendation,\ Tldr,\ Source,\ and\ User\ nodes\ to\ avoid\ irrelevant\ paths\ that\ circumvent\ Reference\ Data.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00316}00316\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00317}00317\ \ \ \ \ \ \ \ \ results,\ meta\ =\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ae053d69a83992c8c62441514ad82617a}{neomodel\_query}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00319}00319\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ path=shortestPath((s)-\/[*..10]-\/(e))}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00320}00320\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ WHERE\ s.uid='\{start\_id\}'}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00321}00321\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ AND\ e.uid='\{end\_id\}'\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00322}00322\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ AND\ NONE(n\ IN\ nodes(path)\ WHERE\ 'Recommendation'\ IN\ LABELS(n))}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00323}00323\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ AND\ NONE(n\ IN\ nodes(path)\ WHERE\ 'Tldr'\ IN\ LABELS(n))}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00324}00324\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ AND\ NONE(n\ IN\ nodes(path)\ WHERE\ 'Source'\ IN\ LABELS(n))}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00325}00325\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ AND\ NONE(n\ IN\ nodes(path)\ WHERE\ 'User'\ IN\ LABELS(n))}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00326}00326\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ AND\ NONE(n\ IN\ nodes(path)\ WHERE\ 'EvalKey'\ IN\ LABELS(n))}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00327}00327\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ RETURN\ path}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00328}00328\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}.format(start\_id=start.uid,\ end\_id=end.uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00329}00329\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00330}00330\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00331}00331\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(results)\ ==\ 0:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00333}00333\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ results[0][meta.index(\textcolor{stringliteral}{"{}path"{}})]}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00335}00335\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00336}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac62b641a2500302ddfeb6b43e0924daf}{00336}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac62b641a2500302ddfeb6b43e0924daf}{get\_by\_uid}}(self,\ uid:\ str):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00337}00337\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac38bc2dcd436b2725a38514ca45c5c0e}{cypher\_query\_one}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}MATCH\ (n)\ WHERE\ n.uid=\$uid\ RETURN\ n"{}},\ params=\{\textcolor{stringliteral}{"{}uid"{}}:\ uid\}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00339}00339\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00340}00340\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00341}00341\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00342}00342\ \ \ \ \ \textcolor{comment}{\#\ Reference\ Data\ API}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00343}00343\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00344}00344\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00345}00345\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00346}00346\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00347}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad5b82357dba60fe6276149e99d95cc56}{00347}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad5b82357dba60fe6276149e99d95cc56}{add\_reference\_node}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00348}00348\ \ \ \ \ \ \ \ \ self,\ text:\ str,\ type:\ str,\ hypothesized:\ bool\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00349}00349\ \ \ \ \ )\ -\/>\ ReferenceNode:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00350}00350\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00351}00351\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Creates\ a\ new\ ReferenceNode\ object\ in\ KG.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00352}00352\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00353}00353\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{ReferenceNode}}(text=text,\ type=type,\ hypothesized=hypothesized).save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00354}00354\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00355}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a07ad023c2b773079b9712f3cf5571d9f}{00355}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a07ad023c2b773079b9712f3cf5571d9f}{get\_reference\_node\_by\_uid}}(self,\ uid:\ str)\ -\/>\ ReferenceNode:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00356}00356\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00357}00357\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Returns\ a\ single\ ReferenceNode\ as\ indicated\ by\ the\ uid\ or\ None\ if\ it\ does\ not\ exist\ in\ KG.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00358}00358\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00359}00359\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ReferenceNode.nodes.get\_or\_none(uid=uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00360}00360\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00361}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a22c96cc837a76a85be5e095833cfbb47}{00361}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a22c96cc837a76a85be5e095833cfbb47}{get\_all\_reference\_nodes}}(self)\ -\/>\ list[ReferenceNode]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00362}00362\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00363}00363\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Returns\ a\ list\ of\ all\ the\ ReferenceNodes\ in\ the\ KG.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00364}00364\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00365}00365\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(\textcolor{stringliteral}{"{}MATCH\ (n:ReferenceNode)\ RETURN\ n"{}},\ \textcolor{stringliteral}{"{}n"{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00366}00366\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00367}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0bf70646467ab6ec24769e27f947fbe3}{00367}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0bf70646467ab6ec24769e27f947fbe3}{update\_reference\_node}}(self,\ node:\ ReferenceNode)\ -\/>\ ReferenceNode:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00368}00368\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00369}00369\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Updates\ the\ KG\ with\ changes\ to\ a\ ReferenceNode\ properties}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00370}00370\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00371}00371\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ node.save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00372}00372\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00373}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_acf53500e4b5b19f939a5871f4e2778f6}{00373}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_acf53500e4b5b19f939a5871f4e2778f6}{delete\_reference\_node}}(self,\ node:\ ReferenceNode):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00374}00374\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00375}00375\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Removes\ the\ passed\ ReferenceNode\ and\ the\ edges\ connected\ to\ them.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00376}00376\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00377}00377\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}MATCH\ (n:ReferenceNode)\ WHERE\ n.uid=\$uid\ DETACH\ DELETE\ n"{}},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00379}00379\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{\textcolor{stringliteral}{"{}uid"{}}:\ node.uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00380}00380\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00381}00381\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00382}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0d85c2055bd9b0d7b0d349d82d336819}{00382}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0d85c2055bd9b0d7b0d349d82d336819}{delete\_all\_reference\_nodes}}(self):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00383}00383\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00384}00384\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Removes\ all\ of\ the\ ReferenceNode\ and\ the\ edges\ connected\ to\ them.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00385}00385\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00386}00386\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(\textcolor{stringliteral}{"{}MATCH\ (n:ReferenceNode)\ DETACH\ DELETE\ n"{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00387}00387\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00388}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a07ad023c2b773079b9712f3cf5571d9f}{00388}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a07ad023c2b773079b9712f3cf5571d9f}{get\_reference\_node\_by\_uid}}(self,\ uid:\ str)\ -\/>\ ReferenceNode:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00389}00389\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00390}00390\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Returns\ a\ single\ ReferenceNode\ as\ indicated\ by\ the\ uid\ or\ None\ if\ it\ does\ not\ exist\ in\ KG.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00391}00391\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00392}00392\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ReferenceNode.nodes.get\_or\_none(uid=uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00393}00393\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00394}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a22c96cc837a76a85be5e095833cfbb47}{00394}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a22c96cc837a76a85be5e095833cfbb47}{get\_all\_reference\_nodes}}(self)\ -\/>\ list[ReferenceNode]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00395}00395\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00396}00396\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Returns\ a\ list\ of\ all\ the\ ReferenceNodes\ in\ the\ KG.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00397}00397\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00398}00398\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(\textcolor{stringliteral}{"{}MATCH\ (n:ReferenceNode)\ RETURN\ n"{}},\ \textcolor{stringliteral}{"{}n"{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00399}00399\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00400}00400\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00401}00401\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00402}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a28df00c8830dddd590b974bcf9852a0e}{00402}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a28df00c8830dddd590b974bcf9852a0e}{add\_reference\_edge}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00403}00403\ \ \ \ \ \ \ \ \ self,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00404}00404\ \ \ \ \ \ \ \ \ from\_node:\ ReferenceNode,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00405}00405\ \ \ \ \ \ \ \ \ to\_node:\ ReferenceNode,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00406}00406\ \ \ \ \ \ \ \ \ text:\ str,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00407}00407\ \ \ \ \ \ \ \ \ type:\ str,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00408}00408\ \ \ \ \ \ \ \ \ hypothesized:\ bool\ =\ \textcolor{keyword}{False},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00409}00409\ \ \ \ \ ):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00410}00410\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00411}00411\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Adds\ a\ ReferenceEdge\ between\ two\ ReferenceNodes.\ Note\ these\ edges\ are\ only\ between\ ReferenceNodes.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00412}00412\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00413}00413\ \ \ \ \ \ \ \ \ from\_node\ =\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a42d3f9d6010f6377950b9c3eec7e40ef}{\_ensure\_saved}}(from\_node)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00414}00414\ \ \ \ \ \ \ \ \ to\_node\ =\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a42d3f9d6010f6377950b9c3eec7e40ef}{\_ensure\_saved}}(to\_node)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00415}00415\ \ \ \ \ \ \ \ \ edge\ =\ from\_node.edges.connect(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00416}00416\ \ \ \ \ \ \ \ \ \ \ \ \ to\_node,\ \{\textcolor{stringliteral}{"{}type"{}}:\ type,\ \textcolor{stringliteral}{"{}text"{}}:\ text,\ \textcolor{stringliteral}{"{}hypothesized"{}}:\ hypothesized\}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00417}00417\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00418}00418\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ edge.save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00419}00419\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00420}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0a2c079afde4b918b67c6b5b24dd8ed4}{00420}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0a2c079afde4b918b67c6b5b24dd8ed4}{get\_reference\_edge\_by\_uid}}(self,\ uid:\ str)\ -\/>\ ReferenceEdge:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00421}00421\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00422}00422\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Returns\ a\ single\ ReferenceEdge\ as\ indicated\ by\ the\ uid\ or\ None\ if\ it\ does\ not\ exist\ in\ KG.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00423}00423\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00424}00424\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac38bc2dcd436b2725a38514ca45c5c0e}{cypher\_query\_one}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00425}00425\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}MATCH\ (a)-\/[r:REFERENCE\_EDGE]-\/>(b)\ WHERE\ r.uid=\$uid\ RETURN\ r"{}},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00426}00426\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{\textcolor{stringliteral}{"{}uid"{}}:\ uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00427}00427\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00428}00428\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00429}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_abc4632eca1d04bda140477e86c20549b}{00429}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_abc4632eca1d04bda140477e86c20549b}{get\_all\_reference\_edges}}(self)\ -\/>\ list[ReferenceEdge]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00430}00430\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00431}00431\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Returns\ a\ list\ of\ all\ of\ the\ ReferenceEdges\ in\ the\ KG.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00432}00432\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00433}00433\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(\textcolor{stringliteral}{"{}MATCH\ (a)-\/[n:REFERENCE\_EDGE]-\/>(b)\ RETURN\ n"{}},\ \textcolor{stringliteral}{"{}n"{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00434}00434\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00435}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a4e031cc7d0f3ff205a2045a8e50bc92f}{00435}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a4e031cc7d0f3ff205a2045a8e50bc92f}{update\_reference\_edge}}(self,\ edge:\ ReferenceEdge)\ -\/>\ ReferenceEdge:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00436}00436\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00437}00437\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Updates\ the\ KG\ with\ changes\ to\ a\ ReferenceEdge's\ properties}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00438}00438\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00439}00439\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ edge.save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00440}00440\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00441}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aea5593651e78f83430ebc50b535d8233}{00441}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aea5593651e78f83430ebc50b535d8233}{delete\_reference\_edge}}(self,\ edge:\ ReferenceEdge):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00442}00442\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00443}00443\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Removes\ the\ ReferenceEdge.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00444}00444\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00445}00445\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00446}00446\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}MATCH\ (a)-\/[r:REFERENCE\_EDGE]-\/>(b)\ WHERE\ r.uid=\$uid\ DETACH\ DELETE\ r"{}},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00447}00447\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{\textcolor{stringliteral}{"{}uid"{}}:\ edge.uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00448}00448\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00449}00449\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00450}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8aff8aadc6e60706ec8ebf0b4d58e3da}{00450}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8aff8aadc6e60706ec8ebf0b4d58e3da}{delete\_all\_reference\_edges}}(self):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00451}00451\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00452}00452\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Removes\ all\ of\ the\ ReferenceEdges\ from\ KG.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00453}00453\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00454}00454\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(\textcolor{stringliteral}{"{}MATCH\ (a)-\/[r:REFERENCE\_EDGE]-\/>(b)\ DETACH\ DELETE\ r"{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00455}00455\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00456}00456\ \ \ \ \ \textcolor{comment}{\#\ =================}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00457}00457\ \ \ \ \ \textcolor{comment}{\#\ Active\ Data}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00458}00458\ \ \ \ \ \textcolor{comment}{\#\ =================}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00459}00459\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00460}00460\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00461}00461\ \ \ \ \ \textcolor{comment}{\#\ Source\ Nodes\ -\/\ refer\ to\ the\ origin\ of\ content}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00462}00462\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00463}00463\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00464}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a07c0af37b71db468d72cd016af9a7daa}{00464}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a07c0af37b71db468d72cd016af9a7daa}{add\_source}}(self,\ name:\ str)\ -\/>\ Source:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00465}00465\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00466}00466\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Creates\ new\ Source\ node,\ or\ if\ one\ by\ the\ same\ name\ already\ exists\ it\ reuses\ it.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00467}00467\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00468}00468\ \ \ \ \ \ \ \ \ source\ =\ Source.nodes.get\_or\_none(name=name)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00469}00469\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ source\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00470}00470\ \ \ \ \ \ \ \ \ \ \ \ \ source\ =\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}}(name=name).save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00471}00471\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00472}00472\ \ \ \ \ \ \ \ \ \ \ \ \ log.warning(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00473}00473\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Found\ existing\ Source\ node\ for\ name\ \{name\},\ returning\ pre-\/existing\ node."{}}.format(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00474}00474\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name=name}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00476}00476\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00477}00477\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ source}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00478}00478\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00479}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac78199aae776b12c2b0dc24f34632703}{00479}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac78199aae776b12c2b0dc24f34632703}{get\_source\_by\_uid}}(self,\ uid:\ str)\ -\/>\ Source:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00480}00480\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00481}00481\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Gets\ an\ existing\ Source\ node\ by\ uid\ or\ None\ if\ it\ does\ not\ exist}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00482}00482\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00483}00483\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Source.nodes.get\_or\_none(uid=uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00484}00484\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00485}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a772e5e90a1ff0a8ee305de916d7fa266}{00485}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a772e5e90a1ff0a8ee305de916d7fa266}{get\_source\_by\_name}}(self,\ name:\ str)\ -\/>\ Source:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00486}00486\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00487}00487\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Gets\ an\ existing\ Source\ node\ by\ name\ or\ None\ if\ it\ does\ not\ exist}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00488}00488\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00489}00489\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Source.nodes.get\_or\_none(name=name)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00490}00490\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00491}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6a554bfedaad6f58068f0932bf70cc34}{00491}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6a554bfedaad6f58068f0932bf70cc34}{get\_all\_sources}}(self)\ -\/>\ list[Source]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00492}00492\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Source.nodes}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00493}00493\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00494}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_acd3b3950f669a9b33e24b23e7bb94c02}{00494}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_acd3b3950f669a9b33e24b23e7bb94c02}{update\_source}}(self,\ node:\ Source)\ -\/>\ Source:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00495}00495\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00496}00496\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Updates\ the\ KG\ with\ changes\ to\ a\ Source's\ properties.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00497}00497\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00498}00498\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ node.save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00499}00499\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00500}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6a024d83809bade2eb20fb760175819b}{00500}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6a024d83809bade2eb20fb760175819b}{delete\_source}}(self,\ source:\ Source):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00501}00501\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00502}00502\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Removes\ the\ passed\ Source\ node,\ its\ content\ nodes,\ and\ the\ edges\ connected\ to\ it.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00503}00503\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00504}00504\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ c\ \textcolor{keywordflow}{in}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad0cb67a8393b8b78b503e68edce68da7}{get\_content\_by\_source}}(source):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00505}00505\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a192f4160785a5d3729c056a5029ad1ac}{delete\_content}}(c)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00506}00506\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_af613db630413d9480e411ec806a661f1}{delete\_source\_by\_uid}}(source.uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00507}00507\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00508}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_af613db630413d9480e411ec806a661f1}{00508}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_af613db630413d9480e411ec806a661f1}{delete\_source\_by\_uid}}(self,\ uid:\ str):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00509}00509\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00510}00510\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00511}00511\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (s:Source)\ WHERE\ s.uid=\$uid}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00512}00512\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ DETACH\ DELETE\ s"{}"{}"{}},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00513}00513\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{\textcolor{stringliteral}{"{}uid"{}}:\ uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00514}00514\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00515}00515\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00516}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a423940b03d3a27c199bd133babbe344f}{00516}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a423940b03d3a27c199bd133babbe344f}{delete\_all\_sources}}(self):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00517}00517\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00518}00518\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Removes\ all\ of\ the\ Sources,\ their\ content,\ and\ the\ edges\ connected\ to\ them.}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00519}00519\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00520}00520\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ s\ \textcolor{keywordflow}{in}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6a554bfedaad6f58068f0932bf70cc34}{get\_all\_sources}}():}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00521}00521\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6a024d83809bade2eb20fb760175819b}{delete\_source}}(s)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00522}00522\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00523}00523\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00524}00524\ \ \ \ \ \textcolor{comment}{\#\ Content\ Nodes\ -\/\ contain\ article\ content\ and\ link\ to\ their\ Source}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00525}00525\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00526}00526\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00527}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a834c419843f055f95ec18b917fe4373b}{00527}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a834c419843f055f95ec18b917fe4373b}{add\_content}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00528}00528\ \ \ \ \ \ \ \ \ self,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00529}00529\ \ \ \ \ \ \ \ \ source:\ Source,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00530}00530\ \ \ \ \ \ \ \ \ type:\ str,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00531}00531\ \ \ \ \ \ \ \ \ url:\ str,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00532}00532\ \ \ \ \ \ \ \ \ date:\ datetime.date,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00533}00533\ \ \ \ \ \ \ \ \ title:\ str,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00534}00534\ \ \ \ \ \ \ \ \ text:\ str,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00535}00535\ \ \ \ \ )\ -\/>\ Content:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00536}00536\ \ \ \ \ \ \ \ \ content\ =\ Content.nodes.get\_or\_none(url=url)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00537}00537\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ content\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00538}00538\ \ \ \ \ \ \ \ \ \ \ \ \ content\ =\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00539}00539\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ url=url,\ date=date,\ title=title,\ text=text,\ type=type}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00540}00540\ \ \ \ \ \ \ \ \ \ \ \ \ ).save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00541}00541\ \ \ \ \ \ \ \ \ \ \ \ \ content.is\_from.connect(source)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00542}00542\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00543}00543\ \ \ \ \ \ \ \ \ \ \ \ \ log.warning(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00544}00544\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Found\ existing\ Content\ node\ for\ url\ \{url\},\ returning\ pre-\/existing\ node."{}}.format(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00545}00545\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ url=url}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00546}00546\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00547}00547\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00548}00548\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ content}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00549}00549\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00550}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a4d28c8a28aee95c94e04a7a702b793b2}{00550}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a4d28c8a28aee95c94e04a7a702b793b2}{get\_content\_by\_uid}}(self,\ uid:\ str)\ -\/>\ Content:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00551}00551\ \ \ \ \ \ \ \ \ content\ =\ Content.nodes.get\_or\_none(uid=uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00552}00552\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ content}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00553}00553\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00554}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a86ab3575efceba5f82a78b9171f3421b}{00554}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a86ab3575efceba5f82a78b9171f3421b}{get\_content\_by\_title}}(self,\ title:\ str)\ -\/>\ Request:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00555}00555\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac38bc2dcd436b2725a38514ca45c5c0e}{cypher\_query\_one}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00556}00556\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00557}00557\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (c:Content)\ WHERE\ c.title=\$title\ }}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00558}00558\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ RETURN\ c\ "{}"{}"{}},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00559}00559\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}c"{}},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00560}00560\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{\textcolor{stringliteral}{"{}title"{}}:\ title\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00561}00561\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00562}00562\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00563}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a076ef7270549fdf2dedefa9c7a8600e3}{00563}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a076ef7270549fdf2dedefa9c7a8600e3}{get\_content\_by\_url}}(self,\ url:\ str)\ -\/>\ Content:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00564}00564\ \ \ \ \ \ \ \ \ content\ =\ Content.nodes.get\_or\_none(url=url)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00565}00565\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ content}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00566}00566\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00567}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0f99661080b8a9aa416deb02e8e5abd4}{00567}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0f99661080b8a9aa416deb02e8e5abd4}{get\_content\_by\_date}}(self,\ date:\ datetime.date)\ -\/>\ list[Content]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00568}00568\ \ \ \ \ \ \ \ \ content\ =\ Content.nodes.get\_or\_none(date=date)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00569}00569\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ content}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00570}00570\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00571}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad0cb67a8393b8b78b503e68edce68da7}{00571}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad0cb67a8393b8b78b503e68edce68da7}{get\_content\_by\_source}}(self,\ source:\ Source)\ -\/>\ list[Content]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00572}00572\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a089e1ed952b34465b5402ea9e80222a6}{get\_content\_by\_source\_uid}}(source.uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00573}00573\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00574}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a089e1ed952b34465b5402ea9e80222a6}{00574}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a089e1ed952b34465b5402ea9e80222a6}{get\_content\_by\_source\_uid}}(self,\ uid:\ str)\ -\/>\ list[Content]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00575}00575\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00576}00576\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00577}00577\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (s:Source)\ WHERE\ s.uid=\$uid}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00578}00578\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (c:Content)}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00579}00579\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (c)-\/[y:IS\_FROM]-\/>(s)}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00580}00580\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ RETURN\ c\ "{}"{}"{}},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00581}00581\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}c"{}},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00582}00582\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{\textcolor{stringliteral}{"{}uid"{}}:\ uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00583}00583\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00584}00584\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00585}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a172dd6b487f05586d00e68ac16e98c81}{00585}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a172dd6b487f05586d00e68ac16e98c81}{get\_content\_by\_recommendation}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00586}00586\ \ \ \ \ \ \ \ \ self,\ recommendation:\ Recommendation}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00587}00587\ \ \ \ \ )\ -\/>\ list[Content]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00588}00588\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ recommendation.get\_recommends()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00589}00589\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00590}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a97ece05f39c93dc33bb9e62edad40e9e}{00590}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a97ece05f39c93dc33bb9e62edad40e9e}{get\_all\_content}}(self)\ -\/>\ list[Content]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00591}00591\ \ \ \ \ \ \ \ \ content\ =\ Content.nodes}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00592}00592\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ content}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00593}00593\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00594}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a192f4160785a5d3729c056a5029ad1ac}{00594}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a192f4160785a5d3729c056a5029ad1ac}{delete\_content}}(self,\ content:\ Content):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00595}00595\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ e\ \textcolor{keywordflow}{in}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a59e401fb338bb82fbad8806bf036d366}{get\_entities\_by\_content}}(content):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00596}00596\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac0614f839e2b658a66ac37693484b70f}{delete\_entity}}(e)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00597}00597\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ k\ \textcolor{keywordflow}{in}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a7d8dc37275969e248d7631a7dff9d4ea}{get\_evalkeys\_by\_content}}(content):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00598}00598\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_acb07cb5a84748e3f8ed108a08252bf38}{delete\_evalkey}}(k)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00599}00599\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab9e32ca1079bdb3ed8c55c502224d6ec}{delete\_content\_by\_uid}}(content.uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00600}00600\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00601}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab9e32ca1079bdb3ed8c55c502224d6ec}{00601}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab9e32ca1079bdb3ed8c55c502224d6ec}{delete\_content\_by\_uid}}(self,\ uid:\ str):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00602}00602\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00603}00603\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00604}00604\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (c:Content)\ WHERE\ c.uid=\$uid}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00605}00605\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ DETACH\ DELETE\ c\ "{}"{}"{}},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00606}00606\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{\textcolor{stringliteral}{"{}uid"{}}:\ uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00607}00607\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00608}00608\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00609}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a595bab0e13f7f9755fbbd8a7e34005e3}{00609}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a595bab0e13f7f9755fbbd8a7e34005e3}{delete\_all\_content}}(self):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00610}00610\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ c\ \textcolor{keywordflow}{in}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a97ece05f39c93dc33bb9e62edad40e9e}{get\_all\_content}}():}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00611}00611\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a192f4160785a5d3729c056a5029ad1ac}{delete\_content}}(c)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00612}00612\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00613}00613\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00614}00614\ \ \ \ \ \textcolor{comment}{\#\ Active\ Data\ /\ Entity}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00615}00615\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00616}00616\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00617}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a86fc1488db3a07943b56b1c56d0cb92e}{00617}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a86fc1488db3a07943b56b1c56d0cb92e}{add\_entity}}(self,\ node:\ Content\ |\ Request,\ text:\ str,\ type:\ str)\ -\/>\ Entity:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00618}00618\ \ \ \ \ \ \ \ \ entity\ =\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}}(text=text,\ type=type).save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00619}00619\ \ \ \ \ \ \ \ \ entity.mentioned\_in.connect(node)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00620}00620\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ entity}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00621}00621\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00622}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6404c205f32c1ad27d877b7ea6112713}{00622}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6404c205f32c1ad27d877b7ea6112713}{add\_refers\_to\_edge}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00623}00623\ \ \ \ \ \ \ \ \ self,\ entity:\ Entity,\ reference:\ ReferenceNode,\ confidence=1.0}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00624}00624\ \ \ \ \ ):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00625}00625\ \ \ \ \ \ \ \ \ entity.refers\_to.connect(reference,\ \{\textcolor{stringliteral}{"{}confidence"{}}:\ confidence\})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00626}00626\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00627}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad8c277e8a26a7b2674c613e5bbc7e1c8}{00627}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad8c277e8a26a7b2674c613e5bbc7e1c8}{get\_entity\_by\_uid}}(self,\ uid:\ str)\ -\/>\ Entity:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00628}00628\ \ \ \ \ \ \ \ \ entities\ =\ Entity.nodes.get\_or\_none(uid=uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00629}00629\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ entities}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00630}00630\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00631}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a09eee174f397fa96365af8c5fbb340b0}{00631}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a09eee174f397fa96365af8c5fbb340b0}{get\_entity\_by\_url}}(self,\ url:\ str)\ -\/>\ Entity:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00632}00632\ \ \ \ \ \ \ \ \ entities\ =\ Entity.nodes.get\_or\_none(url=url)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00633}00633\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ entities}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00634}00634\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00635}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a59e401fb338bb82fbad8806bf036d366}{00635}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a59e401fb338bb82fbad8806bf036d366}{get\_entities\_by\_content}}(self,\ content:\ Content)\ -\/>\ list[Entity]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00636}00636\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00637}00637\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00638}00638\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (c:Content)\ WHERE\ c.uid=\$content\_uid}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00639}00639\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (e:Entity)}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00640}00640\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (e)-\/[y:MENTIONED\_IN]-\/>(c)}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00641}00641\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ RETURN\ e\ "{}"{}"{}},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00642}00642\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}e"{}},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00643}00643\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{\textcolor{stringliteral}{"{}content\_uid"{}}:\ content.uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00644}00644\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00645}00645\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00646}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a95f295a967337c84e138e2e543e10555}{00646}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a95f295a967337c84e138e2e543e10555}{get\_entities\_by\_content\_uid}}(self,\ uid:\ str)\ -\/>\ list[Entity]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00647}00647\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00648}00648\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00649}00649\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (c:Content)\ WHERE\ c.uid=\$content\_uid}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00650}00650\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (e:Entity)}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00651}00651\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (e)-\/[y:MENTIONED\_IN]-\/>(c)}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00652}00652\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ RETURN\ e\ "{}"{}"{}},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00653}00653\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}e"{}},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00654}00654\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{\textcolor{stringliteral}{"{}content\_uid"{}}:\ uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00655}00655\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00656}00656\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00657}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a1d43555ef238b8da92d01adf8b00aad4}{00657}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a1d43555ef238b8da92d01adf8b00aad4}{get\_entities\_by\_request}}(self,\ request:\ Request)\ -\/>\ list[Entity]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00658}00658\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00659}00659\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00660}00660\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (r:Request)\ WHERE\ r.uid=\$request\_uid}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00661}00661\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (e:Entity)}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00662}00662\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (e)-\/[y:MENTIONED\_IN]-\/>(r)}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00663}00663\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ RETURN\ e\ "{}"{}"{}},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00664}00664\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}e"{}},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00665}00665\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{\textcolor{stringliteral}{"{}request\_uid"{}}:\ request.uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00666}00666\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00667}00667\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00668}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a96c552cecd89c6f844b515d85e8a4cf3}{00668}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a96c552cecd89c6f844b515d85e8a4cf3}{get\_all\_entities}}(self)\ -\/>\ list[Entity]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00669}00669\ \ \ \ \ \ \ \ \ entities\ =\ Entity.nodes}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00670}00670\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ entities}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00671}00671\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00672}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac0614f839e2b658a66ac37693484b70f}{00672}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac0614f839e2b658a66ac37693484b70f}{delete\_entity}}(self,\ node:\ Entity):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00673}00673\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a397e33db0f8c5c9e64216e04782adc63}{delete\_entity\_by\_uid}}(node.uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00674}00674\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00675}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a397e33db0f8c5c9e64216e04782adc63}{00675}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a397e33db0f8c5c9e64216e04782adc63}{delete\_entity\_by\_uid}}(self,\ uid:\ str):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00676}00676\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00677}00677\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00678}00678\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (e:Entity)\ WHERE\ e.uid=\$uid}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00679}00679\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ DETACH\ DELETE\ e\ "{}"{}"{}},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00680}00680\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{\textcolor{stringliteral}{"{}uid"{}}:\ uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00681}00681\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00682}00682\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00683}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2cb59755526c933df15c9b39208b40f2}{00683}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2cb59755526c933df15c9b39208b40f2}{delete\_all\_entities}}(self):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00684}00684\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(\textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00685}00685\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (e:Entity)}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00686}00686\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ DETACH\ DELETE\ e\ "{}"{}"{}})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00687}00687\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00688}00688\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00689}00689\ \ \ \ \ \textcolor{comment}{\#\ Requests\ API}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00690}00690\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00691}00691\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00692}00692\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00693}00693\ \ \ \ \ \textcolor{comment}{\#\ Users}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00694}00694\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00695}00695\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00696}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a9cddcdf897eba500a6af5bc71afe9789}{00696}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a9cddcdf897eba500a6af5bc71afe9789}{add\_user}}(self,\ name:\ str,\ email:\ str)\ -\/>\ User:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00697}00697\ \ \ \ \ \ \ \ \ user\ =\ User.nodes.get\_or\_none(name=name)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00698}00698\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ user\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00699}00699\ \ \ \ \ \ \ \ \ \ \ \ \ user\ =\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}}(name=name,\ email=email).save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00700}00700\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00701}00701\ \ \ \ \ \ \ \ \ \ \ \ \ log.warning(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00702}00702\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Found\ existing\ User\ node\ for\ name\ \{name\},\ returning\ pre-\/existing\ node."{}}.format(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00703}00703\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name=name}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00704}00704\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00705}00705\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00706}00706\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ user}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00707}00707\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00708}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_abb1c546736140c0c3329aae6ca630596}{00708}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_abb1c546736140c0c3329aae6ca630596}{get\_user\_by\_uid}}(self,\ uid:\ str)\ -\/>\ User:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00709}00709\ \ \ \ \ \ \ \ \ user\ =\ User.nodes.get\_or\_none(uid=uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00710}00710\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ user}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00711}00711\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00712}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5577180fa180eab5cb961c6d436b74b6}{00712}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5577180fa180eab5cb961c6d436b74b6}{get\_user\_by\_name}}(self,\ name:\ str)\ -\/>\ User:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00713}00713\ \ \ \ \ \ \ \ \ user\ =\ User.nodes.get\_or\_none(name=name)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00714}00714\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ user}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00715}00715\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00716}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a71766d2af3f824afdcf8a17aaf2656d7}{00716}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a71766d2af3f824afdcf8a17aaf2656d7}{get\_all\_users}}(self)\ -\/>\ list[User]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00717}00717\ \ \ \ \ \ \ \ \ users\ =\ User.nodes}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00718}00718\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ users}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00719}00719\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00720}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5714b872718490ec165bcafec6ffc67a}{00720}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5714b872718490ec165bcafec6ffc67a}{delete\_user}}(self,\ user:\ User):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00721}00721\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ r\ \textcolor{keywordflow}{in}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a7652bc73ff49cdd213164fa25c16a93f}{get\_requests\_by\_user}}(user):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00722}00722\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a93206c1e77d34b75f701e4948c5a30bf}{delete\_request}}(r)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00723}00723\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a3edd8d532ebeb2f9a24a15aabcc78b1b}{delete\_user\_by\_uid}}(user.uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00724}00724\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00725}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a3edd8d532ebeb2f9a24a15aabcc78b1b}{00725}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a3edd8d532ebeb2f9a24a15aabcc78b1b}{delete\_user\_by\_uid}}(self,\ uid:\ str):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00726}00726\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\_query}}(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00727}00727\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00728}00728\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (u:User)\ WHERE\ u.uid=\$uid}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00729}00729\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ DETACH\ DELETE\ u"{}"{}"{},}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00730}00730\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}uid"{}:\ uid\},}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00731}00731\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ )}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00732}00732\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00733}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aedf1fac1b84df4b3224471659115a3cf}{00733}}\ \textcolor{stringliteral}{\ \ \ \ def\ delete\_all\_users(self):}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00734}00734\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ for\ u\ in\ self.get\_all\_users():}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00735}00735\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ self.delete\_user(u)}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00736}00736\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00737}00737\ \textcolor{stringliteral}{\ \ \ \ \#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00738}00738\ \textcolor{stringliteral}{\ \ \ \ \#\ Requests}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00739}00739\ \textcolor{stringliteral}{\ \ \ \ \#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00740}00740\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00741}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a281872c51b47aec9a8259f42eb7618ed}{00741}}\ \textcolor{stringliteral}{\ \ \ \ def\ add\_request(self,\ title:\ str,\ text:\ str,\ user:\ User)\ -\/>\ Request:}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00742}00742\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ request\ =\ Request.nodes.get\_or\_none(title=title)}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00743}00743\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ if\ request\ is\ None\ or\ request.requested\_by.single().uid\ !=\ user.uid:}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00744}00744\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ request\ =\ Request(title=title,\ text=text).save()}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00745}00745\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ request.requested\_by.connect(user)}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00746}00746\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ else:}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00747}00747\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ log.warning(}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00748}00748\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}Found\ existing\ Request\ node\ for\ \{title\},\ returning\ pre-\/existing\ node."{}.format(}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00749}00749\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ title=title}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00750}00750\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00751}00751\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ )}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00752}00752\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ return\ request}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00753}00753\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00754}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0d7243bfd0a243a8fe00946069684576}{00754}}\ \textcolor{stringliteral}{\ \ \ \ def\ get\_request\_by\_uid(self,\ uid:\ str)\ -\/>\ Request:}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00755}00755\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ request\ =\ Request.nodes.get\_or\_none(uid=uid)}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00756}00756\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ return\ request}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00757}00757\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00758}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a7652bc73ff49cdd213164fa25c16a93f}{00758}}\ \textcolor{stringliteral}{\ \ \ \ def\ get\_requests\_by\_user(self,\ user:\ User)\ -\/>\ list[Request]:}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00759}00759\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ return\ self.get\_requests\_by\_user\_uid(user.uid)}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00760}00760\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00761}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad10f9e4a3b1de1b319757c2451de6201}{00761}}\ \textcolor{stringliteral}{\ \ \ \ def\ get\_requests\_by\_user\_uid(self,\ uid:\ str)\ -\/>\ list[Request]:}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00762}00762\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ return\ self.cypher\_query(}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00763}00763\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00764}00764\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (u:User)\ WHERE\ u.uid=\$user\_id}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00765}00765\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (q:Request)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00766}00766\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (q)-\/[y:REQUESTED\_BY]-\/>(u)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00767}00767\ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ q\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00768}00768\ \ \ \ \ \ \ \ \ \ \ \ \ "{}q"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00769}00769\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}user\_id"{}:\ uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00770}00770\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00771}00771\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00772}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a149198cf7289b0067422946eba2a8d08}{00772}}\ \ \ \ \ def\ get\_request\_by\_title(self,\ title:\ str)\ -\/>\ Request:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00773}00773\ \ \ \ \ \ \ \ \ return\ self.cypher\_query\_one(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00774}00774\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00775}00775\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (q:Request)\ WHERE\ q.title=\$title}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00776}00776\ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ q\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00777}00777\ \ \ \ \ \ \ \ \ \ \ \ \ "{}q"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00778}00778\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}title"{}:\ title\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00779}00779\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00780}00780\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00781}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aa01c503f67dad1f5b2bcb49e1dd46a2e}{00781}}\ \ \ \ \ def\ get\_all\_requests(self)\ -\/>\ list[Request]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00782}00782\ \ \ \ \ \ \ \ \ requests\ =\ Request.nodes}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00783}00783\ \ \ \ \ \ \ \ \ return\ requests}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00784}00784\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00785}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a93206c1e77d34b75f701e4948c5a30bf}{00785}}\ \ \ \ \ def\ delete\_request(self,\ request:\ Request):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00786}00786\ \ \ \ \ \ \ \ \ for\ e\ in\ self.get\_entities\_by\_request(request):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00787}00787\ \ \ \ \ \ \ \ \ \ \ \ \ self.delete\_entity(e)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00788}00788\ \ \ \ \ \ \ \ \ for\ t\ in\ self.get\_tldr\_by\_request(request):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00789}00789\ \ \ \ \ \ \ \ \ \ \ \ \ self.delete\_tldr(t)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00790}00790\ \ \ \ \ \ \ \ \ for\ k\ in\ self.get\_evalkeys\_by\_request(request):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00791}00791\ \ \ \ \ \ \ \ \ \ \ \ \ self.delete\_evalkey(k)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00792}00792\ \ \ \ \ \ \ \ \ return\ self.delete\_request\_by\_uid(request.uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00793}00793\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00794}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aca2376b7e85e0bd92d548e5f1d11d0f4}{00794}}\ \ \ \ \ def\ delete\_request\_by\_uid(self,\ uid:\ str):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00795}00795\ \ \ \ \ \ \ \ \ return\ self.cypher\_query(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00796}00796\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00797}00797\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (r:Request)\ WHERE\ r.uid=\$uid}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00798}00798\ \ \ \ \ \ \ \ \ \ \ \ \ DETACH\ DELETE\ r\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00799}00799\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}uid"{}:\ uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00800}00800\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00801}00801\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00802}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8b53b87ab4656affa00ad623afa00461}{00802}}\ \ \ \ \ def\ delete\_all\_requests(self):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00803}00803\ \ \ \ \ \ \ \ \ for\ r\ in\ self.get\_all\_requests():}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00804}00804\ \ \ \ \ \ \ \ \ \ \ \ \ self.delete\_request(r)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00805}00805\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00806}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab040e15f37b17350ccf4c5cdd77336f3}{00806}}\ \ \ \ \ def\ get\_requests\_by\_tldr\_entry(self,\ entry:\ TldrEntry)\ -\/>\ Request:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00807}00807\ \ \ \ \ \ \ \ \ return\ self.cypher\_query\_one(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00808}00808\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00809}00809\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (e:TldrEntry)\ WHERE\ e.uid=\$uid}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00810}00810\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (t:Tldr)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00811}00811\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (q:Request)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00812}00812\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (e)<-\/[x:CONTAINS]-\/(t)-\/[y:RESPONSE\_TO]-\/>(q)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00813}00813\ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ q\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00814}00814\ \ \ \ \ \ \ \ \ \ \ \ \ "{}q"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00815}00815\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}uid"{}:\ entry.uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00816}00816\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00817}00817\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00818}00818\ \ \ \ \ \#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00819}00819\ \ \ \ \ \#\ Workflow\ Products\ API}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00820}00820\ \ \ \ \ \#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00821}00821\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00822}00822\ \ \ \ \ \#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00823}00823\ \ \ \ \ \#\ Recommendations}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00824}00824\ \ \ \ \ \#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00825}00825\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00826}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0f92184a5777529b35cc93d803e87b38}{00826}}\ \ \ \ \ def\ add\_recommendation(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00827}00827\ \ \ \ \ \ \ \ \ self,\ score:\ float,\ content:\ Content,\ request:\ Request}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00828}00828\ \ \ \ \ )\ -\/>\ Recommendation:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00829}00829\ \ \ \ \ \ \ \ \ if\ content.uid\ is\ None\ or\ request.uid\ is\ None:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00830}00830\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00831}00831\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}Adding\ Recommendation\ requires\ an\ existing\ and\ saved\ Content\ and\ Request\ node.\ Attempting\ to\ save\ them..."{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00832}00832\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00833}00833\ \ \ \ \ \ \ \ \ \ \ \ \ content.save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00834}00834\ \ \ \ \ \ \ \ \ \ \ \ \ request.save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00835}00835\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00836}00836\ \ \ \ \ \ \ \ \ recommendation\ =\ self.get\_recommendation(content,\ request)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00837}00837\ \ \ \ \ \ \ \ \ if\ recommendation\ is\ None:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00838}00838\ \ \ \ \ \ \ \ \ \ \ \ \ recommendation\ =\ Recommendation(score=score).save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00839}00839\ \ \ \ \ \ \ \ \ \ \ \ \ recommendation.recommends.connect(content)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00840}00840\ \ \ \ \ \ \ \ \ \ \ \ \ recommendation.relates\_to.connect(request)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00841}00841\ \ \ \ \ \ \ \ \ else:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00842}00842\ \ \ \ \ \ \ \ \ \ \ \ \ log.warning(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00843}00843\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}Found\ existing\ Recommendation\ node\ between\ content\ and\ request,\ returning\ pre-\/existing\ node."{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00844}00844\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00845}00845\ \ \ \ \ \ \ \ \ return\ recommendation}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00846}00846\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00847}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a69917b18083ddcdd67681aa8cde9b238}{00847}}\ \ \ \ \ def\ get\_recommendation(self,\ content:\ Content,\ request:\ Request)\ -\/>\ Recommendation:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00848}00848\ \ \ \ \ \ \ \ \ return\ self.cypher\_query\_one(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00849}00849\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00850}00850\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (q:Request)\ WHERE\ q.uid=\$request\_id}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00851}00851\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (a:Content)\ WHERE\ a.uid=\$content\_id}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00852}00852\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (r:Recommendation)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00853}00853\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (r)-\/[x:RECOMMENDS]-\/>(a)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00854}00854\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (r)-\/[y:RELATES\_TO]-\/>(q)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00855}00855\ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ r\ LIMIT\ 1\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00856}00856\ \ \ \ \ \ \ \ \ \ \ \ \ "{}r"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00857}00857\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}request\_id"{}:\ request.uid,\ "{}content\_id"{}:\ content.uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00858}00858\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00859}00859\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00860}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac41414d244bd7dbee46735fbfa694ef6}{00860}}\ \ \ \ \ def\ get\_recommendation\_by\_id(self,\ uid:\ str)\ -\/>\ Recommendation:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00861}00861\ \ \ \ \ \ \ \ \ recommendation\ =\ Recommendation.nodes.get\_or\_none(uid=uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00862}00862\ \ \ \ \ \ \ \ \ return\ recommendation}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00863}00863\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00864}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a1adea36c318077446bd4e21e5263f9ce}{00864}}\ \ \ \ \ def\ get\_recommendations\_by\_request(self,\ request:\ Request)\ -\/>\ list[Recommendation]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00865}00865\ \ \ \ \ \ \ \ \ return\ self.cypher\_query(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00866}00866\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00867}00867\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (q:Request)\ WHERE\ q.uid=\$request\_id}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00868}00868\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (r:Recommendation)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00869}00869\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (r)-\/[y:RELATES\_TO]-\/>(q)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00870}00870\ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ r\ ORDER\ BY\ r.score\ DESC\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00871}00871\ \ \ \ \ \ \ \ \ \ \ \ \ "{}r"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00872}00872\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}request\_id"{}:\ request.uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00873}00873\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00874}00874\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00875}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8b51349be2c1427462206f5827dc04a9}{00875}}\ \ \ \ \ def\ get\_all\_recommendations(self)\ -\/>\ list[Recommendation]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00876}00876\ \ \ \ \ \ \ \ \ recommendations\ =\ Recommendation.nodes}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00877}00877\ \ \ \ \ \ \ \ \ return\ recommendations}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00878}00878\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00879}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a83403168a24b21f071c916785d43b20f}{00879}}\ \ \ \ \ def\ delete\_recommendation(self,\ recommendation:\ Recommendation):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00880}00880\ \ \ \ \ \ \ \ \ recommendation.delete()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00881}00881\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00882}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aef9dbb5ad02812211b7da05a7f17a0fd}{00882}}\ \ \ \ \ def\ delete\_all\_recommendations(self):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00883}00883\ \ \ \ \ \ \ \ \ self.cypher\_query("{}MATCH\ (r:Recommendation)\ DETACH\ DELETE\ (r)"{})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00884}00884\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00885}00885\ \ \ \ \ \#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00886}00886\ \ \ \ \ \#\ Summaries}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00887}00887\ \ \ \ \ \#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00888}00888\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00889}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad27eba1dbd22ff99e8f1149ed70cd98d}{00889}}\ \ \ \ \ def\ add\_summary(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00890}00890\ \ \ \ \ \ \ \ \ self,\ text:\ str,\ content:\ Content,\ recommendation:\ Recommendation\ =\ None}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00891}00891\ \ \ \ \ )\ -\/>\ Summary:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00892}00892\ \ \ \ \ \ \ \ \ summary\ =\ self.get\_summary(content,\ recommendation)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00893}00893\ \ \ \ \ \ \ \ \ if\ summary\ is\ None:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00894}00894\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ Summary(text=text).save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00895}00895\ \ \ \ \ \ \ \ \ \ \ \ \ summary.summarizes.connect(content)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00896}00896\ \ \ \ \ \ \ \ \ \ \ \ \ if\ recommendation\ is\ not\ None:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00897}00897\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ summary.focus\_on.connect(recommendation)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00898}00898\ \ \ \ \ \ \ \ \ else:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00899}00899\ \ \ \ \ \ \ \ \ \ \ \ \ log.warning("{}Found\ existing\ Summary\ node,\ returning\ pre-\/existing\ node."{})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00900}00900\ \ \ \ \ \ \ \ \ return\ summary}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00901}00901\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00902}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8316528e611f567e9a35dd44bb9bcb03}{00902}}\ \ \ \ \ def\ get\_summary(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00903}00903\ \ \ \ \ \ \ \ \ self,\ content:\ Content,\ recommendation:\ Recommendation\ =\ None}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00904}00904\ \ \ \ \ )\ -\/>\ Summary:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00905}00905\ \ \ \ \ \ \ \ \ \#\ Summaries\ without\ recommendations\ should\ explictly\ NOT\ have\ recommendations\ associated\ with\ them}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00906}00906\ \ \ \ \ \ \ \ \ if\ recommendation\ is\ None:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00907}00907\ \ \ \ \ \ \ \ \ \ \ \ \ return\ self.cypher\_query\_one(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00908}00908\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00909}00909\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (a:Content)\ WHERE\ a.uid=\$content\_id}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00910}00910\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (s:Summary)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00911}00911\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (s)-\/[x:SUMMARIZES]-\/>(a)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00912}00912\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ WHERE\ NOT\ (s)-\/[:FOCUS\_ON]-\/>()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00913}00913\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ s\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00914}00914\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}s"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00915}00915\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}content\_id"{}:\ content.uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00916}00916\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00917}00917\ \ \ \ \ \ \ \ \ else:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00918}00918\ \ \ \ \ \ \ \ \ \ \ \ \ return\ self.cypher\_query\_one(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00919}00919\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00920}00920\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (r:Recommendation)\ WHERE\ r.uid=\$recommendation\_id}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00921}00921\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (a:Content)\ WHERE\ a.uid=\$content\_id}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00922}00922\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (s:Summary)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00923}00923\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (s)-\/[x:SUMMARIZES]-\/>(a)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00924}00924\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (s)-\/[y:FOCUS\_ON]-\/>(r)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00925}00925\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ s\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00926}00926\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}s"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00927}00927\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ params=\{}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00928}00928\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}recommendation\_id"{}:\ recommendation.uid,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00929}00929\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}content\_id"{}:\ content.uid,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00930}00930\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00931}00931\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00932}00932\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00933}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a537c51e98f02b922407c41e099e26844}{00933}}\ \ \ \ \ def\ get\_summary\_by\_id(self,\ uid:\ str)\ -\/>\ Summary:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00934}00934\ \ \ \ \ \ \ \ \ summary\ =\ Summary.nodes.get\_or\_none(uid=uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00935}00935\ \ \ \ \ \ \ \ \ return\ summary}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00936}00936\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00937}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a7815f40b59663738a9512a16b0f517ba}{00937}}\ \ \ \ \ def\ get\_summaries\_by\_content(self,\ content:\ Content)\ -\/>\ list[Summary]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00938}00938\ \ \ \ \ \ \ \ \ return\ self.cypher\_query(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00939}00939\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00940}00940\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (a:Content)\ WHERE\ a.uid=\$content\_id}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00941}00941\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (s:Summary)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00942}00942\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (s)-\/[x:SUMMARIZES]-\/>(a)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00943}00943\ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ s\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00944}00944\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}content\_id"{}:\ content.uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00945}00945\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00946}00946\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00947}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a021948360b3b3d3a526ae6ad98d46c99}{00947}}\ \ \ \ \ def\ get\_summaries\_by\_recommendation(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00948}00948\ \ \ \ \ \ \ \ \ self,\ recommendation:\ Recommendation}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00949}00949\ \ \ \ \ )\ -\/>\ list[Summary]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00950}00950\ \ \ \ \ \ \ \ \ return\ self.cypher\_query(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00951}00951\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00952}00952\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (r:Recommendation)\ WHERE\ r.uid=\$recommendation\_id}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00953}00953\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (s:Summary)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00954}00954\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (s)-\/[x:FOCUS\_ON]-\/>(r)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00955}00955\ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ s\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00956}00956\ \ \ \ \ \ \ \ \ \ \ \ \ "{}s"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00957}00957\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}recommendation\_id"{}:\ recommendation.uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00958}00958\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00959}00959\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00960}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aa9eabae9027126710a1e3a3323358ab9}{00960}}\ \ \ \ \ def\ get\_all\_summary(self)\ -\/>\ list[Summary]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00961}00961\ \ \ \ \ \ \ \ \ summary\ =\ Summary.nodes}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00962}00962\ \ \ \ \ \ \ \ \ return\ summary}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00963}00963\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00964}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a11222c052588a422600b17e2ac2a9a2e}{00964}}\ \ \ \ \ def\ delete\_summary(self,\ summary:\ Summary):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00965}00965\ \ \ \ \ \ \ \ \ summary.delete()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00966}00966\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00967}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_af7398425e5a28f089af0c8c29b501cbe}{00967}}\ \ \ \ \ def\ delete\_all\_summaries(self):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00968}00968\ \ \ \ \ \ \ \ \ self.cypher\_query("{}MATCH\ (s:Summary)\ DETACH\ DELETE\ (s)"{})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00969}00969\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00970}00970\ \ \ \ \ \#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00971}00971\ \ \ \ \ \#\ Tldr}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00972}00972\ \ \ \ \ \#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00973}00973\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00974}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_abe976c640f2aa194f0f127b0fbfee301}{00974}}\ \ \ \ \ def\ add\_tldr(self,\ request:\ Request,\ date:\ datetime.date)\ -\/>\ Tldr:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00975}00975\ \ \ \ \ \ \ \ \ tldr\ =\ self.get\_tldr(request,\ date)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00976}00976\ \ \ \ \ \ \ \ \ if\ tldr\ is\ None:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00977}00977\ \ \ \ \ \ \ \ \ \ \ \ \ tldr\ =\ Tldr(date=date).save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00978}00978\ \ \ \ \ \ \ \ \ \ \ \ \ tldr.response\_to.connect(request)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00979}00979\ \ \ \ \ \ \ \ \ else:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00980}00980\ \ \ \ \ \ \ \ \ \ \ \ \ log.warning(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00981}00981\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}Found\ existing\ Tldr\ node\ for\ request\ on\ given\ date,\ returning\ pre-\/existing\ node."{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00982}00982\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00983}00983\ \ \ \ \ \ \ \ \ return\ tldr}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00984}00984\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00985}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5c593d2c4d3bbb6ed882ee8b04119cbc}{00985}}\ \ \ \ \ def\ get\_tldr(self,\ request:\ Request,\ date:\ datetime.date)\ -\/>\ Tldr:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00986}00986\ \ \ \ \ \ \ \ \ return\ self.get\_tldr\_by\_uid\_and\_date(request.uid,\ date)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00987}00987\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00988}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a00ece2e66490b4c6e8073dc09748144d}{00988}}\ \ \ \ \ def\ get\_tldr\_by\_uid(self,\ uid:\ str)\ -\/>\ Tldr:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00989}00989\ \ \ \ \ \ \ \ \ tldr\ =\ Tldr.nodes.get\_or\_none(uid=uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00990}00990\ \ \ \ \ \ \ \ \ return\ tldr}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00991}00991\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00992}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5b48dbd7560903f94555d65d984407d0}{00992}}\ \ \ \ \ def\ get\_tldrs\_by\_date(self,\ date:\ datetime.date):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00993}00993\ \ \ \ \ \ \ \ \ results\ =\ self.cypher\_query(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00994}00994\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00995}00995\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (t:Tldr)\ WHERE\ t.date=\$date}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00996}00996\ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ t\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00997}00997\ \ \ \ \ \ \ \ \ \ \ \ \ "{}t"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00998}00998\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}date"{}:\ date\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l00999}00999\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01000}01000\ \ \ \ \ \ \ \ \ if\ results\ is\ None:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01001}01001\ \ \ \ \ \ \ \ \ \ \ \ \ return\ None}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01002}01002\ \ \ \ \ \ \ \ \ else:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01003}01003\ \ \ \ \ \ \ \ \ \ \ \ \ return\ results[0]}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01004}01004\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01005}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8f00ce90fd2b2d0dab17802b3bf904fb}{01005}}\ \ \ \ \ def\ get\_tldrs\_before\_date(self,\ date:\ datetime.date):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01006}01006\ \ \ \ \ \ \ \ \ return\ self.cypher\_query(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01007}01007\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01008}01008\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (t:Tldr)\ WHERE\ t.date<\$date}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01009}01009\ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ t\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01010}01010\ \ \ \ \ \ \ \ \ \ \ \ \ "{}t"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01011}01011\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}date"{}:\ date\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01012}01012\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01013}01013\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01014}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad5dc8c27cf6a00c201238492f4f80aa9}{01014}}\ \ \ \ \ def\ get\_tldr\_by\_request(self,\ request:\ Request)\ -\/>\ list[Tldr]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01015}01015\ \ \ \ \ \ \ \ \ return\ self.get\_tldr\_by\_request\_uid(request.uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01016}01016\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01017}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8659b2097401229bf84cc66cfa69151d}{01017}}\ \ \ \ \ def\ get\_tldr\_by\_request\_uid(self,\ request\_uid:\ str)\ -\/>\ list[Tldr]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01018}01018\ \ \ \ \ \ \ \ \ return\ self.cypher\_query(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01019}01019\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01020}01020\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (q:Request)\ WHERE\ q.uid=\$request\_uid}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01021}01021\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (t:Tldr)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01022}01022\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (t)-\/[y:RESPONSE\_TO]-\/>(q)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01023}01023\ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ t\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01024}01024\ \ \ \ \ \ \ \ \ \ \ \ \ "{}t"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01025}01025\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}request\_uid"{}:\ request\_uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01026}01026\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01027}01027\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01028}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6aa5e68fb4d5241f7fe535566f6969a3}{01028}}\ \ \ \ \ def\ get\_tldr\_by\_uid\_and\_date(self,\ request\_uid:\ str,\ date:\ datetime.date)\ -\/>\ Tldr:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01029}01029\ \ \ \ \ \ \ \ \ return\ self.cypher\_query\_one(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01030}01030\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01031}01031\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (q:Request)\ WHERE\ q.uid=\$request\_uid}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01032}01032\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (t:Tldr)\ where\ t.date=\$date}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01033}01033\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (t)-\/[y:RESPONSE\_TO]-\/>(q)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01034}01034\ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ t\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01035}01035\ \ \ \ \ \ \ \ \ \ \ \ \ "{}t"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01036}01036\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}date"{}:\ date,\ "{}request\_uid"{}:\ request\_uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01037}01037\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01038}01038\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01039}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a1c681eaaee06734ab5329717b214b4ab}{01039}}\ \ \ \ \ def\ get\_all\_tldrs(self)\ -\/>\ list[Tldr]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01040}01040\ \ \ \ \ \ \ \ \ tldrs\ =\ Tldr.nodes}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01041}01041\ \ \ \ \ \ \ \ \ return\ tldrs}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01042}01042\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01043}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a177b7363068cd63945dc1d14f2cbacf9}{01043}}\ \ \ \ \ def\ delete\_tldr(self,\ tldr:\ Tldr):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01044}01044\ \ \ \ \ \ \ \ \ self.delete\_tldr\_entries\_by\_tldr(tldr)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01045}01045\ \ \ \ \ \ \ \ \ tldr.delete()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01046}01046\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01047}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a09e228ac5030b4576e37d3ab35cf7fa1}{01047}}\ \ \ \ \ def\ delete\_all\_tldrs(self):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01048}01048\ \ \ \ \ \ \ \ \ for\ tldr\ in\ Tldr.nodes:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01049}01049\ \ \ \ \ \ \ \ \ \ \ \ \ self.delete\_tldr(tldr)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01050}01050\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01051}01051\ \ \ \ \ \#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01052}01052\ \ \ \ \ \#\ Tldr\ Entries}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01053}01053\ \ \ \ \ \#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01054}01054\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01055}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6d89bb3fc666c2f8a3270a7583f27dba}{01055}}\ \ \ \ \ def\ add\_entry\_to\_tldr(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01056}01056\ \ \ \ \ \ \ \ \ self,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01057}01057\ \ \ \ \ \ \ \ \ tldr:\ Tldr,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01058}01058\ \ \ \ \ \ \ \ \ score:\ float,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01059}01059\ \ \ \ \ \ \ \ \ recommendation:\ Recommendation,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01060}01060\ \ \ \ \ \ \ \ \ summary:\ Summary,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01061}01061\ \ \ \ \ \ \ \ \ content:\ Content,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01062}01062\ \ \ \ \ )\ -\/>\ TldrEntry:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01063}01063\ \ \ \ \ \ \ \ \ tldr\_entry\ =\ TldrEntry(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01064}01064\ \ \ \ \ \ \ \ \ \ \ \ \ link=content.url,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01065}01065\ \ \ \ \ \ \ \ \ \ \ \ \ title=content.title,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01066}01066\ \ \ \ \ \ \ \ \ \ \ \ \ type=content.type,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01067}01067\ \ \ \ \ \ \ \ \ \ \ \ \ score=recommendation.score,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01068}01068\ \ \ \ \ \ \ \ \ \ \ \ \ summary=summary.text,}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01069}01069\ \ \ \ \ \ \ \ \ ).save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01070}01070\ \ \ \ \ \ \ \ \ tldr\_entry.includes.connect(summary)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01071}01071\ \ \ \ \ \ \ \ \ tldr\_entry.based\_on.connect(recommendation)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01072}01072\ \ \ \ \ \ \ \ \ tldr.contains.connect(tldr\_entry,\ \{"{}score"{}:\ score\})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01073}01073\ \ \ \ \ \ \ \ \ return\ tldr\_entry}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01074}01074\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01075}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a4c4438ef5a2953bf7fc17313b45976e9}{01075}}\ \ \ \ \ def\ get\_tldr\_entry\_by\_uid(self,\ uid:\ str)\ -\/>\ Tldr:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01076}01076\ \ \ \ \ \ \ \ \ tldr\_entry\ =\ TldrEntry.nodes.get\_or\_none(uid=uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01077}01077\ \ \ \ \ \ \ \ \ return\ tldr\_entry}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01078}01078\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01079}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a3742b98c773e35490f1c6b15be3e0ddc}{01079}}\ \ \ \ \ def\ get\_entries\_by\_tldr(self,\ tldr:\ Tldr)\ -\/>\ list[TldrEntry]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01080}01080\ \ \ \ \ \ \ \ \ return\ self.cypher\_query(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01081}01081\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01082}01082\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (t:Tldr)\ WHERE\ t.uid=\$tldr\_id}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01083}01083\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (e:TldrEntry)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01084}01084\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (t)-\/[x:CONTAINS]-\/>(e)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01085}01085\ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ e\ ORDER\ BY\ e.score\ DESC"{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01086}01086\ \ \ \ \ \ \ \ \ \ \ \ \ "{}e"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01087}01087\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}tldr\_id"{}:\ tldr.uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01088}01088\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01089}01089\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01090}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a15cc8ece3dbd45510d4b60eadf0bd7f4}{01090}}\ \ \ \ \ def\ delete\_tldr\_entry(self,\ tldr\_entry:\ TldrEntry):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01091}01091\ \ \ \ \ \ \ \ \ tldr\_entry.delete()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01092}01092\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01093}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab7e1d6ba3ccb970faa6e7f3bc6cd45f2}{01093}}\ \ \ \ \ def\ delete\_tldr\_entries\_by\_tldr(self,\ tldr:\ Tldr):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01094}01094\ \ \ \ \ \ \ \ \ for\ tldr\_entry\ in\ tldr.contains.all():}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01095}01095\ \ \ \ \ \ \ \ \ \ \ \ \ self.delete\_tldr\_entry(tldr\_entry)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01096}01096\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01097}01097\ \ \ \ \ \#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01098}01098\ \ \ \ \ \#\ Feedback}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01099}01099\ \ \ \ \ \#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01100}01100\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01101}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a014db1159232c0720a163739ae1ef890}{01101}}\ \ \ \ \ def\ add\_feedback\_click(self,\ entry:\ TldrEntry,\ date:\ datetime.date)\ -\/>\ Feedback:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01102}01102\ \ \ \ \ \ \ \ \ feedback\ =\ self.tldr\_entry(entry)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01103}01103\ \ \ \ \ \ \ \ \ if\ feedback\ is\ None:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01104}01104\ \ \ \ \ \ \ \ \ \ \ \ \ feedback\ =\ Feedback(click=date).save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01105}01105\ \ \ \ \ \ \ \ \ \ \ \ \ feedback.about\_entry.connect(entry)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01106}01106\ \ \ \ \ \ \ \ \ \ \ \ \ request\ =\ self.get\_requests\_by\_tldr\_entry(entry)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01107}01107\ \ \ \ \ \ \ \ \ \ \ \ \ feedback.from\_request.connect(request)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01108}01108\ \ \ \ \ \ \ \ \ else:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01109}01109\ \ \ \ \ \ \ \ \ \ \ \ \ feedback.click\_date\ =\ date}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01110}01110\ \ \ \ \ \ \ \ \ \ \ \ \ feedback.save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01111}01111\ \ \ \ \ \ \ \ \ \ \ \ \ log.warning("{}Updated\ click\ date\ of\ existing\ Feedback."{})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01112}01112\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01113}01113\ \ \ \ \ \ \ \ \ return\ feedback}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01114}01114\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01115}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aac785a73600d5b7e018a37b1d6fedd18}{01115}}\ \ \ \ \ def\ add\_feedback\_rating(self,\ entry:\ TldrEntry,\ score:\ float)\ -\/>\ Feedback:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01116}01116\ \ \ \ \ \ \ \ \ feedback\ =\ self.get\_feedback\_by\_tldr\_entry(entry)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01117}01117\ \ \ \ \ \ \ \ \ if\ feedback\ is\ None:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01118}01118\ \ \ \ \ \ \ \ \ \ \ \ \ feedback\ =\ Feedback(score=score).save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01119}01119\ \ \ \ \ \ \ \ \ \ \ \ \ feedback.about\_entry.connect(entry)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01120}01120\ \ \ \ \ \ \ \ \ \ \ \ \ request\ =\ self.get\_requests\_by\_tldr\_entry(entry)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01121}01121\ \ \ \ \ \ \ \ \ \ \ \ \ feedback.from\_request.connect(request)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01122}01122\ \ \ \ \ \ \ \ \ else:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01123}01123\ \ \ \ \ \ \ \ \ \ \ \ \ feedback.score\ =\ score}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01124}01124\ \ \ \ \ \ \ \ \ \ \ \ \ feedback.save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01125}01125\ \ \ \ \ \ \ \ \ \ \ \ \ log.warning("{}Updated\ scoring\ of\ existing\ Feedback."{})}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01126}01126\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01127}01127\ \ \ \ \ \ \ \ \ return\ feedback}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01128}01128\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01129}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aaf11c42c3b4ad0c2a18488d2baaf897f}{01129}}\ \ \ \ \ def\ get\_feedback\_by\_tldr\_entry(self,\ entry:\ TldrEntry)\ -\/>\ Feedback:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01130}01130\ \ \ \ \ \ \ \ \ return\ self.cypher\_query\_one(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01131}01131\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01132}01132\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (f:Feedback)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01133}01133\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (e:TldrEntry)\ WHERE\ e.uid=\$uid}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01134}01134\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (f)-\/[x:ABOUT]-\/>(e)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01135}01135\ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ f\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01136}01136\ \ \ \ \ \ \ \ \ \ \ \ \ "{}f"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01137}01137\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}uid"{}:\ entry.uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01138}01138\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01139}01139\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01140}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a60d01d5bfcb3d6e94fd2e2229147155f}{01140}}\ \ \ \ \ def\ get\_feedback\_by\_request(self,\ request:\ Request)\ -\/>\ list[Feedback]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01141}01141\ \ \ \ \ \ \ \ \ return\ self.cypher\_query(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01142}01142\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01143}01143\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (f:Feedback)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01144}01144\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (r:Request)\ WHERE\ r.uid=\$uid}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01145}01145\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (f)-\/[x:FROM]-\/>(r)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01146}01146\ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ f\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01147}01147\ \ \ \ \ \ \ \ \ \ \ \ \ "{}f"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01148}01148\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}uid"{}:\ request.uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01149}01149\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01150}01150\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01151}01151\ \ \ \ \ \#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01152}01152\ \ \ \ \ \#\ EvalKey\ Nodes\ -\/\ rubric\ for\ evaluation\ metrics}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01153}01153\ \ \ \ \ \#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01154}01154\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01155}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a471c7612553a791436d10bf924e6593c}{01155}}\ \ \ \ \ def\ add\_evalkey(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01156}01156\ \ \ \ \ \ \ \ \ self,\ content:\ Content,\ request:\ Request,\ score:\ float,\ text:\ str}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01157}01157\ \ \ \ \ )\ -\/>\ EvalKey:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01158}01158\ \ \ \ \ \ \ \ \ key\ =\ EvalKey(text=text,\ score=score).save()}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01159}01159\ \ \ \ \ \ \ \ \ key.key\_for\_content.connect(content)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01160}01160\ \ \ \ \ \ \ \ \ key.key\_for\_request.connect(request)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01161}01161\ \ \ \ \ \ \ \ \ return\ key}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01162}01162\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01163}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a3510c45e53bc4c571ba2533b100796b8}{01163}}\ \ \ \ \ def\ get\_evalkey\_by\_uid(self,\ uid:\ str)\ -\/>\ EvalKey:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01164}01164\ \ \ \ \ \ \ \ \ key\ =\ EvalKey.nodes.get\_or\_none(uid=uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01165}01165\ \ \ \ \ \ \ \ \ return\ key}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01166}01166\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01167}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0fbedc1b7847949a359d60f289a6bd0c}{01167}}\ \ \ \ \ def\ get\_evalkeys\_by\_request(self,\ request:\ Request)\ -\/>\ list[EvalKey]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01168}01168\ \ \ \ \ \ \ \ \ return\ self.cypher\_query(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01169}01169\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01170}01170\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (q:Request)\ WHERE\ q.uid=\$request\_id}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01171}01171\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (e:EvalKey)-\/[eq:KEY\_FOR\_REQUEST]-\/>(q)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01172}01172\ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ e\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01173}01173\ \ \ \ \ \ \ \ \ \ \ \ \ "{}e"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01174}01174\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}request\_id"{}:\ request.uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01175}01175\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01176}01176\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01177}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a7d8dc37275969e248d7631a7dff9d4ea}{01177}}\ \ \ \ \ def\ get\_evalkeys\_by\_content(self,\ content:\ Content)\ -\/>\ list[EvalKey]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01178}01178\ \ \ \ \ \ \ \ \ return\ self.cypher\_query(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01179}01179\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01180}01180\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (c:Content)\ WHERE\ c.uid=\$content\_id}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01181}01181\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (c)<-\/[ec:KEY\_FOR\_CONTENT]-\/(e:EvalKey)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01182}01182\ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ e\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01183}01183\ \ \ \ \ \ \ \ \ \ \ \ \ "{}e"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01184}01184\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}content\_id"{}:\ content.uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01185}01185\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01186}01186\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01187}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_af48b3a99f71b03a1a607a2253a8a8f98}{01187}}\ \ \ \ \ def\ get\_evalkey\_by\_content\_and\_request(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01188}01188\ \ \ \ \ \ \ \ \ self,\ content:\ Content,\ request:\ Request}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01189}01189\ \ \ \ \ )\ -\/>\ EvalKey:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01190}01190\ \ \ \ \ \ \ \ \ return\ self.cypher\_query\_one(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01191}01191\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01192}01192\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (c:Content)\ WHERE\ c.uid=\$content\_id}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01193}01193\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (q:Request)\ WHERE\ q.uid=\$request\_id}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01194}01194\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (c)<-\/[ec:KEY\_FOR\_CONTENT]-\/(e:EvalKey)-\/[eq:KEY\_FOR\_REQUEST]-\/>(q)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01195}01195\ \ \ \ \ \ \ \ \ \ \ \ \ RETURN\ e\ "{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01196}01196\ \ \ \ \ \ \ \ \ \ \ \ \ "{}e"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01197}01197\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}content\_id"{}:\ content.uid,\ "{}request\_id"{}:\ request.uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01198}01198\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01199}01199\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01200}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a9ae0fc49adaff664357a37ae9904ba6b}{01200}}\ \ \ \ \ def\ get\_all\_evalkeys(self)\ -\/>\ list[EvalKey]:}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01201}01201\ \ \ \ \ \ \ \ \ evalkeys\ =\ EvalKey.nodes}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01202}01202\ \ \ \ \ \ \ \ \ return\ evalkeys}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01203}01203\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01204}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_acb07cb5a84748e3f8ed108a08252bf38}{01204}}\ \ \ \ \ def\ delete\_evalkey(self,\ evalKey:\ EvalKey):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01205}01205\ \ \ \ \ \ \ \ \ return\ self.delete\_evalkey\_by\_uid(evalKey.uid)}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01206}01206\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01207}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8fb4cfa3e65069055c4d6b35865dc292}{01207}}\ \ \ \ \ def\ delete\_evalkey\_by\_uid(self,\ uid:\ str):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01208}01208\ \ \ \ \ \ \ \ \ return\ self.cypher\_query(}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01209}01209\ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01210}01210\ \ \ \ \ \ \ \ \ \ \ \ \ MATCH\ (k:EvalKey)\ WHERE\ k.uid=\$uid}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01211}01211\ \ \ \ \ \ \ \ \ \ \ \ \ DETACH\ DELETE\ k"{}"{}"{},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01212}01212\ \ \ \ \ \ \ \ \ \ \ \ \ params=\{"{}uid"{}:\ uid\},}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01213}01213\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01214}01214\ }
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01215}\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aeac243ee20064493bb11dd5d8ba40260}{01215}}\ \ \ \ \ def\ delete\_all\_evalkeys(self):}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01216}01216\ \ \ \ \ \ \ \ \ for\ k\ in\ self.get\_all\_evalkeys():}
+\DoxyCodeLine{\Hypertarget{_knowledge_graph_8py_source_l01217}01217\ \ \ \ \ \ \ \ \ \ \ \ \ self.delete\_evalkey(k)}
+
+\end{DoxyCode}

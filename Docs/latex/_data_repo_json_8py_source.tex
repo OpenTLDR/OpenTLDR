@@ -1,0 +1,147 @@
+\doxysection{Data\+Repo\+Json.\+py}
+\hypertarget{_data_repo_json_8py_source}{}\label{_data_repo_json_8py_source}\index{/Users/chrisargenta/dev/opentldr/OpenTLDR-\/Core/src/opentldr/DataRepoJson.py@{/Users/chrisargenta/dev/opentldr/OpenTLDR-\/Core/src/opentldr/DataRepoJson.py}}
+\mbox{\hyperlink{_data_repo_json_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00001}\mbox{\hyperlink{namespaceopentldr_1_1_data_repo_json}{00001}}\ \textcolor{keyword}{from}\ .DataRepo\ \textcolor{keyword}{import}\ AbstractDataRepo}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00002}00002\ \textcolor{keyword}{from}\ .KnowledgeGraph\ \textcolor{keyword}{import}\ KnowledgeGraph}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00003}00003\ \textcolor{keyword}{from}\ .Domain\ \textcolor{keyword}{import}\ *}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00004}00004\ \textcolor{keyword}{from}\ .log\ \textcolor{keyword}{import}\ log}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00006}00006\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00007}00007\ \textcolor{keyword}{import}\ json}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00009}\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files}{00009}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files}{DataRepoJsonFiles}}(\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo}{AbstractDataRepo}}):}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00010}00010\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00011}00011\ \textcolor{stringliteral}{\ \ \ \ Reads\ a\ single\ .json\ text\ file\ from\ the\ path\ and\ populates\ the\ KG\ using\ it.}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00012}00012\ \textcolor{stringliteral}{\ \ \ \ This\ is\ a\ great\ way\ to\ export\ checkpoints\ for\ a\ KG\ and\ re-\/import\ them\ later.}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00013}00013\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00015}\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a0f3e7abcb2794eb9c0358017cb95a829}{00015}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a0f3e7abcb2794eb9c0358017cb95a829}{\_\_init\_\_}}(self,\ kg:KnowledgeGraph,\ filename:str):}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00016}\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files}{00016}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a09c4007af00cc06ec68ef288d7b87057}{kg}}=kg}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00017}\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a16714220a9cfaba876a5a269434529bd}{00017}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a16714220a9cfaba876a5a269434529bd}{filename}}\ =\ filename}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00018}00018\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_aeea0cbccf7c9f3805f101cdae9e68e88}{verify}}()}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00021}\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_aeea0cbccf7c9f3805f101cdae9e68e88}{00021}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_aeea0cbccf7c9f3805f101cdae9e68e88}{verify}}(self):}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00023}00023\ \ \ \ \ \ \ \ \ path\ =\ self.\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a16714220a9cfaba876a5a269434529bd}{filename}}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ ensure\ path\ points\ to\ a\ readable\ file}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.exists(path):}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError\ (\textcolor{stringliteral}{"{}Cannot\ reach\ path:\ \{path\}"{}}.format(path=path))}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00028}00028\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ os.path.isdir(path):}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError\ (\textcolor{stringliteral}{"{}Path\ (\{path\})\ is\ a\ directory,\ looking\ for\ a\ .json\ file."{}}.format(path=path))}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.access(path,os.R\_OK):}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(\textcolor{stringliteral}{"{}Cannot\ read\ file\ at\ \{path\}"{}}.format(path=path))}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00034}00034\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ open(path)\ \textcolor{keyword}{as}\ f:}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00036}\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_aff32dc91820910020d01c2e35c4ab7f0}{00036}}\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_aff32dc91820910020d01c2e35c4ab7f0}{data}}\ =\ json.load(f)}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00039}\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a96c199a2fee208c63728f85b402f7923}{00039}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a96c199a2fee208c63728f85b402f7923}{describe}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}JSON\ File\ (path\ =\ '\{path\}')"{}}.format(path=self.ingest\_path)\ \ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00043}\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a73d8b4bf1c42dae27227df50c7480d93}{00043}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a73d8b4bf1c42dae27227df50c7480d93}{importAll}}(self)\ -\/>\ dict:}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ out:dict=\{\}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00045}00045\ \ \ \ \ \ \ \ \ out.update(self.\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a8fb06d87b9b294d686f7f3aa299b3606}{importReferenceData}}())}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ out.update(self.\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a4093953daec63109274c524d900f7e20}{importActiveData}}())}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ out.update(self.\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a55ac91d847517ae1bb2b06fe3a54fdfe}{importRequestData}}())}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ out.update(self.\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_ac5ef37e07abf677c2610abf1c69599e8}{importFeedbackData}}())}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00049}00049\ \ \ \ \ \ \ \ \ out.update(self.\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a8de98bed94056d343c94b031a8924874}{importEvaluationData}}())}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ out}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00051}00051\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00053}\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a8fb06d87b9b294d686f7f3aa299b3606}{00053}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a8fb06d87b9b294d686f7f3aa299b3606}{importReferenceData}}(self)\ -\/>\ dict:}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Importing\ Reference\ Data\ from\ JSON\ File..."{}})}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ node\_look\_up:dict=\{\}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Import\ Reference\ Nodes}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ node\_uids:list[str]\ =\ []}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ref\_node\_json\ \textcolor{keywordflow}{in}\ self.\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_aff32dc91820910020d01c2e35c4ab7f0}{data}}[\textcolor{stringliteral}{'reference'}][\textcolor{stringliteral}{'nodes'}]:}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ ref\_node\ =\ ReferenceNode.from\_json(ref\_node\_json)}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ ref\_node.save()}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ node\_uids.append(ref\_node.uid)}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ node\_look\_up[ref\_node.uid]=ref\_node}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00064}00064\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Imported\ \{c\}\ Reference\ Nodes."{}}.format(len(node\_uids)))}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Import\ Reference\ Edges}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ edge\_uids:list[str]\ =\ []}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ref\_edge\_json\ \textcolor{keywordflow}{in}\ self.\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_aff32dc91820910020d01c2e35c4ab7f0}{data}}[\textcolor{stringliteral}{'reference'}][\textcolor{stringliteral}{'edges'}]:}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ ref\_edge\ =\ ReferenceEdge.from\_json(ref\_edge\_json)}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ TODO:\ set\ the\ to/from\ uids\ into\ neomodel\ object}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ ref\_edge.save()}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ edge\_uids.append(ref\_edge.uid)}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Imported\ \{c\}\ Reference\ Edges."{}}.format(len(edge\_uids)))}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\textcolor{stringliteral}{"{}ReferenceNodes"{}}:node\_uids,\ \textcolor{stringliteral}{"{}ReferenceEdges"{}}:edge\_uids\}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00076}00076\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00078}\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a55ac91d847517ae1bb2b06fe3a54fdfe}{00078}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a55ac91d847517ae1bb2b06fe3a54fdfe}{importRequestData}}(self)\ -\/>\ list[str]:}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Importing\ Requests\ from\ File\ System..."{}})}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ path\ =\ self.ingest\_path}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00082}00082\ \ \ \ \ \ \ \ \ alt\_path\ =\ os.path.join(self.ingest\_path,\textcolor{stringliteral}{"{}requests"{}})}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00083}00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ os.path.exists(alt\_path)\ \textcolor{keywordflow}{and}\ os.path.isdir(alt\_path)\ \textcolor{keywordflow}{and}\ os.access(alt\_path,os.R\_OK):}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Found\ data\ type\ directory\ in\ specified\ repo\ path."{}})}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ path=alt\_path}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00087}00087\ \ \ \ \ \ \ \ \ default\_source\_name\ =\ \textcolor{stringliteral}{"{}File\ System\ Directory:\{path\}"{}}.format(path=path)\ \ \ \ \ \ \textcolor{comment}{\#\ TODO:\ Never\ used.\ \ Delete.}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00088}00088\ \ \ \ \ \ \ \ \ list\_of\_uids\ =\ []}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ read\ in\ each\ text\ file\ from\ directory}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ filename\ \textcolor{keywordflow}{in}\ os.listdir(path):}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ ignore\ anything\ but\ files\ that\ end\ in\ .txt}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ os.path.splitext(filename)[1]\ !=\ \textcolor{stringliteral}{"{}.txt"{}}\ \textcolor{keywordflow}{or}\ \textcolor{keywordflow}{not}\ os.path.isfile(os.path.join(path,\ filename)):}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ full\_path=os.path.join(path,\ filename)}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ open(full\_path)\ \textcolor{keyword}{as}\ f:}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ text\ =\ f.read()}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ request=self.importTextRequest(kg=self.\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a09c4007af00cc06ec68ef288d7b87057}{kg}},\ text=text)\ \ \ \ \ \ \ \textcolor{comment}{\#\ TODO:\ importTextRequest\ never\ defined}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ list\_of\_uids.append(request.uid)}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Imported:\ \{data\}"{}}.format(data=request.to\_text()))}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ list\_of\_uids}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00106}\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a4093953daec63109274c524d900f7e20}{00106}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a4093953daec63109274c524d900f7e20}{importActiveData}}(self)\ -\/>\ list[str]:}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00107}00107\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Importing\ Active\ Data\ from\ File\ System..."{}})}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00108}00108\ \ \ \ \ \ \ \ \ path\ =\ self.ingest\_path}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00109}00109\ \ \ \ \ \ \ \ \ alt\_path\ =\ os.path.join(self.ingest\_path,\textcolor{stringliteral}{"{}active"{}})}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ os.path.exists(alt\_path)\ \textcolor{keywordflow}{and}\ os.path.isdir(alt\_path)\ \textcolor{keywordflow}{and}\ os.access(alt\_path,os.R\_OK):}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Found\ data\ type\ directory\ in\ specified\ repo\ path."{}})}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ path=alt\_path}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00113}00113\ \ \ \ \ \ \ \ \ default\_source\_name\ =\ \textcolor{stringliteral}{"{}File\ System\ Directory:\{path\}"{}}.format(path=path)}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00114}00114\ \ \ \ \ \ \ \ \ list\_of\_uids\ =\ []}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ read\ in\ each\ text\ file\ from\ directory}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00117}00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ filename\ \textcolor{keywordflow}{in}\ os.listdir(path):}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ full\_path=os.path.join(path,\ filename)}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ ignore\ anything\ but\ files\ that\ end\ in\ .txt}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ os.path.splitext(filename)[1]\ !=\ \textcolor{stringliteral}{"{}.txt"{}}\ \textcolor{keywordflow}{or}\ \textcolor{keywordflow}{not}\ os.path.isfile(full\_path):}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ open(full\_path)\ \textcolor{keyword}{as}\ f:}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ text\ =\ f.read()}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ url=\textcolor{stringliteral}{"{}file://\{path\}"{}}.format(path=os.path.abspath(full\_path))}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ content=self.importTextContent(kg=self.\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a09c4007af00cc06ec68ef288d7b87057}{kg}},\ text=text,\ url=url,\ default\_source\_name=default\_source\_name)\ \ \textcolor{comment}{\#\ TODO:\ importTextRequest\ never\ defined}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ list\_of\_uids.append(content.uid)}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Imported:\ \{data\}"{}}.format(data=content.to\_text()))}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ list\_of\_uids}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00132}00132\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00133}\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_ac5ef37e07abf677c2610abf1c69599e8}{00133}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_ac5ef37e07abf677c2610abf1c69599e8}{importFeedbackData}}(self)\ -\/>\ list[str]:}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00134}00134\ \ \ \ \ \ \ \ \ message:str\ =\ \textcolor{stringliteral}{"{}Importing\ MongoDB\ Feedback\ Data\ is\ not\ implemented\ yet."{}}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00135}00135\ \ \ \ \ \ \ \ \ log.error(message)}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00136}00136\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ NotImplementedError(message)}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00138}\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a8de98bed94056d343c94b031a8924874}{00138}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_data_repo_json_1_1_data_repo_json_files_a8de98bed94056d343c94b031a8924874}{importEvaluationData}}(self)\ -\/>\ list[str]:}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00139}00139\ \ \ \ \ \ \ \ \ message:str\ =\ \textcolor{stringliteral}{"{}Importing\ MongoDB\ Evaluation\ Data\ is\ not\ implemented\ yet."{}}}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00140}00140\ \ \ \ \ \ \ \ \ log.error(message)}
+\DoxyCodeLine{\Hypertarget{_data_repo_json_8py_source_l00141}00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ NotImplementedError(message)}
+
+\end{DoxyCode}

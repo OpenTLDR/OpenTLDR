@@ -1,0 +1,123 @@
+\doxysection{opentldr.\+File\+System\+Data\+Repo.\+File\+System\+Data\+Repo Class Reference}
+\hypertarget{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo}{}\label{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo}\index{opentldr.FileSystemDataRepo.FileSystemDataRepo@{opentldr.FileSystemDataRepo.FileSystemDataRepo}}
+Inheritance diagram for opentldr.\+File\+System\+Data\+Repo.\+File\+System\+Data\+Repo\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_a56be22a806b23c3a9bcab3e2bcebbd4b}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph}{Knowledge\+Graph}} \mbox{\hyperlink{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo}{kg}}, \mbox{\hyperlink{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_a146d29f39e78ad167250ee482ddf3df8}{ingest\+\_\+path}}="{}."{})
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_acf09c7a12f0d17086a769dd254d45f2e}{describe}} (self)
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_a2e000dce511ec416ea1809f98de76b81}{get\+All\+Files}} (cls, str current)
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_aba1040386a39ca8a7e337a798f961790}{import\+Data}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo}{opentldr.\+Abstract\+Data\+Repo.\+Abstract\+Data\+Repo}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a58575267f66a2a6df63d80b6e6f4af77}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph}{Knowledge\+Graph}} \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a09c4007af00cc06ec68ef288d7b87057}{kg}})
+\item 
+tuple\mbox{[}dict, str\mbox{]} \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a6c9e83c5886bf8d307a29ca90d98f381}{parse\+Annotated\+Text}} (cls, str text)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a31c8c8f102bc162cc834da77432acdca}{infer\+Domain\+Class}} (cls, str full\+\_\+path, dict annotations)
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a95df8e37ec34655b559b171fcb0b9de5}{clean\+\_\+up\+\_\+nodes}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a27cac12d765b07de2a9cd08764fb972e}{export\+Data}} (self, str path)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_a146d29f39e78ad167250ee482ddf3df8}{ingest\+\_\+path}} = ingest\+\_\+path
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_a08d874a2960172ce5b0ac6b97b3242db}{files}} = self.\+get\+All\+Files(\mbox{\hyperlink{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_a146d29f39e78ad167250ee482ddf3df8}{ingest\+\_\+path}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_af3e308cb65c04bb303e85d11e60a3967}{\+\_\+import\+By\+Class}} (self, dict raw, str clazz)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo}{opentldr.\+Abstract\+Data\+Repo.\+Abstract\+Data\+Repo}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph}{Knowledge\+Graph}} \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a09c4007af00cc06ec68ef288d7b87057}{kg}} = None
+\item 
+list \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a12774abeff90ed7f5ea66d0e18d9fb57}{import\+\_\+order}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Reads all the text files in the provided directory path. Creates a Source node for the directory and parses the text files.
+This extracts lines with property definitions (e.g., "date: 05/14/1960 08:00PM") and puts the rest into the text body.
+Creates a Content node, for each file and adds it to the knowledge graph.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_a56be22a806b23c3a9bcab3e2bcebbd4b}\index{opentldr.FileSystemDataRepo.FileSystemDataRepo@{opentldr.FileSystemDataRepo.FileSystemDataRepo}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!opentldr.FileSystemDataRepo.FileSystemDataRepo@{opentldr.FileSystemDataRepo.FileSystemDataRepo}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_a56be22a806b23c3a9bcab3e2bcebbd4b} 
+opentldr.\+File\+System\+Data\+Repo.\+File\+System\+Data\+Repo.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph}{Knowledge\+Graph}}}]{kg}{, }\item[{}]{ingest\+\_\+path}{ = {\ttfamily "{}."{}}}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_af3e308cb65c04bb303e85d11e60a3967}\index{opentldr.FileSystemDataRepo.FileSystemDataRepo@{opentldr.FileSystemDataRepo.FileSystemDataRepo}!\_importByClass@{\_importByClass}}
+\index{\_importByClass@{\_importByClass}!opentldr.FileSystemDataRepo.FileSystemDataRepo@{opentldr.FileSystemDataRepo.FileSystemDataRepo}}
+\doxysubsubsection{\texorpdfstring{\_importByClass()}{\_importByClass()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_af3e308cb65c04bb303e85d11e60a3967} 
+ list\mbox{[}str\mbox{]} opentldr.\+File\+System\+Data\+Repo.\+File\+System\+Data\+Repo.\+\_\+import\+By\+Class (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{dict}]{raw}{, }\item[{str}]{clazz}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_acf09c7a12f0d17086a769dd254d45f2e}\index{opentldr.FileSystemDataRepo.FileSystemDataRepo@{opentldr.FileSystemDataRepo.FileSystemDataRepo}!describe@{describe}}
+\index{describe@{describe}!opentldr.FileSystemDataRepo.FileSystemDataRepo@{opentldr.FileSystemDataRepo.FileSystemDataRepo}}
+\doxysubsubsection{\texorpdfstring{describe()}{describe()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_acf09c7a12f0d17086a769dd254d45f2e} 
+ str opentldr.\+File\+System\+Data\+Repo.\+File\+System\+Data\+Repo.\+describe (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_adb84f6e0d4b532656f84bb63c3771d2f}{opentldr.\+Abstract\+Data\+Repo.\+Abstract\+Data\+Repo}}.
+
+\Hypertarget{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_a2e000dce511ec416ea1809f98de76b81}\index{opentldr.FileSystemDataRepo.FileSystemDataRepo@{opentldr.FileSystemDataRepo.FileSystemDataRepo}!getAllFiles@{getAllFiles}}
+\index{getAllFiles@{getAllFiles}!opentldr.FileSystemDataRepo.FileSystemDataRepo@{opentldr.FileSystemDataRepo.FileSystemDataRepo}}
+\doxysubsubsection{\texorpdfstring{getAllFiles()}{getAllFiles()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_a2e000dce511ec416ea1809f98de76b81} 
+ list\mbox{[}str\mbox{]} opentldr.\+File\+System\+Data\+Repo.\+File\+System\+Data\+Repo.\+get\+All\+Files (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{str}]{current}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_aba1040386a39ca8a7e337a798f961790}\index{opentldr.FileSystemDataRepo.FileSystemDataRepo@{opentldr.FileSystemDataRepo.FileSystemDataRepo}!importData@{importData}}
+\index{importData@{importData}!opentldr.FileSystemDataRepo.FileSystemDataRepo@{opentldr.FileSystemDataRepo.FileSystemDataRepo}}
+\doxysubsubsection{\texorpdfstring{importData()}{importData()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_aba1040386a39ca8a7e337a798f961790} 
+ list\mbox{[}str\mbox{]} opentldr.\+File\+System\+Data\+Repo.\+File\+System\+Data\+Repo.\+import\+Data (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_ae5dacc8cba09f1c297a8b5525e1c78ac}{opentldr.\+Abstract\+Data\+Repo.\+Abstract\+Data\+Repo}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_a08d874a2960172ce5b0ac6b97b3242db}\index{opentldr.FileSystemDataRepo.FileSystemDataRepo@{opentldr.FileSystemDataRepo.FileSystemDataRepo}!files@{files}}
+\index{files@{files}!opentldr.FileSystemDataRepo.FileSystemDataRepo@{opentldr.FileSystemDataRepo.FileSystemDataRepo}}
+\doxysubsubsection{\texorpdfstring{files}{files}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_a08d874a2960172ce5b0ac6b97b3242db} 
+list\mbox{[}str\mbox{]} opentldr.\+File\+System\+Data\+Repo.\+File\+System\+Data\+Repo.\+files = self.\+get\+All\+Files(\mbox{\hyperlink{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_a146d29f39e78ad167250ee482ddf3df8}{ingest\+\_\+path}})}
+
+\Hypertarget{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_a146d29f39e78ad167250ee482ddf3df8}\index{opentldr.FileSystemDataRepo.FileSystemDataRepo@{opentldr.FileSystemDataRepo.FileSystemDataRepo}!ingest\_path@{ingest\_path}}
+\index{ingest\_path@{ingest\_path}!opentldr.FileSystemDataRepo.FileSystemDataRepo@{opentldr.FileSystemDataRepo.FileSystemDataRepo}}
+\doxysubsubsection{\texorpdfstring{ingest\_path}{ingest\_path}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_file_system_data_repo_1_1_file_system_data_repo_a146d29f39e78ad167250ee482ddf3df8} 
+opentldr.\+File\+System\+Data\+Repo.\+File\+System\+Data\+Repo.\+ingest\+\_\+path = ingest\+\_\+path}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/chrisargenta/dev/opentldr/\+Open\+TLDR-\/\+Core/src/opentldr/\mbox{\hyperlink{_file_system_data_repo_8py}{File\+System\+Data\+Repo.\+py}}\end{DoxyCompactItemize}

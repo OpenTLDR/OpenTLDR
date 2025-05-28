@@ -1,0 +1,104 @@
+\doxysection{opentldr.\+Domain.\+Feedback Class Reference}
+\hypertarget{classopentldr_1_1_domain_1_1_feedback}{}\label{classopentldr_1_1_domain_1_1_feedback}\index{opentldr.Domain.Feedback@{opentldr.Domain.Feedback}}
+Inheritance diagram for opentldr.\+Domain.\+Feedback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.407035cm]{classopentldr_1_1_domain_1_1_feedback}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_afcc51bab6374c2fa4da8660cb321434b}{to\+\_\+text}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{opentldr.\+Domain.\+Open\+Tldr\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a9cf13c000011b62caba715caab59f46b}{from\+\_\+json}} (cls, kg, json\+\_\+string)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3beee20100161b1a421cefb6cb531df2}{to\+\_\+json}} (self, kg)
+\item 
+dict \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3ffd43dde7e5d2f3d736c7141109b855}{to\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a188adbb74405c1735fd06be87f58463c}{from\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored}{opentldr.\+Domain.\+Scored}}}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_af1eecb0e7a0e24f34a64166700a382e5}{score\+\_\+to\+\_\+text}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_a5ed1c3c5d072909fc6017624a0fa2814}{click\+\_\+date}} = nm.\+Date\+Property(required=False)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_a9f415cee16b10f66390ce688d9a4e0c9}{about\+\_\+entry}} = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{Tldr\+Entry}}, \textquotesingle{}ABOUT\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_for_entry}{Feedback\+For\+Entry}}, cardinality=One)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_a773d86dcce4b95cbc0ce49b7d09ccf60}{from\+\_\+request}} = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}, \textquotesingle{}FROM\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_for_request}{Feedback\+For\+Request}}, cardinality=One)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a614bf6f289697675be10cfa8cdd0fb4e}{uid}} = nm.\+Unique\+Id\+Property()
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_afdffc0ebdaf1f8f87441d3db2d793d02}{metadata}} = nm.\+JSONProperty()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored}{opentldr.\+Domain.\+Scored}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_ab2fd1f45213ddb72c96c19f77c6ddf77}{score}} = nm.\+Float\+Property(default=-\/1.\+0)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Feedback relates events back to a Request node to TldrEntry node to provide a method for
+storing events (for example giving it stars or logging accessing the source article)
+
+Feedback score ("score" property is float with expected range of 0.0 - 1.0) indicating
+how relevant that entry is with respect to the request. These edges are generally created
+by the UI when the user rates an entry (e.g., clicking on a star rating).
+
+Feedback clicked ("clicked" property is a date) indicates when the last time the source
+link for the TLDR entry was clicked by the user.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_feedback_afcc51bab6374c2fa4da8660cb321434b}\index{opentldr.Domain.Feedback@{opentldr.Domain.Feedback}!to\_text@{to\_text}}
+\index{to\_text@{to\_text}!opentldr.Domain.Feedback@{opentldr.Domain.Feedback}}
+\doxysubsubsection{\texorpdfstring{to\_text()}{to\_text()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_feedback_afcc51bab6374c2fa4da8660cb321434b} 
+ str opentldr.\+Domain.\+Feedback.\+to\+\_\+text (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}to_text() returns a unique, user readable string representing the object.
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a82fb039f0c98cff4893a796e230572b5}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_feedback_a9f415cee16b10f66390ce688d9a4e0c9}\index{opentldr.Domain.Feedback@{opentldr.Domain.Feedback}!about\_entry@{about\_entry}}
+\index{about\_entry@{about\_entry}!opentldr.Domain.Feedback@{opentldr.Domain.Feedback}}
+\doxysubsubsection{\texorpdfstring{about\_entry}{about\_entry}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_feedback_a9f415cee16b10f66390ce688d9a4e0c9} 
+opentldr.\+Domain.\+Feedback.\+about\+\_\+entry = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{Tldr\+Entry}}, \textquotesingle{}ABOUT\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_for_entry}{Feedback\+For\+Entry}}, cardinality=One)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_feedback_a5ed1c3c5d072909fc6017624a0fa2814}\index{opentldr.Domain.Feedback@{opentldr.Domain.Feedback}!click\_date@{click\_date}}
+\index{click\_date@{click\_date}!opentldr.Domain.Feedback@{opentldr.Domain.Feedback}}
+\doxysubsubsection{\texorpdfstring{click\_date}{click\_date}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_feedback_a5ed1c3c5d072909fc6017624a0fa2814} 
+opentldr.\+Domain.\+Feedback.\+click\+\_\+date = nm.\+Date\+Property(required=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_feedback_a773d86dcce4b95cbc0ce49b7d09ccf60}\index{opentldr.Domain.Feedback@{opentldr.Domain.Feedback}!from\_request@{from\_request}}
+\index{from\_request@{from\_request}!opentldr.Domain.Feedback@{opentldr.Domain.Feedback}}
+\doxysubsubsection{\texorpdfstring{from\_request}{from\_request}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_feedback_a773d86dcce4b95cbc0ce49b7d09ccf60} 
+opentldr.\+Domain.\+Feedback.\+from\+\_\+request = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}, \textquotesingle{}FROM\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_for_request}{Feedback\+For\+Request}}, cardinality=One)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/chrisargenta/dev/opentldr/\+Open\+TLDR-\/\+Core/src/opentldr/\mbox{\hyperlink{_domain_8py}{Domain.\+py}}\end{DoxyCompactItemize}

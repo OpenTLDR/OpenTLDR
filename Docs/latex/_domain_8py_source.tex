@@ -1,0 +1,781 @@
+\doxysection{Domain.\+py}
+\hypertarget{_domain_8py_source}{}\label{_domain_8py_source}\index{/Users/chrisargenta/dev/opentldr/OpenTLDR-\/Core/src/opentldr/Domain.py@{/Users/chrisargenta/dev/opentldr/OpenTLDR-\/Core/src/opentldr/Domain.py}}
+\mbox{\hyperlink{_domain_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00001}\mbox{\hyperlink{namespaceopentldr_1_1_domain}{00001}}\ \textcolor{keyword}{import}\ json}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00002}00002\ \textcolor{keyword}{from}\ abc\ \textcolor{keyword}{import}\ ABC,\ abstractmethod\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00003}00003\ \textcolor{keyword}{from}\ datetime\ \textcolor{keyword}{import}\ datetime,date}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00005}00005\ \textcolor{comment}{\#\ All\ of\ the\ OpenTLDR\ Domain\ classes\ build\ on\ Neomodel\ as\ an\ OGM\ for\ Neo4j}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00006}00006\ \textcolor{keyword}{import}\ neomodel\ \textcolor{keyword}{as}\ nm}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00008}00008\ \textcolor{comment}{\#\ Note\ change\ in\ NeoModel\ 5.3.0}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00009}00009\ \textcolor{comment}{\#\ from\ neomodel.cardinality\ import\ One,\ ZeroOrOne,\ ZeroOrMore,\ OneOrMore}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00010}00010\ \textcolor{keyword}{from}\ neomodel.sync\_.cardinality\ \textcolor{keyword}{import}\ One,\ ZeroOrOne,\ ZeroOrMore,\ OneOrMore}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00012}00012\ \textcolor{keyword}{from}\ .log\ \textcolor{keyword}{import}\ log}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00014}\mbox{\hyperlink{namespaceopentldr_1_1_domain_ab4e9a86c730cf640121c8267bc7bb1cf}{00014}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespaceopentldr_1_1_domain_ab4e9a86c730cf640121c8267bc7bb1cf}{jsonToKg}}(kg,json\_string):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00015}00015\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00016}00016\ \textcolor{stringliteral}{\ \ \ \ Hydrate\ a\ json\ string\ to\ a\ Domain\ object.\ This\ requires\ the\ "{}class"{}\ attribute\ to}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00017}00017\ \textcolor{stringliteral}{\ \ \ \ determine\ the\ correct\ class\ type,\ so\ it\ only\ works\ on\ these\ classes.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00018}00018\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00019}00019\ \ \ \ \ raw\ =\ json.loads(json)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00020}00020\ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Ingesting\ JSON\ into\ an\ OpenTLDR\ Domain\ object\ and\ then\ the\ KG."{}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00021}00021\ \ \ \ \ print(\textcolor{stringliteral}{"{}JSON:\ "{}},raw)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00022}00022\ \ \ \ \ \textcolor{keywordflow}{if}\ isinstance(raw,list):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ item\ \textcolor{keywordflow}{in}\ raw:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceopentldr_1_1_domain_a7bc326bfc78e3724d518cd3ec1e6d9e4}{dictToKg}}(kg,item)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00025}00025\ \ \ \ \ \textcolor{keywordflow}{elif}\ isinstance(raw,dict):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00026}00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceopentldr_1_1_domain_a7bc326bfc78e3724d518cd3ec1e6d9e4}{dictToKg}}(kg,raw)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00027}00027\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00029}\mbox{\hyperlink{namespaceopentldr_1_1_domain_a7bc326bfc78e3724d518cd3ec1e6d9e4}{00029}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespaceopentldr_1_1_domain_a7bc326bfc78e3724d518cd3ec1e6d9e4}{dictToKg}}(kg,data:dict):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00031}00031\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}class"{}}\ \textcolor{keywordflow}{in}\ data:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ clazz\ =\ data[\textcolor{stringliteral}{"{}class"{}}]}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ data.pop(\textcolor{stringliteral}{"{}class"{}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00034}00034\ \ \ \ \ \ \ \ \ obj=\ globals()[clazz].from\_json(kg,json.dumps(data))}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ obj}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00036}00036\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ TypeError(\textcolor{stringliteral}{"{}Cannot\ detect\ a\ class\ specification\ in\ this\ data.\ Unable\ to\ instantiate\ object."{}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00040}\mbox{\hyperlink{namespaceopentldr_1_1_domain_af5958fd9eb7afd7ceaaa90cacf0ee7e3}{00040}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespaceopentldr_1_1_domain_af5958fd9eb7afd7ceaaa90cacf0ee7e3}{inferDateFormat}}(date\_string:str)\ -\/>\ date:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00041}00041\ \ \ \ \ formats=[\textcolor{stringliteral}{'\%m/\%d/\%y'},\ \textcolor{stringliteral}{'\%m/\%d/\%Y'},\ \textcolor{stringliteral}{'\%m-\/\%d-\/\%y'},\ \textcolor{stringliteral}{'\%m-\/\%d-\/\%Y'},\ \textcolor{stringliteral}{'\%Y-\/\%m-\/\%d'}]}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00042}00042\ \ \ \ \ d:date\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{for}\ f\ \textcolor{keywordflow}{in}\ formats:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ d=datetime.strptime(date\_string,f)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ d}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{pass}\ \textcolor{comment}{\#\ try\ try\ again}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00049}00049\ \ \ \ \ \textcolor{comment}{\#\ give\ up\ with\ a\ nicely\ formatted\ date,\ even\ if\ wrong}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00050}00050\ \ \ \ \ log.error(\textcolor{stringliteral}{"{}Unable\ to\ parse\ date\ out\ of\ '\{date\}'.\ \ Returning\ now."{}}.format(date=date))}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00051}00051\ \ \ \ \ \textcolor{keywordflow}{return}\ datetime.now()\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00054}00054\ \textcolor{comment}{\#\ UTILITY\ MIX-\/IN\ CLASSES}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00056}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{00056}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}}():}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00057}00057\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00058}00058\ \textcolor{stringliteral}{\ \ \ \ OpenTldrMeta\ is\ a\ mixin\ class\ that\ adds\ a\ unique\ id\ (uid)\ and\ JSON\ property\ (metadata)}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00059}00059\ \textcolor{stringliteral}{\ \ \ \ to\ a\ Node\ or\ Edge.\ This\ is\ used\ in\ every\ Edge\ and\ Node\ in\ OpenTLDR\ and\ provides\ an}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00060}00060\ \textcolor{stringliteral}{\ \ \ \ interface\ for\ PyDantic\ for\ data\ manipulation\ and\ JSON.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00061}00061\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00062}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a614bf6f289697675be10cfa8cdd0fb4e}{00062}}\ \ \ \ \ uid=nm.UniqueIdProperty()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00063}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_afdffc0ebdaf1f8f87441d3db2d793d02}{00063}}\ \ \ \ \ metadata=nm.JSONProperty()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00064}00064\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00065}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a82fb039f0c98cff4893a796e230572b5}{00065}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a82fb039f0c98cff4893a796e230572b5}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00067}00067\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ to\_text()\ returns\ a\ unique,\ user\ readable\ string\ representing\ the\ object.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00068}00068\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}uid:\ \{uid\}"{}}.format(uid=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a614bf6f289697675be10cfa8cdd0fb4e}{uid}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00072}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{00072}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{OpenTldrNode}}():}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00073}00073\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00074}00074\ \textcolor{stringliteral}{\ \ \ \ OpenTldrNode\ is\ mixed\ in\ to\ each\ node\ class\ to\ support\ json\ import/export.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00075}00075\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00076}00076\ \ \ \ \ \textcolor{preprocessor}{@classmethod}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00077}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a9cf13c000011b62caba715caab59f46b}{00077}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a9cf13c000011b62caba715caab59f46b}{from\_json}}(cls,\ kg,\ json\_string):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ json\_dict=json.loads(json\_string)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}class"{}}\ \textcolor{keywordflow}{in}\ json\_dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ json\_dict.pop(\textcolor{stringliteral}{"{}class"{}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}date"{}}\ \textcolor{keywordflow}{in}\ json\_dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ json\_dict[\textcolor{stringliteral}{"{}date"{}}]=\mbox{\hyperlink{namespaceopentldr_1_1_domain_af5958fd9eb7afd7ceaaa90cacf0ee7e3}{inferDateFormat}}(json\_dict[\textcolor{stringliteral}{"{}date"{}}])}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00083}00083\ \ \ \ \ \ \ \ \ node\ =\ cls(**json\_dict)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00084}00084\ \ \ \ \ \ \ \ \ node.from\_json\_connect(kg,\ json\_dict)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00085}00085\ \ \ \ \ \ \ \ \ node.save()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ node}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00087}00087\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00088}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3beee20100161b1a421cefb6cb531df2}{00088}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3beee20100161b1a421cefb6cb531df2}{to\_json}}(self,kg)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00089}00089\ \ \ \ \ \ \ \ \ data\ =\ self.\_\_properties\_\_.copy()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}date"{}}\ \textcolor{keywordflow}{in}\ data:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ data[\textcolor{stringliteral}{"{}date"{}}]=data[\textcolor{stringliteral}{"{}date"{}}].strftime(\textcolor{stringliteral}{"{}\%m/\%d/\%Y"{}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00092}00092\ \ \ \ \ \ \ \ \ data[\textcolor{stringliteral}{"{}class"{}}]=type(self).\_\_name\_\_}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}element\_id\_property"{}}\ \textcolor{keywordflow}{in}\ data:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ data.pop(\textcolor{stringliteral}{"{}element\_id\_property"{}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00095}00095\ \ \ \ \ \ \ \ \ connection\ =\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3ffd43dde7e5d2f3d736c7141109b855}{to\_json\_connect}}(kg,\ data)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ connection\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ data.update(connection)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ json.dumps(data)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00100}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3ffd43dde7e5d2f3d736c7141109b855}{00100}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3ffd43dde7e5d2f3d736c7141109b855}{to\_json\_connect}}(self,\ kg,\ json\_dict)\ -\/>\ dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00102}00102\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Override\ to\_json\_connect\ to\ insert\ edge\ data\ into\ the\ node.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00103}00103\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00106}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a188adbb74405c1735fd06be87f58463c}{00106}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a188adbb74405c1735fd06be87f58463c}{from\_json\_connect}}(self,\ kg,\ json\_dict):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00108}00108\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Override\ from\_json\_connect\ to\ rebuild\ edge\ data\ from\ serialized\ node.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00109}00109\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00114}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{00114}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{OpenTldrEdge}}():}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00115}00115\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00116}00116\ \textcolor{stringliteral}{\ \ \ \ OpenTldrEdge\ is\ mixed\ in\ to\ each\ edge\ class\ to\ support\ json\ import/export}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00117}00117\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00119}00119\ \ \ \ \ \textcolor{preprocessor}{@abstractmethod}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00120}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge_a14588dfcdbd4535136643ec61890e056}{00120}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge_a14588dfcdbd4535136643ec61890e056}{get\_connection\_json}}(cls)\ -\/>\ dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00121}00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00123}00123\ \ \ \ \ \textcolor{preprocessor}{@classmethod}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00124}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge_af63bc124b01202363a7f8882041ff10c}{00124}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge_af63bc124b01202363a7f8882041ff10c}{from\_json}}(cls,\ kg,\ json\_string):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00125}00125\ \ \ \ \ \ \ \ \ json\_dict=json.loads(json\_string)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00126}00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}class"{}}\ \textcolor{keywordflow}{in}\ json\_dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ json\_dict.pop(\textcolor{stringliteral}{"{}class"{}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00128}00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}date"{}}\ \textcolor{keywordflow}{in}\ json\_dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ json\_dict[\textcolor{stringliteral}{"{}date"{}}]=\mbox{\hyperlink{namespaceopentldr_1_1_domain_af5958fd9eb7afd7ceaaa90cacf0ee7e3}{inferDateFormat}}(json\_dict[\textcolor{stringliteral}{"{}date"{}}])}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00130}00130\ \ \ \ \ \ \ \ \ node\ =\ cls(**json\_dict)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00131}00131\ \ \ \ \ \ \ \ \ node.from\_json\_connect(kg,\ json\_dict)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00132}00132\ \ \ \ \ \ \ \ \ node.save()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ node}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00134}00134\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00135}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge_ae3b2a62d3fdaf22d60d15f39de100acd}{00135}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge_ae3b2a62d3fdaf22d60d15f39de100acd}{to\_json}}(self,kg)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00136}00136\ \ \ \ \ \ \ \ \ data\ =\ self.\_\_properties\_\_.copy()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}date"{}}\ \textcolor{keywordflow}{in}\ data:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ data[\textcolor{stringliteral}{"{}date"{}}]=data[\textcolor{stringliteral}{"{}date"{}}].strftime(\textcolor{stringliteral}{"{}\%m/\%d/\%Y"{}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00139}00139\ \ \ \ \ \ \ \ \ data[\textcolor{stringliteral}{"{}class"{}}]=type(self).\_\_name\_\_}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00140}00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}element\_id\_property"{}}\ \textcolor{keywordflow}{in}\ data:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ data.pop(\textcolor{stringliteral}{"{}element\_id\_property"{}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00142}00142\ \ \ \ \ \ \ \ \ connection\ =\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge_a5eed3f7b4570187643a86936f3fb2de9}{to\_json\_connect}}(kg,\ data)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00143}00143\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ connection\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ data.update(connection)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00145}00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ json.dumps(data)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00147}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge_a5eed3f7b4570187643a86936f3fb2de9}{00147}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge_a5eed3f7b4570187643a86936f3fb2de9}{to\_json\_connect}}(self,\ kg,\ json\_dict)\ -\/>\ dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00148}00148\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00149}00149\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Override\ to\_json\_connect\ to\ insert\ edge\ data\ into\ the\ node.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00150}00150\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00151}00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00154}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge_a1f64a6a77833f9bdb3dd123aa7388bea}{00154}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge_a1f64a6a77833f9bdb3dd123aa7388bea}{from\_json\_connect}}(self,\ kg,\ json\_dict):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00155}00155\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00156}00156\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Override\ from\_json\_connect\ to\ rebuild\ edge\ data\ from\ serialized\ node.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00157}00157\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00158}00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00161}00161\ \ \ \ \ \textcolor{preprocessor}{@classmethod}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00162}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge_af63bc124b01202363a7f8882041ff10c}{00162}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge_af63bc124b01202363a7f8882041ff10c}{from\_json}}(cls,\ kg,\ json\_string):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00163}00163\ \ \ \ \ \ \ \ \ json\_dict=json.loads(json\_string)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00164}00164\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}connection"{}}\ \textcolor{keywordflow}{in}\ json\_dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ connection=json\_dict[\textcolor{stringliteral}{"{}connection"{}}]}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ from\_node=kg.get\_by\_uid(connection[\textcolor{stringliteral}{"{}start"{}}])}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#print("{}FROM:\ \{type\}\(\backslash\)t\{uid\}\(\backslash\)t\{desc\}"{}.format(type=type(from\_node),uid=from\_node.uid,desc=from\_node.to\_text()))}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ to\_node=kg.get\_by\_uid(connection[\textcolor{stringliteral}{"{}end"{}}])}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#print("{}to:\ \{type\}\(\backslash\)t\{uid\}\(\backslash\)t\{desc\}"{}.format(type=type(to\_node),uid=to\_node.uid,desc=to\_node.to\_text()))}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ rel=getattr(from\_node,connection[\textcolor{stringliteral}{"{}relation"{}}])}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}class"{}}\ \textcolor{keywordflow}{in}\ json\_dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ json\_dict.pop(\textcolor{stringliteral}{"{}class"{}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ json\_dict.pop(\textcolor{stringliteral}{"{}connection"{}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ edge=\ rel.connect(to\_node,json\_dict)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ edge.save()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ edge}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00180}00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ TypeError(\textcolor{stringliteral}{"{}OpenTldrEdge\ requires\ connection\ data\ stored\ in\ json."{}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00183}00183\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00184}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge_ae3b2a62d3fdaf22d60d15f39de100acd}{00184}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge_ae3b2a62d3fdaf22d60d15f39de100acd}{to\_json}}(self,kg)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00185}00185\ \ \ \ \ \ \ \ \ data\ =\ self.\_\_properties\_\_.copy()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00186}00186\ \ \ \ \ \ \ \ \ data[\textcolor{stringliteral}{"{}class"{}}]=type(self).\_\_name\_\_}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00187}00187\ \ \ \ \ \ \ \ \ data[\textcolor{stringliteral}{"{}connection"{}}]=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge_a14588dfcdbd4535136643ec61890e056}{get\_connection\_json}}()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00188}00188\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}element\_id\_property"{}}\ \textcolor{keywordflow}{in}\ data:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ data.pop(\textcolor{stringliteral}{"{}element\_id\_property"{}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00190}00190\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ json.dumps(data)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00193}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text}{00193}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text}{OpenTldrText}}():}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00194}00194\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00195}00195\ \textcolor{stringliteral}{\ \ \ \ OpenTldrText\ is\ a\ mixin\ class\ that\ adds\ the\ properties\ of\ text\ and\ type\ (both\ are\ Strings)}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00196}00196\ \textcolor{stringliteral}{\ \ \ \ to\ any\ Node\ or\ Edge.\ This\ is\ used\ whenever\ the\ client\ stores\ text\ in\ the\ knowledge\ graph.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00197}00197\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00198}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text_a7d1c303e41d0ca88b67a61609306e8e6}{00198}}\ \ \ \ \ text\ =\ nm.StringProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00199}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text_a0e1285b9de9d44ceac3f79976d722e7e}{00199}}\ \ \ \ \ type\ =\ nm.StringProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00201}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text_a1a862c1ef704321dcebb82a8cdfa7842}{00201}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text_a1a862c1ef704321dcebb82a8cdfa7842}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00202}00202\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}type:\ \{type\}\(\backslash\)t\ text:\ \{text\}"{}}.format(type=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text_a0e1285b9de9d44ceac3f79976d722e7e}{type}},text=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text_a7d1c303e41d0ca88b67a61609306e8e6}{text}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00205}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_citable_node}{00205}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_citable_node}{CitableNode}}(nm.StructuredNode):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00206}00206\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00207}00207\ \textcolor{stringliteral}{\ \ \ \ CitableNode\ is\ a\ baseclass\ for\ any\ Node\ from\ which\ we\ extract\ entities\ (e.g.,\ NER),}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00208}00208\ \textcolor{stringliteral}{\ \ \ \ we\ can\ add\ a\ topic\ embedding,\ and\ we\ need\ to\ refer\ back\ to\ the\ Node\ from\ where\ they\ were\ detected.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00209}00209\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00210}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_citable_node_ad82412657787fb2637c97e631dce1448}{00210}}\ \ \ \ \ embedding\ =\ nm.ArrayProperty(required=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00211}00211\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00212}00212\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00213}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain}{00213}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain}{Uncertain}}():}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00214}00214\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00215}00215\ \textcolor{stringliteral}{\ \ \ \ Uncertain\ is\ a\ mixin\ class\ that\ adds\ a\ confidence\ value\ (0.0-\/1.0)\ to\ a\ Node\ or\ Edge.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00216}00216\ \textcolor{stringliteral}{\ \ \ \ This\ is\ implemented\ to\ store\ the\ float\ value\ and\ generate\ description\ qualitative}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00217}00217\ \textcolor{stringliteral}{\ \ \ \ text\ clauses\ for\ the\ ranges\ of\ this\ confidence\ value.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00218}00218\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00219}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain_aa072bcd0a31d0e76108a97a05ecbd7ea}{00219}}\ \ \ \ \ confidence\ =\ nm.FloatProperty(default=1.0)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00220}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain_a0ebed19ca2b9ea0bbae3f724f36b79c2}{00220}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain_a0ebed19ca2b9ea0bbae3f724f36b79c2}{uncertainty\_to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00221}00221\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain_aa072bcd0a31d0e76108a97a05ecbd7ea}{confidence}}\ <\ 0.05:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}with\ almost\ no\ chance"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00223}00223\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain_aa072bcd0a31d0e76108a97a05ecbd7ea}{confidence}}\ >=\ 0.05\ \textcolor{keywordflow}{and}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain_aa072bcd0a31d0e76108a97a05ecbd7ea}{confidence}}\ <\ 0.20:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}very\ unlikely"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00225}00225\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain_aa072bcd0a31d0e76108a97a05ecbd7ea}{confidence}}\ >=\ 0.2\ \textcolor{keywordflow}{and}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain_aa072bcd0a31d0e76108a97a05ecbd7ea}{confidence}}\ <\ 0.45:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}unlikely"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00227}00227\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain_aa072bcd0a31d0e76108a97a05ecbd7ea}{confidence}}\ >=\ 0.45\ \textcolor{keywordflow}{and}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain_aa072bcd0a31d0e76108a97a05ecbd7ea}{confidence}}\ <\ 0.55:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}with\ roughly\ even\ chance"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00229}00229\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain_aa072bcd0a31d0e76108a97a05ecbd7ea}{confidence}}\ >=\ 0.55\ \textcolor{keywordflow}{and}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain_aa072bcd0a31d0e76108a97a05ecbd7ea}{confidence}}\ <\ 0.8:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}likely"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00231}00231\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain_aa072bcd0a31d0e76108a97a05ecbd7ea}{confidence}}\ >=\ 0.8\ \textcolor{keywordflow}{and}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain_aa072bcd0a31d0e76108a97a05ecbd7ea}{confidence}}\ <\ 0.95:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}very\ likely"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00233}00233\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain_aa072bcd0a31d0e76108a97a05ecbd7ea}{confidence}}\ >=\ 0.55\ \textcolor{keywordflow}{and}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain_aa072bcd0a31d0e76108a97a05ecbd7ea}{confidence}}\ <\ 1.0:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}with\ almost\ certainty"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00235}00235\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}with\ certainty"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00237}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored}{00237}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored}{Scored}}():}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00238}00238\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00239}00239\ \textcolor{stringliteral}{\ \ \ \ Scored\ is\ a\ mixin\ class\ that\ adds\ a\ score\ value\ (0.0-\/1.0)\ to\ a\ Node\ or\ Edge.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00240}00240\ \textcolor{stringliteral}{\ \ \ \ This\ is\ implemented\ to\ store\ the\ float\ value\ and\ generate\ descriptive\ qualitative}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00241}00241\ \textcolor{stringliteral}{\ \ \ \ text\ clauses\ for\ the\ ranges\ of\ this\ score\ value.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00242}00242\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00243}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_ab2fd1f45213ddb72c96c19f77c6ddf77}{00243}}\ \ \ \ \ score\ =\ nm.FloatProperty(default=-\/1.0)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00244}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_af1eecb0e7a0e24f34a64166700a382e5}{00244}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_af1eecb0e7a0e24f34a64166700a382e5}{score\_to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00245}00245\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_ab2fd1f45213ddb72c96c19f77c6ddf77}{score}}\ <\ 0.0:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}unknown"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00247}00247\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_ab2fd1f45213ddb72c96c19f77c6ddf77}{score}}\ <\ 0.15:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}very\ low"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00249}00249\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_ab2fd1f45213ddb72c96c19f77c6ddf77}{score}}\ >=\ 0.15\ \textcolor{keywordflow}{and}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_ab2fd1f45213ddb72c96c19f77c6ddf77}{score}}\ <\ 0.40:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}low"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00251}00251\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_ab2fd1f45213ddb72c96c19f77c6ddf77}{score}}\ >=\ 0.4\ \textcolor{keywordflow}{and}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_ab2fd1f45213ddb72c96c19f77c6ddf77}{score}}\ <\ 0.6:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}medium"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00253}00253\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_ab2fd1f45213ddb72c96c19f77c6ddf77}{score}}\ >=\ 0.6\ \textcolor{keywordflow}{and}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_ab2fd1f45213ddb72c96c19f77c6ddf77}{score}}\ <\ 0.85:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}high"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00255}00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_ab2fd1f45213ddb72c96c19f77c6ddf77}{score}}\ >=\ 0.85\ \textcolor{keywordflow}{and}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_ab2fd1f45213ddb72c96c19f77c6ddf77}{score}}\ <\ 1.0:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}very\ high"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00257}00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}perfect"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00258}00258\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00259}00259\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00261}00261\ \textcolor{comment}{\#\ REFERENCE\ KNOWLEDGE}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00262}00262\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00263}00263\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00264}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{00264}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{ReferenceEdge}}(nm.StructuredRel,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text}{OpenTldrText}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{OpenTldrEdge}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00265}00265\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00266}00266\ \textcolor{stringliteral}{\ \ \ \ ReferenceEdge\ allows\ for\ general\ reference\ data\ relationships\ to\ be\ introduced\ into\ the\ }}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00267}00267\ \textcolor{stringliteral}{\ \ \ \ knowledge\ graph\ and\ used\ abstractly\ (e.g.,\ ontological\ distance\ using\ path\ finding).}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00268}00268\ \textcolor{stringliteral}{\ \ \ \ This\ uses\ the\ OpenTldrText\ mixin\ to\ implement\ text\ and\ type\ properties.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00269}00269\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00270}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge_a3bee83453344c70b86b8cc4c7e845db7}{00270}}\ \ \ \ \ hypothesized\ =\ nm.BooleanProperty(default=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00271}00271\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00272}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge_a877aedfc9868ac7028da82e3ea991249}{00272}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge_a877aedfc9868ac7028da82e3ea991249}{\_\_init\_\_}}(self,\ *args,\ **kwargs):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00273}00273\ \ \ \ \ \ \ \ \ super().\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge_a877aedfc9868ac7028da82e3ea991249}{\_\_init\_\_}}(*args,\ **kwargs)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00275}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge_a5366876cccc84a2ba8934851f155af0c}{00275}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge_a5366876cccc84a2ba8934851f155af0c}{is\_hypothesized}}(self)\ -\/>\ bool:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00276}00276\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge_a3bee83453344c70b86b8cc4c7e845db7}{hypothesized}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00277}00277\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00278}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge_ad0f2acf0e116321b1f16b28dc3fc041a}{00278}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge_ad0f2acf0e116321b1f16b28dc3fc041a}{set\_hypothesized}}(self,\ is\_hypothesized:bool):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00279}00279\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge_a3bee83453344c70b86b8cc4c7e845db7}{hypothesized}}=is\_hypothesized}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00281}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge_af26f7992769e0e23966f7007a18eab71}{00281}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge_af26f7992769e0e23966f7007a18eab71}{get\_connection\_json}}(self)\ -\/>\ dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00282}00282\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}start"{}}:\ self.start\_node().uid,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}relation"{}}:\ \textcolor{stringliteral}{"{}edges"{}},}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}end"{}}:\ self.end\_node().uid}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00286}00286\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00287}00287\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00288}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge_a7dfcb47cb927ddb1b5d5bf0fceb62517}{00288}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge_a7dfcb47cb927ddb1b5d5bf0fceb62517}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00289}00289\ \ \ \ \ \ \ \ \ left:ReferenceNode\ =\ self.start\_node()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00290}00290\ \ \ \ \ \ \ \ \ right:ReferenceNode\ =\ self.end\_node()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00291}00291\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}\{left\}\ -\/[\{relationship\}:\{type\}]-\/>\ \{right\}"{}}.format(left=left.text,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ right=right.text,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ relationship=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text_a7d1c303e41d0ca88b67a61609306e8e6}{text}},}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ type=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text_a0e1285b9de9d44ceac3f79976d722e7e}{type}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00295}00295\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00297}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{00297}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{ReferenceNode}}(nm.StructuredNode,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text}{OpenTldrText}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{OpenTldrNode}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00298}00298\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00299}00299\ \textcolor{stringliteral}{\ \ \ \ ReferenceNode\ allows\ for\ general\ reference\ data\ nodes\ to\ be\ introduced\ into\ the}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00300}00300\ \textcolor{stringliteral}{\ \ \ \ knowledge\ graph\ and\ used\ abstractly\ (e.g.,\ to\ relate\ extracted\ entities\ to\ known\ things).}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00301}00301\ \textcolor{stringliteral}{\ \ \ \ This\ uses\ the\ OpenTldrText\ mixin\ to\ implement\ text\ and\ type\ properties.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00302}00302\ \textcolor{stringliteral}{\ \ \ \ The\ hypothesized\ property\ is\ a\ boolean\ that\ indicates\ if\ this\ was\ inferred\ (e.g.,\ discovered)}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00303}00303\ \textcolor{stringliteral}{\ \ \ \ or\ provided\ as\ fact\ via\ external\ reference\ data\ (e.g.,\ imported).\ }}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00304}00304\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00305}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_ad9ff21d4b1b660328d7f2a32f7b1cc8e}{00305}}\ \ \ \ \ hypothesized\ =\ nm.BooleanProperty(default=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00307}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_ade9242f6d116565c21161cfaf94b5668}{00307}}\ \ \ \ \ edges\ =\ nm.RelationshipTo(\textcolor{stringliteral}{'ReferenceNode'},\textcolor{stringliteral}{'REFERENCE\_EDGE'},\ model=ReferenceEdge,\ cardinality=ZeroOrMore)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00308}00308\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00309}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_ada60ef40d76a63cee02f75c096d09365}{00309}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_ada60ef40d76a63cee02f75c096d09365}{is\_hypothesized}}(self)\ -\/>\ bool:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00310}00310\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_ad9ff21d4b1b660328d7f2a32f7b1cc8e}{hypothesized}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00312}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_a051b2634fa1b63d885b176c9431c72c2}{00312}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_a051b2634fa1b63d885b176c9431c72c2}{set\_hypothesized}}(self,\ is\_hypothesized:bool):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00313}00313\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_ad9ff21d4b1b660328d7f2a32f7b1cc8e}{hypothesized}}=is\_hypothesized}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00315}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_a3bfd35a4bda3f537073b42f669ab0397}{00315}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_a3bfd35a4bda3f537073b42f669ab0397}{connect\_to}}(self,\ to\_node:\textcolor{stringliteral}{'ReferenceNode'})\ -\/>\ ReferenceEdge:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00316}00316\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_ade9242f6d116565c21161cfaf94b5668}{edges}}.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_ab6731ddb65182d3a4d7c55cc2e8810ae}{connect}}(to\_node)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00317}00317\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00318}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_ab6731ddb65182d3a4d7c55cc2e8810ae}{00318}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_ab6731ddb65182d3a4d7c55cc2e8810ae}{connect}}(self,\ to\_node:\textcolor{stringliteral}{'ReferenceNode'},\ edge:ReferenceEdge):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00319}00319\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_ade9242f6d116565c21161cfaf94b5668}{edges}}.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_ab6731ddb65182d3a4d7c55cc2e8810ae}{connect}}()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00320}00320\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00321}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_a766c7e0fafd2f399de6e543f6763685d}{00321}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node_a766c7e0fafd2f399de6e543f6763685d}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00322}00322\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}'\{text\}'\ of\ type\ \{type\}"{}}.format(text=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text_a7d1c303e41d0ca88b67a61609306e8e6}{text}},type=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text_a0e1285b9de9d44ceac3f79976d722e7e}{type}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00323}00323\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00324}00324\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00325}00325\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00326}00326\ \textcolor{comment}{\#\ Active\ Data}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00327}00327\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00328}00328\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00329}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{00329}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}}(nm.StructuredNode,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{OpenTldrNode}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00330}00330\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00331}00331\ \textcolor{stringliteral}{\ \ \ \ Source\ nodes\ indicate\ the\ generator\ of\ various\ content.\ This\ may\ be\ an\ author\ or\ distributor}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00332}00332\ \textcolor{stringliteral}{\ \ \ \ of\ information.\ The\ name\ property\ is\ used\ to\ uniquely\ identify\ the\ Source.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00333}00333\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00334}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_source_a8945b952cad09a247026e77a49fa3cea}{00334}}\ \ \ \ \ name\ =\ nm.StringProperty(unique\_index=\textcolor{keyword}{True},\ required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00335}00335\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00336}00336\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00337}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_is_from}{00337}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_is_from}{IsFrom}}(nm.StructuredRel,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{OpenTldrEdge}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00338}00338\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00339}00339\ \textcolor{stringliteral}{\ \ \ \ IsFrom\ edges\ connect\ Content\ nodes\ to\ the\ Source\ nodes\ in\ the\ knowledge\ graph.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00340}00340\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00341}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_is_from_a4faf06f8077153d2e231cb7b76126484}{00341}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_is_from_a4faf06f8077153d2e231cb7b76126484}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00342}00342\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}The\ \{content\_type\}\ '\{content\_title\}'\ is\ from\ the\ source\ \{end\}."{}}.format(}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ content\_type=\ self.start\_node().type,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ content\_title=self.start\_node().title,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \ \ end=self.end\_node().name)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00346}00346\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00347}00347\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00348}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{00348}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_citable_node}{CitableNode}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text}{OpenTldrText}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{OpenTldrNode}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00349}00349\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00350}00350\ \textcolor{stringliteral}{\ \ \ \ Content\ nodes\ represent\ text-\/based\ information,\ such\ as\ a\ news\ article\ or\ message.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00351}00351\ \textcolor{stringliteral}{\ \ \ \ They\ include\ properties\ for\ title\ (String),\ date\ (datetime.date),\ and\ url\ (String).}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00352}00352\ \textcolor{stringliteral}{\ \ \ \ In\ OpenTldr\ Content\ node\ urls\ are\ used\ for\ hyperlinks\ back\ to\ the\ original\ material.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00353}00353\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00354}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_aa589fa26ee35055c059ee8b1f62b9ee8}{00354}}\ \ \ \ \ title\ =\ nm.StringProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00355}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_a9e132fe0035f7f7061e908075cb83fbd}{00355}}\ \ \ \ \ date\ =\ nm.properties.DateProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00356}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_ac4d3ef2c0b3cd587589cbe53dde97b83}{00356}}\ \ \ \ \ url\ =\ nm.StringProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00357}00357\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00358}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_a07842c2395053fb56640b02cb329064e}{00358}}\ \ \ \ \ is\_from\ =\ nm.RelationshipTo(Source,\ \textcolor{stringliteral}{'IS\_FROM'},\ model=IsFrom,\ cardinality=One)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00359}00359\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00360}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_ad6f4332b151c0bc4cd707a11415409ae}{00360}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_ad6f4332b151c0bc4cd707a11415409ae}{get\_is\_from}}(self)\ -\/>\ Source:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00361}00361\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_a07842c2395053fb56640b02cb329064e}{is\_from}}.single()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00362}00362\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00363}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_a7e00599a701f270769c364c4f2bec749}{00363}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_a7e00599a701f270769c364c4f2bec749}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00364}00364\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}A\ \{content\_type\}\ content\ titled\ '\{content\_title\}'\ from\ \{date\}."{}}.format(}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00365}00365\ \ \ \ \ \ \ \ \ \ \ \ \ content\_type=\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text_a0e1285b9de9d44ceac3f79976d722e7e}{type}},}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00366}00366\ \ \ \ \ \ \ \ \ \ \ \ \ content\_title=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_aa589fa26ee35055c059ee8b1f62b9ee8}{title}},}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00367}00367\ \ \ \ \ \ \ \ \ \ \ \ \ date=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_a9e132fe0035f7f7061e908075cb83fbd}{date}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00368}00368\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00369}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_ad6d4cb4c822ff926e777909667ab688c}{00369}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_ad6d4cb4c822ff926e777909667ab688c}{to\_json\_connect}}(self,\ kg,\ json\_dict)\ -\/>\ dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00370}00370\ \ \ \ \ \ \ \ \ out:dict=\ \{\}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00371}00371\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}source"{}}\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ json\_dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00372}00372\ \ \ \ \ \ \ \ \ \ \ \ \ out[\textcolor{stringliteral}{"{}source"{}}]=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_a07842c2395053fb56640b02cb329064e}{is\_from}}.single().name}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00373}00373\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ out}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00374}00374\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00375}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_a99c627fb47e210f334fdd90731d5b622}{00375}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_a99c627fb47e210f334fdd90731d5b622}{from\_json\_connect}}(self,\ kg,\ json\_dict):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00376}00376\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Ensure\ there\ is\ an\ is\_from\ relation}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00377}00377\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}source"{}}\ \textcolor{keywordflow}{in}\ json\_dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ source=kg.get\_source\_by\_name(json\_dict[\textcolor{stringliteral}{"{}source"{}}])}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00379}00379\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ source\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00380}00380\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ source=kg.add\_source(json\_dict[\textcolor{stringliteral}{"{}source"{}}])}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \ \ self.save()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00382}00382\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content_a07842c2395053fb56640b02cb329064e}{is\_from}}.connect(source)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00383}00383\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00384}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_mentioned_in}{00384}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_mentioned_in}{MentionedIn}}(nm.StructuredRel,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{OpenTldrEdge}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00385}00385\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00386}00386\ \textcolor{stringliteral}{\ \ \ \ MentionedIn\ edges\ connects\ an\ extracted\ Entity\ node\ to\ the\ CitableNode\ (e.g.,\ Content\ }}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00387}00387\ \textcolor{stringliteral}{\ \ \ \ or\ Request)\ that\ included\ the\ reference.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00388}00388\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00389}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_mentioned_in_aeeea0d980b261428c1019d3ddbbf860b}{00389}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_mentioned_in_aeeea0d980b261428c1019d3ddbbf860b}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00390}00390\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}The\ entity\ '\{entity\}'\ is\ mentioned\ in\ the\ '\{title\}'."{}}.format(}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00391}00391\ \ \ \ \ \ \ \ \ \ \ \ \ entity=self.start\_node().text,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00392}00392\ \ \ \ \ \ \ \ \ \ \ \ \ title=self.end\_node().title)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00393}00393\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00394}00394\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00395}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_refers_to}{00395}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_refers_to}{RefersTo}}(nm.StructuredRel,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{OpenTldrEdge}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain}{Uncertain}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00396}00396\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00397}00397\ \textcolor{stringliteral}{\ \ \ \ RefersTo\ edges\ connects\ an\ extracted\ Entity\ node\ to\ the\ ReferenceNode\ that\ it\ is\ believed}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00398}00398\ \textcolor{stringliteral}{\ \ \ \ to\ represent\ with\ the\ uncertainity\ value\ provided.\ }}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00399}00399\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00400}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_refers_to_a062d49b74e1f85d090c8be8fa36d3a0e}{00400}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_refers_to_a062d49b74e1f85d090c8be8fa36d3a0e}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00401}00401\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}The\ entity\ '\{entity\}'\ \{uncertainty\}\ refers\ to\ '\{ref\}'."{}}.format(}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00402}00402\ \ \ \ \ \ \ \ \ \ \ \ \ entity=self.start\_node().text,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00403}00403\ \ \ \ \ \ \ \ \ \ \ \ \ ref=self.end\_node().text,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00404}00404\ \ \ \ \ \ \ \ \ \ \ \ \ uncertainty=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_uncertain_a0ebed19ca2b9ea0bbae3f724f36b79c2}{uncertainty\_to\_text}}())}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00405}00405\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00406}00406\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00407}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{00407}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}}(nm.StructuredNode,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_text}{OpenTldrText}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{OpenTldrNode}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00408}00408\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00409}00409\ \textcolor{stringliteral}{\ \ \ \ Entity\ nodes\ represent\ specific\ things\ that\ are\ "{}mentioned\_in"{}\ in\ Citable\ nodes\ }}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00410}00410\ \textcolor{stringliteral}{\ \ \ \ (e.g.,\ Content\ or\ Requests)\ that\ "{}refers\_to"{}\ some\ ReferenceNode\ information.\ The\ text\ property}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00411}00411\ \textcolor{stringliteral}{\ \ \ \ contains\ the\ text\ for\ the\ entity\ identified\ and\ the\ type\ property\ expresses\ what\ it\ is.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00412}00412\ \textcolor{stringliteral}{\ \ \ \ The\ "{}refers\_to"{}\ edge\ can\ be\ uncertain\ (e.g.,\ sematic\ similarity\ of\ text\ and\ type\ consistency).\ }}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00413}00413\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00414}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity_a8a8baab5f480b8071676aa99e1c38a46}{00414}}\ \ \ \ \ refers\_to=nm.RelationshipTo(ReferenceNode,\textcolor{stringliteral}{'REFERS\_TO'},\ model\ =\ RefersTo,\ cardinality=ZeroOrMore)\ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00415}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity_a8f81a00a1a9d02e26bf6f54f69f82fbd}{00415}}\ \ \ \ \ mentioned\_in\ =\ nm.RelationshipTo(\textcolor{stringliteral}{"{}CitableNode"{}},\ \textcolor{stringliteral}{'MENTIONED\_IN'},\ model=MentionedIn,\ cardinality=OneOrMore)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00416}00416\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00417}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity_a1dfd2d8bdefa563a65d70978228d72c0}{00417}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity_a1dfd2d8bdefa563a65d70978228d72c0}{get\_refers\_to}}(self)\ -\/>\ list[Source]:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00418}00418\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity_a8a8baab5f480b8071676aa99e1c38a46}{refers\_to}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00419}00419\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00420}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity_a7d8c58cddbc79ce697e1e477142cc31f}{00420}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity_a7d8c58cddbc79ce697e1e477142cc31f}{get\_mentioned\_in}}(self)\ -\/>\ Source:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00421}00421\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity_a8f81a00a1a9d02e26bf6f54f69f82fbd}{mentioned\_in}}.single()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00422}00422\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00423}00423\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00424}00424\ \textcolor{comment}{\#\ Information\ Request}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00425}00425\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00426}00426\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00427}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{00427}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}}(nm.StructuredNode,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{OpenTldrNode}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00428}00428\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00429}00429\ \textcolor{stringliteral}{\ \ \ \ User\ node\ represents\ a\ client\ of\ the\ OpenTLDR\ system\ and\ has\ name\ and\ email\ properties\ (Stings).}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00430}00430\ \textcolor{stringliteral}{\ \ \ \ Similar\ to\ a\ Content\ connecting\ to\ a\ Source,\ Requests\ connect\ to\ a\ User\ (see\ RequestedBy\ edge).}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00431}00431\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00432}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user_a0139a3d91f3f4ae624a939a983d01865}{00432}}\ \ \ \ \ name\ =\ nm.StringProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00433}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user_af5b27f04c2c776981d31bfa1f087babf}{00433}}\ \ \ \ \ email\ =\ nm.StringProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00434}00434\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00435}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user_a445a4a25ebd2c88568ad7019d5159870}{00435}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user_a445a4a25ebd2c88568ad7019d5159870}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00436}00436\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}The\ User\ '\{name\}'\ with\ email\ '\{email\}'."{}}.format(}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00437}00437\ \ \ \ \ \ \ \ \ \ \ \ \ name=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user_a0139a3d91f3f4ae624a939a983d01865}{name}},\ email=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user_af5b27f04c2c776981d31bfa1f087babf}{email}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00438}00438\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00439}00439\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00440}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_requested_by}{00440}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_requested_by}{RequestedBy}}(nm.StructuredRel,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{OpenTldrEdge}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00441}00441\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00442}00442\ \textcolor{stringliteral}{\ \ \ \ RequestedBy\ edges\ connect\ Request\ nodes\ to\ the\ User\ node\ to\ reflect\ who\ made\ the\ request.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00443}00443\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00444}00444\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00445}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_requested_by_ac221f9b0fcc45c53305ca6f312a7c9a4}{00445}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_requested_by_ac221f9b0fcc45c53305ca6f312a7c9a4}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00446}00446\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}The\ request\ '\{request\}'\ was\ requested\ by\ \{user\}."{}}.format(}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00447}00447\ \ \ \ \ \ \ \ \ \ \ \ \ request=self.start\_node().title,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00448}00448\ \ \ \ \ \ \ \ \ \ \ \ \ user=self.end\_node().name)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00449}00449\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00450}00450\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00451}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{00451}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_citable_node}{CitableNode}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{OpenTldrNode}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00452}00452\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00453}00453\ \textcolor{stringliteral}{\ \ \ \ Request\ nodes\ information\ requests\ that\ are\ made\ by\ users\ to\ indicate\ what\ information\ they}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00454}00454\ \textcolor{stringliteral}{\ \ \ \ are\ interested\ in\ and\ how\ to\ tailor\ that\ information\ for\ them.\ A\ "{}text"{}\ property\ (String)\ }}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00455}00455\ \textcolor{stringliteral}{\ \ \ \ holds\ the\ text\ of\ the\ information\ request\ and\ the\ "{}title"{}\ property\ (String)\ provides\ a\ }}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00456}00456\ \textcolor{stringliteral}{\ \ \ \ short\ labels\ for\ the\ request\ to\ avoid\ repeating\ long\ request\ text.\ The\ "{}requested\_by"{}\ edge}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00457}00457\ \textcolor{stringliteral}{\ \ \ \ links\ each\ request\ to\ one\ User\ node.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00458}00458\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00459}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_aff68a987b9fa7ac454113b9da52663b0}{00459}}\ \ \ \ \ title=nm.StringProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00460}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_ac16fe68430ab8b31968e1135ae230481}{00460}}\ \ \ \ \ text\ =\ nm.StringProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00461}00461\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00462}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_af0e90c891179cf925fb1072c5a21ffbb}{00462}}\ \ \ \ \ requested\_by\ =\ nm.RelationshipTo(User,\ \textcolor{stringliteral}{'REQUESTED\_BY'},\ model=RequestedBy,\ cardinality=One)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00463}00463\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00464}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_a2799b7ead544d0459d4c6ff375539506}{00464}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_a2799b7ead544d0459d4c6ff375539506}{get\_requested\_by}}(self)\ -\/>\ User:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00465}00465\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_af0e90c891179cf925fb1072c5a21ffbb}{requested\_by}}.single()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00466}00466\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00467}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_a9e816b0a623a8573f0ac58c4b6d7f0fe}{00467}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_a9e816b0a623a8573f0ac58c4b6d7f0fe}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00468}00468\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}The\ request\ titled\ '\{title\}'."{}}.format(title=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_aff68a987b9fa7ac454113b9da52663b0}{title}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00469}00469\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00470}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_a47099c46bbf68e58ff5e831f435cc38f}{00470}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_a47099c46bbf68e58ff5e831f435cc38f}{to\_json\_connect}}(self,\ kg,\ json\_dict)\ -\/>\ dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00471}00471\ \ \ \ \ \ \ \ \ out:dict=\ \{\}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00472}00472\ \ \ \ \ \ \ \ \ user:User\ =\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_af0e90c891179cf925fb1072c5a21ffbb}{requested\_by}}.single()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00473}00473\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00474}00474\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}user"{}}\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ json\_dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ out[\textcolor{stringliteral}{"{}user"{}}]=user.name}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00476}00476\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}email"{}}\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ json\_dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00477}00477\ \ \ \ \ \ \ \ \ \ \ \ \ out[\textcolor{stringliteral}{"{}email"{}}]=user.email}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00478}00478\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00479}00479\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ out}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00480}00480\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00481}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_a00ddd7e9016961973597513fc0287876}{00481}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_a00ddd7e9016961973597513fc0287876}{from\_json\_connect}}(self,\ kg,\ json\_dict):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00482}00482\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Ensure\ there\ is\ a\ requested\_by\ relation}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00483}00483\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}user"{}}\ \textcolor{keywordflow}{in}\ json\_dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00484}00484\ \ \ \ \ \ \ \ \ \ \ \ \ user=kg.get\_user\_by\_name(json\_dict[\textcolor{stringliteral}{"{}user"{}}])}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00485}00485\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ user\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00486}00486\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ email=\textcolor{stringliteral}{"{}unknown"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00487}00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}email"{}}\ \textcolor{keywordflow}{in}\ json\_dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00488}00488\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ email\ =\ json\_dict[\textcolor{stringliteral}{"{}email"{}}]}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00489}00489\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ user=kg.add\_user(json\_dict[\textcolor{stringliteral}{"{}user"{}}],email)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00490}00490\ \ \ \ \ \ \ \ \ \ \ \ \ self.save()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00491}00491\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_af0e90c891179cf925fb1072c5a21ffbb}{requested\_by}}.connect(user)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00492}00492\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00493}00493\ \textcolor{comment}{\#\ Workflow\ Products\ |\ Recommendations\ and\ Summaries}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00494}00494\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00495}00495\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00496}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommends}{00496}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommends}{Recommends}}(nm.StructuredRel,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{OpenTldrEdge}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00497}00497\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00498}00498\ \textcolor{stringliteral}{\ \ \ \ Recommends\ edge\ connects\ a\ Recommendation\ node\ to\ the\ Content\ node\ that\ is\ being\ recommended.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00499}00499\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00500}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommends_ae35480f4f8dd5013b9de7f2e685d0f0d}{00500}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommends_ae35480f4f8dd5013b9de7f2e685d0f0d}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00501}00501\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}This\ has\ \{score\}\ relevance\ for\ \{content\_type\}\ '\{content\_title\}'."{}}.format(}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00502}00502\ \ \ \ \ \ \ \ \ \ \ \ \ content\_title=self.end\_node().title,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00503}00503\ \ \ \ \ \ \ \ \ \ \ \ \ content\_type=\ self.end\_node().type,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00504}00504\ \ \ \ \ \ \ \ \ \ \ \ \ score=self.start\_node.score\_to\_text())}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00505}00505\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00506}00506\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00507}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_relates_to}{00507}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_relates_to}{RelatesTo}}(nm.StructuredRel,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{OpenTldrEdge}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00508}00508\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00509}00509\ \textcolor{stringliteral}{\ \ \ \ RelatesTo\ edge\ connects\ a\ Recommendation\ node\ to\ the\ Request\ on\ which\ it\ is\ based.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00510}00510\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00511}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_relates_to_a8fc0fbf9108c3c77325308bb2357ebb6}{00511}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_relates_to_a8fc0fbf9108c3c77325308bb2357ebb6}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00512}00512\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}This\ has\ \{score\}\ relevance\ to\ the\ request\ '\{request\}'."{}}.format(}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00513}00513\ \ \ \ \ \ \ \ \ \ \ \ \ request=\ self.end\_node().title,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00514}00514\ \ \ \ \ \ \ \ \ \ \ \ \ score=self.start\_node().score\_to\_text())}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00515}00515\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00516}00516\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00517}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{00517}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}}(nm.StructuredNode,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{OpenTldrNode}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored}{Scored}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00518}00518\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00519}00519\ \textcolor{stringliteral}{\ \ \ \ Recommendation\ nodes\ represent\ the\ assertion\ that\ a\ Content\ node\ (pointed\ to\ by\ Recommends\ edge)}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00520}00520\ \textcolor{stringliteral}{\ \ \ \ is\ believed\ to\ be\ relevant\ to\ a\ Request\ node\ (pointed\ to\ by\ the\ RelatesTo\ edge).\ The\ score}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00521}00521\ \textcolor{stringliteral}{\ \ \ \ property\ (float\ 0.0\ -\/\ 1.0)\ indicates\ how\ relevant\ and\ thus\ how\ strong\ the\ recommendation.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00522}00522\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00523}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_a4cdf8a4c529979172a892115cd1403e9}{00523}}\ \ \ \ \ recommends\ =\ nm.RelationshipTo(Content,\ \textcolor{stringliteral}{'RECOMMENDS'},\ model=Recommends,\ cardinality=One)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00524}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_a873a14a6342f57447c8ce1ef0abedfd1}{00524}}\ \ \ \ \ relates\_to\ =\ nm.RelationshipTo(Request,\ \textcolor{stringliteral}{'RELATES\_TO'},\ model=RelatesTo,\ cardinality=One)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00525}00525\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00526}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_a2508a21c04bf1afbbdcc5a8387581e22}{00526}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_a2508a21c04bf1afbbdcc5a8387581e22}{get\_recommends}}(self)\ -\/>\ Content:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00527}00527\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_a4cdf8a4c529979172a892115cd1403e9}{recommends}}.single()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00528}00528\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00529}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_a0a54cc4ac793ecc3e931b7b12169de4c}{00529}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_a0a54cc4ac793ecc3e931b7b12169de4c}{get\_relates\_to}}(self)\ -\/>\ Request:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00530}00530\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_a873a14a6342f57447c8ce1ef0abedfd1}{relates\_to}}.single()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00531}00531\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00532}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_aabb10fedc0300dbf3da0c80dcdac3a2b}{00532}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_aabb10fedc0300dbf3da0c80dcdac3a2b}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00533}00533\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}The\ \{content\_type\}\ '\{content\_title\}'\ has\ \{score\}\ relevance\ to\ the\ request\ '\{request\}'."{}}.format(}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00534}00534\ \ \ \ \ \ \ \ \ \ \ \ \ content\_title=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_a4cdf8a4c529979172a892115cd1403e9}{recommends}}.single().text,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00535}00535\ \ \ \ \ \ \ \ \ \ \ \ \ content\_type=\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_a4cdf8a4c529979172a892115cd1403e9}{recommends}}.single().type,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00536}00536\ \ \ \ \ \ \ \ \ \ \ \ \ request=\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_a873a14a6342f57447c8ce1ef0abedfd1}{relates\_to}}.single().title,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00537}00537\ \ \ \ \ \ \ \ \ \ \ \ \ score=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_af1eecb0e7a0e24f34a64166700a382e5}{score\_to\_text}}())}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00538}00538\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00539}00539\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00540}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summarizes}{00540}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summarizes}{Summarizes}}(nm.StructuredRel,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{OpenTldrEdge}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00541}00541\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00542}00542\ \textcolor{stringliteral}{\ \ \ \ Summerizes\ edges\ connect\ a\ Summary\ node\ to\ the\ Content\ node\ that\ they\ summarize.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00543}00543\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00544}00544\ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00545}00545\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00546}00546\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00547}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_focus_on}{00547}}\ \textcolor{keyword}{class\ }FocusOn(nm.StructuredRel,\ OpenTldrMeta,\ OpenTldrEdge,\ Uncertain):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00548}00548\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00549}00549\ \textcolor{stringliteral}{\ \ \ \ FocusOn\ edges\ connect\ a\ Summary\ node\ to\ the\ Recommendation\ node\ that\ may\ help\ inform\ what}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00550}00550\ \textcolor{stringliteral}{\ \ \ \ the\ most\ relevant\ parts\ of\ the\ Summary\ are\ with\ respect\ to\ that\ Recommendation\ /\ Request.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00551}00551\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00552}00552\ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00553}00553\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00554}00554\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00555}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{00555}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}}(nm.StructuredNode,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{OpenTldrNode}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00556}00556\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00557}00557\ \textcolor{stringliteral}{\ \ \ \ Summary\ node\ contains\ text\ (String\ property)\ that\ is\ a\ shortened\ (ideally\ tailored)\ version}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00558}00558\ \textcolor{stringliteral}{\ \ \ \ of\ the\ Content\ node\ connect\ with\ the\ "{}summaries"{}\ edge.\ The\ "{}focus\_on"{}\ edge\ connects\ to\ the}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00559}00559\ \textcolor{stringliteral}{\ \ \ \ Recommendation\ that\ may\ inform\ how\ this\ summary\ is\ tailored.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00560}00560\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00561}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary_a17491b91c190a32ae32015ea664ecf72}{00561}}\ \ \ \ \ text\ =\ nm.StringProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00562}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary_a5672355dc84f04d11a754bdfd6ff21c5}{00562}}\ \ \ \ \ summarizes\ =\ nm.RelationshipTo(Content,\ \textcolor{stringliteral}{'SUMMARIZES'},\ model=Summarizes,\ cardinality=One)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00563}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary_a045dca674af957714e839c1284c6b23e}{00563}}\ \ \ \ \ focus\_on\ =\ nm.RelationshipTo(Recommendation,\ \textcolor{stringliteral}{'FOCUS\_ON'},\ model=FocusOn,\ cardinality=ZeroOrOne)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00564}00564\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00565}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary_a43fbfe9137561a63c9afeb747686c498}{00565}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary_a43fbfe9137561a63c9afeb747686c498}{get\_summarizes}}(self)\ -\/>\ Content:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00566}00566\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary_a5672355dc84f04d11a754bdfd6ff21c5}{summarizes}}.single()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00567}00567\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00568}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary_aab4b931d88f2e7c81472424762198a2d}{00568}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary_aab4b931d88f2e7c81472424762198a2d}{get\_focus\_on}}(self)\ -\/>\ Recommendation:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00569}00569\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary_a045dca674af957714e839c1284c6b23e}{focus\_on}}.single()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00570}00570\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00571}00571\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00572}00572\ \textcolor{comment}{\#\ Workflow\ Products\ |\ TLDR}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00573}00573\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00574}00574\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00575}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_includes}{00575}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_includes}{Includes}}(nm.StructuredRel,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{OpenTldrEdge}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00576}00576\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00577}00577\ \textcolor{stringliteral}{\ \ \ \ Includes\ edges\ connect\ a\ TldrEntry\ node\ to\ a\ Summary\ node\ to\ indicate\ that\ the\ Summary\ is}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00578}00578\ \textcolor{stringliteral}{\ \ \ \ to\ be\ used\ in\ that\ part\ of\ the\ TLDR.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00579}00579\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00580}00580\ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00581}00581\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00582}00582\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00583}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_based_on}{00583}}\ \textcolor{keyword}{class\ }BasedOn(nm.StructuredRel,\ OpenTldrMeta,\ OpenTldrEdge):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00584}00584\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00585}00585\ \textcolor{stringliteral}{\ \ \ \ BasedOn\ edges\ connect\ a\ TldrEntry\ node\ to\ a\ Recommendation\ node\ to\ indicate\ why\ that}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00586}00586\ \textcolor{stringliteral}{\ \ \ \ entry\ is\ being\ included\ in\ the\ TLDR\ and\ may\ be\ used\ for\ things\ like\ ordering\ the\ entries}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00587}00587\ \textcolor{stringliteral}{\ \ \ \ to\ show\ the\ most\ recommended\ first.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00588}00588\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00589}00589\ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00590}00590\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00591}00591\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00592}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{00592}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{TldrEntry}}(nm.StructuredNode,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{OpenTldrNode}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored}{Scored}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00593}00593\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00594}00594\ \textcolor{stringliteral}{\ \ \ \ TldrEntry\ is\ one\ record\ within\ a\ TLDR.\ In\ general,\ there\ is\ a\ one-\/to-\/one\ relationship}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00595}00595\ \textcolor{stringliteral}{\ \ \ \ between\ each\ TldrEntry,\ Recommendation,\ and\ Summary\ such\ that\ each\ record\ within\ a\ TLDR}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00596}00596\ \textcolor{stringliteral}{\ \ \ \ has\ a\ score\ for\ the\ Recommendation,\ a\ text\ blurb\ from\ the\ Summary,\ and\ a\ connection\ back}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00597}00597\ \textcolor{stringliteral}{\ \ \ \ to\ the\ original\ Content\ (from\ both\ the\ Recommendation\ and\ Summary).}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00598}00598\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00599}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_adf3d5b3f5b4ae4f1f1387e45c5a3befa}{00599}}\ \ \ \ \ link\ =\ nm.StringProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00600}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_a8980f81a7f91ed8a1d13520d87d88648}{00600}}\ \ \ \ \ title\ =\ nm.StringProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00601}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_a445a91154377aa4b5fa25ad8a1834006}{00601}}\ \ \ \ \ type\ =\ nm.StringProperty(required=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00602}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_a3aa4675c5917a9d8eafb611a939ac07c}{00602}}\ \ \ \ \ summary=nm.StringProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00603}00603\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00604}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_a4020a3aa6fcf4c63f91f8beaabae1c58}{00604}}\ \ \ \ \ includes\ =\ nm.RelationshipTo(Summary,\ \textcolor{stringliteral}{'INCLUDES'},\ model=Includes,\ cardinality=ZeroOrOne)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00605}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_a1ceda9e5279c84b0c80810a6118c65e9}{00605}}\ \ \ \ \ based\_on\ =\ nm.RelationshipTo(Recommendation,\ \textcolor{stringliteral}{'BASED\_ON'},\ model=BasedOn,\ cardinality=ZeroOrOne)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00606}00606\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00607}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_aab2375ec26d4038c895cbafbec4fa1b9}{00607}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_aab2375ec26d4038c895cbafbec4fa1b9}{get\_includes}}(self)\ -\/>\ Summary:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00608}00608\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_a4020a3aa6fcf4c63f91f8beaabae1c58}{includes}}.single()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00609}00609\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00610}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_abceefbbbe4d4badef679ff504e0a58dd}{00610}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_abceefbbbe4d4badef679ff504e0a58dd}{get\_based\_on}}(self)\ -\/>\ Recommendation:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00611}00611\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_a1ceda9e5279c84b0c80810a6118c65e9}{based\_on}}.single()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00612}00612\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00613}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_a4e55cab2ebcb0b5f1e65fcf3d78d4e76}{00613}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_a4e55cab2ebcb0b5f1e65fcf3d78d4e76}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00614}00614\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}The\ entry\ summarizes\ \{content\_type\}\ '\{content\_title\}'\ and\ \{score\}\ relevance\ to\ the\ request."{}}.format(}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00615}00615\ \ \ \ \ \ \ \ \ \ \ \ \ content\_title=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_a8980f81a7f91ed8a1d13520d87d88648}{title}},}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00616}00616\ \ \ \ \ \ \ \ \ \ \ \ \ content\_type=\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_a445a91154377aa4b5fa25ad8a1834006}{type}},}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00617}00617\ \ \ \ \ \ \ \ \ \ \ \ \ score=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_af1eecb0e7a0e24f34a64166700a382e5}{score\_to\_text}}())}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00618}00618\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00619}00619\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00620}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_contains}{00620}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_contains}{Contains}}(nm.StructuredRel,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{OpenTldrEdge}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored}{Scored}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00621}00621\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00622}00622\ \textcolor{stringliteral}{\ \ \ \ Connects\ a\ Tldr\ to\ each\ of\ the\ TldrEntry\ objects\ that\ makes\ it\ up.\ The\ assumption}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00623}00623\ \textcolor{stringliteral}{\ \ \ \ here\ is\ that\ the\ score\ property\ (float\ 0.0\ -\/\ 1.0)\ on\ the\ edge\ provides\ a\ descending\ ordering\ for}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00624}00624\ \textcolor{stringliteral}{\ \ \ \ the\ entries\ connected\ by\ these\ links.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00625}00625\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00626}00626\ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00627}00627\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00628}00628\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00629}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_response_to}{00629}}\ \textcolor{keyword}{class\ }ResponseTo(nm.StructuredRel,\ OpenTldrMeta,\ OpenTldrEdge):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00630}00630\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00631}00631\ \textcolor{stringliteral}{\ \ \ \ ResponseTo\ edges\ connect\ a\ Tldr\ to\ the\ Request\ for\ which\ it\ was\ generated.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00632}00632\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00633}00633\ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00634}00634\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00635}00635\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00636}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{00636}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}}(nm.StructuredNode,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{OpenTldrNode}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00637}00637\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00638}00638\ \textcolor{stringliteral}{\ \ \ \ Tldr\ nodes\ represent\ an\ instance\ of\ the\ TLDR\ report\ for\ the\ date\ (in\ 'date'\ property\ of\ type}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00639}00639\ \textcolor{stringliteral}{\ \ \ \ datetime.date).\ It\ is\ connected\ to\ the\ Request\ by\ the\ ResponseTo\ edge\ and\ a\ set\ of\ TldrEntries}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00640}00640\ \textcolor{stringliteral}{\ \ \ \ by\ "{}Entries"{}\ edges.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00641}00641\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00642}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_aea12e8a3ca58ce4a03fd535c966092b9}{00642}}\ \ \ \ \ date\ =\ nm.DateProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00643}00643\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00644}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_a9e8920804bb4ed8bc702718846a39000}{00644}}\ \ \ \ \ contains\ =\ nm.RelationshipTo(TldrEntry,\ \textcolor{stringliteral}{'CONTAINS'},\ model=Contains,\ cardinality=ZeroOrMore)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00645}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_a162f2f2ce4b4d189de92383bcce782b8}{00645}}\ \ \ \ \ response\_to\ =\ nm.RelationshipTo(Request,\ \textcolor{stringliteral}{'RESPONSE\_TO'},\ model=ResponseTo,\ cardinality=One)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00646}00646\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00647}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_a90e6b755ded1d65869088e5d4b0fd2a6}{00647}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_a90e6b755ded1d65869088e5d4b0fd2a6}{get\_contains}}(self)\ -\/>\ list[TldrEntry]:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00648}00648\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_a9e8920804bb4ed8bc702718846a39000}{contains}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00649}00649\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00650}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_a60505449f32ab34126c773a470d92524}{00650}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_a60505449f32ab34126c773a470d92524}{get\_response\_to}}(self)\ -\/>\ Request:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00651}00651\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_a162f2f2ce4b4d189de92383bcce782b8}{response\_to}}.single()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00652}00652\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00653}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_a251266cc2f60e8ba0b403ce12e343c26}{00653}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_a251266cc2f60e8ba0b403ce12e343c26}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00654}00654\ \ \ \ \ \ \ \ \ out:str\ =\ \textcolor{stringliteral}{"{}The\ TLDR\ for\ request\ '\{request\}'\ on\ date\ \{date\}\ includes:\ "{}}.format(}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00655}00655\ \ \ \ \ \ \ \ \ \ \ \ \ request=\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_a162f2f2ce4b4d189de92383bcce782b8}{response\_to}}.single().title,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00656}00656\ \ \ \ \ \ \ \ \ \ \ \ \ date=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_aea12e8a3ca58ce4a03fd535c966092b9}{date}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00657}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_aad341aa2674dcd408023d647c92830c4}{00657}}\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ tldr\_entry\ \textcolor{keywordflow}{in}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_aad341aa2674dcd408023d647c92830c4}{includes}}:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00658}00658\ \ \ \ \ \ \ \ \ \ \ \ \ out\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)t\{text\}\(\backslash\)n"{}}.format(text=tldr\_entry.to\_text())}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00659}00659\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ out}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00660}00660\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00661}00661\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00662}00662\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00663}00663\ \textcolor{comment}{\#\ FEEDBACK}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00664}00664\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00665}00665\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00666}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_for_entry}{00666}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_for_entry}{FeedbackForEntry}}(nm.StructuredRel,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{OpenTldrEdge}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00667}00667\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00668}00668\ \textcolor{stringliteral}{\ \ \ \ Edges\ connect\ a\ Feedback\ to\ the\ TLDR\ Entry\ for\ which\ it\ was\ generated.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00669}00669\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00670}00670\ \ \ \ \ \textcolor{keywordflow}{pass}\ \textcolor{comment}{\#TODO:\ complete\ this\ methods}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00671}00671\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00672}00672\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00673}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_for_request}{00673}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_for_request}{FeedbackForRequest}}(nm.StructuredRel,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{OpenTldrEdge}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00674}00674\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00675}00675\ \textcolor{stringliteral}{\ \ \ \ Edges\ connect\ a\ Feedback\ to\ the\ Request\ for\ which\ it\ was\ generated.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00676}00676\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00677}00677\ \ \ \ \ \textcolor{keywordflow}{pass}\ \textcolor{comment}{\#TODO:\ complete\ this\ method}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00678}00678\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00679}00679\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00680}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback}{00680}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback}{Feedback}}(nm.StructuredNode,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{OpenTldrNode}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored}{Scored}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00681}00681\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00682}00682\ \textcolor{stringliteral}{\ \ \ \ Feedback\ relates\ events\ back\ to\ a\ Request\ node\ to\ TldrEntry\ node\ to\ provide\ a\ method\ for}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00683}00683\ \textcolor{stringliteral}{\ \ \ \ storing\ events\ (for\ example\ giving\ it\ stars\ or\ logging\ accessing\ the\ source\ article)}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00684}00684\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00685}00685\ \textcolor{stringliteral}{\ \ \ \ Feedback\ score\ ("{}score"{}\ property\ is\ float\ with\ expected\ range\ of\ 0.0\ -\/\ 1.0)\ indicating}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00686}00686\ \textcolor{stringliteral}{\ \ \ \ how\ relevant\ that\ entry\ is\ with\ respect\ to\ the\ request.\ These\ edges\ are\ generally\ created}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00687}00687\ \textcolor{stringliteral}{\ \ \ \ by\ the\ UI\ when\ the\ user\ rates\ an\ entry\ (e.g.,\ clicking\ on\ a\ star\ rating).}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00688}00688\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00689}00689\ \textcolor{stringliteral}{\ \ \ \ Feedback\ clicked\ ("{}clicked"{}\ property\ is\ a\ date)\ indicates\ when\ the\ last\ time\ the\ source}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00690}00690\ \textcolor{stringliteral}{\ \ \ \ link\ for\ the\ TLDR\ entry\ was\ clicked\ by\ the\ user.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00691}00691\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00692}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_a5ed1c3c5d072909fc6017624a0fa2814}{00692}}\ \ \ \ \ click\_date\ =\ nm.DateProperty(required=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00693}00693\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00694}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_a9f415cee16b10f66390ce688d9a4e0c9}{00694}}\ \ \ \ \ about\_entry\ =\ nm.RelationshipTo(TldrEntry,\ \textcolor{stringliteral}{'ABOUT'},\ model=FeedbackForEntry,\ cardinality=One)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00695}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_a773d86dcce4b95cbc0ce49b7d09ccf60}{00695}}\ \ \ \ \ from\_request\ =\ nm.RelationshipTo(Request,\ \textcolor{stringliteral}{'FROM'},\ model=FeedbackForRequest,\ cardinality=One)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00696}00696\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00697}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_afcc51bab6374c2fa4da8660cb321434b}{00697}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_afcc51bab6374c2fa4da8660cb321434b}{to\_text}}(self)\ -\/>\ str:\ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00698}00698\ \ \ \ \ \ \ \ \ click\_status\ =\ \textcolor{stringliteral}{"{}not\ clicked"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00699}00699\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_a5ed1c3c5d072909fc6017624a0fa2814}{click\_date}}\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00700}00700\ \ \ \ \ \ \ \ \ \ \ \ \ click\_status=\ \textcolor{stringliteral}{"{}clicked\ on\ \{date\}"{}}.format(date=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_a5ed1c3c5d072909fc6017624a0fa2814}{click\_date}}.strftime(\textcolor{stringliteral}{"{}\%m/\%d/\%Y"{}}))}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00701}00701\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00702}00702\ \ \ \ \ \ \ \ \ rate\_status\ =\ \textcolor{stringliteral}{"{}unrated"{}}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00703}00703\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_ab2fd1f45213ddb72c96c19f77c6ddf77}{score}}\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00704}00704\ \ \ \ \ \ \ \ \ \ \ \ \ rate\_status\ =\ \textcolor{stringliteral}{"{}rated\ as\ \{rate\}"{}}.format(rate=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_af1eecb0e7a0e24f34a64166700a382e5}{score\_to\_text}}())}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00705}00705\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00706}00706\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}The\ feedback\ is\ that\ entry\ '\{entry\}'\ was\ \{rate\_status\}\ and\ \{click\_status\}."{}}.format(}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00707}00707\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ entry\ =\ self.key\_for\_content.single().\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback_afcc51bab6374c2fa4da8660cb321434b}{to\_text}}(),}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00708}00708\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rate\_status\ =\ rate\_status,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00709}00709\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ click\_status\ =\ click\_status);}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00710}00710\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00711}00711\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00712}00712\ \textcolor{comment}{\#\ EVALUATION\ }}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00713}00713\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00714}00714\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00715}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_key_for_content}{00715}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_key_for_content}{KeyForContent}}(nm.StructuredRel,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{OpenTldrEdge}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00716}00716\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00717}00717\ \textcolor{stringliteral}{\ \ \ \ Edges\ connect\ a\ EvaluationKey\ to\ a\ Content\ node.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00718}00718\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00719}00719\ \ \ \ \ \textcolor{keywordflow}{pass}\ \textcolor{comment}{\#TODO:\ complete\ this\ method}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00720}00720\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00721}00721\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00722}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_key_for_request}{00722}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_key_for_request}{KeyForRequest}}(nm.StructuredRel,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_edge}{OpenTldrEdge}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00723}00723\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00724}00724\ \textcolor{stringliteral}{\ \ \ \ Edges\ connect\ a\ EvaluationKey\ to\ a\ Request.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00725}00725\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00726}00726\ \ \ \ \ \textcolor{keywordflow}{pass}\ \textcolor{comment}{\#TODO:\ complete\ this\ method}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00727}00727\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00728}00728\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00729}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key}{00729}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key}{EvalKey}}(nm.StructuredNode,\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{OpenTldrMeta}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{OpenTldrNode}},\ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored}{Scored}}):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00730}00730\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00731}00731\ \textcolor{stringliteral}{\ \ \ \ EvalKey\ is\ an\ indication\ of\ the\ relationship\ between\ a\ Content\ (e.g.,\ a\ news\ article)\ and\ a}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00732}00732\ \textcolor{stringliteral}{\ \ \ \ Request\ (i.e.,\ what\ the\ user\ is\ interested\ in).\ This\ represents\ a\ "{}correct"{}\ tailoring\ pair.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00733}00733\ \textcolor{stringliteral}{\ \ \ \ This\ also\ includes\ a\ score\ and\ text\ to\ help\ identify\ what\ was\ most\ relevant\ in\ the\ pair.}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00734}00734\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00735}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_ae654810a408bea5f2f26a92aadcb5e45}{00735}}\ \ \ \ \ text\ =\ nm.StringProperty(required=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00736}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_ac8df8c1a48390b7896d8762d3a7a2429}{00736}}\ \ \ \ \ key\_for\_content\ =\ nm.RelationshipTo(Content,\ \textcolor{stringliteral}{'KEY\_FOR\_CONTENT'},\ model=KeyForContent,\ cardinality=One)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00737}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_abddfd1e17b0a297f0b816a251622d334}{00737}}\ \ \ \ \ key\_for\_request\ =\ nm.RelationshipTo(Request,\ \textcolor{stringliteral}{'KEY\_FOR\_REQUEST'},\ model=KeyForRequest,\ cardinality=One)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00738}00738\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00739}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_af744cd9e6a3213bac4a03720b42c4027}{00739}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_af744cd9e6a3213bac4a03720b42c4027}{to\_json\_connect}}(self,\ kg,\ json\_dict)\ -\/>\ dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00740}00740\ \ \ \ \ \ \ \ \ out:dict=\ \{\}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00741}00741\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}request"{}}\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ json\_dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00742}00742\ \ \ \ \ \ \ \ \ \ \ \ \ out[\textcolor{stringliteral}{"{}request"{}}]=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_abddfd1e17b0a297f0b816a251622d334}{key\_for\_request}}.single().title}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00743}00743\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}content"{}}\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ json\_dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00744}00744\ \ \ \ \ \ \ \ \ \ \ \ \ out[\textcolor{stringliteral}{"{}content"{}}]=self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_ac8df8c1a48390b7896d8762d3a7a2429}{key\_for\_content}}.single().title}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00745}00745\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ out}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00746}00746\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00747}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_a4e2bd88a9e0500721e3636c7593277de}{00747}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_a4e2bd88a9e0500721e3636c7593277de}{from\_json\_connect}}(self,\ kg,\ json\_dict):}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00748}00748\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00749}00749\ \ \ \ \ \ \ \ \ request:Request\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00750}00750\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}request"{}}\ \textcolor{keywordflow}{in}\ json\_dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00751}00751\ \ \ \ \ \ \ \ \ \ \ \ \ request=kg.get\_request\_by\_title(json\_dict[\textcolor{stringliteral}{"{}request"{}}])}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00752}00752\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ request\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00753}00753\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(\textcolor{stringliteral}{"{}Request\ titled\ '\{req\}'\ was\ not\ found\ in\ KG,\ but\ is\ required\ for\ EvalKey."{}}.format(req=json\_dict[\textcolor{stringliteral}{"{}request"{}}]))}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00754}00754\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00755}00755\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(\textcolor{stringliteral}{"{}EvalKey\ requires\ a\ 'request'\ entry."{}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00756}00756\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00757}00757\ \ \ \ \ \ \ \ \ content:Content\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00758}00758\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}content"{}}\ \textcolor{keywordflow}{in}\ json\_dict:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00759}00759\ \ \ \ \ \ \ \ \ \ \ \ \ content=kg.get\_content\_by\_title(json\_dict[\textcolor{stringliteral}{"{}content"{}}])}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00760}00760\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ content\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00761}00761\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(\textcolor{stringliteral}{"{}Content\ titled\ '\{req\}'\ was\ not\ found\ in\ KG,\ but\ is\ required\ for\ EvalKey."{}}.format(req=json\_dict[\textcolor{stringliteral}{"{}content"{}}]))}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00762}00762\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00763}00763\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(\textcolor{stringliteral}{"{}EvalKey\ requires\ a\ 'request'\ entry."{}})}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00764}00764\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00765}00765\ \ \ \ \ \ \ \ \ self.save()}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00766}00766\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_abddfd1e17b0a297f0b816a251622d334}{key\_for\_request}}.connect(request)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00767}00767\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_ac8df8c1a48390b7896d8762d3a7a2429}{key\_for\_content}}.connect(content)}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00768}00768\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00769}00769\ }
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00770}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_aca1767ad060b5cf841e9a8770e9d6773}{00770}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_aca1767ad060b5cf841e9a8770e9d6773}{to\_text}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00771}00771\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}The\ relevance\ of\ the\ content\ '\{content\}'\ to\ the\ request\ '\{request\}'\ is\ \{amount\},\ and\ can\ be\ tailored\ down\ to\ '\{text\}'."{}}.format(}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00772}00772\ \ \ \ \ \ \ \ \ \ \ \ \ content\ =\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_ac8df8c1a48390b7896d8762d3a7a2429}{key\_for\_content}}.single().title,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00773}00773\ \ \ \ \ \ \ \ \ \ \ \ \ request\ =\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_abddfd1e17b0a297f0b816a251622d334}{key\_for\_request}}.single().title,}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00774}00774\ \ \ \ \ \ \ \ \ \ \ \ \ text\ =\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key_ae654810a408bea5f2f26a92aadcb5e45}{text}},}
+\DoxyCodeLine{\Hypertarget{_domain_8py_source_l00775}00775\ \ \ \ \ \ \ \ \ \ \ \ \ amount\ =\ self.\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_af1eecb0e7a0e24f34a64166700a382e5}{score\_to\_text}}())}
+
+\end{DoxyCode}

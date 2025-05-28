@@ -1,0 +1,127 @@
+\doxysection{opentldr.\+Domain.\+Request Class Reference}
+\hypertarget{classopentldr_1_1_domain_1_1_request}{}\label{classopentldr_1_1_domain_1_1_request}\index{opentldr.Domain.Request@{opentldr.Domain.Request}}
+Inheritance diagram for opentldr.\+Domain.\+Request\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.814070cm]{classopentldr_1_1_domain_1_1_request}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}} \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_a2799b7ead544d0459d4c6ff375539506}{get\+\_\+requested\+\_\+by}} (self)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_a9e816b0a623a8573f0ac58c4b6d7f0fe}{to\+\_\+text}} (self)
+\item 
+dict \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_a47099c46bbf68e58ff5e831f435cc38f}{to\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_a00ddd7e9016961973597513fc0287876}{from\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{opentldr.\+Domain.\+Open\+Tldr\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a9cf13c000011b62caba715caab59f46b}{from\+\_\+json}} (cls, kg, json\+\_\+string)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3beee20100161b1a421cefb6cb531df2}{to\+\_\+json}} (self, kg)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_aff68a987b9fa7ac454113b9da52663b0}{title}} = nm.\+String\+Property(required=True)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_ac16fe68430ab8b31968e1135ae230481}{text}} = nm.\+String\+Property(required=True)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request_af0e90c891179cf925fb1072c5a21ffbb}{requested\+\_\+by}} = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}}, \textquotesingle{}REQUESTED\+\_\+\+BY\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_requested_by}{Requested\+By}}, cardinality=One)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_citable_node}{opentldr.\+Domain.\+Citable\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_citable_node_ad82412657787fb2637c97e631dce1448}{embedding}} = nm.\+Array\+Property(required=False)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a614bf6f289697675be10cfa8cdd0fb4e}{uid}} = nm.\+Unique\+Id\+Property()
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_afdffc0ebdaf1f8f87441d3db2d793d02}{metadata}} = nm.\+JSONProperty()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Request nodes information requests that are made by users to indicate what information they
+are interested in and how to tailor that information for them. A "text" property (String) 
+holds the text of the information request and the "title" property (String) provides a 
+short labels for the request to avoid repeating long request text. The "requested_by" edge
+links each request to one User node.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_request_a00ddd7e9016961973597513fc0287876}\index{opentldr.Domain.Request@{opentldr.Domain.Request}!from\_json\_connect@{from\_json\_connect}}
+\index{from\_json\_connect@{from\_json\_connect}!opentldr.Domain.Request@{opentldr.Domain.Request}}
+\doxysubsubsection{\texorpdfstring{from\_json\_connect()}{from\_json\_connect()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_request_a00ddd7e9016961973597513fc0287876} 
+opentldr.\+Domain.\+Request.\+from\+\_\+json\+\_\+connect (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{kg}{, }\item[{}]{json\+\_\+dict}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Override from_json_connect to rebuild edge data from serialized node.
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a188adbb74405c1735fd06be87f58463c}{opentldr.\+Domain.\+Open\+Tldr\+Node}}.
+
+\Hypertarget{classopentldr_1_1_domain_1_1_request_a2799b7ead544d0459d4c6ff375539506}\index{opentldr.Domain.Request@{opentldr.Domain.Request}!get\_requested\_by@{get\_requested\_by}}
+\index{get\_requested\_by@{get\_requested\_by}!opentldr.Domain.Request@{opentldr.Domain.Request}}
+\doxysubsubsection{\texorpdfstring{get\_requested\_by()}{get\_requested\_by()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_request_a2799b7ead544d0459d4c6ff375539506} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}} opentldr.\+Domain.\+Request.\+get\+\_\+requested\+\_\+by (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_request_a47099c46bbf68e58ff5e831f435cc38f}\index{opentldr.Domain.Request@{opentldr.Domain.Request}!to\_json\_connect@{to\_json\_connect}}
+\index{to\_json\_connect@{to\_json\_connect}!opentldr.Domain.Request@{opentldr.Domain.Request}}
+\doxysubsubsection{\texorpdfstring{to\_json\_connect()}{to\_json\_connect()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_request_a47099c46bbf68e58ff5e831f435cc38f} 
+ dict opentldr.\+Domain.\+Request.\+to\+\_\+json\+\_\+connect (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{kg}{, }\item[{}]{json\+\_\+dict}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Override to_json_connect to insert edge data into the node.
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3ffd43dde7e5d2f3d736c7141109b855}{opentldr.\+Domain.\+Open\+Tldr\+Node}}.
+
+\Hypertarget{classopentldr_1_1_domain_1_1_request_a9e816b0a623a8573f0ac58c4b6d7f0fe}\index{opentldr.Domain.Request@{opentldr.Domain.Request}!to\_text@{to\_text}}
+\index{to\_text@{to\_text}!opentldr.Domain.Request@{opentldr.Domain.Request}}
+\doxysubsubsection{\texorpdfstring{to\_text()}{to\_text()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_request_a9e816b0a623a8573f0ac58c4b6d7f0fe} 
+ str opentldr.\+Domain.\+Request.\+to\+\_\+text (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}to_text() returns a unique, user readable string representing the object.
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a82fb039f0c98cff4893a796e230572b5}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_request_af0e90c891179cf925fb1072c5a21ffbb}\index{opentldr.Domain.Request@{opentldr.Domain.Request}!requested\_by@{requested\_by}}
+\index{requested\_by@{requested\_by}!opentldr.Domain.Request@{opentldr.Domain.Request}}
+\doxysubsubsection{\texorpdfstring{requested\_by}{requested\_by}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_request_af0e90c891179cf925fb1072c5a21ffbb} 
+opentldr.\+Domain.\+Request.\+requested\+\_\+by = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}}, \textquotesingle{}REQUESTED\+\_\+\+BY\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_requested_by}{Requested\+By}}, cardinality=One)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_request_ac16fe68430ab8b31968e1135ae230481}\index{opentldr.Domain.Request@{opentldr.Domain.Request}!text@{text}}
+\index{text@{text}!opentldr.Domain.Request@{opentldr.Domain.Request}}
+\doxysubsubsection{\texorpdfstring{text}{text}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_request_ac16fe68430ab8b31968e1135ae230481} 
+opentldr.\+Domain.\+Request.\+text = nm.\+String\+Property(required=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_request_aff68a987b9fa7ac454113b9da52663b0}\index{opentldr.Domain.Request@{opentldr.Domain.Request}!title@{title}}
+\index{title@{title}!opentldr.Domain.Request@{opentldr.Domain.Request}}
+\doxysubsubsection{\texorpdfstring{title}{title}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_request_aff68a987b9fa7ac454113b9da52663b0} 
+opentldr.\+Domain.\+Request.\+title = nm.\+String\+Property(required=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/chrisargenta/dev/opentldr/\+Open\+TLDR-\/\+Core/src/opentldr/\mbox{\hyperlink{_domain_8py}{Domain.\+py}}\end{DoxyCompactItemize}

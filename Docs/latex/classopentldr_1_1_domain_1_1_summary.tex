@@ -1,0 +1,95 @@
+\doxysection{opentldr.\+Domain.\+Summary Class Reference}
+\hypertarget{classopentldr_1_1_domain_1_1_summary}{}\label{classopentldr_1_1_domain_1_1_summary}\index{opentldr.Domain.Summary@{opentldr.Domain.Summary}}
+Inheritance diagram for opentldr.\+Domain.\+Summary\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.876047cm]{classopentldr_1_1_domain_1_1_summary}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} \mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary_a43fbfe9137561a63c9afeb747686c498}{get\+\_\+summarizes}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} \mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary_aab4b931d88f2e7c81472424762198a2d}{get\+\_\+focus\+\_\+on}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a82fb039f0c98cff4893a796e230572b5}{to\+\_\+text}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{opentldr.\+Domain.\+Open\+Tldr\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a9cf13c000011b62caba715caab59f46b}{from\+\_\+json}} (cls, kg, json\+\_\+string)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3beee20100161b1a421cefb6cb531df2}{to\+\_\+json}} (self, kg)
+\item 
+dict \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3ffd43dde7e5d2f3d736c7141109b855}{to\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a188adbb74405c1735fd06be87f58463c}{from\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary_a17491b91c190a32ae32015ea664ecf72}{text}} = nm.\+String\+Property(required=True)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary_a5672355dc84f04d11a754bdfd6ff21c5}{summarizes}} = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}, \textquotesingle{}SUMMARIZES\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summarizes}{Summarizes}}, cardinality=One)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary_a045dca674af957714e839c1284c6b23e}{focus\+\_\+on}} = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}}, \textquotesingle{}FOCUS\+\_\+\+ON\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_focus_on}{Focus\+On}}, cardinality=Zero\+Or\+One)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a614bf6f289697675be10cfa8cdd0fb4e}{uid}} = nm.\+Unique\+Id\+Property()
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_afdffc0ebdaf1f8f87441d3db2d793d02}{metadata}} = nm.\+JSONProperty()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Summary node contains text (String property) that is a shortened (ideally tailored) version
+of the Content node connect with the "summaries" edge. The "focus_on" edge connects to the
+Recommendation that may inform how this summary is tailored.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_summary_aab4b931d88f2e7c81472424762198a2d}\index{opentldr.Domain.Summary@{opentldr.Domain.Summary}!get\_focus\_on@{get\_focus\_on}}
+\index{get\_focus\_on@{get\_focus\_on}!opentldr.Domain.Summary@{opentldr.Domain.Summary}}
+\doxysubsubsection{\texorpdfstring{get\_focus\_on()}{get\_focus\_on()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_summary_aab4b931d88f2e7c81472424762198a2d} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} opentldr.\+Domain.\+Summary.\+get\+\_\+focus\+\_\+on (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_summary_a43fbfe9137561a63c9afeb747686c498}\index{opentldr.Domain.Summary@{opentldr.Domain.Summary}!get\_summarizes@{get\_summarizes}}
+\index{get\_summarizes@{get\_summarizes}!opentldr.Domain.Summary@{opentldr.Domain.Summary}}
+\doxysubsubsection{\texorpdfstring{get\_summarizes()}{get\_summarizes()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_summary_a43fbfe9137561a63c9afeb747686c498} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} opentldr.\+Domain.\+Summary.\+get\+\_\+summarizes (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_summary_a045dca674af957714e839c1284c6b23e}\index{opentldr.Domain.Summary@{opentldr.Domain.Summary}!focus\_on@{focus\_on}}
+\index{focus\_on@{focus\_on}!opentldr.Domain.Summary@{opentldr.Domain.Summary}}
+\doxysubsubsection{\texorpdfstring{focus\_on}{focus\_on}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_summary_a045dca674af957714e839c1284c6b23e} 
+opentldr.\+Domain.\+Summary.\+focus\+\_\+on = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}}, \textquotesingle{}FOCUS\+\_\+\+ON\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_focus_on}{Focus\+On}}, cardinality=Zero\+Or\+One)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_summary_a5672355dc84f04d11a754bdfd6ff21c5}\index{opentldr.Domain.Summary@{opentldr.Domain.Summary}!summarizes@{summarizes}}
+\index{summarizes@{summarizes}!opentldr.Domain.Summary@{opentldr.Domain.Summary}}
+\doxysubsubsection{\texorpdfstring{summarizes}{summarizes}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_summary_a5672355dc84f04d11a754bdfd6ff21c5} 
+opentldr.\+Domain.\+Summary.\+summarizes = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}, \textquotesingle{}SUMMARIZES\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summarizes}{Summarizes}}, cardinality=One)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_summary_a17491b91c190a32ae32015ea664ecf72}\index{opentldr.Domain.Summary@{opentldr.Domain.Summary}!text@{text}}
+\index{text@{text}!opentldr.Domain.Summary@{opentldr.Domain.Summary}}
+\doxysubsubsection{\texorpdfstring{text}{text}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_summary_a17491b91c190a32ae32015ea664ecf72} 
+opentldr.\+Domain.\+Summary.\+text = nm.\+String\+Property(required=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/chrisargenta/dev/opentldr/\+Open\+TLDR-\/\+Core/src/opentldr/\mbox{\hyperlink{_domain_8py}{Domain.\+py}}\end{DoxyCompactItemize}

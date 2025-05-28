@@ -1,0 +1,114 @@
+\doxysection{Abstract\+Data\+Repo.\+py}
+\hypertarget{_abstract_data_repo_8py_source}{}\label{_abstract_data_repo_8py_source}\index{/Users/chrisargenta/dev/opentldr/OpenTLDR-\/Core/src/opentldr/AbstractDataRepo.py@{/Users/chrisargenta/dev/opentldr/OpenTLDR-\/Core/src/opentldr/AbstractDataRepo.py}}
+\mbox{\hyperlink{_abstract_data_repo_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00001}\mbox{\hyperlink{namespaceopentldr_1_1_abstract_data_repo}{00001}}\ \textcolor{keyword}{from}\ abc\ \textcolor{keyword}{import}\ ABC,\ abstractmethod\ }
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00002}00002\ \textcolor{keyword}{import}\ re}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00003}00003\ \textcolor{keyword}{import}\ json}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00005}00005\ \textcolor{keyword}{from}\ .KnowledgeGraph\ \textcolor{keyword}{import}\ KnowledgeGraph}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00006}00006\ \textcolor{keyword}{from}\ .log\ \textcolor{keyword}{import}\ log}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00008}\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo}{00008}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo}{AbstractDataRepo}}:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00009}00009\ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00010}00010\ \textcolor{stringliteral}{\ \ \ \ baseclass\ for\ all\ Data\ Repositories,\ includes\ shared\ methods\ and\ ingest\ ordering.}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00011}00011\ \textcolor{stringliteral}{\ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00012}00012\ \ \ \ \ \textcolor{comment}{\#\ knowledgegraph\ for\ import/export}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00013}\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a09c4007af00cc06ec68ef288d7b87057}{00013}}\ \ \ \ \ kg:KnowledgeGraph=\textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00015}00015\ \ \ \ \ \textcolor{comment}{\#\ order\ content\ should\ be\ imported\ to\ ensure\ dependencies.}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00016}\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a12774abeff90ed7f5ea66d0e18d9fb57}{00016}}\ \ \ \ \ import\_order=[}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}ReferenceNode"{}},}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}ReferenceEdge"{}},}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Source"{}},}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Content"{}},}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}User"{}},}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Request"{}},}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Feedback"{}},}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}EvalKey"{}}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00025}00025\ \ \ \ \ \ \ \ \ ]}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00026}00026\ \ \ }
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00027}00027\ \ \ \ \ \textcolor{preprocessor}{@abstractmethod}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00028}\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_ae5dacc8cba09f1c297a8b5525e1c78ac}{00028}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_ae5dacc8cba09f1c297a8b5525e1c78ac}{importData}}(self)\ -\/>\ list[str]:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00031}00031\ \ \ \ \ \textcolor{preprocessor}{@abstractmethod}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00032}\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_adb84f6e0d4b532656f84bb63c3771d2f}{00032}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_adb84f6e0d4b532656f84bb63c3771d2f}{describe}}(self)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00035}\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a58575267f66a2a6df63d80b6e6f4af77}{00035}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a58575267f66a2a6df63d80b6e6f4af77}{\_\_init\_\_}}(self,\ kg:KnowledgeGraph):}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00036}00036\ \ \ \ \ \ \ \ \ self.kg=kg}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00038}00038\ \ \ \ \ \textcolor{preprocessor}{@classmethod}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00039}\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a6c9e83c5886bf8d307a29ca90d98f381}{00039}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a6c9e83c5886bf8d307a29ca90d98f381}{parseAnnotatedText}}(cls,text:str\ )\ -\/>\ tuple[dict,\ str]:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00041}00041\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Parses\ a\ string\ from\ an\ annotated\ text\ file,\ extracts\ the\ annotations,\ and}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00042}00042\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ returns\ a\ tuple\ (dict\ of\ metadata\ ,\ string\ of\ non\ annotation\ text\ block).}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00043}00043\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00044}00044\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Annotations\ are\ commented\ property\ key\ :\ value\ pairs,\ such\ as:}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00045}00045\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \#\ uid\ =\ 1234\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00046}00046\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ This\ is\ a\ text\ block.\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00047}00047\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \#\ name\ =\ Chris\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00048}00048\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ Another\ line.\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00049}00049\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ And\ one\ at\ the\ end.\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00050}00050\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00051}00051\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Will\ return\ (\{'uid':\ '1234',\ 'name':'Chris\},\ 'This\ is\ a\ text\ block.\(\backslash\)nAnother\ line.\(\backslash\)nAnd\ one\ at\ the\ end')\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00052}00052\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Identifies\ a\ property\ key}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ property\_regex=re.compile(\textcolor{stringliteral}{r'\string^\#\(\backslash\)s*[a-\/z\_]+\(\backslash\)s*\(\backslash\):\(\backslash\)s*'})}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ content\_text=\textcolor{stringliteral}{"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ properties=\{\}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ line\ \textcolor{keywordflow}{in}\ text.splitlines():}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ match=\ property\_regex.search(line)}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ match:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ This\ line\ is\ an\ annotation}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ key\ =\ re.sub(\textcolor{stringliteral}{r'[\#:\(\backslash\)s]'},\textcolor{stringliteral}{"{}"{}},match.group()).lower()}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ value\ =\ \textcolor{stringliteral}{''}.join(re.split(property\_regex,line)).strip()}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ properties[key]=value}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ This\ line\ is\ a\ text\ block}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ content\_text=\textcolor{stringliteral}{'\(\backslash\)n'}.join([content\_text,line])}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (properties,\ content\_text.strip())}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00071}00071\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00072}00072\ \ \ \ \ \textcolor{preprocessor}{@classmethod}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00073}\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a31c8c8f102bc162cc834da77432acdca}{00073}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a31c8c8f102bc162cc834da77432acdca}{inferDomainClass}}(cls,full\_path:str,annotations:dict)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'class'}\ \textcolor{keywordflow}{in}\ annotations:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ annotations[\textcolor{stringliteral}{"{}class"{}}]}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Class\ was\ not\ specified\ in\ annotations,\ attempting\ to\ infer\ from\ path\ (\{path\})."{}}.format(path=full\_path))}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ path\ =\ full\_path.lower()}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'reference'}\ \textcolor{keywordflow}{in}\ path:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}ReferenceNode"{}}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'active'}\ \textcolor{keywordflow}{in}\ path\ \textcolor{keywordflow}{or}\ \textcolor{stringliteral}{'content'}\ \textcolor{keywordflow}{in}\ path\ \textcolor{keywordflow}{or}\ \textcolor{stringliteral}{'article'}\ \textcolor{keywordflow}{in}\ path:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Content"{}}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'request'}\ \textcolor{keywordflow}{in}\ path\ \textcolor{keywordflow}{or}\ \textcolor{stringliteral}{'query'}\ \textcolor{keywordflow}{in}\ path\ \textcolor{keywordflow}{or}\ \textcolor{stringliteral}{'user'}\ \textcolor{keywordflow}{in}\ path:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'text'}\ \textcolor{keywordflow}{in}\ annotations:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Request"{}}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'name'}\ \textcolor{keywordflow}{in}\ annotations:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}User"{}}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ TODO:\ Nothing\ is\ returned\ if\ no\ text\ and\ no\ name}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'eval'}\ \textcolor{keywordflow}{in}\ path\ \textcolor{keywordflow}{or}\ \textcolor{stringliteral}{'evalkey'}\ \textcolor{keywordflow}{in}\ path\ \textcolor{keywordflow}{or}\ \textcolor{stringliteral}{'evaluation'}\ \textcolor{keywordflow}{in}\ path:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}EvalKey"{}}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'feedback'}\ \textcolor{keywordflow}{in}\ path:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Feedback"{}}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}UNKNOWN"{}}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00094}\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a95df8e37ec34655b559b171fcb0b9de5}{00094}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a95df8e37ec34655b559b171fcb0b9de5}{clean\_up\_nodes}}(self)\ -\/>\ list[str]:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00095}00095\ \ \ \ \ \ \ \ \ out:list[str]=[]}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ tag\ \textcolor{keywordflow}{in}\ self.\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a12774abeff90ed7f5ea66d0e18d9fb57}{import\_order}}:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Cleaning\ up\ \{tag\}:"{}}.format(tag=tag))}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ node\_list\ =\ self.\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a09c4007af00cc06ec68ef288d7b87057}{kg}}.get\_all\_nodes\_by\_tag(tag)}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ node\_list\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ node\ \textcolor{keywordflow}{in}\ node\_list:}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ node.save()\ \textcolor{comment}{\#\ Updates\ properties,\ including\ uid}}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ out.append(node.uid)}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00104}00104\ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Cleaned\ \{n\}\ nodes."{}}.format(n=len(out)))}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ out}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00107}\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a27cac12d765b07de2a9cd08764fb972e}{00107}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_abstract_data_repo_1_1_abstract_data_repo_a27cac12d765b07de2a9cd08764fb972e}{exportData}}(self,\ path:str):}
+\DoxyCodeLine{\Hypertarget{_abstract_data_repo_8py_source_l00108}00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{pass}}
+
+\end{DoxyCode}

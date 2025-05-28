@@ -1,0 +1,139 @@
+\doxysection{opentldr.\+Domain.\+Tldr\+Entry Class Reference}
+\hypertarget{classopentldr_1_1_domain_1_1_tldr_entry}{}\label{classopentldr_1_1_domain_1_1_tldr_entry}\index{opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}}
+Inheritance diagram for opentldr.\+Domain.\+Tldr\+Entry\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.407035cm]{classopentldr_1_1_domain_1_1_tldr_entry}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}} \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_aab2375ec26d4038c895cbafbec4fa1b9}{get\+\_\+includes}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_abceefbbbe4d4badef679ff504e0a58dd}{get\+\_\+based\+\_\+on}} (self)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_a4e55cab2ebcb0b5f1e65fcf3d78d4e76}{to\+\_\+text}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{opentldr.\+Domain.\+Open\+Tldr\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a9cf13c000011b62caba715caab59f46b}{from\+\_\+json}} (cls, kg, json\+\_\+string)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3beee20100161b1a421cefb6cb531df2}{to\+\_\+json}} (self, kg)
+\item 
+dict \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3ffd43dde7e5d2f3d736c7141109b855}{to\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a188adbb74405c1735fd06be87f58463c}{from\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored}{opentldr.\+Domain.\+Scored}}}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_af1eecb0e7a0e24f34a64166700a382e5}{score\+\_\+to\+\_\+text}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_adf3d5b3f5b4ae4f1f1387e45c5a3befa}{link}} = nm.\+String\+Property(required=True)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_a8980f81a7f91ed8a1d13520d87d88648}{title}} = nm.\+String\+Property(required=True)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_a445a91154377aa4b5fa25ad8a1834006}{type}} = nm.\+String\+Property(required=False)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_a3aa4675c5917a9d8eafb611a939ac07c}{summary}} = nm.\+String\+Property(required=True)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_a4020a3aa6fcf4c63f91f8beaabae1c58}{includes}} = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}}, \textquotesingle{}INCLUDES\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_includes}{Includes}}, cardinality=Zero\+Or\+One)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry_a1ceda9e5279c84b0c80810a6118c65e9}{based\+\_\+on}} = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}}, \textquotesingle{}BASED\+\_\+\+ON\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_based_on}{Based\+On}}, cardinality=Zero\+Or\+One)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a614bf6f289697675be10cfa8cdd0fb4e}{uid}} = nm.\+Unique\+Id\+Property()
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_afdffc0ebdaf1f8f87441d3db2d793d02}{metadata}} = nm.\+JSONProperty()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored}{opentldr.\+Domain.\+Scored}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_ab2fd1f45213ddb72c96c19f77c6ddf77}{score}} = nm.\+Float\+Property(default=-\/1.\+0)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}TldrEntry is one record within a TLDR. In general, there is a one-to-one relationship
+between each TldrEntry, Recommendation, and Summary such that each record within a TLDR
+has a score for the Recommendation, a text blurb from the Summary, and a connection back
+to the original Content (from both the Recommendation and Summary).
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_tldr_entry_abceefbbbe4d4badef679ff504e0a58dd}\index{opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}!get\_based\_on@{get\_based\_on}}
+\index{get\_based\_on@{get\_based\_on}!opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}}
+\doxysubsubsection{\texorpdfstring{get\_based\_on()}{get\_based\_on()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_tldr_entry_abceefbbbe4d4badef679ff504e0a58dd} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} opentldr.\+Domain.\+Tldr\+Entry.\+get\+\_\+based\+\_\+on (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_tldr_entry_aab2375ec26d4038c895cbafbec4fa1b9}\index{opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}!get\_includes@{get\_includes}}
+\index{get\_includes@{get\_includes}!opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}}
+\doxysubsubsection{\texorpdfstring{get\_includes()}{get\_includes()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_tldr_entry_aab2375ec26d4038c895cbafbec4fa1b9} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}} opentldr.\+Domain.\+Tldr\+Entry.\+get\+\_\+includes (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_tldr_entry_a4e55cab2ebcb0b5f1e65fcf3d78d4e76}\index{opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}!to\_text@{to\_text}}
+\index{to\_text@{to\_text}!opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}}
+\doxysubsubsection{\texorpdfstring{to\_text()}{to\_text()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_tldr_entry_a4e55cab2ebcb0b5f1e65fcf3d78d4e76} 
+ str opentldr.\+Domain.\+Tldr\+Entry.\+to\+\_\+text (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}to_text() returns a unique, user readable string representing the object.
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a82fb039f0c98cff4893a796e230572b5}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_tldr_entry_a1ceda9e5279c84b0c80810a6118c65e9}\index{opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}!based\_on@{based\_on}}
+\index{based\_on@{based\_on}!opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}}
+\doxysubsubsection{\texorpdfstring{based\_on}{based\_on}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_tldr_entry_a1ceda9e5279c84b0c80810a6118c65e9} 
+opentldr.\+Domain.\+Tldr\+Entry.\+based\+\_\+on = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}}, \textquotesingle{}BASED\+\_\+\+ON\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_based_on}{Based\+On}}, cardinality=Zero\+Or\+One)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_tldr_entry_a4020a3aa6fcf4c63f91f8beaabae1c58}\index{opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}!includes@{includes}}
+\index{includes@{includes}!opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}}
+\doxysubsubsection{\texorpdfstring{includes}{includes}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_tldr_entry_a4020a3aa6fcf4c63f91f8beaabae1c58} 
+opentldr.\+Domain.\+Tldr\+Entry.\+includes = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}}, \textquotesingle{}INCLUDES\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_includes}{Includes}}, cardinality=Zero\+Or\+One)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_tldr_entry_adf3d5b3f5b4ae4f1f1387e45c5a3befa}\index{opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}!link@{link}}
+\index{link@{link}!opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}}
+\doxysubsubsection{\texorpdfstring{link}{link}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_tldr_entry_adf3d5b3f5b4ae4f1f1387e45c5a3befa} 
+opentldr.\+Domain.\+Tldr\+Entry.\+link = nm.\+String\+Property(required=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_tldr_entry_a3aa4675c5917a9d8eafb611a939ac07c}\index{opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}!summary@{summary}}
+\index{summary@{summary}!opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}}
+\doxysubsubsection{\texorpdfstring{summary}{summary}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_tldr_entry_a3aa4675c5917a9d8eafb611a939ac07c} 
+opentldr.\+Domain.\+Tldr\+Entry.\+summary = nm.\+String\+Property(required=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_tldr_entry_a8980f81a7f91ed8a1d13520d87d88648}\index{opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}!title@{title}}
+\index{title@{title}!opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}}
+\doxysubsubsection{\texorpdfstring{title}{title}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_tldr_entry_a8980f81a7f91ed8a1d13520d87d88648} 
+opentldr.\+Domain.\+Tldr\+Entry.\+title = nm.\+String\+Property(required=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_tldr_entry_a445a91154377aa4b5fa25ad8a1834006}\index{opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}!type@{type}}
+\index{type@{type}!opentldr.Domain.TldrEntry@{opentldr.Domain.TldrEntry}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_tldr_entry_a445a91154377aa4b5fa25ad8a1834006} 
+opentldr.\+Domain.\+Tldr\+Entry.\+type = nm.\+String\+Property(required=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/chrisargenta/dev/opentldr/\+Open\+TLDR-\/\+Core/src/opentldr/\mbox{\hyperlink{_domain_8py}{Domain.\+py}}\end{DoxyCompactItemize}

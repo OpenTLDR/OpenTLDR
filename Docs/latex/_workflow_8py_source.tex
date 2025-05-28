@@ -1,0 +1,180 @@
+\doxysection{Workflow.\+py}
+\hypertarget{_workflow_8py_source}{}\label{_workflow_8py_source}\index{/Users/chrisargenta/dev/opentldr/OpenTLDR-\/Core/src/opentldr/Workflow.py@{/Users/chrisargenta/dev/opentldr/OpenTLDR-\/Core/src/opentldr/Workflow.py}}
+\mbox{\hyperlink{_workflow_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00001}\mbox{\hyperlink{namespaceopentldr_1_1_workflow}{00001}}\ \textcolor{keyword}{import}\ json}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00002}00002\ \textcolor{keyword}{from}\ time\ \textcolor{keyword}{import}\ perf\_counter}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00004}00004\ \textcolor{keyword}{from}\ .log\ \textcolor{keyword}{import}\ log}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00006}00006\ \textcolor{comment}{\#\ Pull\ environment\ variables\ from\ .env\ or\ os}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00007}00007\ \textcolor{keyword}{from}\ dotenv\ \textcolor{keyword}{import}\ load\_dotenv}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00008}00008\ load\_dotenv()}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00010}00010\ \textcolor{comment}{\#\ disable\ warning\ for\ debugging\ of\ frozen\ packages}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00011}00011\ \textcolor{comment}{\#\ seems\ to\ only\ matter\ when\ running\ under\ Jupyter}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00012}00012\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00013}00013\ os.environ[\textcolor{stringliteral}{"{}PYDEVD\_DISABLE\_FILE\_VALIDATION"{}}]=\textcolor{stringliteral}{"{}1"{}}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00015}00015\ \textcolor{comment}{\#\ For\ setting\ the\ output\ notebooks\ to\ read-\/only}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00016}00016\ \textcolor{keyword}{from}\ stat\ \textcolor{keyword}{import}\ S\_IREAD,\ S\_IRGRP,\ S\_IROTH,\ S\_IWRITE}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00018}00018\ \textcolor{keyword}{import}\ papermill\ \textcolor{keyword}{as}\ pm}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00020}\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow}{00020}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow}{Workflow}}:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00022}\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a065593c50d0b5f830a0235f9562e0b46}{00022}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a065593c50d0b5f830a0235f9562e0b46}{\_\_init\_\_}}(self,\ workflow:\ dict):}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00023}\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad881bd3b131b1ac6c66b088fe6660f1a}{00023}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad881bd3b131b1ac6c66b088fe6660f1a}{workflow}}=workflow}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00024}00024\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ac8e6335ff5c37d13bed5c1871265d0c4}{verify}}()}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00026}00026\ \ \ \ \ \textcolor{preprocessor}{@classmethod}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00027}\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a4f90e300befa3cd9c1a466f4968e451c}{00027}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a4f90e300befa3cd9c1a466f4968e451c}{from\_json}}(cls,j:str):}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00028}00028\ \ \ \ \ \ \ \ \ wf:Workflow\ =\ cls(json.loads(j))}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ wf}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00030}00030\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00031}00031\ \ \ \ \ \textcolor{preprocessor}{@classmethod}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00032}\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_af0f7bdd2538d41105df26902295ce34c}{00032}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_af0f7bdd2538d41105df26902295ce34c}{from\_file}}(cls,filepath:str):}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ j=json.load(open(filepath))}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ cls(j)}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00036}00036\ \ \ \ \ \textcolor{preprocessor}{@classmethod}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00037}\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a6ee040f835b88f15345ee00c0a1c2c2e}{00037}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a6ee040f835b88f15345ee00c0a1c2c2e}{from\_vars}}(cls,output\_folder:str,\ notebook\_order:list[str],\ variables:dict):}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ workflow\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ workflow[\textcolor{stringliteral}{"{}Output"{}}]\ =\ output\_folder}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ nblist\ =\ []}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ notebook\ \textcolor{keywordflow}{in}\ notebook\_order:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ nblist.append([notebook,\ variables])}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ workflow[\textcolor{stringliteral}{"{}Notebooks"{}}]\ =\ nblist}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ cls(workflow)}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00046}\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ac8e6335ff5c37d13bed5c1871265d0c4}{00046}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ac8e6335ff5c37d13bed5c1871265d0c4}{verify}}(self):}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00048}00048\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Walk\ thru\ the\ structure\ of\ the\ workflow\ and\ ensure\ it\ is\ setup\ correctly.}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00049}00049\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ has\_errors:bool=\textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00051}00051\ \ \ \ \ \ \ \ \ errors:str=\textcolor{stringliteral}{"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Verify\ Output}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ path=self.\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad881bd3b131b1ac6c66b088fe6660f1a}{workflow}}[\textcolor{stringliteral}{"{}Output"{}}]}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ path\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}'Output'\ path\ is\ set\ to\ None."{}})}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ has\_errors=\textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ \textcolor{keywordflow}{not}\ os.path.exists(path):}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}'Output'\ path\ (\{path\})\ does\ not\ exist,\ creating\ it..."{}}.format(path=path))}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a26d1807f210272a2cc3e2d5b3e15c4d2}{ensure\_path}}(path)\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ \textcolor{keywordflow}{not}\ os.path.isdir(path):}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}'Output'\ path\ (\{path\})\ is\ not\ a\ directory."{}}.format(path=path))\ \ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ has\_errors=\textcolor{keyword}{True}\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ \textcolor{keywordflow}{not}\ os.access(path,\ os.W\_OK):}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}'Output'\ path\ (\{path\})\ is\ not\ writable."{}}.format(path=path))}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ has\_errors=\textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Output\ config\ verified."{}})}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Verify\ Common\ Settings}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}Common"{}}\ \textcolor{keywordflow}{in}\ self.\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad881bd3b131b1ac6c66b088fe6660f1a}{workflow}}:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ common\_dict=self.\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad881bd3b131b1ac6c66b088fe6660f1a}{workflow}}[\textcolor{stringliteral}{"{}Common"{}}]}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Common\ config\ exists."{}})\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Verify\ Notebooks\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ nblist=self.\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad881bd3b131b1ac6c66b088fe6660f1a}{workflow}}[\textcolor{stringliteral}{"{}Notebooks"{}}]}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ nblist\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}'Notebooks'\ is\ set\ to\ None."{}})}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ has\_errors=\textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ c\ =\ 1}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ step\ \textcolor{keywordflow}{in}\ nblist:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ notebook:str=step[0]}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isfile(notebook):}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}'Notebooks'\ \#\{c\}:\ '\{notebook\}'\ not\ exist."{}}.format(c=c,notebook=notebook))}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ has\_errors=\textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ \textcolor{keywordflow}{not}\ os.access(notebook,os.R\_OK):}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}'Notebooks'\ \#\{c\}:\ '\{notebook\}'\ is\ not\ readable."{}}.format(c=c,notebook=notebook))\ \ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ has\_errors=\textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ params=step[1]}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ params\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}'Notebooks'\ \#\{c\}:\ '\{notebook\}'\ does\ not\ have\ parameters\ set."{}}.format(c=c,notebook=notebook))}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ has\_errors=\textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ p=1}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ key,\ value\ \textcolor{keywordflow}{in}\ params.items():}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ type(key)\ ==\ str:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}'Notebooks'\ \#\{c\}:\ \{notebook\}\ Variable\ \#\{p\}:\ name\ '\{var\}'\ is\ not\ a\ string\ value."{}}.format(c=c,notebook=notebook,p=p,var=key))}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ has\_errors=\textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ p=p+1}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ c=c+1}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00102}00102\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00103}00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ has\_errors:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(\textcolor{stringliteral}{"{}Error\ in\ Workflow\ specification\ (see\ errors\ in\ log)."{}})}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}No\ errors\ in\ verification\ of\ workflow\ specification,\ exporting\ a\ copy\ to\ output\ directory."{}})}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a1af2a7757daee5f190a988f806d15b5f}{export\_workflow}}(os.path.join(self.\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad881bd3b131b1ac6c66b088fe6660f1a}{workflow}}[\textcolor{stringliteral}{"{}Output"{}}],\textcolor{stringliteral}{"{}workflow.json"{}}))}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00109}\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a1af2a7757daee5f190a988f806d15b5f}{00109}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a1af2a7757daee5f190a988f806d15b5f}{export\_workflow}}(self,\ filepath:str)\ -\/>json:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ open(filepath,\ \textcolor{stringliteral}{'w'},\ encoding=\textcolor{stringliteral}{'utf-\/8'})\ \textcolor{keyword}{as}\ f:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ json.dump(self.\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad881bd3b131b1ac6c66b088fe6660f1a}{workflow}},\ f,\ ensure\_ascii=\textcolor{keyword}{False},\ indent=4)}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00113}\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a26d1807f210272a2cc3e2d5b3e15c4d2}{00113}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a26d1807f210272a2cc3e2d5b3e15c4d2}{ensure\_path}}(self,path):}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00114}00114\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00115}00115\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Ensure\_path(path)\ simply\ creates\ a\ directory\ if\ it\ is\ not\ there\ already.}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00116}00116\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00117}00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.exists(path):}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ os.makedirs(path)}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ log.info(\textcolor{stringliteral}{"{}Created\ output\ directory:\ "{}}+path)}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00121}\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad1f2b102c2b687ebff381cd650be04df}{00121}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad1f2b102c2b687ebff381cd650be04df}{execute\_notebook}}(self,\ notebook:str,\ variables:dict,\ output\_path:str)\ -\/>\ float:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00122}00122\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00123}00123\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Execute\_notebook\ runs\ a\ single\ notebook\ file\ in\ PaperMill\ returns\ the\ run\ time\ in\ seconds}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00124}00124\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00125}00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ out\_notebook:str\ =\ os.path.join(output\_path,notebook.replace(\textcolor{stringliteral}{'/'},\textcolor{stringliteral}{"{}\_"{}}))}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Now\ executing\ notebook\ '\{notebook\}'\ with\ params\ '\{params\}'\ and\ output\ '\{output\}'."{}}.format(notebook=notebook,params=variables,output=output\_path))}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ notebook\_working\_dir\ =\ os.path.dirname(notebook)}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ notebook\_working\_dir\ ==\ \textcolor{stringliteral}{''}:\ \textcolor{comment}{\#\ no\ directory\ given}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ notebook\_working\_dir=os.getcwd()}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}CWD\ for\ notebook\ '\{notebook\}'\ set\ to\ '\{cwd\}'."{}}.format(notebook=notebook,cwd=notebook\_working\_dir))}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ step\_start=perf\_counter()}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ pm.execute\_notebook(notebook,\ out\_notebook,\ variables,\ cwd=notebook\_working\_dir)}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ step\_end=perf\_counter()}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (step\_end-\/step\_start)}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00140}00140\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00141}00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ log.error(\textcolor{stringliteral}{"{}There\ was\ an\ error\ executing\ the\ notebook\ (\{nb\}),\ please\ verify\ the\ parameters\ and\ that\ the\ notebook\ runs\ successfully\ on\ its\ own."{}}.format(nb=notebook))}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ e}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00145}\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a6c86183378937e71d6825e5bbcee3787}{00145}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a6c86183378937e71d6825e5bbcee3787}{run}}(self):}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00146}00146\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'''}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00147}00147\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Run\ the\ defined\ workflow\ files\ in\ order\ in\ PaperMill}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00148}00148\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ '''}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00149}00149\ \ \ \ \ \ \ \ \ output\_path=self.\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad881bd3b131b1ac6c66b088fe6660f1a}{workflow}}[\textcolor{stringliteral}{"{}Output"{}}]}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00150}00150\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_a26d1807f210272a2cc3e2d5b3e15c4d2}{ensure\_path}}(output\_path)}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00152}00152\ \ \ \ \ \ \ \ \ common\_params\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00153}00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}Common"{}}\ \textcolor{keywordflow}{in}\ self.\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad881bd3b131b1ac6c66b088fe6660f1a}{workflow}}:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ common\_params=self.\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad881bd3b131b1ac6c66b088fe6660f1a}{workflow}}[\textcolor{stringliteral}{"{}Common"{}}]}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00156}00156\ \ \ \ \ \ \ \ \ workflow\_start=perf\_counter()}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00157}00157\ \ \ \ \ \ \ \ \ c=1}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00158}00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ step\ \textcolor{keywordflow}{in}\ self.\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad881bd3b131b1ac6c66b088fe6660f1a}{workflow}}[\textcolor{stringliteral}{"{}Notebooks"{}}]:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ notebook:str=step[0]}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ params=step[1]}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ common\_params\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ params\ =\ params\ |\ common\_params}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ log.debug(\textcolor{stringliteral}{"{}Common\ config\ exists,\ combined\ to\ \{\}"{}}.format(params))\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nStarting\ Notebook\ \#\{c\}:\ \{name\}"{}}.format(c=c,name=notebook))}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ time=self.\mbox{\hyperlink{classopentldr_1_1_workflow_1_1_workflow_ad1f2b102c2b687ebff381cd650be04df}{execute\_notebook}}(notebook,params,output\_path)}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Completed\ \#\{c\}:\ \{name\}\ in\ \{time\}\ seconds."{}}.format(c=c,name=notebook,time=round(time,2)))}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ c=c+1}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00172}00172\ \ \ \ \ \ \ \ \ workflow\_end=perf\_counter()}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00173}00173\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Workflow\ completed\ successfully\ in\ \{time\}\ seconds."{}}.format(time=round(workflow\_end-\/workflow\_start,2)))}
+\DoxyCodeLine{\Hypertarget{_workflow_8py_source_l00174}00174\ }
+
+\end{DoxyCode}

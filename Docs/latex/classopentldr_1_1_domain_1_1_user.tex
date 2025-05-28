@@ -1,0 +1,79 @@
+\doxysection{opentldr.\+Domain.\+User Class Reference}
+\hypertarget{classopentldr_1_1_domain_1_1_user}{}\label{classopentldr_1_1_domain_1_1_user}\index{opentldr.Domain.User@{opentldr.Domain.User}}
+Inheritance diagram for opentldr.\+Domain.\+User\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.876047cm]{classopentldr_1_1_domain_1_1_user}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_user_a445a4a25ebd2c88568ad7019d5159870}{to\+\_\+text}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{opentldr.\+Domain.\+Open\+Tldr\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a9cf13c000011b62caba715caab59f46b}{from\+\_\+json}} (cls, kg, json\+\_\+string)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3beee20100161b1a421cefb6cb531df2}{to\+\_\+json}} (self, kg)
+\item 
+dict \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3ffd43dde7e5d2f3d736c7141109b855}{to\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a188adbb74405c1735fd06be87f58463c}{from\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user_a0139a3d91f3f4ae624a939a983d01865}{name}} = nm.\+String\+Property(required=True)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user_af5b27f04c2c776981d31bfa1f087babf}{email}} = nm.\+String\+Property(required=True)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a614bf6f289697675be10cfa8cdd0fb4e}{uid}} = nm.\+Unique\+Id\+Property()
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_afdffc0ebdaf1f8f87441d3db2d793d02}{metadata}} = nm.\+JSONProperty()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}User node represents a client of the OpenTLDR system and has name and email properties (Stings).
+Similar to a Content connecting to a Source, Requests connect to a User (see RequestedBy edge).
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_user_a445a4a25ebd2c88568ad7019d5159870}\index{opentldr.Domain.User@{opentldr.Domain.User}!to\_text@{to\_text}}
+\index{to\_text@{to\_text}!opentldr.Domain.User@{opentldr.Domain.User}}
+\doxysubsubsection{\texorpdfstring{to\_text()}{to\_text()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_user_a445a4a25ebd2c88568ad7019d5159870} 
+ str opentldr.\+Domain.\+User.\+to\+\_\+text (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}to_text() returns a unique, user readable string representing the object.
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a82fb039f0c98cff4893a796e230572b5}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_user_af5b27f04c2c776981d31bfa1f087babf}\index{opentldr.Domain.User@{opentldr.Domain.User}!email@{email}}
+\index{email@{email}!opentldr.Domain.User@{opentldr.Domain.User}}
+\doxysubsubsection{\texorpdfstring{email}{email}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_user_af5b27f04c2c776981d31bfa1f087babf} 
+opentldr.\+Domain.\+User.\+email = nm.\+String\+Property(required=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_user_a0139a3d91f3f4ae624a939a983d01865}\index{opentldr.Domain.User@{opentldr.Domain.User}!name@{name}}
+\index{name@{name}!opentldr.Domain.User@{opentldr.Domain.User}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_user_a0139a3d91f3f4ae624a939a983d01865} 
+opentldr.\+Domain.\+User.\+name = nm.\+String\+Property(required=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/chrisargenta/dev/opentldr/\+Open\+TLDR-\/\+Core/src/opentldr/\mbox{\hyperlink{_domain_8py}{Domain.\+py}}\end{DoxyCompactItemize}

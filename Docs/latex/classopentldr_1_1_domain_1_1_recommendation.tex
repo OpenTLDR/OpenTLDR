@@ -1,0 +1,106 @@
+\doxysection{opentldr.\+Domain.\+Recommendation Class Reference}
+\hypertarget{classopentldr_1_1_domain_1_1_recommendation}{}\label{classopentldr_1_1_domain_1_1_recommendation}\index{opentldr.Domain.Recommendation@{opentldr.Domain.Recommendation}}
+Inheritance diagram for opentldr.\+Domain.\+Recommendation\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.327014cm]{classopentldr_1_1_domain_1_1_recommendation}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} \mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_a2508a21c04bf1afbbdcc5a8387581e22}{get\+\_\+recommends}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} \mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_a0a54cc4ac793ecc3e931b7b12169de4c}{get\+\_\+relates\+\_\+to}} (self)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_aabb10fedc0300dbf3da0c80dcdac3a2b}{to\+\_\+text}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node}{opentldr.\+Domain.\+Open\+Tldr\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a9cf13c000011b62caba715caab59f46b}{from\+\_\+json}} (cls, kg, json\+\_\+string)
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3beee20100161b1a421cefb6cb531df2}{to\+\_\+json}} (self, kg)
+\item 
+dict \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a3ffd43dde7e5d2f3d736c7141109b855}{to\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_node_a188adbb74405c1735fd06be87f58463c}{from\+\_\+json\+\_\+connect}} (self, kg, json\+\_\+dict)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored}{opentldr.\+Domain.\+Scored}}}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_af1eecb0e7a0e24f34a64166700a382e5}{score\+\_\+to\+\_\+text}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_a4cdf8a4c529979172a892115cd1403e9}{recommends}} = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}, \textquotesingle{}RECOMMENDS\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommends}{Recommends}}, cardinality=One)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation_a873a14a6342f57447c8ce1ef0abedfd1}{relates\+\_\+to}} = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}, \textquotesingle{}RELATES\+\_\+\+TO\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_relates_to}{Relates\+To}}, cardinality=One)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a614bf6f289697675be10cfa8cdd0fb4e}{uid}} = nm.\+Unique\+Id\+Property()
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_afdffc0ebdaf1f8f87441d3db2d793d02}{metadata}} = nm.\+JSONProperty()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored}{opentldr.\+Domain.\+Scored}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_scored_ab2fd1f45213ddb72c96c19f77c6ddf77}{score}} = nm.\+Float\+Property(default=-\/1.\+0)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Recommendation nodes represent the assertion that a Content node (pointed to by Recommends edge)
+is believed to be relevant to a Request node (pointed to by the RelatesTo edge). The score
+property (float 0.0 - 1.0) indicates how relevant and thus how strong the recommendation.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_recommendation_a2508a21c04bf1afbbdcc5a8387581e22}\index{opentldr.Domain.Recommendation@{opentldr.Domain.Recommendation}!get\_recommends@{get\_recommends}}
+\index{get\_recommends@{get\_recommends}!opentldr.Domain.Recommendation@{opentldr.Domain.Recommendation}}
+\doxysubsubsection{\texorpdfstring{get\_recommends()}{get\_recommends()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_recommendation_a2508a21c04bf1afbbdcc5a8387581e22} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} opentldr.\+Domain.\+Recommendation.\+get\+\_\+recommends (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_recommendation_a0a54cc4ac793ecc3e931b7b12169de4c}\index{opentldr.Domain.Recommendation@{opentldr.Domain.Recommendation}!get\_relates\_to@{get\_relates\_to}}
+\index{get\_relates\_to@{get\_relates\_to}!opentldr.Domain.Recommendation@{opentldr.Domain.Recommendation}}
+\doxysubsubsection{\texorpdfstring{get\_relates\_to()}{get\_relates\_to()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_recommendation_a0a54cc4ac793ecc3e931b7b12169de4c} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} opentldr.\+Domain.\+Recommendation.\+get\+\_\+relates\+\_\+to (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_recommendation_aabb10fedc0300dbf3da0c80dcdac3a2b}\index{opentldr.Domain.Recommendation@{opentldr.Domain.Recommendation}!to\_text@{to\_text}}
+\index{to\_text@{to\_text}!opentldr.Domain.Recommendation@{opentldr.Domain.Recommendation}}
+\doxysubsubsection{\texorpdfstring{to\_text()}{to\_text()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_recommendation_aabb10fedc0300dbf3da0c80dcdac3a2b} 
+ str opentldr.\+Domain.\+Recommendation.\+to\+\_\+text (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}to_text() returns a unique, user readable string representing the object.
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta_a82fb039f0c98cff4893a796e230572b5}{opentldr.\+Domain.\+Open\+Tldr\+Meta}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classopentldr_1_1_domain_1_1_recommendation_a4cdf8a4c529979172a892115cd1403e9}\index{opentldr.Domain.Recommendation@{opentldr.Domain.Recommendation}!recommends@{recommends}}
+\index{recommends@{recommends}!opentldr.Domain.Recommendation@{opentldr.Domain.Recommendation}}
+\doxysubsubsection{\texorpdfstring{recommends}{recommends}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_recommendation_a4cdf8a4c529979172a892115cd1403e9} 
+opentldr.\+Domain.\+Recommendation.\+recommends = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}, \textquotesingle{}RECOMMENDS\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommends}{Recommends}}, cardinality=One)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_domain_1_1_recommendation_a873a14a6342f57447c8ce1ef0abedfd1}\index{opentldr.Domain.Recommendation@{opentldr.Domain.Recommendation}!relates\_to@{relates\_to}}
+\index{relates\_to@{relates\_to}!opentldr.Domain.Recommendation@{opentldr.Domain.Recommendation}}
+\doxysubsubsection{\texorpdfstring{relates\_to}{relates\_to}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_domain_1_1_recommendation_a873a14a6342f57447c8ce1ef0abedfd1} 
+opentldr.\+Domain.\+Recommendation.\+relates\+\_\+to = nm.\+Relationship\+To(\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}, \textquotesingle{}RELATES\+\_\+\+TO\textquotesingle{}, model=\mbox{\hyperlink{classopentldr_1_1_domain_1_1_relates_to}{Relates\+To}}, cardinality=One)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/chrisargenta/dev/opentldr/\+Open\+TLDR-\/\+Core/src/opentldr/\mbox{\hyperlink{_domain_8py}{Domain.\+py}}\end{DoxyCompactItemize}

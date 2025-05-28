@@ -1,0 +1,1172 @@
+\doxysection{opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph Class Reference}
+\hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph}{}\label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2c531a38e1418624185e37b410062bea}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, neo4j\+\_\+driver=None, \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2c3bf7492bb2167ab425f6d2877eab0b}{connection}}=None, \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a87d184700dde3455ca73770c98bf545f}{user}}=None, \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab5d9784d801fda4dc621d387f1f3a11d}{password}}=None, \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aeaeceb9420e4d37d479d259c83fe49ba}{database}}=None)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a03e6143a869eb4331b1cf0d258859fe1}{\+\_\+\+\_\+del\+\_\+\+\_\+}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a9b5e3bb2b5550ed8cad3231849aa8efa}{\+\_\+\+\_\+enter\+\_\+\+\_\+}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab2020a03aa26f03e0ad16b635fc88ac2}{\+\_\+\+\_\+exit\+\_\+\+\_\+}} (self, ctx\+\_\+type, ctx\+\_\+value, ctx\+\_\+traceback)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a020cdd76b7d4d347d05f304c6b0b29f7}{neo4j\+\_\+query}} (self, cql)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ae053d69a83992c8c62441514ad82617a}{neomodel\+\_\+query}} (self, \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\+\_\+query}}, dict params=\{\})
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a90f76a2524973d4c91a0a137ead2bab0}{connect}} (self, \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}}=None)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a609dbb2ca39dd2ebea591a93a65ddc7d}{get\+Neo4j\+Driver}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aa4dcbea4838a04e1c86b0aaf2ab4f03e}{close}} (self)
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aac10fc455d8264ac64567ec471b350ab}{get\+\_\+all\+\_\+node\+\_\+uids\+\_\+by\+\_\+tag}} (self, str tag)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_afbf8196b86e556998a935f8ebaed3409}{get\+\_\+all\+\_\+nodes\+\_\+by\+\_\+tag}} (self, str tag)
+\item 
+list \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\+\_\+query}} (self, cypher\+\_\+query, extract\+\_\+variable=None, dict params=\{\})
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac38bc2dcd436b2725a38514ca45c5c0e}{cypher\+\_\+query\+\_\+one}} (self, \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}{cypher\+\_\+query}}, extract\+\_\+variable=None, dict params=\{\})
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a556dfdcd967cbfcdf3bd066f7004c7dd}{cypher\+\_\+import}} (self, filename)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a716046d64e384491a127f2fdfe80c996}{delete\+\_\+all}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac60641ad7f42d22ea3892abc86914447}{shortest\+\_\+path}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{Open\+Tldr\+Meta}} start, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{Open\+Tldr\+Meta}} end)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac62b641a2500302ddfeb6b43e0924daf}{get\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad5b82357dba60fe6276149e99d95cc56}{add\+\_\+reference\+\_\+node}} (self, str text, str type, bool hypothesized=False)
+\begin{DoxyCompactList}\small\item\em Reference Nodes in KG are labeled as \doxylink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a07ad023c2b773079b9712f3cf5571d9f}{get\+\_\+reference\+\_\+node\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a22c96cc837a76a85be5e095833cfbb47}{get\+\_\+all\+\_\+reference\+\_\+nodes}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0bf70646467ab6ec24769e27f947fbe3}{update\+\_\+reference\+\_\+node}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}} node)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_acf53500e4b5b19f939a5871f4e2778f6}{delete\+\_\+reference\+\_\+node}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}} node)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0d85c2055bd9b0d7b0d349d82d336819}{delete\+\_\+all\+\_\+reference\+\_\+nodes}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a07ad023c2b773079b9712f3cf5571d9f}{get\+\_\+reference\+\_\+node\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a22c96cc837a76a85be5e095833cfbb47}{get\+\_\+all\+\_\+reference\+\_\+nodes}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a28df00c8830dddd590b974bcf9852a0e}{add\+\_\+reference\+\_\+edge}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}} from\+\_\+node, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}} to\+\_\+node, str text, str type, bool hypothesized=False)
+\begin{DoxyCompactList}\small\item\em Reference Edges -\/ in KG these are labeled as REFERENCE\+\_\+\+EDGE but Neomodel classes are \doxylink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0a2c079afde4b918b67c6b5b24dd8ed4}{get\+\_\+reference\+\_\+edge\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_abc4632eca1d04bda140477e86c20549b}{get\+\_\+all\+\_\+reference\+\_\+edges}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a4e031cc7d0f3ff205a2045a8e50bc92f}{update\+\_\+reference\+\_\+edge}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}} edge)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aea5593651e78f83430ebc50b535d8233}{delete\+\_\+reference\+\_\+edge}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}} edge)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8aff8aadc6e60706ec8ebf0b4d58e3da}{delete\+\_\+all\+\_\+reference\+\_\+edges}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a07c0af37b71db468d72cd016af9a7daa}{add\+\_\+source}} (self, str name)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac78199aae776b12c2b0dc24f34632703}{get\+\_\+source\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a772e5e90a1ff0a8ee305de916d7fa266}{get\+\_\+source\+\_\+by\+\_\+name}} (self, str name)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6a554bfedaad6f58068f0932bf70cc34}{get\+\_\+all\+\_\+sources}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_acd3b3950f669a9b33e24b23e7bb94c02}{update\+\_\+source}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}} node)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6a024d83809bade2eb20fb760175819b}{delete\+\_\+source}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}} source)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_af613db630413d9480e411ec806a661f1}{delete\+\_\+source\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a423940b03d3a27c199bd133babbe344f}{delete\+\_\+all\+\_\+sources}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a834c419843f055f95ec18b917fe4373b}{add\+\_\+content}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}} source, str type, str url, datetime.\+date date, str title, str text)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a4d28c8a28aee95c94e04a7a702b793b2}{get\+\_\+content\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a86ab3575efceba5f82a78b9171f3421b}{get\+\_\+content\+\_\+by\+\_\+title}} (self, str title)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a076ef7270549fdf2dedefa9c7a8600e3}{get\+\_\+content\+\_\+by\+\_\+url}} (self, str url)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0f99661080b8a9aa416deb02e8e5abd4}{get\+\_\+content\+\_\+by\+\_\+date}} (self, datetime.\+date date)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad0cb67a8393b8b78b503e68edce68da7}{get\+\_\+content\+\_\+by\+\_\+source}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}} source)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a089e1ed952b34465b5402ea9e80222a6}{get\+\_\+content\+\_\+by\+\_\+source\+\_\+uid}} (self, str uid)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a172dd6b487f05586d00e68ac16e98c81}{get\+\_\+content\+\_\+by\+\_\+recommendation}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} recommendation)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a97ece05f39c93dc33bb9e62edad40e9e}{get\+\_\+all\+\_\+content}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a192f4160785a5d3729c056a5029ad1ac}{delete\+\_\+content}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} content)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab9e32ca1079bdb3ed8c55c502224d6ec}{delete\+\_\+content\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a595bab0e13f7f9755fbbd8a7e34005e3}{delete\+\_\+all\+\_\+content}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a86fc1488db3a07943b56b1c56d0cb92e}{add\+\_\+entity}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}\texorpdfstring{$\vert$}{|}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} node, str text, str type)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6404c205f32c1ad27d877b7ea6112713}{add\+\_\+refers\+\_\+to\+\_\+edge}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}} entity, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}} reference, confidence=1.\+0)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad8c277e8a26a7b2674c613e5bbc7e1c8}{get\+\_\+entity\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a09eee174f397fa96365af8c5fbb340b0}{get\+\_\+entity\+\_\+by\+\_\+url}} (self, str url)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a59e401fb338bb82fbad8806bf036d366}{get\+\_\+entities\+\_\+by\+\_\+content}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} content)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a95f295a967337c84e138e2e543e10555}{get\+\_\+entities\+\_\+by\+\_\+content\+\_\+uid}} (self, str uid)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a1d43555ef238b8da92d01adf8b00aad4}{get\+\_\+entities\+\_\+by\+\_\+request}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} request)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a96c552cecd89c6f844b515d85e8a4cf3}{get\+\_\+all\+\_\+entities}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac0614f839e2b658a66ac37693484b70f}{delete\+\_\+entity}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}} node)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a397e33db0f8c5c9e64216e04782adc63}{delete\+\_\+entity\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2cb59755526c933df15c9b39208b40f2}{delete\+\_\+all\+\_\+entities}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a9cddcdf897eba500a6af5bc71afe9789}{add\+\_\+user}} (self, str name, str email)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_abb1c546736140c0c3329aae6ca630596}{get\+\_\+user\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5577180fa180eab5cb961c6d436b74b6}{get\+\_\+user\+\_\+by\+\_\+name}} (self, str name)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a71766d2af3f824afdcf8a17aaf2656d7}{get\+\_\+all\+\_\+users}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5714b872718490ec165bcafec6ffc67a}{delete\+\_\+user}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a87d184700dde3455ca73770c98bf545f}{user}})
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a3edd8d532ebeb2f9a24a15aabcc78b1b}{delete\+\_\+user\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aedf1fac1b84df4b3224471659115a3cf}{delete\+\_\+all\+\_\+users}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a281872c51b47aec9a8259f42eb7618ed}{add\+\_\+request}} (self, str title, str text, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a87d184700dde3455ca73770c98bf545f}{user}})
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0d7243bfd0a243a8fe00946069684576}{get\+\_\+request\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a7652bc73ff49cdd213164fa25c16a93f}{get\+\_\+requests\+\_\+by\+\_\+user}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a87d184700dde3455ca73770c98bf545f}{user}})
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad10f9e4a3b1de1b319757c2451de6201}{get\+\_\+requests\+\_\+by\+\_\+user\+\_\+uid}} (self, str uid)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a149198cf7289b0067422946eba2a8d08}{get\+\_\+request\+\_\+by\+\_\+title}} (self, str title)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aa01c503f67dad1f5b2bcb49e1dd46a2e}{get\+\_\+all\+\_\+requests}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a93206c1e77d34b75f701e4948c5a30bf}{delete\+\_\+request}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} request)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aca2376b7e85e0bd92d548e5f1d11d0f4}{delete\+\_\+request\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8b53b87ab4656affa00ad623afa00461}{delete\+\_\+all\+\_\+requests}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab040e15f37b17350ccf4c5cdd77336f3}{get\+\_\+requests\+\_\+by\+\_\+tldr\+\_\+entry}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{Tldr\+Entry}} entry)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0f92184a5777529b35cc93d803e87b38}{add\+\_\+recommendation}} (self, float score, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} content, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} request)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a69917b18083ddcdd67681aa8cde9b238}{get\+\_\+recommendation}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} content, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} request)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac41414d244bd7dbee46735fbfa694ef6}{get\+\_\+recommendation\+\_\+by\+\_\+id}} (self, str uid)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a1adea36c318077446bd4e21e5263f9ce}{get\+\_\+recommendations\+\_\+by\+\_\+request}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} request)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8b51349be2c1427462206f5827dc04a9}{get\+\_\+all\+\_\+recommendations}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a83403168a24b21f071c916785d43b20f}{delete\+\_\+recommendation}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} recommendation)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aef9dbb5ad02812211b7da05a7f17a0fd}{delete\+\_\+all\+\_\+recommendations}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad27eba1dbd22ff99e8f1149ed70cd98d}{add\+\_\+summary}} (self, str text, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} content, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} recommendation=None)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8316528e611f567e9a35dd44bb9bcb03}{get\+\_\+summary}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} content, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} recommendation=None)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a537c51e98f02b922407c41e099e26844}{get\+\_\+summary\+\_\+by\+\_\+id}} (self, str uid)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a7815f40b59663738a9512a16b0f517ba}{get\+\_\+summaries\+\_\+by\+\_\+content}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} content)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a021948360b3b3d3a526ae6ad98d46c99}{get\+\_\+summaries\+\_\+by\+\_\+recommendation}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} recommendation)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aa9eabae9027126710a1e3a3323358ab9}{get\+\_\+all\+\_\+summary}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a11222c052588a422600b17e2ac2a9a2e}{delete\+\_\+summary}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}} summary)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_af7398425e5a28f089af0c8c29b501cbe}{delete\+\_\+all\+\_\+summaries}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_abe976c640f2aa194f0f127b0fbfee301}{add\+\_\+tldr}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} request, datetime.\+date date)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5c593d2c4d3bbb6ed882ee8b04119cbc}{get\+\_\+tldr}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} request, datetime.\+date date)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a00ece2e66490b4c6e8073dc09748144d}{get\+\_\+tldr\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5b48dbd7560903f94555d65d984407d0}{get\+\_\+tldrs\+\_\+by\+\_\+date}} (self, datetime.\+date date)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8f00ce90fd2b2d0dab17802b3bf904fb}{get\+\_\+tldrs\+\_\+before\+\_\+date}} (self, datetime.\+date date)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad5dc8c27cf6a00c201238492f4f80aa9}{get\+\_\+tldr\+\_\+by\+\_\+request}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} request)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8659b2097401229bf84cc66cfa69151d}{get\+\_\+tldr\+\_\+by\+\_\+request\+\_\+uid}} (self, str request\+\_\+uid)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6aa5e68fb4d5241f7fe535566f6969a3}{get\+\_\+tldr\+\_\+by\+\_\+uid\+\_\+and\+\_\+date}} (self, str request\+\_\+uid, datetime.\+date date)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a1c681eaaee06734ab5329717b214b4ab}{get\+\_\+all\+\_\+tldrs}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a177b7363068cd63945dc1d14f2cbacf9}{delete\+\_\+tldr}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}} tldr)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a09e228ac5030b4576e37d3ab35cf7fa1}{delete\+\_\+all\+\_\+tldrs}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{Tldr\+Entry}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6d89bb3fc666c2f8a3270a7583f27dba}{add\+\_\+entry\+\_\+to\+\_\+tldr}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}} tldr, float score, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} recommendation, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}} summary, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} content)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a4c4438ef5a2953bf7fc17313b45976e9}{get\+\_\+tldr\+\_\+entry\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{Tldr\+Entry}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a3742b98c773e35490f1c6b15be3e0ddc}{get\+\_\+entries\+\_\+by\+\_\+tldr}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}} tldr)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a15cc8ece3dbd45510d4b60eadf0bd7f4}{delete\+\_\+tldr\+\_\+entry}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{Tldr\+Entry}} tldr\+\_\+entry)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab7e1d6ba3ccb970faa6e7f3bc6cd45f2}{delete\+\_\+tldr\+\_\+entries\+\_\+by\+\_\+tldr}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}} tldr)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback}{Feedback}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a014db1159232c0720a163739ae1ef890}{add\+\_\+feedback\+\_\+click}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{Tldr\+Entry}} entry, datetime.\+date date)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback}{Feedback}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aac785a73600d5b7e018a37b1d6fedd18}{add\+\_\+feedback\+\_\+rating}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{Tldr\+Entry}} entry, float score)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback}{Feedback}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aaf11c42c3b4ad0c2a18488d2baaf897f}{get\+\_\+feedback\+\_\+by\+\_\+tldr\+\_\+entry}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{Tldr\+Entry}} entry)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback}{Feedback}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a60d01d5bfcb3d6e94fd2e2229147155f}{get\+\_\+feedback\+\_\+by\+\_\+request}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} request)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key}{Eval\+Key}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a471c7612553a791436d10bf924e6593c}{add\+\_\+evalkey}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} content, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} request, float score, str text)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key}{Eval\+Key}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a3510c45e53bc4c571ba2533b100796b8}{get\+\_\+evalkey\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key}{Eval\+Key}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0fbedc1b7847949a359d60f289a6bd0c}{get\+\_\+evalkeys\+\_\+by\+\_\+request}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} request)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key}{Eval\+Key}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a7d8dc37275969e248d7631a7dff9d4ea}{get\+\_\+evalkeys\+\_\+by\+\_\+content}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} content)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key}{Eval\+Key}} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_af48b3a99f71b03a1a607a2253a8a8f98}{get\+\_\+evalkey\+\_\+by\+\_\+content\+\_\+and\+\_\+request}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} content, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} request)
+\item 
+list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key}{Eval\+Key}}\mbox{]} \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a9ae0fc49adaff664357a37ae9904ba6b}{get\+\_\+all\+\_\+evalkeys}} (self)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_acb07cb5a84748e3f8ed108a08252bf38}{delete\+\_\+evalkey}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key}{Eval\+Key}} eval\+Key)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8fb4cfa3e65069055c4d6b35865dc292}{delete\+\_\+evalkey\+\_\+by\+\_\+uid}} (self, str uid)
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aeac243ee20064493bb11dd5d8ba40260}{delete\+\_\+all\+\_\+evalkeys}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2c3bf7492bb2167ab425f6d2877eab0b}{connection}} = \mbox{\hyperlink{namespaceopentldr_1_1_knowledge_graph_ae716c7469fbad08b82aa463a9b8e8a21}{\+\_\+getenv}}("{}NEO4\+J\+\_\+\+CONNECTION"{}, "{}neo4j\+://localhost\+:7687"{})
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a87d184700dde3455ca73770c98bf545f}{user}} = \mbox{\hyperlink{namespaceopentldr_1_1_knowledge_graph_ae716c7469fbad08b82aa463a9b8e8a21}{\+\_\+getenv}}("{}NEO4\+J\+\_\+\+USERNAME"{}, "{}neo4j"{})
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab5d9784d801fda4dc621d387f1f3a11d}{password}} = \mbox{\hyperlink{namespaceopentldr_1_1_knowledge_graph_ae716c7469fbad08b82aa463a9b8e8a21}{\+\_\+getenv}}("{}NEO4\+J\+\_\+\+PASSWORD"{}, "{}neo4j"{})
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aeaeceb9420e4d37d479d259c83fe49ba}{database}} = \mbox{\hyperlink{namespaceopentldr_1_1_knowledge_graph_ae716c7469fbad08b82aa463a9b8e8a21}{\+\_\+getenv}}("{}NEO4\+J\+\_\+\+DATABASE"{}, "{}neo4j"{})
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}{driver}} = Graph\+Database.\+driver(\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2c3bf7492bb2167ab425f6d2877eab0b}{connection}}, auth=(\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a87d184700dde3455ca73770c98bf545f}{user}}, \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab5d9784d801fda4dc621d387f1f3a11d}{password}}))
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab1a575940d30d1b9341084f22477d129}{DRIVER}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a42d3f9d6010f6377950b9c3eec7e40ef}{\+\_\+ensure\+\_\+saved}} (self, \mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{Open\+Tldr\+Meta}} node)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}KnowledgeGraph is the API for OpenTLDR's interface to Neo4j graph database. It attempts to make the
+driver connection using OS, .env, and then default values for connections. This API maps neo4j
+nodes/edges to types specified in the Domain module (using Neomodel OGM and some custom cypher).
+
+In order to be successful, you will need to have a neo4j server running, reachable on the network,
+and with environment variables (either in OS or .env files) similar to these:
+
+    NEO4J_CONNECTION='neo4j://localhost:7687'
+    NEO4J_USERNAME=neo4jUser
+    NEO4J_PASSWORD=neo4jPassword
+    NEO4J_DATABASE=neo4j
+
+This class can be used in several different ways, including:
+    (1) import opentldr.KnowledgeGraph ... kg=KnowledgeGraph() ... (use kg here) ... kg.close()
+    (2) with opentldr.KnowledgeGraph as kg: ... (use kg here, and then it will autoclose)
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2c531a38e1418624185e37b410062bea}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2c531a38e1418624185e37b410062bea} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{neo4j\+\_\+driver}{ = {\ttfamily None}, }\item[{}]{connection}{ = {\ttfamily None}, }\item[{}]{user}{ = {\ttfamily None}, }\item[{}]{password}{ = {\ttfamily None}, }\item[{}]{database}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a03e6143a869eb4331b1cf0d258859fe1}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!\_\_del\_\_@{\_\_del\_\_}}
+\index{\_\_del\_\_@{\_\_del\_\_}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{\_\_del\_\_()}{\_\_del\_\_()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a03e6143a869eb4331b1cf0d258859fe1} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+\_\+\+\_\+del\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a9b5e3bb2b5550ed8cad3231849aa8efa}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!\_\_enter\_\_@{\_\_enter\_\_}}
+\index{\_\_enter\_\_@{\_\_enter\_\_}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{\_\_enter\_\_()}{\_\_enter\_\_()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a9b5e3bb2b5550ed8cad3231849aa8efa} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+\_\+\+\_\+enter\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab2020a03aa26f03e0ad16b635fc88ac2}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!\_\_exit\_\_@{\_\_exit\_\_}}
+\index{\_\_exit\_\_@{\_\_exit\_\_}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{\_\_exit\_\_()}{\_\_exit\_\_()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab2020a03aa26f03e0ad16b635fc88ac2} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+\_\+\+\_\+exit\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{ctx\+\_\+type}{, }\item[{}]{ctx\+\_\+value}{, }\item[{}]{ctx\+\_\+traceback}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a42d3f9d6010f6377950b9c3eec7e40ef}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!\_ensure\_saved@{\_ensure\_saved}}
+\index{\_ensure\_saved@{\_ensure\_saved}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{\_ensure\_saved()}{\_ensure\_saved()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a42d3f9d6010f6377950b9c3eec7e40ef} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+\_\+ensure\+\_\+saved (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{Open\+Tldr\+Meta}}}]{node}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}OpenTLDR objects all inherit from the OpenTldrMeta mixin class. They will be assigned a "uid" when they are saved.
+So, we can use this to determine if an object has been saved or not and respond appropriately.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a834c419843f055f95ec18b917fe4373b}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!add\_content@{add\_content}}
+\index{add\_content@{add\_content}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{add\_content()}{add\_content()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a834c419843f055f95ec18b917fe4373b} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+add\+\_\+content (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}}}]{source}{, }\item[{str}]{type}{, }\item[{str}]{url}{, }\item[{datetime.\+date}]{date}{, }\item[{str}]{title}{, }\item[{str}]{text}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a86fc1488db3a07943b56b1c56d0cb92e}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!add\_entity@{add\_entity}}
+\index{add\_entity@{add\_entity}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{add\_entity()}{add\_entity()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a86fc1488db3a07943b56b1c56d0cb92e} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+add\+\_\+entity (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} \texorpdfstring{$\vert$}{|} \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}}]{node}{, }\item[{str}]{text}{, }\item[{str}]{type}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6d89bb3fc666c2f8a3270a7583f27dba}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!add\_entry\_to\_tldr@{add\_entry\_to\_tldr}}
+\index{add\_entry\_to\_tldr@{add\_entry\_to\_tldr}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{add\_entry\_to\_tldr()}{add\_entry\_to\_tldr()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6d89bb3fc666c2f8a3270a7583f27dba} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{Tldr\+Entry}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+add\+\_\+entry\+\_\+to\+\_\+tldr (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}}}]{tldr}{, }\item[{float}]{score}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}}}]{recommendation}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}}}]{summary}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}}]{content}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a471c7612553a791436d10bf924e6593c}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!add\_evalkey@{add\_evalkey}}
+\index{add\_evalkey@{add\_evalkey}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{add\_evalkey()}{add\_evalkey()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a471c7612553a791436d10bf924e6593c} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key}{Eval\+Key}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+add\+\_\+evalkey (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}}]{content}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}}]{request}{, }\item[{float}]{score}{, }\item[{str     }]{text}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a014db1159232c0720a163739ae1ef890}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!add\_feedback\_click@{add\_feedback\_click}}
+\index{add\_feedback\_click@{add\_feedback\_click}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{add\_feedback\_click()}{add\_feedback\_click()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a014db1159232c0720a163739ae1ef890} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback}{Feedback}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+add\+\_\+feedback\+\_\+click (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{Tldr\+Entry}}}]{entry}{, }\item[{datetime.\+date}]{date}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aac785a73600d5b7e018a37b1d6fedd18}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!add\_feedback\_rating@{add\_feedback\_rating}}
+\index{add\_feedback\_rating@{add\_feedback\_rating}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{add\_feedback\_rating()}{add\_feedback\_rating()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aac785a73600d5b7e018a37b1d6fedd18} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback}{Feedback}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+add\+\_\+feedback\+\_\+rating (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{Tldr\+Entry}}}]{entry}{, }\item[{float}]{score}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0f92184a5777529b35cc93d803e87b38}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!add\_recommendation@{add\_recommendation}}
+\index{add\_recommendation@{add\_recommendation}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{add\_recommendation()}{add\_recommendation()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0f92184a5777529b35cc93d803e87b38} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+add\+\_\+recommendation (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{score}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}}]{content}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}     }]{request}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a28df00c8830dddd590b974bcf9852a0e}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!add\_reference\_edge@{add\_reference\_edge}}
+\index{add\_reference\_edge@{add\_reference\_edge}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{add\_reference\_edge()}{add\_reference\_edge()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a28df00c8830dddd590b974bcf9852a0e} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+add\+\_\+reference\+\_\+edge (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}}}]{from\+\_\+node}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}}}]{to\+\_\+node}{, }\item[{str}]{text}{, }\item[{str}]{type}{, }\item[{bool }]{hypothesized}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+
+
+Reference Edges -\/ in KG these are labeled as REFERENCE\+\_\+\+EDGE but Neomodel classes are \doxylink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}. 
+
+\begin{DoxyVerb}Adds a ReferenceEdge between two ReferenceNodes. Note these edges are only between ReferenceNodes.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad5b82357dba60fe6276149e99d95cc56}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!add\_reference\_node@{add\_reference\_node}}
+\index{add\_reference\_node@{add\_reference\_node}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{add\_reference\_node()}{add\_reference\_node()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad5b82357dba60fe6276149e99d95cc56} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+add\+\_\+reference\+\_\+node (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{text}{, }\item[{str}]{type}{, }\item[{bool }]{hypothesized}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+
+
+Reference Nodes in KG are labeled as \doxylink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}. 
+
+\begin{DoxyVerb}Creates a new ReferenceNode object in KG.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6404c205f32c1ad27d877b7ea6112713}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!add\_refers\_to\_edge@{add\_refers\_to\_edge}}
+\index{add\_refers\_to\_edge@{add\_refers\_to\_edge}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{add\_refers\_to\_edge()}{add\_refers\_to\_edge()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6404c205f32c1ad27d877b7ea6112713} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+add\+\_\+refers\+\_\+to\+\_\+edge (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}}}]{entity}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}}}]{reference}{, }\item[{}]{confidence}{ = {\ttfamily 1.0}}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a281872c51b47aec9a8259f42eb7618ed}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!add\_request@{add\_request}}
+\index{add\_request@{add\_request}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{add\_request()}{add\_request()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a281872c51b47aec9a8259f42eb7618ed} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+add\+\_\+request (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{title}{, }\item[{str}]{text}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}}}]{user}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a07c0af37b71db468d72cd016af9a7daa}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!add\_source@{add\_source}}
+\index{add\_source@{add\_source}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{add\_source()}{add\_source()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a07c0af37b71db468d72cd016af9a7daa} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+add\+\_\+source (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Creates new Source node, or if one by the same name already exists it reuses it.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad27eba1dbd22ff99e8f1149ed70cd98d}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!add\_summary@{add\_summary}}
+\index{add\_summary@{add\_summary}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{add\_summary()}{add\_summary()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad27eba1dbd22ff99e8f1149ed70cd98d} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+add\+\_\+summary (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{text}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}}]{content}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} }]{recommendation}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_abe976c640f2aa194f0f127b0fbfee301}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!add\_tldr@{add\_tldr}}
+\index{add\_tldr@{add\_tldr}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{add\_tldr()}{add\_tldr()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_abe976c640f2aa194f0f127b0fbfee301} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+add\+\_\+tldr (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}}]{request}{, }\item[{datetime.\+date}]{date}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a9cddcdf897eba500a6af5bc71afe9789}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!add\_user@{add\_user}}
+\index{add\_user@{add\_user}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{add\_user()}{add\_user()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a9cddcdf897eba500a6af5bc71afe9789} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+add\+\_\+user (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{name}{, }\item[{str}]{email}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aa4dcbea4838a04e1c86b0aaf2ab4f03e}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!close@{close}}
+\index{close@{close}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aa4dcbea4838a04e1c86b0aaf2ab4f03e} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+close (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Shuts down the current connection to neo4j. This should be done at the end of each program / notebook.
+If you use the "with statement" context control, this will be called automatically when the code block ends.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a90f76a2524973d4c91a0a137ead2bab0}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!connect@{connect}}
+\index{connect@{connect}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a90f76a2524973d4c91a0a137ead2bab0} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+connect (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{driver}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Ensures that a connection to Neo4j has been established and is functioning.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a556dfdcd967cbfcdf3bd066f7004c7dd}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!cypher\_import@{cypher\_import}}
+\index{cypher\_import@{cypher\_import}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{cypher\_import()}{cypher\_import()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a556dfdcd967cbfcdf3bd066f7004c7dd} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+cypher\+\_\+import (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{filename}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Processes a text file containing cypher commands and executes them on the KnowledgeGraph.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!cypher\_query@{cypher\_query}}
+\index{cypher\_query@{cypher\_query}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{cypher\_query()}{cypher\_query()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a326dad7798240f502b8602c55433f7cc} 
+ list opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+cypher\+\_\+query (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{cypher\+\_\+query}{, }\item[{}]{extract\+\_\+variable}{ = {\ttfamily None}, }\item[{dict }]{params}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Performs a cypher query and returns a single simple list of Neomodel objects based on the variable indicated (or first).
+Use this for most OpenTLDR queries because it is much simpler to process for iterating on the results.
+For example: cypher_query("MATCH (a)-[b]->(c) RETURN a,b,c","a") only returns a list of only the "a" results.
+So, cypher_query("MATCH (a)-[b]->(c) RETURN a","a") would give the same result list by dropping the "b" and "c" results.
+Reduce the risk of Cypher injection attacks by passing Cypher parameters in params.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac38bc2dcd436b2725a38514ca45c5c0e}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!cypher\_query\_one@{cypher\_query\_one}}
+\index{cypher\_query\_one@{cypher\_query\_one}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{cypher\_query\_one()}{cypher\_query\_one()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac38bc2dcd436b2725a38514ca45c5c0e} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+cypher\+\_\+query\+\_\+one (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{cypher\+\_\+query}{, }\item[{}]{extract\+\_\+variable}{ = {\ttfamily None}, }\item[{dict }]{params}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Performs a query that is intended to LIMIT the return values to one single Neomodel object. This simplifies the processing
+of the query results to consistently only get a single object for the extract_variable, it is undefined which unless you sort them.
+For example: cypher_query_one("MATCH (a)-[b]->(c) RETURN a,b,c","a") returns the FIRST object of result "a".
+So, cypher_query_one("MATCH (a)-[b]->(c) RETURN a LIMIT 1","a") gives the same result (faster).
+Reduce the risk of Cypher injection attacks by passing Cypher parameters in params.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a716046d64e384491a127f2fdfe80c996}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_all@{delete\_all}}
+\index{delete\_all@{delete\_all}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_all()}{delete\_all()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a716046d64e384491a127f2fdfe80c996} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+all (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Clears the neo4j graph database.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a595bab0e13f7f9755fbbd8a7e34005e3}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_all\_content@{delete\_all\_content}}
+\index{delete\_all\_content@{delete\_all\_content}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_all\_content()}{delete\_all\_content()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a595bab0e13f7f9755fbbd8a7e34005e3} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+all\+\_\+content (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2cb59755526c933df15c9b39208b40f2}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_all\_entities@{delete\_all\_entities}}
+\index{delete\_all\_entities@{delete\_all\_entities}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_all\_entities()}{delete\_all\_entities()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2cb59755526c933df15c9b39208b40f2} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+all\+\_\+entities (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aeac243ee20064493bb11dd5d8ba40260}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_all\_evalkeys@{delete\_all\_evalkeys}}
+\index{delete\_all\_evalkeys@{delete\_all\_evalkeys}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_all\_evalkeys()}{delete\_all\_evalkeys()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aeac243ee20064493bb11dd5d8ba40260} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+all\+\_\+evalkeys (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aef9dbb5ad02812211b7da05a7f17a0fd}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_all\_recommendations@{delete\_all\_recommendations}}
+\index{delete\_all\_recommendations@{delete\_all\_recommendations}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_all\_recommendations()}{delete\_all\_recommendations()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aef9dbb5ad02812211b7da05a7f17a0fd} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+all\+\_\+recommendations (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8aff8aadc6e60706ec8ebf0b4d58e3da}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_all\_reference\_edges@{delete\_all\_reference\_edges}}
+\index{delete\_all\_reference\_edges@{delete\_all\_reference\_edges}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_all\_reference\_edges()}{delete\_all\_reference\_edges()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8aff8aadc6e60706ec8ebf0b4d58e3da} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+all\+\_\+reference\+\_\+edges (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Removes all of the ReferenceEdges from KG.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0d85c2055bd9b0d7b0d349d82d336819}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_all\_reference\_nodes@{delete\_all\_reference\_nodes}}
+\index{delete\_all\_reference\_nodes@{delete\_all\_reference\_nodes}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_all\_reference\_nodes()}{delete\_all\_reference\_nodes()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0d85c2055bd9b0d7b0d349d82d336819} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+all\+\_\+reference\+\_\+nodes (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Removes all of the ReferenceNode and the edges connected to them.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8b53b87ab4656affa00ad623afa00461}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_all\_requests@{delete\_all\_requests}}
+\index{delete\_all\_requests@{delete\_all\_requests}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_all\_requests()}{delete\_all\_requests()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8b53b87ab4656affa00ad623afa00461} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+all\+\_\+requests (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a423940b03d3a27c199bd133babbe344f}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_all\_sources@{delete\_all\_sources}}
+\index{delete\_all\_sources@{delete\_all\_sources}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_all\_sources()}{delete\_all\_sources()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a423940b03d3a27c199bd133babbe344f} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+all\+\_\+sources (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Removes all of the Sources, their content, and the edges connected to them.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_af7398425e5a28f089af0c8c29b501cbe}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_all\_summaries@{delete\_all\_summaries}}
+\index{delete\_all\_summaries@{delete\_all\_summaries}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_all\_summaries()}{delete\_all\_summaries()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_af7398425e5a28f089af0c8c29b501cbe} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+all\+\_\+summaries (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a09e228ac5030b4576e37d3ab35cf7fa1}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_all\_tldrs@{delete\_all\_tldrs}}
+\index{delete\_all\_tldrs@{delete\_all\_tldrs}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_all\_tldrs()}{delete\_all\_tldrs()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a09e228ac5030b4576e37d3ab35cf7fa1} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+all\+\_\+tldrs (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aedf1fac1b84df4b3224471659115a3cf}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_all\_users@{delete\_all\_users}}
+\index{delete\_all\_users@{delete\_all\_users}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_all\_users()}{delete\_all\_users()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aedf1fac1b84df4b3224471659115a3cf} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+all\+\_\+users (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a192f4160785a5d3729c056a5029ad1ac}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_content@{delete\_content}}
+\index{delete\_content@{delete\_content}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_content()}{delete\_content()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a192f4160785a5d3729c056a5029ad1ac} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+content (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}}]{content}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab9e32ca1079bdb3ed8c55c502224d6ec}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_content\_by\_uid@{delete\_content\_by\_uid}}
+\index{delete\_content\_by\_uid@{delete\_content\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_content\_by\_uid()}{delete\_content\_by\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab9e32ca1079bdb3ed8c55c502224d6ec} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+content\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac0614f839e2b658a66ac37693484b70f}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_entity@{delete\_entity}}
+\index{delete\_entity@{delete\_entity}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_entity()}{delete\_entity()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac0614f839e2b658a66ac37693484b70f} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+entity (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}}}]{node}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a397e33db0f8c5c9e64216e04782adc63}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_entity\_by\_uid@{delete\_entity\_by\_uid}}
+\index{delete\_entity\_by\_uid@{delete\_entity\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_entity\_by\_uid()}{delete\_entity\_by\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a397e33db0f8c5c9e64216e04782adc63} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+entity\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_acb07cb5a84748e3f8ed108a08252bf38}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_evalkey@{delete\_evalkey}}
+\index{delete\_evalkey@{delete\_evalkey}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_evalkey()}{delete\_evalkey()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_acb07cb5a84748e3f8ed108a08252bf38} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+evalkey (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key}{Eval\+Key}}}]{eval\+Key}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8fb4cfa3e65069055c4d6b35865dc292}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_evalkey\_by\_uid@{delete\_evalkey\_by\_uid}}
+\index{delete\_evalkey\_by\_uid@{delete\_evalkey\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_evalkey\_by\_uid()}{delete\_evalkey\_by\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8fb4cfa3e65069055c4d6b35865dc292} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+evalkey\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a83403168a24b21f071c916785d43b20f}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_recommendation@{delete\_recommendation}}
+\index{delete\_recommendation@{delete\_recommendation}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_recommendation()}{delete\_recommendation()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a83403168a24b21f071c916785d43b20f} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+recommendation (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}}}]{recommendation}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aea5593651e78f83430ebc50b535d8233}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_reference\_edge@{delete\_reference\_edge}}
+\index{delete\_reference\_edge@{delete\_reference\_edge}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_reference\_edge()}{delete\_reference\_edge()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aea5593651e78f83430ebc50b535d8233} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+reference\+\_\+edge (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}}}]{edge}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Removes the ReferenceEdge.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_acf53500e4b5b19f939a5871f4e2778f6}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_reference\_node@{delete\_reference\_node}}
+\index{delete\_reference\_node@{delete\_reference\_node}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_reference\_node()}{delete\_reference\_node()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_acf53500e4b5b19f939a5871f4e2778f6} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+reference\+\_\+node (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}}}]{node}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Removes the passed ReferenceNode and the edges connected to them.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a93206c1e77d34b75f701e4948c5a30bf}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_request@{delete\_request}}
+\index{delete\_request@{delete\_request}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_request()}{delete\_request()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a93206c1e77d34b75f701e4948c5a30bf} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+request (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}}]{request}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aca2376b7e85e0bd92d548e5f1d11d0f4}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_request\_by\_uid@{delete\_request\_by\_uid}}
+\index{delete\_request\_by\_uid@{delete\_request\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_request\_by\_uid()}{delete\_request\_by\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aca2376b7e85e0bd92d548e5f1d11d0f4} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+request\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6a024d83809bade2eb20fb760175819b}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_source@{delete\_source}}
+\index{delete\_source@{delete\_source}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_source()}{delete\_source()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6a024d83809bade2eb20fb760175819b} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+source (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}}}]{source}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Removes the passed Source node, its content nodes, and the edges connected to it.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_af613db630413d9480e411ec806a661f1}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_source\_by\_uid@{delete\_source\_by\_uid}}
+\index{delete\_source\_by\_uid@{delete\_source\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_source\_by\_uid()}{delete\_source\_by\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_af613db630413d9480e411ec806a661f1} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+source\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a11222c052588a422600b17e2ac2a9a2e}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_summary@{delete\_summary}}
+\index{delete\_summary@{delete\_summary}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_summary()}{delete\_summary()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a11222c052588a422600b17e2ac2a9a2e} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+summary (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}}}]{summary}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a177b7363068cd63945dc1d14f2cbacf9}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_tldr@{delete\_tldr}}
+\index{delete\_tldr@{delete\_tldr}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_tldr()}{delete\_tldr()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a177b7363068cd63945dc1d14f2cbacf9} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+tldr (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}}}]{tldr}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab7e1d6ba3ccb970faa6e7f3bc6cd45f2}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_tldr\_entries\_by\_tldr@{delete\_tldr\_entries\_by\_tldr}}
+\index{delete\_tldr\_entries\_by\_tldr@{delete\_tldr\_entries\_by\_tldr}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_tldr\_entries\_by\_tldr()}{delete\_tldr\_entries\_by\_tldr()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab7e1d6ba3ccb970faa6e7f3bc6cd45f2} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+tldr\+\_\+entries\+\_\+by\+\_\+tldr (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}}}]{tldr}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a15cc8ece3dbd45510d4b60eadf0bd7f4}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_tldr\_entry@{delete\_tldr\_entry}}
+\index{delete\_tldr\_entry@{delete\_tldr\_entry}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_tldr\_entry()}{delete\_tldr\_entry()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a15cc8ece3dbd45510d4b60eadf0bd7f4} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+tldr\+\_\+entry (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{Tldr\+Entry}}}]{tldr\+\_\+entry}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5714b872718490ec165bcafec6ffc67a}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_user@{delete\_user}}
+\index{delete\_user@{delete\_user}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_user()}{delete\_user()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5714b872718490ec165bcafec6ffc67a} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+user (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}}}]{user}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a3edd8d532ebeb2f9a24a15aabcc78b1b}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!delete\_user\_by\_uid@{delete\_user\_by\_uid}}
+\index{delete\_user\_by\_uid@{delete\_user\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{delete\_user\_by\_uid()}{delete\_user\_by\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a3edd8d532ebeb2f9a24a15aabcc78b1b} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+delete\+\_\+user\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a97ece05f39c93dc33bb9e62edad40e9e}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_all\_content@{get\_all\_content}}
+\index{get\_all\_content@{get\_all\_content}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_all\_content()}{get\_all\_content()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a97ece05f39c93dc33bb9e62edad40e9e} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+all\+\_\+content (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a96c552cecd89c6f844b515d85e8a4cf3}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_all\_entities@{get\_all\_entities}}
+\index{get\_all\_entities@{get\_all\_entities}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_all\_entities()}{get\_all\_entities()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a96c552cecd89c6f844b515d85e8a4cf3} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+all\+\_\+entities (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a9ae0fc49adaff664357a37ae9904ba6b}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_all\_evalkeys@{get\_all\_evalkeys}}
+\index{get\_all\_evalkeys@{get\_all\_evalkeys}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_all\_evalkeys()}{get\_all\_evalkeys()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a9ae0fc49adaff664357a37ae9904ba6b} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key}{Eval\+Key}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+all\+\_\+evalkeys (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aac10fc455d8264ac64567ec471b350ab}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_all\_node\_uids\_by\_tag@{get\_all\_node\_uids\_by\_tag}}
+\index{get\_all\_node\_uids\_by\_tag@{get\_all\_node\_uids\_by\_tag}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_all\_node\_uids\_by\_tag()}{get\_all\_node\_uids\_by\_tag()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aac10fc455d8264ac64567ec471b350ab} 
+ list\mbox{[}str\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+all\+\_\+node\+\_\+uids\+\_\+by\+\_\+tag (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{tag}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns the list of uids for the tag specified as a string.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_afbf8196b86e556998a935f8ebaed3409}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_all\_nodes\_by\_tag@{get\_all\_nodes\_by\_tag}}
+\index{get\_all\_nodes\_by\_tag@{get\_all\_nodes\_by\_tag}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_all\_nodes\_by\_tag()}{get\_all\_nodes\_by\_tag()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_afbf8196b86e556998a935f8ebaed3409} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+all\+\_\+nodes\+\_\+by\+\_\+tag (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{tag}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns the list of uids for the tag specified as a string.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8b51349be2c1427462206f5827dc04a9}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_all\_recommendations@{get\_all\_recommendations}}
+\index{get\_all\_recommendations@{get\_all\_recommendations}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_all\_recommendations()}{get\_all\_recommendations()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8b51349be2c1427462206f5827dc04a9} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+all\+\_\+recommendations (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_abc4632eca1d04bda140477e86c20549b}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_all\_reference\_edges@{get\_all\_reference\_edges}}
+\index{get\_all\_reference\_edges@{get\_all\_reference\_edges}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_all\_reference\_edges()}{get\_all\_reference\_edges()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_abc4632eca1d04bda140477e86c20549b} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+all\+\_\+reference\+\_\+edges (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns a list of all of the ReferenceEdges in the KG.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a22c96cc837a76a85be5e095833cfbb47}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_all\_reference\_nodes@{get\_all\_reference\_nodes}}
+\index{get\_all\_reference\_nodes@{get\_all\_reference\_nodes}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_all\_reference\_nodes()}{get\_all\_reference\_nodes()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a22c96cc837a76a85be5e095833cfbb47} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+all\+\_\+reference\+\_\+nodes (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns a list of all the ReferenceNodes in the KG.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a22c96cc837a76a85be5e095833cfbb47}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_all\_reference\_nodes@{get\_all\_reference\_nodes}}
+\index{get\_all\_reference\_nodes@{get\_all\_reference\_nodes}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_all\_reference\_nodes()}{get\_all\_reference\_nodes()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a22c96cc837a76a85be5e095833cfbb47} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+all\+\_\+reference\+\_\+nodes (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns a list of all the ReferenceNodes in the KG.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aa01c503f67dad1f5b2bcb49e1dd46a2e}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_all\_requests@{get\_all\_requests}}
+\index{get\_all\_requests@{get\_all\_requests}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_all\_requests()}{get\_all\_requests()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aa01c503f67dad1f5b2bcb49e1dd46a2e} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+all\+\_\+requests (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6a554bfedaad6f58068f0932bf70cc34}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_all\_sources@{get\_all\_sources}}
+\index{get\_all\_sources@{get\_all\_sources}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_all\_sources()}{get\_all\_sources()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6a554bfedaad6f58068f0932bf70cc34} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+all\+\_\+sources (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aa9eabae9027126710a1e3a3323358ab9}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_all\_summary@{get\_all\_summary}}
+\index{get\_all\_summary@{get\_all\_summary}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_all\_summary()}{get\_all\_summary()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aa9eabae9027126710a1e3a3323358ab9} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+all\+\_\+summary (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a1c681eaaee06734ab5329717b214b4ab}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_all\_tldrs@{get\_all\_tldrs}}
+\index{get\_all\_tldrs@{get\_all\_tldrs}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_all\_tldrs()}{get\_all\_tldrs()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a1c681eaaee06734ab5329717b214b4ab} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+all\+\_\+tldrs (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a71766d2af3f824afdcf8a17aaf2656d7}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_all\_users@{get\_all\_users}}
+\index{get\_all\_users@{get\_all\_users}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_all\_users()}{get\_all\_users()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a71766d2af3f824afdcf8a17aaf2656d7} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+all\+\_\+users (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac62b641a2500302ddfeb6b43e0924daf}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_by\_uid@{get\_by\_uid}}
+\index{get\_by\_uid@{get\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_by\_uid()}{get\_by\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac62b641a2500302ddfeb6b43e0924daf} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0f99661080b8a9aa416deb02e8e5abd4}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_content\_by\_date@{get\_content\_by\_date}}
+\index{get\_content\_by\_date@{get\_content\_by\_date}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_content\_by\_date()}{get\_content\_by\_date()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0f99661080b8a9aa416deb02e8e5abd4} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+content\+\_\+by\+\_\+date (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{datetime.\+date}]{date}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a172dd6b487f05586d00e68ac16e98c81}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_content\_by\_recommendation@{get\_content\_by\_recommendation}}
+\index{get\_content\_by\_recommendation@{get\_content\_by\_recommendation}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_content\_by\_recommendation()}{get\_content\_by\_recommendation()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a172dd6b487f05586d00e68ac16e98c81} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+content\+\_\+by\+\_\+recommendation (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}}     }]{recommendation}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad0cb67a8393b8b78b503e68edce68da7}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_content\_by\_source@{get\_content\_by\_source}}
+\index{get\_content\_by\_source@{get\_content\_by\_source}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_content\_by\_source()}{get\_content\_by\_source()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad0cb67a8393b8b78b503e68edce68da7} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+content\+\_\+by\+\_\+source (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}}}]{source}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a089e1ed952b34465b5402ea9e80222a6}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_content\_by\_source\_uid@{get\_content\_by\_source\_uid}}
+\index{get\_content\_by\_source\_uid@{get\_content\_by\_source\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_content\_by\_source\_uid()}{get\_content\_by\_source\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a089e1ed952b34465b5402ea9e80222a6} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+content\+\_\+by\+\_\+source\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a86ab3575efceba5f82a78b9171f3421b}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_content\_by\_title@{get\_content\_by\_title}}
+\index{get\_content\_by\_title@{get\_content\_by\_title}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_content\_by\_title()}{get\_content\_by\_title()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a86ab3575efceba5f82a78b9171f3421b} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+content\+\_\+by\+\_\+title (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{title}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a4d28c8a28aee95c94e04a7a702b793b2}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_content\_by\_uid@{get\_content\_by\_uid}}
+\index{get\_content\_by\_uid@{get\_content\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_content\_by\_uid()}{get\_content\_by\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a4d28c8a28aee95c94e04a7a702b793b2} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+content\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a076ef7270549fdf2dedefa9c7a8600e3}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_content\_by\_url@{get\_content\_by\_url}}
+\index{get\_content\_by\_url@{get\_content\_by\_url}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_content\_by\_url()}{get\_content\_by\_url()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a076ef7270549fdf2dedefa9c7a8600e3} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+content\+\_\+by\+\_\+url (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{url}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a59e401fb338bb82fbad8806bf036d366}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_entities\_by\_content@{get\_entities\_by\_content}}
+\index{get\_entities\_by\_content@{get\_entities\_by\_content}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_entities\_by\_content()}{get\_entities\_by\_content()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a59e401fb338bb82fbad8806bf036d366} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+entities\+\_\+by\+\_\+content (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}}]{content}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a95f295a967337c84e138e2e543e10555}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_entities\_by\_content\_uid@{get\_entities\_by\_content\_uid}}
+\index{get\_entities\_by\_content\_uid@{get\_entities\_by\_content\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_entities\_by\_content\_uid()}{get\_entities\_by\_content\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a95f295a967337c84e138e2e543e10555} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+entities\+\_\+by\+\_\+content\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a1d43555ef238b8da92d01adf8b00aad4}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_entities\_by\_request@{get\_entities\_by\_request}}
+\index{get\_entities\_by\_request@{get\_entities\_by\_request}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_entities\_by\_request()}{get\_entities\_by\_request()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a1d43555ef238b8da92d01adf8b00aad4} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+entities\+\_\+by\+\_\+request (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}}]{request}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad8c277e8a26a7b2674c613e5bbc7e1c8}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_entity\_by\_uid@{get\_entity\_by\_uid}}
+\index{get\_entity\_by\_uid@{get\_entity\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_entity\_by\_uid()}{get\_entity\_by\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad8c277e8a26a7b2674c613e5bbc7e1c8} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+entity\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a09eee174f397fa96365af8c5fbb340b0}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_entity\_by\_url@{get\_entity\_by\_url}}
+\index{get\_entity\_by\_url@{get\_entity\_by\_url}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_entity\_by\_url()}{get\_entity\_by\_url()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a09eee174f397fa96365af8c5fbb340b0} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_entity}{Entity}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+entity\+\_\+by\+\_\+url (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{url}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a3742b98c773e35490f1c6b15be3e0ddc}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_entries\_by\_tldr@{get\_entries\_by\_tldr}}
+\index{get\_entries\_by\_tldr@{get\_entries\_by\_tldr}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_entries\_by\_tldr()}{get\_entries\_by\_tldr()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a3742b98c773e35490f1c6b15be3e0ddc} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{Tldr\+Entry}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+entries\+\_\+by\+\_\+tldr (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}}}]{tldr}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_af48b3a99f71b03a1a607a2253a8a8f98}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_evalkey\_by\_content\_and\_request@{get\_evalkey\_by\_content\_and\_request}}
+\index{get\_evalkey\_by\_content\_and\_request@{get\_evalkey\_by\_content\_and\_request}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_evalkey\_by\_content\_and\_request()}{get\_evalkey\_by\_content\_and\_request()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_af48b3a99f71b03a1a607a2253a8a8f98} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key}{Eval\+Key}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+evalkey\+\_\+by\+\_\+content\+\_\+and\+\_\+request (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}}]{content}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}     }]{request}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a3510c45e53bc4c571ba2533b100796b8}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_evalkey\_by\_uid@{get\_evalkey\_by\_uid}}
+\index{get\_evalkey\_by\_uid@{get\_evalkey\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_evalkey\_by\_uid()}{get\_evalkey\_by\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a3510c45e53bc4c571ba2533b100796b8} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key}{Eval\+Key}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+evalkey\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a7d8dc37275969e248d7631a7dff9d4ea}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_evalkeys\_by\_content@{get\_evalkeys\_by\_content}}
+\index{get\_evalkeys\_by\_content@{get\_evalkeys\_by\_content}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_evalkeys\_by\_content()}{get\_evalkeys\_by\_content()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a7d8dc37275969e248d7631a7dff9d4ea} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key}{Eval\+Key}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+evalkeys\+\_\+by\+\_\+content (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}}]{content}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0fbedc1b7847949a359d60f289a6bd0c}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_evalkeys\_by\_request@{get\_evalkeys\_by\_request}}
+\index{get\_evalkeys\_by\_request@{get\_evalkeys\_by\_request}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_evalkeys\_by\_request()}{get\_evalkeys\_by\_request()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0fbedc1b7847949a359d60f289a6bd0c} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_eval_key}{Eval\+Key}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+evalkeys\+\_\+by\+\_\+request (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}}]{request}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a60d01d5bfcb3d6e94fd2e2229147155f}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_feedback\_by\_request@{get\_feedback\_by\_request}}
+\index{get\_feedback\_by\_request@{get\_feedback\_by\_request}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_feedback\_by\_request()}{get\_feedback\_by\_request()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a60d01d5bfcb3d6e94fd2e2229147155f} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback}{Feedback}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+feedback\+\_\+by\+\_\+request (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}}]{request}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aaf11c42c3b4ad0c2a18488d2baaf897f}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_feedback\_by\_tldr\_entry@{get\_feedback\_by\_tldr\_entry}}
+\index{get\_feedback\_by\_tldr\_entry@{get\_feedback\_by\_tldr\_entry}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_feedback\_by\_tldr\_entry()}{get\_feedback\_by\_tldr\_entry()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aaf11c42c3b4ad0c2a18488d2baaf897f} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_feedback}{Feedback}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+feedback\+\_\+by\+\_\+tldr\+\_\+entry (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{Tldr\+Entry}}}]{entry}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a69917b18083ddcdd67681aa8cde9b238}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_recommendation@{get\_recommendation}}
+\index{get\_recommendation@{get\_recommendation}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_recommendation()}{get\_recommendation()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a69917b18083ddcdd67681aa8cde9b238} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+recommendation (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}}]{content}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}}]{request}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac41414d244bd7dbee46735fbfa694ef6}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_recommendation\_by\_id@{get\_recommendation\_by\_id}}
+\index{get\_recommendation\_by\_id@{get\_recommendation\_by\_id}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_recommendation\_by\_id()}{get\_recommendation\_by\_id()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac41414d244bd7dbee46735fbfa694ef6} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+recommendation\+\_\+by\+\_\+id (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a1adea36c318077446bd4e21e5263f9ce}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_recommendations\_by\_request@{get\_recommendations\_by\_request}}
+\index{get\_recommendations\_by\_request@{get\_recommendations\_by\_request}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_recommendations\_by\_request()}{get\_recommendations\_by\_request()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a1adea36c318077446bd4e21e5263f9ce} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+recommendations\+\_\+by\+\_\+request (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}}]{request}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0a2c079afde4b918b67c6b5b24dd8ed4}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_reference\_edge\_by\_uid@{get\_reference\_edge\_by\_uid}}
+\index{get\_reference\_edge\_by\_uid@{get\_reference\_edge\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_reference\_edge\_by\_uid()}{get\_reference\_edge\_by\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0a2c079afde4b918b67c6b5b24dd8ed4} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+reference\+\_\+edge\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns a single ReferenceEdge as indicated by the uid or None if it does not exist in KG.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a07ad023c2b773079b9712f3cf5571d9f}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_reference\_node\_by\_uid@{get\_reference\_node\_by\_uid}}
+\index{get\_reference\_node\_by\_uid@{get\_reference\_node\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_reference\_node\_by\_uid()}{get\_reference\_node\_by\_uid()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a07ad023c2b773079b9712f3cf5571d9f} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+reference\+\_\+node\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns a single ReferenceNode as indicated by the uid or None if it does not exist in KG.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a07ad023c2b773079b9712f3cf5571d9f}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_reference\_node\_by\_uid@{get\_reference\_node\_by\_uid}}
+\index{get\_reference\_node\_by\_uid@{get\_reference\_node\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_reference\_node\_by\_uid()}{get\_reference\_node\_by\_uid()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a07ad023c2b773079b9712f3cf5571d9f} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+reference\+\_\+node\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns a single ReferenceNode as indicated by the uid or None if it does not exist in KG.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a149198cf7289b0067422946eba2a8d08}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_request\_by\_title@{get\_request\_by\_title}}
+\index{get\_request\_by\_title@{get\_request\_by\_title}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_request\_by\_title()}{get\_request\_by\_title()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a149198cf7289b0067422946eba2a8d08} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+request\+\_\+by\+\_\+title (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{title}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0d7243bfd0a243a8fe00946069684576}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_request\_by\_uid@{get\_request\_by\_uid}}
+\index{get\_request\_by\_uid@{get\_request\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_request\_by\_uid()}{get\_request\_by\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0d7243bfd0a243a8fe00946069684576} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+request\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab040e15f37b17350ccf4c5cdd77336f3}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_requests\_by\_tldr\_entry@{get\_requests\_by\_tldr\_entry}}
+\index{get\_requests\_by\_tldr\_entry@{get\_requests\_by\_tldr\_entry}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_requests\_by\_tldr\_entry()}{get\_requests\_by\_tldr\_entry()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab040e15f37b17350ccf4c5cdd77336f3} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+requests\+\_\+by\+\_\+tldr\+\_\+entry (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr_entry}{Tldr\+Entry}}}]{entry}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a7652bc73ff49cdd213164fa25c16a93f}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_requests\_by\_user@{get\_requests\_by\_user}}
+\index{get\_requests\_by\_user@{get\_requests\_by\_user}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_requests\_by\_user()}{get\_requests\_by\_user()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a7652bc73ff49cdd213164fa25c16a93f} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+requests\+\_\+by\+\_\+user (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}}}]{user}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad10f9e4a3b1de1b319757c2451de6201}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_requests\_by\_user\_uid@{get\_requests\_by\_user\_uid}}
+\index{get\_requests\_by\_user\_uid@{get\_requests\_by\_user\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_requests\_by\_user\_uid()}{get\_requests\_by\_user\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad10f9e4a3b1de1b319757c2451de6201} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+requests\+\_\+by\+\_\+user\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a772e5e90a1ff0a8ee305de916d7fa266}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_source\_by\_name@{get\_source\_by\_name}}
+\index{get\_source\_by\_name@{get\_source\_by\_name}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_source\_by\_name()}{get\_source\_by\_name()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a772e5e90a1ff0a8ee305de916d7fa266} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+source\+\_\+by\+\_\+name (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Gets an existing Source node by name or None if it does not exist
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac78199aae776b12c2b0dc24f34632703}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_source\_by\_uid@{get\_source\_by\_uid}}
+\index{get\_source\_by\_uid@{get\_source\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_source\_by\_uid()}{get\_source\_by\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac78199aae776b12c2b0dc24f34632703} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+source\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Gets an existing Source node by uid or None if it does not exist
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a7815f40b59663738a9512a16b0f517ba}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_summaries\_by\_content@{get\_summaries\_by\_content}}
+\index{get\_summaries\_by\_content@{get\_summaries\_by\_content}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_summaries\_by\_content()}{get\_summaries\_by\_content()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a7815f40b59663738a9512a16b0f517ba} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+summaries\+\_\+by\+\_\+content (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}}]{content}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a021948360b3b3d3a526ae6ad98d46c99}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_summaries\_by\_recommendation@{get\_summaries\_by\_recommendation}}
+\index{get\_summaries\_by\_recommendation@{get\_summaries\_by\_recommendation}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_summaries\_by\_recommendation()}{get\_summaries\_by\_recommendation()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a021948360b3b3d3a526ae6ad98d46c99} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+summaries\+\_\+by\+\_\+recommendation (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}}     }]{recommendation}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8316528e611f567e9a35dd44bb9bcb03}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_summary@{get\_summary}}
+\index{get\_summary@{get\_summary}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_summary()}{get\_summary()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8316528e611f567e9a35dd44bb9bcb03} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+summary (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_content}{Content}}}]{content}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_recommendation}{Recommendation}} }]{recommendation}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a537c51e98f02b922407c41e099e26844}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_summary\_by\_id@{get\_summary\_by\_id}}
+\index{get\_summary\_by\_id@{get\_summary\_by\_id}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_summary\_by\_id()}{get\_summary\_by\_id()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a537c51e98f02b922407c41e099e26844} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_summary}{Summary}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+summary\+\_\+by\+\_\+id (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5c593d2c4d3bbb6ed882ee8b04119cbc}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_tldr@{get\_tldr}}
+\index{get\_tldr@{get\_tldr}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_tldr()}{get\_tldr()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5c593d2c4d3bbb6ed882ee8b04119cbc} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+tldr (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}}]{request}{, }\item[{datetime.\+date}]{date}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad5dc8c27cf6a00c201238492f4f80aa9}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_tldr\_by\_request@{get\_tldr\_by\_request}}
+\index{get\_tldr\_by\_request@{get\_tldr\_by\_request}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_tldr\_by\_request()}{get\_tldr\_by\_request()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ad5dc8c27cf6a00c201238492f4f80aa9} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+tldr\+\_\+by\+\_\+request (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_request}{Request}}}]{request}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8659b2097401229bf84cc66cfa69151d}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_tldr\_by\_request\_uid@{get\_tldr\_by\_request\_uid}}
+\index{get\_tldr\_by\_request\_uid@{get\_tldr\_by\_request\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_tldr\_by\_request\_uid()}{get\_tldr\_by\_request\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8659b2097401229bf84cc66cfa69151d} 
+ list\mbox{[}\mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}}\mbox{]} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+tldr\+\_\+by\+\_\+request\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{request\+\_\+uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a00ece2e66490b4c6e8073dc09748144d}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_tldr\_by\_uid@{get\_tldr\_by\_uid}}
+\index{get\_tldr\_by\_uid@{get\_tldr\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_tldr\_by\_uid()}{get\_tldr\_by\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a00ece2e66490b4c6e8073dc09748144d} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+tldr\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6aa5e68fb4d5241f7fe535566f6969a3}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_tldr\_by\_uid\_and\_date@{get\_tldr\_by\_uid\_and\_date}}
+\index{get\_tldr\_by\_uid\_and\_date@{get\_tldr\_by\_uid\_and\_date}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_tldr\_by\_uid\_and\_date()}{get\_tldr\_by\_uid\_and\_date()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a6aa5e68fb4d5241f7fe535566f6969a3} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+tldr\+\_\+by\+\_\+uid\+\_\+and\+\_\+date (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{request\+\_\+uid}{, }\item[{datetime.\+date}]{date}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a4c4438ef5a2953bf7fc17313b45976e9}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_tldr\_entry\_by\_uid@{get\_tldr\_entry\_by\_uid}}
+\index{get\_tldr\_entry\_by\_uid@{get\_tldr\_entry\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_tldr\_entry\_by\_uid()}{get\_tldr\_entry\_by\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a4c4438ef5a2953bf7fc17313b45976e9} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_tldr}{Tldr}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+tldr\+\_\+entry\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8f00ce90fd2b2d0dab17802b3bf904fb}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_tldrs\_before\_date@{get\_tldrs\_before\_date}}
+\index{get\_tldrs\_before\_date@{get\_tldrs\_before\_date}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_tldrs\_before\_date()}{get\_tldrs\_before\_date()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a8f00ce90fd2b2d0dab17802b3bf904fb} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+tldrs\+\_\+before\+\_\+date (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{datetime.\+date}]{date}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5b48dbd7560903f94555d65d984407d0}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_tldrs\_by\_date@{get\_tldrs\_by\_date}}
+\index{get\_tldrs\_by\_date@{get\_tldrs\_by\_date}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_tldrs\_by\_date()}{get\_tldrs\_by\_date()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5b48dbd7560903f94555d65d984407d0} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+tldrs\+\_\+by\+\_\+date (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{datetime.\+date}]{date}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5577180fa180eab5cb961c6d436b74b6}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_user\_by\_name@{get\_user\_by\_name}}
+\index{get\_user\_by\_name@{get\_user\_by\_name}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_user\_by\_name()}{get\_user\_by\_name()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a5577180fa180eab5cb961c6d436b74b6} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+user\+\_\+by\+\_\+name (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{name}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_abb1c546736140c0c3329aae6ca630596}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!get\_user\_by\_uid@{get\_user\_by\_uid}}
+\index{get\_user\_by\_uid@{get\_user\_by\_uid}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{get\_user\_by\_uid()}{get\_user\_by\_uid()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_abb1c546736140c0c3329aae6ca630596} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_user}{User}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+\_\+user\+\_\+by\+\_\+uid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{uid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a609dbb2ca39dd2ebea591a93a65ddc7d}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!getNeo4jDriver@{getNeo4jDriver}}
+\index{getNeo4jDriver@{getNeo4jDriver}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{getNeo4jDriver()}{getNeo4jDriver()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a609dbb2ca39dd2ebea591a93a65ddc7d} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+get\+Neo4j\+Driver (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns the Neo4j driver class being used (usually neo4j.GraphDatabase.driver) so that direct neo4j calls can be
+made or it can be passed into other libraries.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a020cdd76b7d4d347d05f304c6b0b29f7}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!neo4j\_query@{neo4j\_query}}
+\index{neo4j\_query@{neo4j\_query}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{neo4j\_query()}{neo4j\_query()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a020cdd76b7d4d347d05f304c6b0b29f7} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+neo4j\+\_\+query (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{cql}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Performs a cypher call to the knowledge base and returns results in the standard neo4j driver format.
+Use this if you are following neo4j documentation, otherwise use cypher_query().
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ae053d69a83992c8c62441514ad82617a}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!neomodel\_query@{neomodel\_query}}
+\index{neomodel\_query@{neomodel\_query}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{neomodel\_query()}{neomodel\_query()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ae053d69a83992c8c62441514ad82617a} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+neomodel\+\_\+query (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{cypher\+\_\+query}{, }\item[{dict }]{params}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Performs a cypher query in the standard neomodel method, which will return a list of lists of neomodel.
+Use this if you are following Neomodel documentation, otherwise use cypher_query().
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac60641ad7f42d22ea3892abc86914447}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!shortest\_path@{shortest\_path}}
+\index{shortest\_path@{shortest\_path}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{shortest\_path()}{shortest\_path()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ac60641ad7f42d22ea3892abc86914447} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+shortest\+\_\+path (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{Open\+Tldr\+Meta}}}]{start}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_open_tldr_meta}{Open\+Tldr\+Meta}}}]{end}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This is a special cypher command to run neo4j's shortest path algorithm and return the path (list of edges) found.
+We remove EvalKey, Recommendation, Tldr, Source, and User nodes to avoid irrelevant paths that circumvent Reference Data.
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a4e031cc7d0f3ff205a2045a8e50bc92f}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!update\_reference\_edge@{update\_reference\_edge}}
+\index{update\_reference\_edge@{update\_reference\_edge}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{update\_reference\_edge()}{update\_reference\_edge()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a4e031cc7d0f3ff205a2045a8e50bc92f} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+update\+\_\+reference\+\_\+edge (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_edge}{Reference\+Edge}}}]{edge}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Updates the KG with changes to a ReferenceEdge's properties
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0bf70646467ab6ec24769e27f947fbe3}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!update\_reference\_node@{update\_reference\_node}}
+\index{update\_reference\_node@{update\_reference\_node}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{update\_reference\_node()}{update\_reference\_node()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a0bf70646467ab6ec24769e27f947fbe3} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+update\+\_\+reference\+\_\+node (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_reference_node}{Reference\+Node}}}]{node}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Updates the KG with changes to a ReferenceNode properties
+\end{DoxyVerb}
+ \Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_acd3b3950f669a9b33e24b23e7bb94c02}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!update\_source@{update\_source}}
+\index{update\_source@{update\_source}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{update\_source()}{update\_source()}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_acd3b3950f669a9b33e24b23e7bb94c02} 
+ \mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}} opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+update\+\_\+source (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classopentldr_1_1_domain_1_1_source}{Source}}}]{node}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Updates the KG with changes to a Source's properties.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2c3bf7492bb2167ab425f6d2877eab0b}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!connection@{connection}}
+\index{connection@{connection}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{connection}{connection}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2c3bf7492bb2167ab425f6d2877eab0b} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+connection = \mbox{\hyperlink{namespaceopentldr_1_1_knowledge_graph_ae716c7469fbad08b82aa463a9b8e8a21}{\+\_\+getenv}}("{}NEO4\+J\+\_\+\+CONNECTION"{}, "{}neo4j\+://localhost\+:7687"{})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aeaeceb9420e4d37d479d259c83fe49ba}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!database@{database}}
+\index{database@{database}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{database}{database}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_aeaeceb9420e4d37d479d259c83fe49ba} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+database = \mbox{\hyperlink{namespaceopentldr_1_1_knowledge_graph_ae716c7469fbad08b82aa463a9b8e8a21}{\+\_\+getenv}}("{}NEO4\+J\+\_\+\+DATABASE"{}, "{}neo4j"{})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab1a575940d30d1b9341084f22477d129}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!DRIVER@{DRIVER}}
+\index{DRIVER@{DRIVER}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{DRIVER}{DRIVER}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab1a575940d30d1b9341084f22477d129} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+DRIVER\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!driver@{driver}}
+\index{driver@{driver}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{driver}{driver}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab45a4b2bbd8b1a0c6b6c3437c70a7484} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+driver = Graph\+Database.\+driver(\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a2c3bf7492bb2167ab425f6d2877eab0b}{connection}}, auth=(\mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a87d184700dde3455ca73770c98bf545f}{user}}, \mbox{\hyperlink{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab5d9784d801fda4dc621d387f1f3a11d}{password}}))\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab5d9784d801fda4dc621d387f1f3a11d}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!password@{password}}
+\index{password@{password}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{password}{password}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_ab5d9784d801fda4dc621d387f1f3a11d} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+password = \mbox{\hyperlink{namespaceopentldr_1_1_knowledge_graph_ae716c7469fbad08b82aa463a9b8e8a21}{\+\_\+getenv}}("{}NEO4\+J\+\_\+\+PASSWORD"{}, "{}neo4j"{})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a87d184700dde3455ca73770c98bf545f}\index{opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}!user@{user}}
+\index{user@{user}!opentldr.KnowledgeGraph.KnowledgeGraph@{opentldr.KnowledgeGraph.KnowledgeGraph}}
+\doxysubsubsection{\texorpdfstring{user}{user}}
+{\footnotesize\ttfamily \label{classopentldr_1_1_knowledge_graph_1_1_knowledge_graph_a87d184700dde3455ca73770c98bf545f} 
+opentldr.\+Knowledge\+Graph.\+Knowledge\+Graph.\+user = \mbox{\hyperlink{namespaceopentldr_1_1_knowledge_graph_ae716c7469fbad08b82aa463a9b8e8a21}{\+\_\+getenv}}("{}NEO4\+J\+\_\+\+USERNAME"{}, "{}neo4j"{})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/chrisargenta/dev/opentldr/\+Open\+TLDR-\/\+Core/src/opentldr/\mbox{\hyperlink{_knowledge_graph_8py}{Knowledge\+Graph.\+py}}\end{DoxyCompactItemize}
