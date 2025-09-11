@@ -3,9 +3,10 @@ import os
 import ollama
 
 from typing import Optional, List
+from Summarizer import Summarizer
 
 
-class SummarizeWithLocalOllama:
+class SummarizeWithOllama(Summarizer):
 
     def __init__(self, model_name: str, llm_temp:float=0.01, logging_level=logging.WARN):
         """
@@ -38,9 +39,9 @@ class SummarizeWithLocalOllama:
 
         return out
 
-    def _get_response(self, model_name, request:str) -> str:
+    def _get_response(self, model_name, prompt:str) -> str:
         options= { "temperture":self.temp }
-        response = ollama.generate(model = self.llm, prompt = request, stream=False, options=options)
+        response = ollama.generate(model = self.llm, prompt = prompt, stream=False, options=options)
         return response['response'].strip()
 
     def summarize (self, text:str) -> str:

@@ -1,5 +1,6 @@
 import logging
 import os
+from Summarizer import Summarizer
 
 from langchain.chains.summarize import load_summarize_chain
 from langchain.llms import GPT4All
@@ -10,7 +11,7 @@ from langchain.prompts import PromptTemplate
 from langchain.docstore.document import Document
 from langchain.text_splitter import CharacterTextSplitter
 
-class SummarizeWithGPT4All:
+class SummarizeWithGPT4All(Summarizer):
 
     def __init__(self, model_path: str, device: str = "gpu", logging_level=logging.WARN):
         """

@@ -1,8 +1,8 @@
 services:
 
-  neo4j:
+  OpenTLDR_KB:
     image: neo4j:5.26-community
-    container_name: KnowledgeGraph
+    container_name: OpenTLDR_KnowledgeGraph
     restart: on-failure:3
     environment:
       - NEO4J_AUTH=none
@@ -20,10 +20,10 @@ services:
         protocol: tcp
         mode: host
     volumes:
-      - neo4jdb:/neo4jdata
+      - opentldr_kg:/neo4jdata
 
 volumes:
-  neo4jdb:
+  opentldr_kg:
 
 networks:
     dev:

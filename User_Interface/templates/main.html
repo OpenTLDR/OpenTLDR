@@ -10,7 +10,7 @@
     
     // This JavaScript fuction makes a REST call to OpenTLDR API to record a Request in KG
 
-    function add_request (){
+    function add_new_request (){
         var formData = {
             user_name : $('#user_name').val(),
             user_email : $('#user_email').val(),    
@@ -34,7 +34,7 @@
                 alert("ERROR: " + JSON.stringify(data));
             }
         });
-        location.reload()
+        //location.reload()
     }
 
     function delete_request(uid){
@@ -132,8 +132,7 @@
             <textarea rows="4" name="request_text" id="request_text" autocomplete="on" autocorrect="on" spellcheck="true"></textarea>
         </div>
         <div>
-          <button id="add_request" onclick="add_request();">Add New Request</button>
-          
+          <button id="add_request" onclick="add_new_request();">Add New Request</button>
         </div>
     </form>
     <script>

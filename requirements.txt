@@ -6,9 +6,10 @@ spacy
 sentence-transformers
 langchain
 langchain-text-splitters
-gpt4all
 feedparser
 beautifulsoup4
 pymupdf
 langchain_community
 ollama
+gpt4all
+openai

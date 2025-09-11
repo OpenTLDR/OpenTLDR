@@ -17,7 +17,7 @@ load_dotenv(".env")
 #
 # Setup parameters and data source for workflow run
 #
-type = "ollama"
+type = "gpt4all"
 
 def build_llm_config() -> dict:
         '''
@@ -27,13 +27,13 @@ def build_llm_config() -> dict:
             case "ollama":
                 return {
                     'type': 'Ollama',
-                    'device':'local',
+                    'device':'',
                     'model':'mistral:latest'
                 }
             case "gpt4all":
                 return {
                     'type': 'GPT4ALL',
-                    'device':'gpu',
+                    'device':'cpu',
                     'model':'../LLM_Models/mistral-7b-openorca.gguf2.Q4_0.gguf'
                 }
             case _ :
@@ -81,7 +81,7 @@ for today in [(real_today-timedelta(days=i)).strftime('%Y-%m-%d') for i in range
                 }
         else:
             return {'repo_type': 'files',
-                    'path': '../Data/Live/bbc/{d}/{dir}'.format(d=today, dir=dir)}
+                    'path': '../Data/Live/{d}/{dir}'.format(d=today, dir=dir)}
 
 
     #
@@ -108,6 +108,11 @@ for today in [(real_today-timedelta(days=i)).strftime('%Y-%m-%d') for i in range
                     # Load Content and Requests
             [ "Stage_2_Ingest/Load_Content.ipynb", {
                 "active_data_repo_config": data_repo_config(today,"content"),
+            }],
+
+            # Generate stand-alone untailored summaries ONLY NEEDED for multi-doc comparisons in digger
+            [ "Stage_5_Summarize/Presummarize.ipynb",{
+                "llm_config" : build_llm_config(),
             }],
 
             # Perform Analytics to link entities in Requests and Content nodes
